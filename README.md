@@ -1,12 +1,18 @@
 # DUSK project template
 
-This project is just a minimal Laravel instance to deploy a Dusk end to end test suite. The idea is to use Dusk to test non Laravel projects
+This project contains the end to end tests for GVV. 
+
+Prerequisites;
+
+GVV must be up and running.
+
+    https://gvv.flub78.net/gvv
+
+    and a testadmin / password acount must exists
 
 ## Tests execution
 
-    php artisan dusk --colors=always --browse tests/Browser/ExampleTest.php
-    php artisan dusk tests/Browser/LoginTest.php
-    php artisan dusk --colors=always --browse
+    run\tests.bat
 
 ## In case of incorrect chrome-driver version
 

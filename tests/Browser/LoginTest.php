@@ -16,9 +16,10 @@ class LoginTest extends DuskTestCase
     public function testExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('https://aviation.meteo.fr/login.php#debut_page')
-                    ->assertSee('AEROWEB');
-
+            $browser->visit('https://gvv.flub78.net/gvv/')
+                    ->assertSee('GVV')
+                    ->assertSee('Boissel')
+                    ->assertSee('Peignot');        ;   
         });
     }
 
@@ -30,17 +31,17 @@ class LoginTest extends DuskTestCase
     public function testExample2()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('https://aviation.meteo.fr/login.php#debut_page')
-                    ->assertSee('Bienvenue')
-                    ->type('login', 'flubber')
-                    ->type('password', env('AERO_PASSWORD'))
+            $browser->visit('https://gvv.flub78.net/gvv/')
+                    ->assertSee('Utilisateur')
+                    ->type('username', 'testadmin')
+                    ->type('password', 'password')
                     ->press('input[type="submit"]');
 
             sleep(2);
 
-            $browser->assertSee('TEMSI-WINTEM');
+            $browser->assertSee('Compta');
 
-            $browser->screenshot('aeroweb_in');
+            $browser->screenshot('gvv_in');
 
         });
     }
