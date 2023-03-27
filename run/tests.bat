@@ -1,0 +1,1 @@
+php artisan dusk --colors=always --log-junit=tests\reports\junit.xml 
