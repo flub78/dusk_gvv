@@ -8,12 +8,18 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
+
+    function __construct() {
+		parent::__construct ();
+		$this->url = "https://gvv.flub78.net/gvv/";
+	}
+
     /**
-     * A Dusk test example.
+     * A few checks on the home page
      *
      * @return void
      */
-    public function testExample()
+    public function testHome()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('https://gvv.flub78.net/gvv/')
@@ -23,26 +29,24 @@ class LoginTest extends DuskTestCase
         });
     }
 
-        /**
-     * A Dusk test example.
+    /**
+     * An initial login
      *
      * @return void
      */
-    public function testExample2()
+    public function testFirstLogin()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('https://gvv.flub78.net/gvv/')
-                    ->assertSee('Utilisateur')
-                    ->type('username', 'testadmin')
-                    ->type('password', 'password')
-                    ->press('input[type="submit"]');
 
-            sleep(2);
+            $this->login($browser, 'testadmin', 'password');
 
             $browser->assertSee('Compta');
+            $browser->screenshot('login');
 
-            $browser->screenshot('gvv_in');
-
+            $this->logout($browser);
+            $browser->assertDontSee('Compta');
+            $browser->assertSee('Utilisateur');
+            $browser->screenshot('logout');
         });
     }
 }

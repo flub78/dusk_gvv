@@ -8,10 +8,12 @@ GVV must be up and running.
 
     https://gvv.flub78.net/gvv
 
-    and a testadmin / password acount must exists
+and a testadmin / password acount must exists
 
 ## Tests execution
 
+    php artisan dusk --browse
+    or
     run\tests.bat
 
 ## In case of incorrect chrome-driver version
