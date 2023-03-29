@@ -4,28 +4,21 @@ namespace Tests\Browser;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
+use Tests\GvvDuskTestCase;
 
-class LoginTest extends DuskTestCase
-{
-
-    function __construct() {
-		parent::__construct ();
-		$this->url = "https://gvv.flub78.net/gvv/";
-	}
+class LoginTest extends GvvDuskTestCase {
 
     /**
      * A few checks on the home page
      *
      * @return void
      */
-    public function testHome()
-    {
+    public function testHome() {
         $this->browse(function (Browser $browser) {
-            $browser->visit('https://gvv.flub78.net/gvv/')
-                    ->assertSee('GVV')
-                    ->assertSee('Boissel')
-                    ->assertSee('Peignot');        ;   
+            $browser->visit($this->url)
+                ->assertSee('GVV')
+                ->assertSee('Boissel')
+                ->assertSee('Peignot');;
         });
     }
 
@@ -34,8 +27,7 @@ class LoginTest extends DuskTestCase
      *
      * @return void
      */
-    public function testFirstLogin()
-    {
+    public function testFirstLogin() {
         $this->browse(function (Browser $browser) {
 
             $this->login($browser, 'testadmin', 'password');

@@ -59,25 +59,4 @@ abstract class DuskTestCase extends BaseTestCase
                isset($_ENV['DUSK_HEADLESS_DISABLED']);
     }
 
-    /*********************************************************** */
-
-    /**
-     * Login as a user.
-     */
-    public function login($browser, $username, $password) {
-        $browser->visit($this->url)
-                ->assertSee('Utilisateur')
-                ->type('username', $username)
-                ->type('password', $password)
-                ->press('input[type="submit"]');
-
-        sleep(2);
-    }
-
-    /**
-     * Logout as a user.
-     */
-    public function logout($browser) {
-        $browser->visit($this->url . "index.php/auth/logout");
-    }
 }

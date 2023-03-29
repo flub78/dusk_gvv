@@ -15,3 +15,4 @@ yarn-error.log
 /.vscode
 setenv.bat
 tests/reports/junit.xml
+tests/reports/junit.xml
