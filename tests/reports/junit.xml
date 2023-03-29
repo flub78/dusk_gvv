@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="3" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="11.941074">
-    <testsuite name="Browser Test Suite" tests="3" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="11.941074">
-      <testsuite name="Tests\Browser\ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="6.804965">
-        <testcase name="testBasicExample" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="16" assertions="1" time="6.804965"/>
+  <testsuite name="" tests="4" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="11.796924">
+    <testsuite name="Browser Test Suite" tests="4" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="11.796924">
+      <testsuite name="Tests\Browser\ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="5.134457">
+        <testcase name="testBasicExample" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="16" assertions="1" time="5.134457"/>
       </testsuite>
-      <testsuite name="Tests\Browser\LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" tests="2" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="5.136110">
-        <testcase name="testHome" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="16" assertions="3" time="1.334214"/>
-        <testcase name="testFirstLogin" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="30" assertions="4" time="3.801895"/>
+      <testsuite name="Tests\Browser\InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" tests="1" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="1.015434">
+        <testcase name="testReset" class="Tests\Browser\InstallationTest" classname="Tests.Browser.InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" line="17" assertions="5" time="1.015434"/>
+      </testsuite>
+      <testsuite name="Tests\Browser\LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" tests="2" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="5.647033">
+        <testcase name="testHome" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="16" assertions="3" time="1.828090"/>
+        <testcase name="testFirstLogin" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="30" assertions="4" time="3.818943"/>
       </testsuite>
     </testsuite>
   </testsuite>
