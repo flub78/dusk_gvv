@@ -33,4 +33,29 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->click('@user_icon')
             ->clickLink('Quitter');
     }
+
+    public function IsLoggedIn($browser) {
+        $browser->assertSee('Compta');
+    }
+
+    public function IsLoggedOut($browser) {
+        $browser->assertDontSee('Compta');
+        $browser->assertSee('Utilisateur');
+        // $browser->assertSee('@user_icon');
+    }
+
+    public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = []) {
+        $browser->visit($this->url . 'index.php/' . $suburl);
+
+        foreach ($mustFind as $str) {
+            $browser->assertSee($str);
+        }
+        foreach ($mustNotFind as $str) {
+            $browser->assertDontSee($str);
+        }
+
+        $browser->screenshot('page_' . str_replace('/', '_', $suburl));
+
+    }
+
 }

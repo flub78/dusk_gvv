@@ -32,13 +32,20 @@ class LoginTest extends GvvDuskTestCase {
 
             $this->login($browser, 'testadmin', 'password');
 
-            $browser->assertSee('Compta');
+            $this->IsLoggedIn($browser);
             $browser->screenshot('login');
 
             $this->logout($browser);
-            $browser->assertDontSee('Compta');
-            $browser->assertSee('Utilisateur');
+            $this->IsLoggedOut($browser);
             $browser->screenshot('logout');
+        });
+    }
+
+    public function testAccess() {
+        $this->browse(function (Browser $browser) {
+            $this->login($browser, 'testadmin', 'password');
+            $this->canAccess($browser, "vols_planeur/page", ['Compta', 'Planche']);
+            $this->logout($browser);
         });
     }
 }
