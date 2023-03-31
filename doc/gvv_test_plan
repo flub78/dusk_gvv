@@ -1,0 +1,16 @@
+# Plan de test GVV
+
+Ce project implémente les tests de bout en bout (end to end) de GVV. Ne sont décrits ici que les tests Dusk qui controllent un navigateur.
+
+Suite à différentes évolutions technologiques la plupart des tests automatiques de GVV ne fonctionnent plus. GVV est en fin de vie et son remplacement est déjà planifié. Il va néamoins rester actif jusqu'à ce que son remplacant soit prèt.
+
+Le but de ce projet est donc de reprendre le contrôl partiel des tests d'une application déployée depuis des années et dont beaucoup de bugs ont été corrigés.
+
+GVV n'est pas complétement figé et donc il est utile de redevelopper certains tests pour rendre les évolutions plus comfortables.
+
+## Objectifs
+
+Ecrire un ou plusieurs tests sur les corrections de bug ou les nouvelle fonctionnalités (approche TDD).
+
+Redevelopper un peu de non regression. Le problème est que redevelopper une suite de non regression complète est un gros travail qui ne serait probablement pas rentable. Il faut donc ce concentrer sur les points les plus succeptibles dêtres impactés par les changements.
+

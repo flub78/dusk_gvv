@@ -1,12 +1,10 @@
 <?php
 
 namespace Tests\Browser;
-
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
-class LoginTest extends GvvDuskTestCase {
+class MotdTest extends GvvDuskTestCase {
 
     /**
      * A few checks on the home page
@@ -30,24 +28,25 @@ class LoginTest extends GvvDuskTestCase {
     public function testFirstLogin() {
         $this->browse(function (Browser $browser) {
 
+            $motd = 'Message du jour';
+
             $this->login($browser, 'testadmin', 'password');
 
             $this->IsLoggedIn($browser);
-            $browser->screenshot('login');
 
-            $browser->click('#close_mod_dialog');
+            // check that the message of the day is visible
+            $browser->assertSee($motd)
+                ->check('#no_mod')
+                ->click('#close_mod_dialog');
 
             $this->logout($browser);
             $this->IsLoggedOut($browser);
-            $browser->screenshot('logout');
-        });
-    }
 
-    public function testAccess() {
-        $this->browse(function (Browser $browser) {
+            // login again
             $this->login($browser, 'testadmin', 'password');
-            $this->canAccess($browser, "vols_planeur/page", ['Compta', 'Planche']);
+            $browser->assertDontSee($motd);
             $this->logout($browser);
+
         });
     }
 }
