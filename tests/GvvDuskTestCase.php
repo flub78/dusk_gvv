@@ -44,7 +44,7 @@ class GvvDuskTestCase extends DuskTestCase {
         // $browser->assertSee('@user_icon');
     }
 
-    public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = []) {
+    public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
         $browser->visit($this->url . 'index.php/' . $suburl);
 
         foreach ($mustFind as $str) {
@@ -52,6 +52,9 @@ class GvvDuskTestCase extends DuskTestCase {
         }
         foreach ($mustNotFind as $str) {
             $browser->assertDontSee($str);
+        }
+        foreach ($inputValues as $field) {
+            $browser->assertInputValue($field['selector'], $field['value']);
         }
 
         $browser->screenshot('page_' . str_replace('/', '_', $suburl));

@@ -116,6 +116,10 @@ class PageAccessTest extends GvvDuskTestCase {
                 ['url' => 'terrains/page', 'mustSee' => ['LFOI', 'Terrains']],
                 // I need another test to check input values
                 // ['url' => 'terrains/edit/LFOI', 'mustSee' => ['LFOI', 'Abbeville']],
+                ['url' => 'terrains/edit/LFOI', 
+                 'mustSee' => ['OACI', 'Nom du terrain'],
+                 'inputValues' => [['selector' => '#oaci', 'value' => 'LFOI']]
+                ],
                 ['url' => 'terrains/create', 'mustSee' => ['Terrain', 'Code OACI', 'Description']],
             ];
 
@@ -123,7 +127,7 @@ class PageAccessTest extends GvvDuskTestCase {
                         
             foreach ($pages as $page) {
                 $ms = array_merge($mustSee, $page['mustSee']);
-                $this->canAccess($browser, $page['url'], $ms, $mustNotSee);
+                $this->canAccess($browser, $page['url'], $ms, $mustNotSee, $page['inputValues'] ?? []);
             }
             
             $this->logout($browser);
