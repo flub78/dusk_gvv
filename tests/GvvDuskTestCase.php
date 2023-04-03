@@ -48,12 +48,15 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->visit($this->url . 'index.php/' . $suburl);
 
         foreach ($mustFind as $str) {
+            echo ($suburl . ': assertSee: ' . $str . "\n");
             $browser->assertSee($str);
         }
         foreach ($mustNotFind as $str) {
+            echo ($suburl . ': assertDontSee: ' . $str . "\n");
             $browser->assertDontSee($str);
         }
         foreach ($inputValues as $field) {
+            echo ($suburl . ': assertInput: ' . $field['selector'] . ', ' . $field['value'] .  "\n");
             $browser->assertInputValue($field['selector'], $field['value']);
         }
 
