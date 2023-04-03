@@ -48,20 +48,30 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->visit($this->url . 'index.php/' . $suburl);
 
         foreach ($mustFind as $str) {
-            echo ($suburl . ': assertSee: ' . $str . "\n");
+            if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
             $browser->assertSee($str);
         }
         foreach ($mustNotFind as $str) {
-            echo ($suburl . ': assertDontSee: ' . $str . "\n");
+            if ($this->verbose()) echo ($suburl . ': assertDontSee: ' . $str . "\n");
             $browser->assertDontSee($str);
         }
         foreach ($inputValues as $field) {
-            echo ($suburl . ': assertInput: ' . $field['selector'] . ', ' . $field['value'] .  "\n");
+            if ($this->verbose()) echo ($suburl . ': assertInput: ' . $field['selector'] . ', ' . $field['value'] .  "\n");
             $browser->assertInputValue($field['selector'], $field['value']);
         }
 
         $browser->screenshot('page_' . str_replace('/', '_', $suburl));
 
+    }
+
+    /**
+     * Checks if the test runs in verbose mode.
+     */
+    public function verbose() {
+        global $argv;
+        if (in_array('--verbose', $argv)) return true;
+        if (in_array('-v', $argv)) return true;
+        return false;
     }
 
 }
