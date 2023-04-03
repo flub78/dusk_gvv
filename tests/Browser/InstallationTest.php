@@ -17,6 +17,9 @@ class InstallationTest extends GvvDuskTestCase {
     public function testReset() {
         $this->browse(function (Browser $browser) {
 
+            $user = "testadmin";
+            $password = "password";
+
             $browser->visit($this->url . 'install/reset.php')
                 ->assertSee("Verification de l'installation")
                 // tables are only dropped when they exist
@@ -30,6 +33,11 @@ class InstallationTest extends GvvDuskTestCase {
             $browser->assertSee('Installation de GVV')
                 ->assertSee("Fin de la procédure d'installation");
 
+            $this->login($browser, $user, $password);
+            $browser->visit($this->url . 'index.php/migration')
+                ->assertSee('Migration de la base de données')
+                ->press("Valider");
+            $this->logout($browser);
         });
     }
 }
