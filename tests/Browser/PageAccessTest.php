@@ -10,6 +10,7 @@ class PageAccessTest extends GvvDuskTestCase {
 
 
     public function testAdminAccess() {
+        // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
             $user = "testadmin";
@@ -52,6 +53,7 @@ class PageAccessTest extends GvvDuskTestCase {
     }
 
     public function testMembresAccess() {
+        // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
             $user = "testadmin";
@@ -94,7 +96,8 @@ class PageAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testPlaneurssAccess() {
+    public function testPlaneursAccess() {
+        // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
             $user = "testadmin";
@@ -113,6 +116,69 @@ class PageAccessTest extends GvvDuskTestCase {
                 ['url' => 'event/stats', 'mustSee' => ['formation']],
                 ['url' => 'event/fai', 'mustSee' => ['performance FAI']],
 
+            ];
+
+            $this->login($browser, $user, $password);
+
+            foreach ($pages as $page) {
+                $ms = array_merge($mustSee, $page['mustSee']);
+                $mns = array_merge($mustNotSee, $page['mustNotSee'] ?? []);
+                $this->canAccess($browser, $page['url'], $ms, $mns, $page['inputValues'] ?? []);
+            }
+
+            $this->logout($browser);
+        });
+    }
+
+    public function testAvionsAccess() {
+        // $this->markTestSkipped('Speedup during dev.');
+        $this->browse(function (Browser $browser) {
+
+            $user = "testadmin";
+            $password = "password";
+            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+
+            $pages = [
+                ['url' => 'vols_avion/page', 'mustSee' => ['Planche des vols avion']],
+                ['url' => 'vols_avion/create', 'mustSee' => ['Vol']],
+                ['url' => 'avion/page', 'mustSee' => ['Avions']],
+                ['url' => 'avion/create', 'mustSee' => ['Avion', 'Immatriculation', 'Année de mise en service']],
+                ['url' => 'vols_avion/statistic', 'mustSee' => ['Statistiques avion', 'Par mois', 'Par machine', 'Activité avion par mois']],
+                ['url' => 'pompes', 'mustSee' => ['Utilisation de la pompe']],
+                ['url' => 'pompes/create', 'mustSee' => ['100LL']],
+            ];
+
+            $this->login($browser, $user, $password);
+
+            foreach ($pages as $page) {
+                $ms = array_merge($mustSee, $page['mustSee']);
+                $mns = array_merge($mustNotSee, $page['mustNotSee'] ?? []);
+                $this->canAccess($browser, $page['url'], $ms, $mns, $page['inputValues'] ?? []);
+            }
+
+            $this->logout($browser);
+        });
+    }
+
+    public function testComptaAccess() {
+        $this->browse(function (Browser $browser) {
+
+            $user = "testadmin";
+            $password = "password";
+            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+
+            $pages = [
+                ['url' => 'compta/page', 'mustSee' => ['Grand journal']],
+                ['url' => 'compta/create', 'mustSee' => ['Ecriture comptable']],
+                ['url' => 'comptes/general', 'mustSee' => ['Balance des comptes']],
+                ['url' => 'comptes/page/411', 'mustSee' => ['Balance des comptes Classe 411']],
+                // ['url' => 'comptes/create', 'mustSee' => ['Compte']],
+                ['url' => 'comptes/resultat', 'mustSee' => ["Résultat d'exploitation de l'exercice"]],
+                ['url' => 'comptes/bilan', 'mustSee' => ["Bilan de fin d'exercice"]],
+                ['url' => 'achats/list_per_year', 'mustSee' => ["Ventes de l'année"]],
+                ['url' => 'comptes/tresorerie', 'mustSee' => ["Trésorerie"]],
             ];
 
             $this->login($browser, $user, $password);
