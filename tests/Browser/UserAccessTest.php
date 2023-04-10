@@ -2,42 +2,52 @@
 
 namespace Tests\Browser;
 
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
-class PageAccessTest extends GvvDuskTestCase {
+/**
+ * Test user access to pages for a regular user
+ *
+ * @category Tests
+ * @package  Tests\Browser
+ * @author   <>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://projets.developpez.com/projects/gvv/repository
+ */
+class UserAccessTest extends GvvDuskTestCase {
 
 
     public function testAdminAccess() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testadmin";
+            $user = "testuser";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'vols_planeur/page', 'mustSee' => ['Planche']],
-                ['url' => 'alarmes', 'mustSee' => ['Conditions', 'Visite']],
+                ['url' => 'alarmes', 'mustSee' => $denied],
                 ['url' => 'tickets/page', 'mustSee' => ['tickets']],
-                ['url' => 'tickets/solde', 'mustSee' => ['Solde']],
+                ['url' => 'tickets/solde', 'mustSee' => $denied],
 
-                ['url' => 'reports/page', 'mustSee' => ['Rapports']],
+                ['url' => 'reports/page', 'mustSee' => $denied],
 
-                ['url' => 'rapports/ffvv', 'mustSee' => ['annuel FFVV']],
-                ['url' => 'rapports/dgac', 'mustSee' => ['DGAC']],
+                ['url' => 'rapports/ffvv', 'mustSee' => $denied],
+                ['url' => 'rapports/dgac', 'mustSee' =>  $denied],
 
-                ['url' => 'welcome/ca', 'mustSee' => ['Administration', 'terrains']],
-
-                ['url' => 'terrains/page', 'mustSee' => ['LFOI', 'Terrains']],
+                ['url' => 'terrains/page', 'mustSee' => $denied],
                 [
                     'url' => 'terrains/edit/LFOI',
-                    'mustSee' => ['OACI', 'Nom du terrain'],
-                    'inputValues' => [['selector' => '#oaci', 'value' => 'LFOI']]
+                    'mustSee' => $denied,
+                    'inputValues' => []
                 ],
-                ['url' => 'terrains/create', 'mustSee' => ['Terrain', 'Code OACI', 'Description']],
+                ['url' => 'terrains/create', 'mustSee' => $denied],
+                ['url' => 'welcome/ca', 'mustSee' => $denied],
+                ['url' => 'welcome/compta', 'mustSee' => $denied],
             ];
 
             $this->login($browser, $user, $password);
@@ -56,10 +66,11 @@ class PageAccessTest extends GvvDuskTestCase {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testadmin";
+            $user = "testuser";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'membre/page', 'mustSee' => ['Liste des membres']],
@@ -76,8 +87,8 @@ class PageAccessTest extends GvvDuskTestCase {
                 ['url' => 'membre/edit', 'mustSee' => ['pas de fiche']],
                 ['url' => 'licences/per_year', 'mustSee' => ['Licences']],
 
-                ['url' => 'mails/page', 'mustSee' => ['Courriels']],
-                ['url' => 'mails/create', 'mustSee' => ['Courriel']],
+                ['url' => 'mails/page', 'mustSee' => $denied],
+                ['url' => 'mails/create', 'mustSee' => $denied],
 
                 ['url' => 'auth/change_password', 'mustSee' => ['Nouveau mot de passe']],
 
@@ -100,21 +111,23 @@ class PageAccessTest extends GvvDuskTestCase {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testadmin";
+            $user = "testuser";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'vols_planeur/page', 'mustSee' => ['Planche des Vols Planeur']],
-                ['url' => 'vols_planeur/create', 'mustSee' => ['Vol']],
-                ['url' => 'vols_planeur/plancheauto_select', 'mustSee' => ['Choix de la planche']],
-                ['url' => 'vols_planeur/plancheauto', 'mustSee' => ['Saisie planche planeur']],
+                ['url' => 'vols_planeur/create', 'mustSee' => $denied],
+                ['url' => 'vols_planeur/plancheauto_select', 'mustSee' => $denied],
+                ['url' => 'vols_planeur/plancheauto', 'mustSee' => $denied],
                 ['url' => 'planeur/page', 'mustSee' => ['Planeurs']],
-                ['url' => 'planeur/create', 'mustSee' => ['Planeur', 'Immatriculation', 'Année de mise en service']],
+                ['url' => 'planeur/create', 'mustSee' => $denied],
                 ['url' => 'vols_planeur/statistic', 'mustSee' => ['Statistiques planeur', 'Par mois', 'Par machine', 'Activité planeur par mois']],
                 ['url' => 'event/stats', 'mustSee' => ['formation']],
                 ['url' => 'event/fai', 'mustSee' => ['performance FAI']],
+
 
             ];
 
@@ -134,19 +147,20 @@ class PageAccessTest extends GvvDuskTestCase {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testadmin";
+            $user = "testuser";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'vols_avion/page', 'mustSee' => ['Planche des vols avion']],
-                ['url' => 'vols_avion/create', 'mustSee' => ['Vol']],
+                ['url' => 'vols_avion/create', 'mustSee' => $denied],
                 ['url' => 'avion/page', 'mustSee' => ['Avions']],
-                ['url' => 'avion/create', 'mustSee' => ['Avion', 'Immatriculation', 'Année de mise en service']],
+                ['url' => 'avion/create', 'mustSee' => $denied],
                 ['url' => 'vols_avion/statistic', 'mustSee' => ['Statistiques avion', 'Par mois', 'Par machine', 'Activité avion par mois']],
-                ['url' => 'pompes', 'mustSee' => ['Utilisation de la pompe']],
-                ['url' => 'pompes/create', 'mustSee' => ['100LL']],
+                ['url' => 'pompes', 'mustSee' => $denied],
+                ['url' => 'pompes/create', 'mustSee' => $denied],
             ];
 
             $this->login($browser, $user, $password);
@@ -162,23 +176,25 @@ class PageAccessTest extends GvvDuskTestCase {
     }
 
     public function testComptaAccess() {
+        // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testadmin";
+            $user = "testuser";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
-                ['url' => 'compta/page', 'mustSee' => ['Grand journal']],
-                ['url' => 'compta/create', 'mustSee' => ['Ecriture comptable']],
-                ['url' => 'comptes/general', 'mustSee' => ['Balance des comptes']],
-                ['url' => 'comptes/page/411', 'mustSee' => ['Balance des comptes Classe 411']],
-                // ['url' => 'comptes/create', 'mustSee' => ['Compte']],
-                ['url' => 'comptes/resultat', 'mustSee' => ["Résultat d'exploitation de l'exercice"]],
-                ['url' => 'comptes/bilan', 'mustSee' => ["Bilan de fin d'exercice"]],
-                ['url' => 'achats/list_per_year', 'mustSee' => ["Ventes de l'année"]],
-                ['url' => 'comptes/tresorerie', 'mustSee' => ["Trésorerie"]],
+                ['url' => 'compta/page', 'mustSee' => $denied],
+                ['url' => 'compta/create', 'mustSee' => $denied],
+                ['url' => 'comptes/general', 'mustSee' => $denied],
+                ['url' => 'comptes/page/411', 'mustSee' => $denied],
+                ['url' => 'comptes/create', 'mustSee' => $denied],
+                ['url' => 'comptes/resultat', 'mustSee' => $denied],
+                ['url' => 'comptes/bilan', 'mustSee' => $denied],
+                ['url' => 'achats/list_per_year', 'mustSee' => $denied],
+                ['url' => 'comptes/tresorerie', 'mustSee' => $denied],
             ];
 
             $this->login($browser, $user, $password);
