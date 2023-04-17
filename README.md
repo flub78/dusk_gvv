@@ -13,6 +13,7 @@ and a testadmin / password acount must exists
 ## Tests execution
 
     php artisan dusk --browse
+    php artisan dusk --browse tests/Browser/PlanchisteAccessTest.php
     or
     run\tests.bat
 
