@@ -1,4 +1,4 @@
-# DUSK project template
+# DUSK for GVV
 
 This project contains the end to end tests for GVV. 
 
@@ -13,9 +13,13 @@ and a testadmin / password acount must exists
 ## Tests execution
 
     php artisan dusk --browse
-    php artisan dusk --browse tests/Browser/PlanchisteAccessTest.php
     or
     run\tests.bat
+
+For individual tests:
+
+    php artisan dusk --browse tests/Browser/PlanchisteAccessTest.php
+    php artisan dusk --browse tests/Browser/PlaneurTest.php
 
 ## In case of incorrect chrome-driver version
 
