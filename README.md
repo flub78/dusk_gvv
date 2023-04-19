@@ -18,8 +18,9 @@ and a testadmin / password acount must exists
 
 For individual tests:
 
-    php artisan dusk --browse tests/Browser/PlanchisteAccessTest.php
-    php artisan dusk --browse tests/Browser/PlaneurTest.php
+    php artisan dusk --color=always --browse tests/Browser/PlanchisteAccessTest.php
+    php artisan dusk --color=always --browse tests/Browser/PlaneurTest.php
+    php artisan dusk --color=always --browse tests/Browser/TerrainTest.php
 
 ## In case of incorrect chrome-driver version
 
@@ -32,3 +33,13 @@ For individual tests:
 ## Documentation
 
     https://laravel.com/docs/10.x/dusk
+
+## GVV testing
+
+Even if it is still actively maintained, regarding automated testing GVV can be considered legacy.
+
+* as phpunit was poorly integrated with CodeIgniter 2.x, the unit tests are written with CIUnit which cannot generate junit.xml
+
+* I'll try to regain control with Dusk tests. They may be a little slow for some purpose but at least it is a way to get minimal automated test covergage.
+
+* One difficulty comes the table dependencies, accounts and membres are needed to create gliders, gileders and pilots are required to create flights, etc.

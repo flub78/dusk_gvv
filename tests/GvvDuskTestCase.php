@@ -3,6 +3,8 @@
 namespace Tests;
 
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\Login;
+use Exception;
 
 class GvvDuskTestCase extends DuskTestCase {
 
@@ -15,8 +17,7 @@ class GvvDuskTestCase extends DuskTestCase {
      * Login as a user.
      */
     public function login($browser, $username, $password) {
-        $browser->visit($this->url)
-            ->assertSee('Utilisateur')
+        $browser->visit(new Login)
             ->type('username', $username)
             ->type('password', $password)
             ->press('input[type="submit"]');
@@ -28,8 +29,6 @@ class GvvDuskTestCase extends DuskTestCase {
      * Logout as a user.
      */
     public function logout($browser) {
-        // $browser->visit($this->url . "index.php/auth/logout");
-
         $browser->click('@user_icon')
             ->clickLink('Quitter');
     }
@@ -41,7 +40,6 @@ class GvvDuskTestCase extends DuskTestCase {
     public function IsLoggedOut($browser) {
         $browser->assertDontSee('Compta');
         $browser->assertSee('Utilisateur');
-        // $browser->assertSee('@user_icon');
     }
 
     public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
@@ -72,6 +70,23 @@ class GvvDuskTestCase extends DuskTestCase {
         if (in_array('--verbose', $argv)) return true;
         if (in_array('-v', $argv)) return true;
         return false;
+    }
+
+    /* returns the number of rows in the table */
+    public function TableTotal($browser) {
+
+        $counter = $browser->text('#DataTables_Table_0_info');
+        // echo "Counter: $counter";
+        $pattern = '/(\d+) à (\d+) sur (\d+) éléments/';
+        if (preg_match($pattern, $counter, $matches)) {
+            $from = $matches[1];
+            $to = $matches[2];
+            $total = $matches[3];
+            echo "From: $from, To: $to, Total: $total";
+            return $total;
+        } else {
+            throw new Exception("No match for $pattern in $counter");
+        }       
     }
 
 }
