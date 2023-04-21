@@ -43,7 +43,9 @@ class GvvDuskTestCase extends DuskTestCase {
     }
 
     public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
-        $browser->visit($this->url . 'index.php/' . $suburl);
+        $url = $this->url . 'index.php/' . $suburl;
+        if ($this->verbose()) echo ("Visiting $url\n");
+        $browser->visit($url);
 
         foreach ($mustFind as $str) {
             if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
