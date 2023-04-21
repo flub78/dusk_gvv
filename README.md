@@ -22,6 +22,7 @@ For individual tests:
     php artisan dusk --color=always --browse tests/Browser/PlaneurTest.php
     php artisan dusk --color=always --browse tests/Browser/TerrainTest.php
     php artisan dusk --color=always --browse tests/Browser/BureauAccessTest.php
+    php artisan dusk --color=always --browse tests/Browser/CAAccessTest.php
 
 ## In case of incorrect chrome-driver version
 

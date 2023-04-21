@@ -5,26 +5,22 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
-class BureauAccessTest extends GvvDuskTestCase {
+class CAAccessTest extends GvvDuskTestCase {
 
 
     public function testAdminAccess() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testbureau";
+            $user = "testca";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'vols_planeur/page', 'mustSee' => ['Planche']],
-                // alarmes est commenté. Pour l'instant le role bureau ne peut pas y accéder.
-                // D'un coté il devrait y avoir le droit, mais de l'autre cette page est obsolète
-                // la plupart des clubs gérant les expériences avec GESASSO
                 // ['url' => 'alarmes', 'mustSee' => ['Conditions', 'Visite']],
-
-
                 ['url' => 'tickets/page', 'mustSee' => ['tickets']],
                 ['url' => 'tickets/solde', 'mustSee' => ['Solde']],
 
@@ -60,9 +56,9 @@ class BureauAccessTest extends GvvDuskTestCase {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testbureau";
+            $user = "testca";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
 
             $pages = [
@@ -104,10 +100,11 @@ class BureauAccessTest extends GvvDuskTestCase {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testbureau";
+            $user = "testca";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'vols_planeur/page', 'mustSee' => ['Planche des Vols Planeur']],
@@ -134,20 +131,15 @@ class BureauAccessTest extends GvvDuskTestCase {
         });
     }
 
-    /**
-     * Test access to avions pages
-     * 
-     * Attention les tests sur les pompes sont dépendants de la base de données qui doit être modifiée
-     * manuellement avant de faire passer le test. C'est mauvais mais la correction entrainerait la refonte complète des droits de GVV.
-     */
     public function testAvionsAccess() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
-            $user = "testbureau";
+            $user = "testca";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
+            $denied = ["Accès non autorisé"];
 
             $pages = [
                 ['url' => 'vols_avion/page', 'mustSee' => ['Planche des vols avion']],
@@ -155,9 +147,8 @@ class BureauAccessTest extends GvvDuskTestCase {
                 ['url' => 'avion/page', 'mustSee' => ['Avions']],
                 ['url' => 'avion/create', 'mustSee' => ['Avion', 'Immatriculation', 'Année de mise en service']],
                 ['url' => 'vols_avion/statistic', 'mustSee' => ['Statistiques avion', 'Par mois', 'Par machine', 'Activité avion par mois']],
-                // commenté parce que la base de données doit être modifiée manuellement avant de faire passer le test
-                // ['url' => 'pompes', 'mustSee' => ['Utilisation de la pompe']],
-                // ['url' => 'pompes/create', 'mustSee' => ['100LL']],
+                ['url' => 'pompes', 'mustSee' => $denied],
+                ['url' => 'pompes/create', 'mustSee' => $denied],
             ];
 
             $this->login($browser, $user, $password);
@@ -175,9 +166,9 @@ class BureauAccessTest extends GvvDuskTestCase {
     public function testComptaAccess() {
         $this->browse(function (Browser $browser) {
 
-            $user = "testbureau";
+            $user = "testca";
             $password = "password";
-            $mustSee = ['GVV', 'Compta', $user, 'Copyright (©)', "Boissel", "Peignot"];
+            $mustSee = ['GVV', $user, 'Copyright (©)', "Boissel", "Peignot"];
             $mustNotSee = ['Error', 'Exception', 'Fatal error', 'Undefined', '404 Page not found'];
 
             $pages = [
