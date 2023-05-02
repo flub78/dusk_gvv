@@ -20,7 +20,8 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->visit(new Login)
             ->type('username', $username)
             ->type('password', $password)
-            ->press('input[type="submit"]');
+            ->press('input[type="submit"]')
+            ->assertSee('Planeurs');
 
         sleep(2);
     }
@@ -30,7 +31,8 @@ class GvvDuskTestCase extends DuskTestCase {
      */
     public function logout($browser) {
         $browser->click('@user_icon')
-            ->clickLink('Quitter');
+            ->clickLink('Quitter')
+            ->assertSee('Utilisateur');
     }
 
     public function IsLoggedIn($browser) {
@@ -84,7 +86,7 @@ class GvvDuskTestCase extends DuskTestCase {
             $from = $matches[1];
             $to = $matches[2];
             $total = $matches[3];
-            echo "From: $from, To: $to, Total: $total";
+            // echo "From: $from, To: $to, Total: $total";
             return $total;
         } else {
             throw new Exception("No match for $pattern in $counter");

@@ -12,6 +12,15 @@ and a testadmin / password acount must exists
 
 ## Installation
 
+### On Windows
+
+    install composer
+    composer update
+    php artisan dusk:chrome-driver
+
+
+### On Linux
+
     sudo apt install composer
 
     composer update
@@ -30,22 +39,6 @@ and a testadmin / password acount must exists
     
     Failed to connect to localhost port 9515 after 0 ms: Connection refused
     
-## Tests execution
-
-    php artisan dusk --browse
-    or
-    run\tests.bat
-
-For individual tests:
-
-    php artisan dusk --color=always --browse tests/Browser/ExampleTest.php
-    php artisan dusk --color=always --browse tests/Browser/PlanchisteAccessTest.php
-    php artisan dusk --color=always --browse tests/Browser/PlaneurTest.php
-    php artisan dusk --color=always --browse tests/Browser/TerrainTest.php
-    php artisan dusk --color=always --browse tests/Browser/BureauAccessTest.php
-    php artisan dusk --color=always --browse tests/Browser/CAAccessTest.php
-
-If the tests are run on a Dropbox shared file system, disable synchronisation to avoid errors.
 
 ## In case of incorrect chrome-driver version
 
@@ -72,3 +65,21 @@ Even if it is still actively maintained, regarding automated testing GVV can be 
 ## Target update
 
 There is no automatic update of the project under test. It must be done manually or by the CI/CD pipeline.
+
+## Tests execution
+
+    php artisan dusk --browse
+    or
+    run\tests.bat
+
+For individual tests:
+
+    php artisan dusk --color=always --browse tests/Browser/ExampleTest.php
+    php artisan dusk --color=always --browse tests/Browser/PlanchisteAccessTest.php
+    php artisan dusk --color=always --browse tests/Browser/PlaneurTest.php
+    php artisan dusk --color=always --browse tests/Browser/TerrainTest.php
+    php artisan dusk --color=always --browse tests/Browser/BureauAccessTest.php
+    php artisan dusk --color=always --browse tests/Browser/CAAccessTest.php
+
+If the tests are run on a Dropbox shared file system, disable synchronisation to avoid errors.
+
