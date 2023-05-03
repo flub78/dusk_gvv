@@ -77,7 +77,11 @@ class GvvDuskTestCase extends DuskTestCase {
     }
 
     /* returns the number of rows in the table */
-    public function TableTotal($browser) {
+    public function TableTotal($browser, $route = "", $mustSee = []) {
+
+        if ($route != "") {
+            $this->canAccess($browser, $route, $mustSee);
+        }
 
         $counter = $browser->text('#DataTables_Table_0_info');
         // echo "Counter: $counter";

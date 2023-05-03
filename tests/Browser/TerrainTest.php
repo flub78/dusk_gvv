@@ -9,19 +9,37 @@ use Tests\GvvDuskTestCase;
  * Test Terrain CRUD
  * 
  * php artisan dusk --color=always --browse tests/Browser/TerrainTest.php
+ * 
+ * The tests rely on the method order. 
  */
 class TerrainTest extends GvvDuskTestCase {
 
     /** Constructor */
     function __construct() {
         parent::__construct();
-        
+
+        // var_dump($this->terrains);
         $this->terrains = [
             ['oaci' => "LFAA", 'nom' => "Trifouillis", 'freq1' => "123.45", 'comment' => "Mon terrain"],
             ['oaci' => "LFAB", 'nom' => "Les Oies", 'freq1' => "123.45", 'comment' => "Mon second terrain"]
         ];
+    }
 
-}
+    // protected function setUp(): void {
+    //     echo "setup\n";
+    // }
+
+    // protected function tearDown(): void {
+    //     echo "teardown\n";
+    // }
+
+    public static function setUpBeforeClass(): void {
+        //echo "setup before class\n";
+    }
+
+    public static function tearDownAfterClass(): void {
+        //echo "teardown after class\n";
+    }
 
     /**
      * Test create elements
@@ -94,34 +112,7 @@ class TerrainTest extends GvvDuskTestCase {
     }
 
     /**
-     * Test Creation, Read, Update and Delete of a Terrain
-     */
-    public function testTerrainCRUD() {
-        $this->browse(function (Browser $browser) {
-
-            $this->login($browser, 'testadmin', 'password');
-
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-
-            $terrains = [
-                ['oaci' => "LFAA", 'nom' => "Trifouillis", 'freq1' => "123.45", 'comment' => "Mon terrain"],
-                ['oaci' => "LFAB", 'nom' => "Les Oies", 'freq1' => "123.45", 'comment' => "Mon second terrain"]
-            ];
-
-            $total = $this->TableTotal($browser);
-            $this->assertGreaterThan(0, $total, "Terrains Table contains some entries");
-
-            $this->createTerrain($browser, $terrains);
-            $this->createTerrainError($browser, $terrains);
-            $this->deleteTerrain($browser, $terrains);
-
-            $this->logout($browser);
-        });
-    }
-
-    /**
-     * For test readibility, it is easier to rely on test sequence.
-     * Test independence can be achieved at the class level
+     * Test cases
      */
 
     /**
@@ -134,31 +125,53 @@ class TerrainTest extends GvvDuskTestCase {
         });
     }
 
+    /**
+     * Test create
+     * @depends testLogin
+     */
     public function testCreate() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $total = $this->TableTotal($browser);
+            $total = $this->TableTotal($browser, "terrains/page");
+            $this->assertGreaterThan(0, $total, "Terrains Table contains some entries");
 
-            $this->assertEquals(12, $total, "Terrains Table contains some entries");
             $this->createTerrain($browser, $this->terrains);
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $this->assertEquals(14, $this->TableTotal($browser), "Terrains Table contains some entries");
-        });        
+
+            $new_total = $this->TableTotal($browser, "terrains/page", ["Terrains"]);
+            $this->assertEquals($new_total, $total + count($this->terrains), "Terrains Table contains more entries");
+        });
     }
 
-    public function testDelete() {
-        // $this->markTestSkipped('must be revisited.');
+    /**
+     * Test create errors
+     * @depends testCreate
+     */
+    public function testCreateErrors() {
         $this->browse(function (Browser $browser) {
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $this->assertEquals(14, $this->TableTotal($browser), "Terrains Table contains some entries");
-            // $this->deleteTerrain($browser, $this->terrains);
-        });        
+            $this->createTerrainError($browser, $this->terrains);
+        });
+    }
+
+    /**
+     * Test delete
+     * @depends testCreateErrors
+     */
+    public function testDelete() {
+        $this->browse(function (Browser $browser) {
+
+            $total = $this->TableTotal($browser, "terrains/page");
+
+            $this->deleteTerrain($browser, $this->terrains);
+
+            $new_total = $this->TableTotal($browser, "terrains/page", ["Terrains"]);
+            $this->assertEquals($new_total, $total - count($this->terrains), "Terrains Table contains less entries");
+        });
     }
 
     /**
      * Logout
+     * @depends testDelete
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');
