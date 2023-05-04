@@ -75,11 +75,14 @@ There is no automatic update of the project under test. It must be done manually
 For individual tests:
 
     php artisan dusk --color=always --browse tests/Browser/ExampleTest.php
+    php artisan dusk --color=always --browse tests/Browser/AdminAccessTest.php
     php artisan dusk --color=always --browse tests/Browser/PlanchisteAccessTest.php
     php artisan dusk --color=always --browse tests/Browser/PlaneurTest.php
     php artisan dusk --color=always --browse tests/Browser/TerrainTest.php
     php artisan dusk --color=always --browse tests/Browser/BureauAccessTest.php
     php artisan dusk --color=always --browse tests/Browser/CAAccessTest.php
+
+    php artisan dusk --color=always --browse tests/Browser/SmokeTest.php
 
 If the tests are run on a Dropbox shared file system, disable synchronisation to avoid errors.
 
