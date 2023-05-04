@@ -97,6 +97,33 @@ class GvvDuskTestCase extends DuskTestCase {
         }       
     }
 
+    /*
+     * Extract the values of a select from an HTML page
+     * returns an array of values => text
+     */
+    public function geyValuesFromSelect($browser, $page, $id) {
+        $this->canAccess($browser, $page, []);
+
+        $js = "
+        var result = [];
+        var select = document.getElementById('" . $id ."');
+        var options = select.options;
+        for (var i = 0; i < options.length; i++) {
+            text = options[i].text;
+            value = options[i].value;
+            result.push(value + ',' + text);
+        }
+        return result;";
+
+        $sel = [];
+        $results = $browser->script($js)[0];
+        foreach ($results as $result) {
+            $values = explode(',', $result);
+            $sel[$values[0]] = $values[1];
+        }
+        return $sel;
+    }
+
     /** 
      * Check that an account exists.
      * 
@@ -104,19 +131,18 @@ class GvvDuskTestCase extends DuskTestCase {
      */
     public function AccountExists($browser, $account) {
         // the page to create an accounting line contains a select with all the accounts
-        // id, name = "compte1"
-        $this->canAccess($browser, "compta/create", ['comptable']);
-        // var_dump($browser->elements('#compte1'));
-        $html = $browser->element('#compte1');// ->getDomProperty('innerHTML'); 
-        // $browser->dump();
-        var_dump($html);
+        $selectValues = $this->geyValuesFromSelect($browser, "compta/create", "compte1");
 
-        $result = $browser->script(
-            "var t = ['a', 'b', 'c'];
-            return t;",
-        );
-        var_dump($result);
-        return true;
+        $codec = $account['codec'];
+        $nom = $account['nom'];
+        $str = "($codec) $nom";
+
+        foreach($selectValues as $key => $name) {
+            if ($name == $str) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** 
@@ -126,23 +152,16 @@ class GvvDuskTestCase extends DuskTestCase {
         foreach ($accounts as $account) {
             if (!$this->AccountExists($browser, $account)) {
                 // Create account
+                $this->canAccess($browser, "comptes/create", ['Compte']);
+                $browser
+                ->type('nom', $account['nom'])
+                ->type('desc', $account['comment'])
+                ->select('codec', $account['codec'])
+                ->press('#validate')
+                ->assertSee('Balance');
             }
-            $this->assertTrue($this->AccountExists($browser, $account), "account exists: ");
-            return;
+            $this->assertTrue($this->AccountExists($browser, $account), 
+                "account exists: (" . $account['codec'] . ')' . $account['nom']);
         }
-
-        // $total = $this->TableTotal($browser);
-        // foreach ($accounts as $account) {
-        //     $this->canAccess($browser, "accounts/create", ['Compta', 'Comptes']);
-        //     $browser
-        //         ->type('code', $account['code'])
-        //         ->type('name', $account['name'])
-        //         ->type('description', $account['description'])
-        //         ->press('#validate')
-        //         ->assertSee('Comptes');
-        //     $this->canAccess($browser, "accounts/page", ['Compta', 'Comptes']);
-        // }
-        // $new_total = $this->TableTotal($browser);
-        // $this->assertEquals($total + count($accounts), $new_total, "Account created, total = " . $new_total);
     }
 }

@@ -61,18 +61,16 @@ class SmokeTest extends GvvDuskTestCase {
         $this->initial_nb_plane_flights = 0;
         $this->initial_nb_terrains = 0;
 
-
-        // var_dump($this->terrains);
         $this->terrains = [
             ['oaci' => "LFAA", 'nom' => "Trifouillis", 'freq1' => "123.45", 'comment' => "Mon terrain"],
             ['oaci' => "LFAB", 'nom' => "Les Oies", 'freq1' => "123.45", 'comment' => "Mon second terrain"]
         ];
 
         $this->accounts = [
-            ['nom' => "Immbilisations", 'codec' => '215', 'comment' => "Immobilisations"],
+            ['nom' => "Immobilisations", 'codec' => '215', 'comment' => "Immobilisations"],
             ['nom' => "Fonds associatifs", 'codec' => '102', 'comment' => "Fonds associatifs"],
             ['nom' => "Banque", 'codec' => '512', 'comment' => "Banque"],
-            ['nom' => "Emprunt", 'codec' => '164', 'comment' => "Emprunt"],
+        //    ['nom' => "Emprunt", 'codec' => '164', 'comment' => "Emprunt"],
             ['nom' => "Frais de bureau", 'codec' => '606', 'comment' => "Frais de bureau"],
             ['nom' => "Essence plus huile", 'codec' => '606', 'comment' => "Essence plus huile"],
             ['nom' => "Entretien", 'codec' => '615', 'comment' => "Entretien"],
@@ -146,12 +144,10 @@ class SmokeTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $this->assertTrue(true, "main test");
             $this->CreateAccounts($browser, $this->accounts);
 
         });
     }
-
 
     /**
      * Logout
