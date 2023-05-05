@@ -42,7 +42,7 @@ class CIUnitTest extends GvvDuskTestCase {
                         
             foreach ($pages as $page) {
                 $ms = array_merge($mustSee, $page['mustSee']);
-                $this->canAccess($browser, $page['url'], $ms, $mustNotSee, $page['inputValues'] ?? []);
+                $this->canAccessTest($browser, $page['url'], $ms, $mustNotSee, $page['inputValues'] ?? []);
             }
             
             $browser->visit($this->url . 'index.php/calendar');

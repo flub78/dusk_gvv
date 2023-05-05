@@ -18,6 +18,8 @@ class GvvDuskTestCase extends DuskTestCase {
      */
     public function login($browser, $username, $password) {
         $browser->visit(new Login)
+            ->waitForText('Utilisateur')
+            ->waitForText('Peignot')
             ->type('username', $username)
             ->type('password', $password)
             ->press('input[type="submit"]')
@@ -32,6 +34,7 @@ class GvvDuskTestCase extends DuskTestCase {
     public function logout($browser) {
         $browser->click('@user_icon')
             ->clickLink('Quitter')
+            ->waitForText('Utilisateur')
             ->assertSee('Utilisateur');
     }
 
@@ -40,14 +43,15 @@ class GvvDuskTestCase extends DuskTestCase {
     }
 
     public function IsLoggedOut($browser) {
-        $browser->assertDontSee('Compta');
+        $browser->assertDontSee('Planeurs');
         $browser->assertSee('Utilisateur');
     }
 
     public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
         $url = $this->url . 'index.php/' . $suburl;
         if ($this->verbose()) echo ("Visiting $url\n");
-        $browser->visit($url);
+        $browser->visit($url)
+            ->waitForText('Peignot');
 
         foreach ($mustFind as $str) {
             if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
@@ -65,6 +69,24 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->screenshot('page_' . str_replace('/', '_', $suburl));
 
     }
+
+    public function canAccessTest($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
+        $url = $this->url . 'index.php/' . $suburl;
+        if ($this->verbose()) echo ("Visiting $url\n");
+        $browser->visit($url)->waitForText('Line Number');
+
+        foreach ($mustFind as $str) {
+            if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
+            $browser->assertSee($str);
+        }
+        foreach ($mustNotFind as $str) {
+            if ($this->verbose()) echo ($suburl . ': assertDontSee: ' . $str . "\n");
+            $browser->assertDontSee($str);
+        }
+        $browser->screenshot('page_' . str_replace('/', '_', $suburl));
+
+    }
+
 
     /**
      * Checks if the test runs in verbose mode.

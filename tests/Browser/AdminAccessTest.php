@@ -28,7 +28,7 @@ class AdminAccessTest extends GvvDuskTestCase {
                 ['url' => 'rapports/ffvv', 'mustSee' => ['annuel FFVV']],
                 ['url' => 'rapports/dgac', 'mustSee' => ['DGAC']],
 
-                ['url' => 'welcome/ca', 'mustSee' => ['Administration', 'terrains']],
+                ['url' => 'welcome/ca', 'mustSee' => ["Rapports d'activité", 'Année']],
 
                 ['url' => 'terrains/page', 'mustSee' => ['LFOI', 'Terrains']],
                 [
