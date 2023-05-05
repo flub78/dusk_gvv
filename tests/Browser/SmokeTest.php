@@ -66,11 +66,15 @@ class SmokeTest extends GvvDuskTestCase {
             ['oaci' => "LFAB", 'nom' => "Les Oies", 'freq1' => "123.45", 'comment' => "Mon second terrain"]
         ];
 
+        $this->accountsChart = [
+            ['codec' => "164", "desc" => "Emprunts auprès des établissements de crédit"]
+        ];
+
         $this->accounts = [
             ['nom' => "Immobilisations", 'codec' => '215', 'comment' => "Immobilisations"],
             ['nom' => "Fonds associatifs", 'codec' => '102', 'comment' => "Fonds associatifs"],
             ['nom' => "Banque", 'codec' => '512', 'comment' => "Banque"],
-        //    ['nom' => "Emprunt", 'codec' => '164', 'comment' => "Emprunt"],
+            ['nom' => "Emprunt", 'codec' => '164', 'comment' => "Emprunt"],
             ['nom' => "Frais de bureau", 'codec' => '606', 'comment' => "Frais de bureau"],
             ['nom' => "Essence plus huile", 'codec' => '606', 'comment' => "Essence plus huile"],
             ['nom' => "Entretien", 'codec' => '615', 'comment' => "Entretien"],
@@ -144,6 +148,7 @@ class SmokeTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
+            $this->CreateAccountCodes($browser, $this->accountsChart);
             $this->CreateAccounts($browser, $this->accounts);
 
         });
