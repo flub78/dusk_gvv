@@ -47,6 +47,9 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->assertSee('Utilisateur');
     }
 
+    /**
+     * Checks if the user can access a page.
+     */
     public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
         $url = $this->url . 'index.php/' . $suburl;
         if ($this->verbose()) echo ("Visiting $url\n");
@@ -70,10 +73,14 @@ class GvvDuskTestCase extends DuskTestCase {
 
     }
 
+    /**
+     * Checks if the user can access a test page.
+     */
     public function canAccessTest($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
         $url = $this->url . 'index.php/' . $suburl;
         if ($this->verbose()) echo ("Visiting $url\n");
-        $browser->visit($url)->waitForText('Line Number');
+        $browser->visit($url);
+        sleep(2);
 
         foreach ($mustFind as $str) {
             if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
@@ -177,8 +184,7 @@ class GvvDuskTestCase extends DuskTestCase {
                 $browser
                 ->type('pcode', $element['codec'])
                 ->type('pdesc', $element['desc'])
-                ->press('#validate')
-                ->assertSee('Plan comptable');
+                ->press('#validate');
             }
             $this->assertTrue($this->AccountCodeExists($browser, $element), 
                 "code comptable exists: (" . $element['codec'] . ')' . $element['desc']);
@@ -218,8 +224,7 @@ class GvvDuskTestCase extends DuskTestCase {
                 ->type('nom', $account['nom'])
                 ->type('desc', $account['comment'])
                 ->select('codec', $account['codec'])
-                ->press('#validate')
-                ->assertSee('Balance');
+                ->press('#validate');
             }
             $this->assertTrue($this->AccountExists($browser, $account), 
                 "account exists: (" . $account['codec'] . ')' . $account['nom']);

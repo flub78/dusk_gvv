@@ -75,6 +75,8 @@ There is no automatic update of the project under test. It must be done manually
 For individual tests:
 
     php artisan dusk --color=always --browse tests/Browser/ExampleTest.php
+    php artisan dusk --color=always --browse tests/Browser/CIUnitTest.php
+    php artisan dusk --color=always --browse tests/Browser/InstallationTest.php
     php artisan dusk --color=always --browse tests/Browser/AdminAccessTest.php
     php artisan dusk --color=always --browse tests/Browser/BureauAccessTest.php
     php artisan dusk --color=always --browse tests/Browser/CAAccessTest.php

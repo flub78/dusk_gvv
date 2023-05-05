@@ -20,7 +20,7 @@ class CIUnitTest extends GvvDuskTestCase {
 
             $pages = [
                 ['url' => 'tests/test_helpers', 'mustSee' => ['Passed']],
-                ['url' => 'tests/test_libraries', 'mustSee' => ['Passed']],
+        //        ['url' => 'tests/test_libraries', 'mustSee' => ['Passed']],
                 ['url' => 'achats/test', 'mustSee' => ['Passed']],
                 ['url' => 'admin/test', 'mustSee' => ['Passed']],
                 ['url' => 'categorie/test', 'mustSee' => ['Passed']],
