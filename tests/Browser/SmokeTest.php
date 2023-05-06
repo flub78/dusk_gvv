@@ -80,10 +80,29 @@ class SmokeTest extends GvvDuskTestCase {
             ['nom' => "Entretien", 'codec' => '615', 'comment' => "Entretien"],
             ['nom' => "Assurances", 'codec' => '616', 'comment' => "Assurances"],
             ['nom' => "Heures de vol planeur", 'codec' => '706', 'comment' => "Heures de vol planeur"],
-            ['nom' => "Heures de vol remorqués", 'codec' => '706', 'comment' => "Heures de vol remorqués"],
+            ['nom' => "Remorqués", 'codec' => '706', 'comment' => "Remorqués"],
             ['nom' => "Heures de vol ULM", 'codec' => '706', 'comment' => "Heures de vol ULM"],
             ['nom' => "Subventions", 'codec' => '74', 'comment' => "Subventions"]
         ];
+
+        $this->products = [
+            ['ref' => 'remorqué', 'description' => 'Remorqué', 'prix' => '25', 'account' => 'Remorqués', 'codec' => '706'],
+            ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706'],
+            ['ref' => 'treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706'],        
+            ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
+            ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
+            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706'],        
+        ];
+
+        $this->members = [
+            ['id' => 'asterix', 'nom' => 'Asterix', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
+            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce', 'tel' => '0102030405',
+            'date_naissance' => '1980-01-01', 'date_adhesion' => '2019-01-01', 'date_certificat_medical' => '2019-01-01',]
+        ];
+
+        $this->gliders = [];
+
+        $this->planes = [];
     }
 
     // protected function setUp(): void {
@@ -150,6 +169,7 @@ class SmokeTest extends GvvDuskTestCase {
 
             $this->CreateAccountCodes($browser, $this->accountsChart);
             $this->CreateAccounts($browser, $this->accounts);
+            $this->CreateProducts($browser, $this->products);
 
         });
     }
