@@ -91,7 +91,8 @@ class SmokeTest extends GvvDuskTestCase {
             ['ref' => 'treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706'],        
             ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
             ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
-            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706'],        
+            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706'], 
+            ['ref' => 'gratuit', 'description' => 'non facturé', 'prix' => '0', 'account' => 'Heures de vol planeur', 'codec' => '706'],           
         ];
 
         $this->members = [
@@ -100,9 +101,16 @@ class SmokeTest extends GvvDuskTestCase {
             'date_naissance' => '1980-01-01', 'date_adhesion' => '2019-01-01', 'date_certificat_medical' => '2019-01-01',]
         ];
 
-        $this->gliders = [];
+        $this->gliders = [
+            ['immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher'],
+            ['immat' => 'F-CGAB', 'type' => 'Pégase', 'nb_places' => '1', 'numc' => 'EG', 'construct' => 'Centrair'],
+            ['immat' => 'F-CGAC', 'type' => 'DG800', 'nb_places' => '1', 'numc' => 'AC', 'construct' => 'DG'],
+        ];
 
-        $this->planes = [];
+        $this->planes = [
+            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'towplane' => true ],
+            ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'towplane' => false ]
+        ];
     }
 
     // protected function setUp(): void {
@@ -170,7 +178,8 @@ class SmokeTest extends GvvDuskTestCase {
             $this->CreateAccountCodes($browser, $this->accountsChart);
             $this->CreateAccounts($browser, $this->accounts);
             $this->CreateProducts($browser, $this->products);
-
+            $this->CreateGliders($browser, $this->gliders);
+            $this->CreatePlanes($browser, $this->planes);
         });
     }
 
