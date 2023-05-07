@@ -96,9 +96,8 @@ class SmokeTest extends GvvDuskTestCase {
         ];
 
         $this->members = [
-            ['id' => 'asterix', 'nom' => 'Asterix', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
-            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce', 'tel' => '0102030405',
-            'date_naissance' => '1980-01-01', 'date_adhesion' => '2019-01-01', 'date_certificat_medical' => '2019-01-01',]
+            ['id' => 'asterix', 'nom' => 'Le Gaulois', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
+            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce' ]
         ];
 
         $this->gliders = [
@@ -180,6 +179,7 @@ class SmokeTest extends GvvDuskTestCase {
             $this->CreateProducts($browser, $this->products);
             $this->CreateGliders($browser, $this->gliders);
             $this->CreatePlanes($browser, $this->planes);
+            $this->CreateMembers($browser, $this->members);
         });
     }
 

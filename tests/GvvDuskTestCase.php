@@ -391,4 +391,64 @@ class GvvDuskTestCase extends DuskTestCase {
                     "plane exists: " . $elt['immat']);
             }
         }
+
+        /**********************************************************************/
+        /* Members */
+        /**********************************************************************/
+    
+        /** 
+         * Check that a member exists.
+         */
+        public function MemberExists($browser, $member) {
+            $selectValues = $this->geyValuesFromSelect($browser, "comptes/create", "pilote");
+        
+            foreach($selectValues as $key => $value) {
+                if ($value == $member['nom'] . ' ' . $member['prenom']) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    
+        /** 
+         * Create members
+         */
+        public function CreateMembers($browser, $list = []) {
+            foreach ($list as $elt) {
+                if (!$this->MemberExists($browser, $elt)) {
+    
+                    // Create member
+                    $this->canAccess($browser, "membre/create", ['Fiche de membre']);
+                    $browser
+                    ->type('mlogin', $elt['id']) 
+                    ->type('mprenom', $elt['prenom'])
+                    ->type('mnom', $elt['nom'])
+                    ->type('memail', $elt['email'])
+                    ->type('madresse', $elt['adresse']);
+    
+                    // Sometimes I get the following error:
+                    // ElementClickInterceptedException: element click intercepted: Element is not clickable at point (57, 1633)
+                    // Note that 1633 is likely out of screen ...
+
+                    // sleep(5); does not change anything
+
+                    // attempt to scroll down improves things after a sleep ...
+                    // $js = "window.scrollTo(0, document.body.scrollHeight);";
+                    $js = "window.scrollTo(57, 1635);";
+                    $browser->script($js);
+                    sleep(2);
+
+                    // Overlap is unlikely, there is nothing to overlap ...
+                    
+                    // $browser->maximize(); does not change anything
+
+                    $browser
+                    ->type('comment', $elt['id'])
+                    // ->scrollIntoView('#validate') does not change anything
+                    ->press('#validate');
+                }
+                $this->assertTrue($this->MemberExists($browser, $elt), 
+                    "member exists: " . $elt['id']);
+            }
+        }
 }
