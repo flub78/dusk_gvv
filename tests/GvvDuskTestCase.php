@@ -50,7 +50,7 @@ class GvvDuskTestCase extends DuskTestCase {
     /**
      * Checks if the user can access a page.
      */
-    public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
+    public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues = []) {
         $url = $this->url . 'index.php/' . $suburl;
         if ($this->verbose()) echo ("Visiting $url\n");
         $browser->visit($url)
@@ -75,7 +75,7 @@ class GvvDuskTestCase extends DuskTestCase {
     /**
      * Checks if the user can access a test page.
      */
-    public function canAccessTest($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues=[]) {
+    public function canAccessTest($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues = []) {
         $url = $this->url . 'index.php/' . $suburl;
         if ($this->verbose()) echo ("Visiting $url\n");
         $browser->visit($url);
@@ -90,7 +90,6 @@ class GvvDuskTestCase extends DuskTestCase {
             $browser->assertDontSee($str);
         }
         $browser->screenshot('page_' . str_replace('/', '_', $suburl));
-
     }
 
 
@@ -122,7 +121,7 @@ class GvvDuskTestCase extends DuskTestCase {
             return $total;
         } else {
             throw new Exception("No match for $pattern in $counter");
-        }       
+        }
     }
 
     /*
@@ -134,7 +133,7 @@ class GvvDuskTestCase extends DuskTestCase {
 
         $js = "
         var result = [];
-        var select = document.getElementById('" . $id ."');
+        var select = document.getElementById('" . $id . "');
         var options = select.options;
         for (var i = 0; i < options.length; i++) {
             text = options[i].text;
@@ -168,7 +167,7 @@ class GvvDuskTestCase extends DuskTestCase {
         $desc = $codec['desc'];
         $str = "$code $desc";
 
-        foreach($selectValues as $key => $name) {
+        foreach ($selectValues as $key => $name) {
             if ($name == $str) {
                 return true;
             }
@@ -185,12 +184,14 @@ class GvvDuskTestCase extends DuskTestCase {
                 // Create element
                 $this->canAccess($browser, "plan_comptable/create", ['Nouveau code comptable']);
                 $browser
-                ->type('pcode', $element['codec'])
-                ->type('pdesc', $element['desc'])
-                ->press('#validate');
+                    ->type('pcode', $element['codec'])
+                    ->type('pdesc', $element['desc'])
+                    ->press('#validate');
             }
-            $this->assertTrue($this->AccountCodeExists($browser, $element), 
-                "code comptable exists: (" . $element['codec'] . ')' . $element['desc']);
+            $this->assertTrue(
+                $this->AccountCodeExists($browser, $element),
+                "code comptable exists: (" . $element['codec'] . ')' . $element['desc']
+            );
         }
     }
 
@@ -210,7 +211,7 @@ class GvvDuskTestCase extends DuskTestCase {
         $nom = $account['nom'];
         $str = "($codec) $nom";
 
-        foreach($selectValues as $key => $value) {
+        foreach ($selectValues as $key => $value) {
             if ($value == $str) {
                 return $key;
             }
@@ -234,13 +235,15 @@ class GvvDuskTestCase extends DuskTestCase {
                 // Create account
                 $this->canAccess($browser, "comptes/create", ['Compte']);
                 $browser
-                ->type('nom', $account['nom'])
-                ->type('desc', $account['comment'])
-                ->select('codec', $account['codec'])
-                ->press('#validate');
+                    ->type('nom', $account['nom'])
+                    ->type('desc', $account['comment'])
+                    ->select('codec', $account['codec'])
+                    ->press('#validate');
             }
-            $this->assertTrue($this->AccountExists($browser, $account), 
-                "account exists: (" . $account['codec'] . ')' . $account['nom']);
+            $this->assertTrue(
+                $this->AccountExists($browser, $account),
+                "account exists: (" . $account['codec'] . ')' . $account['nom']
+            );
         }
     }
 
@@ -260,7 +263,7 @@ class GvvDuskTestCase extends DuskTestCase {
         $price = number_format($product['prix'], 2);
         $str = "$ref : $price";
 
-        foreach($selectValues as $key => $value) {
+        foreach ($selectValues as $key => $value) {
             if ($value == $str) {
                 return true;
             }
@@ -275,22 +278,25 @@ class GvvDuskTestCase extends DuskTestCase {
         foreach ($list as $elt) {
             if (!$this->ProductExists($browser, $elt)) {
 
-                $account = ['nom'   => $elt['account'],
-                            'codec' => $elt['codec']
-                            ];
+                $account = [
+                    'nom'   => $elt['account'],
+                    'codec' => $elt['codec']
+                ];
                 $account_id = $this->AccountIdFromName($browser, $account);
 
                 // Create product
                 $this->canAccess($browser, "tarifs/create", ['Tarif']);
                 $browser
-                ->type('reference', $elt['ref'])
-                ->type('description', $elt['description'])
-                ->type('prix', $elt['prix'])
-                ->select('compte', $account_id)
-                ->press('#validate');
+                    ->type('reference', $elt['ref'])
+                    ->type('description', $elt['description'])
+                    ->type('prix', $elt['prix'])
+                    ->select('compte', $account_id)
+                    ->press('#validate');
             }
-            $this->assertTrue($this->ProductExists($browser, $elt), 
-                "product exists: (" . $elt['ref'] . ')' . $elt['prix']);
+            $this->assertTrue(
+                $this->ProductExists($browser, $elt),
+                "product exists: (" . $elt['ref'] . ')' . $elt['prix']
+            );
         }
     }
 
@@ -298,10 +304,10 @@ class GvvDuskTestCase extends DuskTestCase {
     /* Gliders */
     /**********************************************************************/
     public function gliderImage($glider) {
-        $res = $glider['type'] . ' - ' .$glider['immat'];
+        $res = $glider['type'] . ' - ' . $glider['immat'];
         if (array_key_exists('numc', $glider)) {
             $res .= ' - (' . $glider['numc'] . ')';
-        } 
+        }
         return $res;
     }
 
@@ -315,7 +321,7 @@ class GvvDuskTestCase extends DuskTestCase {
 
         $image = $this->gliderImage($glider);
 
-        foreach($selectValues as $key => $value) {
+        foreach ($selectValues as $key => $value) {
             if ($value == $image) {
                 return true;
             }
@@ -333,122 +339,148 @@ class GvvDuskTestCase extends DuskTestCase {
                 // Create product
                 $this->canAccess($browser, "planeur/create", ['Planeur']);
                 $browser
-                ->type('mpconstruc', $elt['construct'])
-                ->type('mpmodele', $elt['type'])
-                ->type('mpimmat', $elt['immat']);
+                    ->type('mpconstruc', $elt['construct'])
+                    ->type('mpmodele', $elt['type'])
+                    ->type('mpimmat', $elt['immat']);
 
                 if (array_key_exists('numc', $elt)) {
                     $browser->type('mpnumc', $elt['numc']);
                 }
 
+                if (array_key_exists('prix', $elt)) {
+                    $browser->select('mprix', $elt['prix']);
+                }
+
+                if (array_key_exists('prix_forfait', $elt)) {
+                    $browser->select('mprix_forfait', $elt['prix_forfait']);
+                }
+
+                if (array_key_exists('prix_moteur', $elt)) {
+                    $browser->select('mprix_moteur', $elt['prix_moteur']);
+                }
+
                 $browser->type('mpbiplace', $elt['nb_places'])
-                ->press('#validate');
+                    ->press('#validate');
             }
             $image = $this->gliderImage($elt);
-            $this->assertTrue($this->GliderExists($browser, $elt), 
-                "glider exists: " . $image);
+            $this->assertTrue(
+                $this->GliderExists($browser, $elt),
+                "glider exists: " . $image
+            );
         }
     }
 
-        /**********************************************************************/
-        /* Planes */
-        /**********************************************************************/
-    
-        /** 
-         * Check that a plane exists.
-         * 
-         * As plane IDs are not public (they are generated by the database), we check that the plane image is present in a select.
-         */
-        public function PlaneExists($browser, $plane) {
-            $selectValues = $this->geyValuesFromSelect($browser, "vols_avion/create", "vamacid");
-        
-            foreach($selectValues as $key => $value) {
-                if ($value == $plane['immat']) {
-                    return true;
-                }
+    /**********************************************************************/
+    /* Planes */
+    /**********************************************************************/
+
+    /** 
+     * Check that a plane exists.
+     * 
+     * As plane IDs are not public (they are generated by the database), we check that the plane image is present in a select.
+     */
+    public function PlaneExists($browser, $plane) {
+        $selectValues = $this->geyValuesFromSelect($browser, "vols_avion/create", "vamacid");
+
+        foreach ($selectValues as $key => $value) {
+            if ($value == $plane['immat']) {
+                return true;
             }
-            return false;
         }
-    
-        /** 
-         * Create planes
-         */
-        public function CreatePlanes($browser, $list = []) {
-            foreach ($list as $elt) {
-                if (!$this->PlaneExists($browser, $elt)) {
-    
-                    // Create product
-                    $this->canAccess($browser, "avion/create", ['Avion']);
-                    $browser
-                    ->type('macconstruc', $elt['construct']) 
+        return false;
+    }
+
+    /** 
+     * Create planes
+     */
+    public function CreatePlanes($browser, $list = []) {
+        foreach ($list as $elt) {
+            if (!$this->PlaneExists($browser, $elt)) {
+
+                // Create product
+                $this->canAccess($browser, "avion/create", ['Avion']);
+                $browser
+                    ->type('macconstruc', $elt['construct'])
                     ->type('macmodele', $elt['type'])
                     ->type('macimmat', $elt['immat']);
-    
-                    $browser->type('macplaces', $elt['nb_places'])
-                    ->press('#validate');
-                }
-                $this->assertTrue($this->PlaneExists($browser, $elt), 
-                    "plane exists: " . $elt['immat']);
-            }
-        }
 
-        /**********************************************************************/
-        /* Members */
-        /**********************************************************************/
-    
-        /** 
-         * Check that a member exists.
-         */
-        public function MemberExists($browser, $member) {
-            $selectValues = $this->geyValuesFromSelect($browser, "comptes/create", "pilote");
-        
-            foreach($selectValues as $key => $value) {
-                if ($value == $member['nom'] . ' ' . $member['prenom']) {
-                    return true;
+                if (array_key_exists('prix', $elt)) {
+                    $browser->select('maprix', $elt['prix']);
                 }
+
+                if (array_key_exists('prix_dc', $elt)) {
+                    $browser->select('maprixdc', $elt['prix_dc']);
+                }
+
+                $browser->type('macplaces', $elt['nb_places'])
+                    ->press('#validate');
             }
-            return false;
+            $this->assertTrue(
+                $this->PlaneExists($browser, $elt),
+                "plane exists: " . $elt['immat']
+            );
         }
-    
-        /** 
-         * Create members
-         */
-        public function CreateMembers($browser, $list = []) {
-            foreach ($list as $elt) {
-                if (!$this->MemberExists($browser, $elt)) {
-    
-                    // Create member
-                    $this->canAccess($browser, "membre/create", ['Fiche de membre']);
-                    $browser
-                    ->type('mlogin', $elt['id']) 
+    }
+
+    /**********************************************************************/
+    /* Members */
+    /**********************************************************************/
+
+    /** 
+     * Check that a member exists.
+     */
+    public function MemberExists($browser, $member) {
+        $selectValues = $this->geyValuesFromSelect($browser, "comptes/create", "pilote");
+
+        foreach ($selectValues as $key => $value) {
+            if ($value == $member['nom'] . ' ' . $member['prenom']) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** 
+     * Create members
+     */
+    public function CreateMembers($browser, $list = []) {
+        foreach ($list as $elt) {
+            if (!$this->MemberExists($browser, $elt)) {
+
+                // Create member
+                $this->canAccess($browser, "membre/create", ['Fiche de membre']);
+                $browser
+                    ->type('mlogin', $elt['id'])
                     ->type('mprenom', $elt['prenom'])
                     ->type('mnom', $elt['nom'])
                     ->type('memail', $elt['email'])
                     ->type('madresse', $elt['adresse']);
-    
-                    // Sometimes I get the following error:
-                    // ElementClickInterceptedException: element click intercepted: Element is not clickable at point (57, 1633)
-                    // Note that 1633 is likely out of screen ...
 
-                    // sleep(5); does not change anything
+                // Sometimes I get the following error:
+                // ElementClickInterceptedException: element click intercepted: Element is not clickable at point (57, 1633)
+                // Note that 1633 is likely out of screen ...
 
-                    // attempt to scroll down improves things after a sleep ...
-                    // $js = "window.scrollTo(0, document.body.scrollHeight);";
-                    $js = "window.scrollTo(57, 1635);";
-                    $browser->script($js);
-                    sleep(2);
+                // sleep(5); does not change anything
 
-                    // Overlap is unlikely, there is nothing to overlap ...
-                    
-                    // $browser->maximize(); does not change anything
+                // attempt to scroll down improves things after a sleep ...
+                // $js = "window.scrollTo(0, document.body.scrollHeight);";
+                $js = "window.scrollTo(57, 1635);";
+                $browser->script($js);
+                sleep(2);
 
-                    $browser
+                // Overlap is unlikely, there is nothing to overlap ...
+
+                // $browser->maximize(); does not change anything
+
+                $browser
                     ->type('comment', $elt['id'])
                     // ->scrollIntoView('#validate') does not change anything
                     ->press('#validate');
-                }
-                $this->assertTrue($this->MemberExists($browser, $elt), 
-                    "member exists: " . $elt['id']);
             }
+            $this->assertTrue(
+                $this->MemberExists($browser, $elt),
+                "member exists: " . $elt['id']
+            );
         }
+    }
 }

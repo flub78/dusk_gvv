@@ -101,13 +101,15 @@ class SmokeTest extends GvvDuskTestCase {
         ];
 
         $this->gliders = [
-            ['immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher'],
-            ['immat' => 'F-CGAB', 'type' => 'Pégase', 'nb_places' => '1', 'numc' => 'EG', 'construct' => 'Centrair'],
+            ['immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher',
+             'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'],
+            ['immat' => 'F-CGAB', 'type' => 'Pégase', 'nb_places' => '1', 'numc' => 'EG', 'construct' => 'Centrair',
+            'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'],
             ['immat' => 'F-CGAC', 'type' => 'DG800', 'nb_places' => '1', 'numc' => 'AC', 'construct' => 'DG'],
         ];
 
         $this->planes = [
-            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'towplane' => true ],
+            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'towplane' => true, 'prix' => 'hdv-ULM', 'prix_dc' => 'hdv-ULM' ],
             ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'towplane' => false ]
         ];
     }
