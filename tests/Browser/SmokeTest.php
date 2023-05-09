@@ -97,7 +97,20 @@ class SmokeTest extends GvvDuskTestCase {
 
         $this->members = [
             ['id' => 'asterix', 'nom' => 'Le Gaulois', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
-            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce' ]
+            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+            'treuillard' => true ],
+
+            ['id' => 'goudurix', 'nom' => 'Le Gaulois', 'prenom' => 'Goudurix', 'email' => 'goudurix@flub78.net',
+            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Village Gaulois'],
+
+            ['id' => 'panoramix', 'nom' => 'Le Gaulois', 'prenom' => 'Panoramix', 'email' => 'panoramix@flub78.net',
+            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+            'fi_planeur' => true , 'fe_planeur' => true, 'fi_avion' => true , 'fe_avion' => true],
+
+            ['id' => 'abraracourcix', 'nom' => 'Le Gaulois', 'prenom' => 'Abraracourcix', 'email' => 'abraracourcix@flub78.net',
+            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+            'remorqueur' => true],
+
         ];
 
         $this->gliders = [

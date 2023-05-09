@@ -458,19 +458,34 @@ class GvvDuskTestCase extends DuskTestCase {
 
                 // Sometimes I get the following error:
                 // ElementClickInterceptedException: element click intercepted: Element is not clickable at point (57, 1633)
-                // Note that 1633 is likely out of screen ...
-
-                // sleep(5); does not change anything
-
-                // attempt to scroll down improves things after a sleep ...
-                // $js = "window.scrollTo(0, document.body.scrollHeight);";
-                $js = "window.scrollTo(57, 1635);";
-                $browser->script($js);
+                $browser->script("window.scrollTo(57, 1635);");
                 sleep(2);
+                
+                if (array_key_exists('treuillard', $elt)) {
+                    // <input type="checkbox" name="mniveau[]" value="524288">
+                    $browser->check('mniveau[]', '524288');
+                }
 
-                // Overlap is unlikely, there is nothing to overlap ...
+                if (array_key_exists('remorqueur', $elt)) {
+                    // <input type="checkbox" name="mniveau[]" value="8192">
+                    $browser->check('mniveau[]', '8192');
+                }
 
-                // $browser->maximize(); does not change anything
+                if (array_key_exists('fi_avion', $elt)) {
+                    $browser->check('mniveau[]', '131072');
+                }
+
+                if (array_key_exists('fe_avion', $elt)) {
+                    $browser->check('mniveau[]', '262144');
+                }
+
+                if (array_key_exists('fi_planeur', $elt)) {
+                    $browser->check('mniveau[]', '32768');
+                }
+
+                if (array_key_exists('fe_planeur', $elt)) {
+                    $browser->check('mniveau[]', '65536');
+                }
 
                 $browser
                     ->type('comment', $elt['id'])
