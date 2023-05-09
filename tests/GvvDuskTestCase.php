@@ -412,6 +412,11 @@ class GvvDuskTestCase extends DuskTestCase {
                     $browser->select('maprixdc', $elt['prix_dc']);
                 }
 
+                if (array_key_exists('remorqueur', $elt)) {
+                    // <input type="checkbox" name="macrem" value="1" id="macrem">
+                    $browser->check('macrem');
+                }
+                
                 $browser->type('macplaces', $elt['nb_places'])
                     ->press('#validate');
             }

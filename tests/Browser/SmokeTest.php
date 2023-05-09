@@ -122,8 +122,8 @@ class SmokeTest extends GvvDuskTestCase {
         ];
 
         $this->planes = [
-            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'towplane' => true, 'prix' => 'hdv-ULM', 'prix_dc' => 'hdv-ULM' ],
-            ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'towplane' => false ]
+            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'remorqueur' => true, 'prix' => 'hdv-ULM', 'prix_dc' => 'hdv-ULM' ],
+            ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'remorqueur' => false ]
         ];
     }
 
