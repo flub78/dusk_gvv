@@ -5,6 +5,11 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 use Tests\libraries\GliderHandler;
+use Tests\libraries\PlaneHandler;
+// use Tests\libraries\AccountCodeHandler;
+// use Tests\libraries\AccountHandler;
+// use Tests\libraries\ProductHandler;
+// use Tests\libraries\MemberHandler;
 
 /**
  * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases.
@@ -168,12 +173,23 @@ class SmokeTest extends GvvDuskTestCase {
         $this->browse(function (Browser $browser) {
 
             $glider_handler = new GliderHandler($browser, $this);
+            $plane_handler = new PlaneHandler($browser, $this);
+            // $account_code_handler = new AccountCodeHandler($browser, $this);
+            // $account_handler = new AccountHandler($browser, $this);
+            // $product_handler = new ProductHandler($browser, $this);
+            // $member_handler = new MemberHandler($browser, $this);
 
             $this->CreateAccountCodes($browser, $this->accountsChart);
             $this->CreateAccounts($browser, $this->accounts);
             $this->CreateProducts($browser, $this->products);
+            
             $glider_handler->CreateGliders($this->gliders);
-            $this->CreatePlanes($browser, $this->planes);
+            $plane_handler->CreatePlanes($this->planes);
+            // $account_code_handler->CreateAccountCodes($this->accountsChart);
+            // $account_handler->CreateAccounts($this->accounts);
+            // $product_handler->CreateProducts($this->products);
+            // $member_handler->CreateMembers($this->members);
+            
             $this->CreateMembers($browser, $this->members);
         });
     }
