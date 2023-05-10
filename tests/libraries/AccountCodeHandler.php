@@ -21,4 +21,45 @@ namespace Tests\libraries;
         $this->tc = $test_context;
     }
 
+        /** 
+     * Check that an account code exists.
+     * 
+     * The account code list is extracted from the dropdown select of the comptes/create page.
+     */
+    public function AccountCodeExists($codec) {
+        $selectValues = $this->tc->geyValuesFromSelect($this->browser, "comptes/create", "codec");
+
+        $code = $codec['codec'];
+        $desc = $codec['desc'];
+        $str = "$code $desc";
+
+        foreach ($selectValues as $key => $name) {
+            if ($name == $str) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** 
+     * Create accounts
+     */
+    public function CreateAccountCodes($list = []) {
+        foreach ($list as $element) {
+            if (!$this->AccountCodeExists($element)) {
+                // Create element
+                $this->tc->canAccess($this->browser, "plan_comptable/create", ['Nouveau code comptable']);
+                $this->browser
+                    ->type('pcode', $element['codec'])
+                    ->type('pdesc', $element['desc'])
+                    ->press('#validate');
+            }
+            $this->tc->assertTrue(
+                $this->AccountCodeExists($element),
+                "code comptable exists: (" . $element['codec'] . ')' . $element['desc']
+            );
+        }
+    }
+
+
 }
