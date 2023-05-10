@@ -4,6 +4,7 @@ namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
+use Tests\libraries\GliderHandler;
 
 /**
  * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases.
@@ -143,29 +144,6 @@ class SmokeTest extends GvvDuskTestCase {
     //     //echo "teardown after class\n";
     // }
 
-    /**
-     * Test create elements
-     */
-    public function createTerrain($browser, $terrains = []) {
-
-        $total = $this->TableTotal($browser);
-        foreach ($terrains as $terrain) {
-
-            $this->canAccess($browser, "terrains/create", ['Code OACI']);
-            $browser
-                ->type('oaci', $terrain['oaci'])
-                ->type('nom', $terrain['nom'])
-                ->type('freq1', $terrain['freq1'])
-                ->type('comment', $terrain['comment'])
-                ->press('#validate')
-                ->assertSee('Terrains');
-
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-        }
-
-        $new_total = $this->TableTotal($browser);
-        $this->assertEquals($total + count($terrains), $new_total, "Terrain created, total = " . $new_total);
-    }
 
     /*************
      * Test cases
@@ -189,14 +167,43 @@ class SmokeTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
+            $glider_handler = new GliderHandler($browser, $this);
+
             $this->CreateAccountCodes($browser, $this->accountsChart);
             $this->CreateAccounts($browser, $this->accounts);
             $this->CreateProducts($browser, $this->products);
-            $this->CreateGliders($browser, $this->gliders);
+            $glider_handler->CreateGliders($this->gliders);
             $this->CreatePlanes($browser, $this->planes);
             $this->CreateMembers($browser, $this->members);
         });
     }
+
+    /**
+     * Test AccountMovements
+     * @depends testCreateData
+     */
+    public function testAccountMovements() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            // Check that an account has been created for Asterix
+            $asterix_account = $this->AccountIdFromMember($browser, $this->members[0]);
+            $this->assertGreaterThan('-1', $asterix_account,  "Asterix account = " . $asterix_account);
+
+            // Check the account total
+            $abraracourcix_account = $this->AccountIdFromMember($browser, $this->members[3]);
+            $this->assertEquals($abraracourcix_account, '307', "Abraracourcix account = " . $abraracourcix_account);
+
+            // Check the bank account 
+
+            // Put money on the account
+
+            // Check the pilot total
+
+            // Check the bank account
+        });
+    }
+
 
     /**
      * Logout
