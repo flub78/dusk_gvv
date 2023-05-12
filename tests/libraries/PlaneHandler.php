@@ -45,6 +45,7 @@ namespace Tests\libraries;
             if (!$this->PlaneExists($elt)) {
 
                 // Create product
+                echo "creating " . $elt['immat'] . "\n";
                 $this->tc->canAccess($this->browser, "avion/create", ['Avion']);
                 $this->browser
                     ->type('macconstruc', $elt['construct'])

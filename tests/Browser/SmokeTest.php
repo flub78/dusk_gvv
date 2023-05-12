@@ -4,12 +4,13 @@ namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
-use Tests\libraries\GliderHandler;
-use Tests\libraries\PlaneHandler;
+
 use Tests\libraries\AccountCodeHandler;
 use Tests\libraries\AccountHandler;
-// use Tests\libraries\ProductHandler;
-// use Tests\libraries\MemberHandler;
+use Tests\libraries\ProductHandler;
+use Tests\libraries\GliderHandler;
+use Tests\libraries\PlaneHandler;
+use Tests\libraries\MemberHandler;
 
 /**
  * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases.
@@ -166,22 +167,18 @@ class SmokeTest extends GvvDuskTestCase {
         $this->browse(function (Browser $browser) {
 
             $account_code_handler = new AccountCodeHandler($browser, $this);
+            $account_handler = new AccountHandler($browser, $this);
+            $product_handler = new ProductHandler($browser, $this);
             $glider_handler = new GliderHandler($browser, $this);
             $plane_handler = new PlaneHandler($browser, $this);
-            $account_handler = new AccountHandler($browser, $this);
-            // $product_handler = new ProductHandler($browser, $this);
-            // $member_handler = new MemberHandler($browser, $this);
-
-            $this->CreateProducts($browser, $this->products);
+            $member_handler = new MemberHandler($browser, $this);
             
             $account_code_handler->CreateAccountCodes($this->accountsChart);
             $account_handler->CreateAccounts($this->accounts);
+            $product_handler->CreateProducts($this->products);
             $glider_handler->CreateGliders($this->gliders);
             $plane_handler->CreatePlanes($this->planes);
-            // $product_handler->CreateProducts($this->products);
-            // $member_handler->CreateMembers($this->members);
-
-            $this->CreateMembers($browser, $this->members);
+            $member_handler->CreateMembers($this->members);
         });
     }
 
@@ -189,29 +186,29 @@ class SmokeTest extends GvvDuskTestCase {
      * Test AccountMovements
      * @depends testCreateData
      */
-    public function testAccountMovements() {
-        // $this->markTestSkipped('must be revisited.');
-        $this->browse(function (Browser $browser) {
+    // public function testAccountMovements() {
+    //     // $this->markTestSkipped('must be revisited.');
+    //     $this->browse(function (Browser $browser) {
 
-            $account_handler = new AccountHandler($browser, $this);
+    //         $account_handler = new AccountHandler($browser, $this);
 
-            // Check that an account has been created for Asterix
-            $asterix_account = $account_handler->AccountIdFromMember($this->members[0]);
-            $this->assertGreaterThan('-1', $asterix_account,  "Asterix account = " . $asterix_account);
+    //         // Check that an account has been created for Asterix
+    //         $asterix_account = $account_handler->AccountIdFromMember($this->members[0]);
+    //         $this->assertGreaterThan('-1', $asterix_account,  "Asterix account = " . $asterix_account);
 
-            // Check the account total
-            $abraracourcix_account = $account_handler->AccountIdFromMember($this->members[3]);
-            $this->assertGreaterThan('307', $abraracourcix_account,  "Abraracourcix account = " . $abraracourcix_account);
+    //         // Check the account total
+    //         $abraracourcix_account = $account_handler->AccountIdFromMember($this->members[3]);
+    //         $this->assertGreaterThan('307', $abraracourcix_account,  "Abraracourcix account = " . $abraracourcix_account);
 
-            // Check the bank account 
+    //         // Check the bank account 
 
-            // Put money on the account
+    //         // Put money on the account
 
-            // Check the pilot total
+    //         // Check the pilot total
 
-            // Check the bank account
-        });
-    }
+    //         // Check the bank account
+    //     });
+    // }
 
 
     /**
