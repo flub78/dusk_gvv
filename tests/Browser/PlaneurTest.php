@@ -4,35 +4,33 @@ namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
+use Tests\libraries\GliderHandler;
+
 
 class PlaneurTest extends GvvDuskTestCase {
 
-    public function createGlider($browser) {
-
-        $this->canAccess($browser, "planeur/create", ['Planeur']);
-
-        $glider = ['mpconstruc' => 'Test Glider', 'type' => 'planeur', 'seats' => 1, 'weight' => 100, 'max_weight' => 100, 'max_fuel' => 100, 'max_fuel_type' => 'L', 'max_fuel_weight' => 100, 'max_fuel_weight_type' => 'L'];
-
-        $browser
-            ->type('mpconstruc', "construction amateur")  
-            ->select('mpmodele', "planeur")
-            ->type('mpimmat', "F-TEST")
-            ->type('mpnumc', "UP")
-            ->type('mpbiplace', 2)
-            ->check('mptreuil')
-            ->press('submit')
-            ->assertSee('Enregistré');
-    }
 
     public function testAccess() {
+
         $this->browse(function (Browser $browser) {
+
+            $glider = ['immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher',
+            'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'];
+    
+
+            $glider_handler = new GliderHandler($browser, $this);
 
             $this->login($browser, 'testadmin', 'password');
 
             $this->canAccess($browser, "planeur/page", ['Compta', 'Planeurs']);
+            $initial_total = $this->TableTotal($browser);
 
-            $total = $this->TableTotal($browser);
-            $this->assertEquals(0, $total, "Glider Table should be empty"); 
+            $glider_handler->CreateGliders([$glider]);
+
+            $this->canAccess($browser, "planeur/page", ['Compta', 'Planeurs']);
+            $new_total = $this->TableTotal($browser);
+
+            $this->assertGreaterThanOrEqual($initial_total, $new_total);
 
             $this->logout($browser);
         });
