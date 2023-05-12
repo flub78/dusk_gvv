@@ -182,38 +182,47 @@ class SmokeTest extends GvvDuskTestCase {
         });
     }
 
+
     /**
      * Test AccountMovements
      * @depends testCreateData
      */
-    // public function testAccountMovements() {
-    //     // $this->markTestSkipped('must be revisited.');
-    //     $this->browse(function (Browser $browser) {
+    public function testAccountMovements() {
+        // $this->markTestSkipped('must be revisited.');
 
-    //         $account_handler = new AccountHandler($browser, $this);
+        $this->browse(function (Browser $browser) {
 
-    //         // Check that an account has been created for Asterix
-    //         $asterix_account = $account_handler->AccountIdFromMember($this->members[0]);
-    //         $this->assertGreaterThan('-1', $asterix_account,  "Asterix account = " . $asterix_account);
+            $account_handler = new AccountHandler($browser, $this);
 
-    //         // Check the account total
-    //         $abraracourcix_account = $account_handler->AccountIdFromMember($this->members[3]);
-    //         $this->assertGreaterThan('307', $abraracourcix_account,  "Abraracourcix account = " . $abraracourcix_account);
+            // Check that an account has been created for Asterix
+            $asterix_account = $account_handler->AccountIdFromMember($this->members[0]);
+            $this->assertGreaterThan('-1', $asterix_account,  "Asterix account = " . $asterix_account);
 
-    //         // Check the bank account 
+            // Check the account total
+            $abraracourcix_account = $account_handler->AccountIdFromMember($this->members[3]);
+            $this->assertGreaterThanOrEqual('307', $abraracourcix_account,  "Abraracourcix account = " . $abraracourcix_account);
 
-    //         // Put money on the account
+            // Check the bank total
 
-    //         // Check the pilot total
+            // Put money on the account
+            $account_handler->AccountingLine([
+                'url' => 'compta/reglement_pilote',
+                'account1' => "(512) Banque",
+                'account2' => "(411) Le Gaulois Asterix",
+                'amount' => "100",
+                'description' => "Avance sur vol",
+                'reference' => "AV-1"]);
 
-    //         // Check the bank account
-    //     });
-    // }
+            // Check the pilot total
+
+            // Check the bank account
+        });
+    }
 
 
     /**
      * Logout
-     * @depends testCreateData
+     * @depends testAccountMovements
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');

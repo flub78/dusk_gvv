@@ -48,17 +48,28 @@ namespace Tests\libraries;
         return ($this->AccountIdFromName($account) != -1);
     }
 
-    public function AccountIdFromMember($member) {
+    /**
+     * Find the account ID from its image
+     */
+    public function AccountIdFromImage($image) {
         $selectValues = $this->tc->geyValuesFromSelect($this->browser, "compta/create", "compte1");
 
-        $str = "(411) " . $member['nom'] . " " . $member['prenom'];
-
         foreach ($selectValues as $key => $value) {
-            if ($value == $str) {
+            if ($value == $image) {
                 return $key;
             }
         }
         return -1;
+    }
+
+    /**
+     * Find the account ID from a member
+     */
+    public function AccountIdFromMember($member) {
+ 
+        $image = "(411) " . $member['nom'] . " " . $member['prenom'];
+
+        return $this->AccountIdFromImage($image);
     }
 
     /** 
@@ -72,7 +83,33 @@ namespace Tests\libraries;
      * Create an accounting line
      */
     public function AccountingLine ($line) {
+        
+        echo "creating " . $line['description'] . "\n";
 
+        $act1 = $this->AccountIdFromImage($line['account1']);
+        $act2 = $this->AccountIdFromImage($line['account2']);
+        $this->tc->canAccess($this->browser, $line['url'], []);
+
+        if (array_key_exists('date', $line)) {
+            $this->browser->type('date_op', $line['date']);
+        }
+
+        $this->browser
+        ->select('compte1', $act1)
+        ->select('compte2', $act2)
+        ->type('montant', $line['amount'])
+        ->type('description', $line['description'])
+        ->type('num_cheque', $line['reference']);
+
+        if (array_key_exists('verified', $line)) {
+            $this->browser->select('gel');
+        }
+
+        $this->browser->screenshot('aaaaaaaaaaa_' . $line['url']);
+
+        $this->browser
+        ->press('#validate')
+        ->assertDontSee('404');
     }
 
     /** 
