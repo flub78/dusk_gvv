@@ -54,7 +54,9 @@ class GvvDuskTestCase extends DuskTestCase {
      */
     public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues = []) {
         $url = $this->url . 'index.php/' . $suburl;
-        if ($this->verbose()) echo ("Visiting $url\n");
+        if ($this->verbose()) {
+            echo ("Visiting $url\n");
+        }
         $browser->visit($url)
             ->waitForText('Peignot');
 

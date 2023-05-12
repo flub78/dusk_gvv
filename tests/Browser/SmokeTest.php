@@ -13,7 +13,7 @@ use Tests\libraries\PlaneHandler;
 use Tests\libraries\MemberHandler;
 
 /**
- * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases.
+ * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases. When the smoke test passes, it means that the application is able to handle the basic nominal cases. 
  * 
  * Dependencies
  * - Planeur depends on product for the hour price
@@ -210,7 +210,7 @@ class SmokeTest extends GvvDuskTestCase {
                 'account1' => "(512) Banque",
                 'account2' => "(411) Le Gaulois Asterix",
                 'amount' => "100",
-                'description' => "Avance sur vol",
+                'description' => "Avance sur vols",
                 'reference' => "AV-1"]);
 
             // Check the pilot total

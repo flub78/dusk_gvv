@@ -119,7 +119,7 @@ class PlanchisteAccessTest extends GvvDuskTestCase {
 
             $pages = [
                 ['url' => 'vols_planeur/page', 'mustSee' => ['Planche des Vols Planeur']],
-                ['url' => 'vols_planeur/create', 'mustSee' => ['Vol', 'si le pilote paye', 'Avitaillement']],
+                ['url' => 'vols_planeur/create', 'mustSee' => ['Vol', 'si le pilote paye', 'Pourcentage']],
                 ['url' => 'vols_planeur/plancheauto_select', 'mustSee' => ['Choix de la planche']],
                 ['url' => 'vols_planeur/plancheauto', 'mustSee' => ['Saisie planche planeur']],
                 ['url' => 'planeur/page', 'mustSee' => ['Planeurs']],
