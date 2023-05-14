@@ -75,8 +75,24 @@ namespace Tests\libraries;
     /** 
      * Returns the amount of money in an account
      */
-    public function AccountTotal() {
- 
+    public function AccountTotal($account_id) {
+        $this->tc->canAccess($this->browser, "compta/journal_compte/" . $account_id, ["Compte", "Solde au", "débiteur", "créditeur"]);
+
+        $debit = $this->browser->inputValue('current_debit');
+        $credit = $this->browser->inputValue('current_credit'); 
+
+        if ($debit == "") $debit = 0;
+        if ($credit == "") $credit = 0; 
+
+        $debit = str_replace("€", "", $debit);
+        $credit = str_replace("€", "", $credit);
+        $debit = str_replace(",", ".", $debit);
+        $credit = str_replace(",", ".", $credit);
+
+        $debit = floatval($debit);
+        $credit = floatval($credit);
+
+        return $credit - $debit;
     }
 
     /**
@@ -84,7 +100,7 @@ namespace Tests\libraries;
      */
     public function AccountingLine ($line) {
         
-        echo "creating " . $line['description'] . "\n";
+        // echo "creating " . $line['description'] . "\n";
 
         $act1 = $this->AccountIdFromImage($line['account1']);
         $act2 = $this->AccountIdFromImage($line['account2']);
