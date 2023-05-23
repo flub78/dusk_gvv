@@ -186,6 +186,8 @@ class SmokeTest extends GvvDuskTestCase {
     /**
      * Test AccountMovements
      * @depends testCreateData
+     * 
+     * TODO: Check all kind of movements
      */
     public function testAccountMovements() {
         // $this->markTestSkipped('must be revisited.');
@@ -194,43 +196,31 @@ class SmokeTest extends GvvDuskTestCase {
 
             $account_handler = new AccountHandler($browser, $this);
 
-            $bank_account = "(512) Banque";
             $asterix_account = "(411) Le Gaulois Asterix";
-            $bank_id = $account_handler->AccountIdFromImage($bank_account);
             $asterix_id = $account_handler->AccountIdFromImage($asterix_account);
-            $amount = 100;
 
             // Check that an account has been created for Asterix
             $this->assertGreaterThan('-1', $asterix_id,  "Asterix account id = " . $asterix_id);
 
-            // Check the account total
-            $asterix_total = $account_handler->AccountTotal($asterix_id);
-
-            // Check the bank total
-            $bank_total = $account_handler->AccountTotal($bank_id);
-
-            // Put money on the account
-            $account_handler->AccountingLine([
-                'url' => 'compta/reglement_pilote',
-                'account1' => $bank_account,
-                'account2' => $asterix_account,
-                'amount' => $amount,
+            $movements = [
+                ['url' => 'compta/reglement_pilote',
+                'account1' => '(512) Banque',
+                'account2' => '(411) Le Gaulois Asterix',
+                'amount' => '100',
                 'description' => "Avance sur vols",
-                'reference' => "AV-1"]);
- 
-            // Check the account total
-            $asterix_new_total = $account_handler->AccountTotal($asterix_id);
+                'reference' => "AV-1"],
+                ['url' => 'compta/reglement_pilote',
+                'account1' => '(512) Banque',
+                'account2' => '(411) Le Gaulois Goudurix',
+                'amount' => '250.47',
+                'description' => "Avance avec décimals",
+                'reference' => "Petites pièces"]
+            ];
 
-            // Check the bank total
-            $bank_new_total = $account_handler->AccountTotal($bank_id);
+            foreach ($movements as $movement) {
+                $account_handler->AccountingLineWithCheck($movement);
+            }
 
-            // echo "asterix_total = $asterix_total\n";
-            // echo "asterix_new_total = $asterix_new_total\n";
-            // echo "bank_total = $bank_total\n";
-            // echo "bank_new_total = $bank_new_total\n";
-
-            $this->assertEquals($asterix_total + $amount, $asterix_new_total, "Asterix account total");
-            $this->assertEquals($bank_total - $amount, $bank_new_total, "Bank account total");
         });
     }
 

@@ -81,18 +81,24 @@ namespace Tests\libraries;
         $debit = $this->browser->inputValue('current_debit');
         $credit = $this->browser->inputValue('current_credit'); 
 
-        if ($debit == "") $debit = 0;
-        if ($credit == "") $credit = 0; 
-
-        $debit = str_replace("€", "", $debit);
-        $credit = str_replace("€", "", $credit);
-        $debit = str_replace(",", ".", $debit);
-        $credit = str_replace(",", ".", $credit);
-
-        $debit = floatval($debit);
-        $credit = floatval($credit);
-
-        return $credit - $debit;
+        // be careful to non breaking spaces
+        $search = [' ', '€', ',', chr(0xC2).chr(0xA0)];
+        $replace = ['', '', '.', ''];
+        $debit = str_replace($search, $replace, $debit);
+        $credit = str_replace($search, $replace, $credit);
+        
+        if ($debit == "") {
+            $debit = 0.0;
+        } else {
+            $debit = floatval($debit);
+        }
+        if ($credit == "") {
+            $credit = 0.0;
+        } else {
+            $credit = floatval($credit);
+        }    
+        $total = $credit - $debit;
+        return $total;
     }
 
     /**
@@ -100,8 +106,6 @@ namespace Tests\libraries;
      */
     public function AccountingLine ($line) {
         
-        // echo "creating " . $line['description'] . "\n";
-
         $act1 = $this->AccountIdFromImage($line['account1']);
         $act2 = $this->AccountIdFromImage($line['account2']);
         $this->tc->canAccess($this->browser, $line['url'], []);
@@ -126,6 +130,36 @@ namespace Tests\libraries;
         $this->browser
         ->press('#validate')
         ->assertDontSee('404');
+    }
+
+    public function AccountingLineWithCheck ($line) {
+
+        $account1_id = $this->AccountIdFromImage($line['account1']);
+        $account2_id = $this->AccountIdFromImage($line['account2']);
+
+        $account1_total = $this->AccountTotal($account1_id);
+        $account2_total = $this->AccountTotal($account2_id);
+
+
+        $this->AccountingLine($line);
+
+        $account1_new_total = $this->AccountTotal($account1_id);
+        $account2_new_total = $this->AccountTotal($account2_id);
+
+        // echo "account1_id = $account1_id\n";
+        // echo "account2_id = $account2_id\n";
+        // echo "account1_total = $account1_total\n";
+        // echo "account2_total = $account2_total\n";
+        // echo "account1_new_total = $account1_new_total\n";
+        // echo "account2_new_total = $account2_new_total\n";
+
+        $amount = $line['amount'];
+        $this->tc->assertEquals($account1_total - $amount, $account1_new_total, 
+            "total pour " . $line['account1']);
+
+        $this->tc->assertEquals($account2_total + $amount, $account2_new_total, 
+            "total pour " . $line['account2']);
+
     }
 
     /** 
