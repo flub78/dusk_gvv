@@ -28,3 +28,7 @@ use of $this in the wrong context
 ## Invisible characters
 
 Non breaking spaces inside an input field.
+
+## Exact comparison on float
+
+Rounding has to be taken into account
