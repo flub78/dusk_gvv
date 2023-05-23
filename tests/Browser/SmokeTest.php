@@ -209,12 +209,20 @@ class SmokeTest extends GvvDuskTestCase {
                 'amount' => '100',
                 'description' => "Avance sur vols",
                 'reference' => "AV-1"],
+
                 ['url' => 'compta/reglement_pilote',
                 'account1' => '(512) Banque',
                 'account2' => '(411) Le Gaulois Goudurix',
                 'amount' => '250.47',
                 'description' => "Avance avec décimals",
-                'reference' => "Petites pièces"]
+                'reference' => "Petites pièces"],
+
+                ['url' => 'compta/factu_pilote',
+                'account1' => '(411) Le Gaulois Goudurix',
+                'account2' => '(706) Remorqués',
+                'amount' => '23',
+                'description' => "Facturation manuelle de remorqués",
+                'reference' => "Facture d'un autre club"]
             ];
 
             foreach ($movements as $movement) {

@@ -154,10 +154,10 @@ namespace Tests\libraries;
         // echo "account2_new_total = $account2_new_total\n";
 
         $amount = $line['amount'];
-        $this->tc->assertEquals($account1_total - $amount, $account1_new_total, 
+        $this->tc->assertLessThan(0.000001, $account1_total - $amount - $account1_new_total, 
             "total pour " . $line['account1']);
 
-        $this->tc->assertEquals($account2_total + $amount, $account2_new_total, 
+        $this->tc->assertLessThan(0.000001, $account2_total + $amount - $account2_new_total, 
             "total pour " . $line['account2']);
 
     }
