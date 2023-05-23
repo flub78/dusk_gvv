@@ -75,6 +75,7 @@ class SmokeTest extends GvvDuskTestCase {
             ['nom' => "Fonds associatifs", 'codec' => '102', 'comment' => "Fonds associatifs"],
             ['nom' => "Banque", 'codec' => '512', 'comment' => "Banque"],
             ['nom' => "Emprunt", 'codec' => '164', 'comment' => "Emprunt"],
+            ['nom' => "Atelier de la Somme", 'codec' => '401', 'comment' => "Fournisseur"],
             ['nom' => "Frais de bureau", 'codec' => '606', 'comment' => "Frais de bureau"],
             ['nom' => "Essence plus huile", 'codec' => '606', 'comment' => "Essence plus huile"],
             ['nom' => "Entretien", 'codec' => '615', 'comment' => "Entretien"],
@@ -222,7 +223,57 @@ class SmokeTest extends GvvDuskTestCase {
                 'account2' => '(706) Remorqués',
                 'amount' => '23',
                 'description' => "Facturation manuelle de remorqués",
-                'reference' => "Facture d'un autre club"]
+                'reference' => "Facture d'un autre club"],
+
+                ['url' => 'compta/recettes',
+                'account1' => '(512) Banque',
+                'account2' => '(74) Subventions',
+                'amount' => '500',
+                'description' => "Subvention d'aide à la formation",
+                'reference' => "Relevé CDN"],
+
+                ['url' => 'compta/avoir_fournisseur',
+                'account1' => '(401) Atelier de la Somme',
+                'account2' => '(615) Entretien',
+                'amount' => '350',
+                'description' => "Trop perçu sur facture",
+                'reference' => "Facture 4712"],
+
+                ['url' => 'compta/depenses',
+                'account1' => '(606) Essence plus huile',
+                'account2' => '(512) Banque',
+                'amount' => '125.5',
+                'description' => "Achat d'essence",
+                'reference' => "Chèque 413"],
+
+                ['url' => 'compta/credit_pilote',
+                'account1' => '(606) Frais de bureau',
+                'account2' => '(411) Le Gaulois Panoramix',
+                'amount' => '25.5',
+                'description' => "Remboursement fournitures de bureau",
+                'reference' => "Facture XX78"],
+
+                ['url' => 'compta/debit_pilote',
+                'account1' => '(411) Le Gaulois Goudurix',
+                'account2' => '(512) Banque',
+                'amount' => '27.13',
+                'description' => "Remboursement de solde pilote",
+                'reference' => "Chèque CDN1027"],
+
+                ['url' => 'compta/utilisation_avoir_fournisseur',
+                'account1' => '(615) Entretien',
+                'account2' => '(401) Atelier de la Somme',
+                'amount' => '350',
+                'description' => "Utilisation avoir fournisseur",
+                'reference' => "Facture 4712"],
+
+                // ['url' => 'compta/virement',
+                // 'account1' => '(512) Banque',
+                // 'account2' => '(512) Banque',
+                // 'amount' => '100.00',
+                // 'description' => "Virement d'un compte sur lui même",
+                // 'reference' => "Vous êtes fou..."]
+
             ];
 
             foreach ($movements as $movement) {
