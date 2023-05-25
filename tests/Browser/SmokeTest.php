@@ -283,10 +283,65 @@ class SmokeTest extends GvvDuskTestCase {
         });
     }
 
-
     /**
      * Logout
      * @depends testAccountMovements
+     */
+    public function testPlaneFlight() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            $account_handler = new AccountHandler($browser, $this);
+
+            $asterix_account = "(411) Le Gaulois Asterix";
+            $asterix_id = $account_handler->AccountIdFromImage($asterix_account);
+            $asterix_total = $account_handler->AccountTotal($asterix_id);
+
+            $price = 51.0;
+
+            /* 
+            TODO: move to HTML times
+            TODO: Check that there is one more flight after creation
+            TODO: Check that the plane account has been credited
+            TODO: Find the flight back to delete
+            TODO: check that the pilot is reimbursed after flight deletion 
+            */
+
+            $fligt = [
+                'url' => 'vols_avion/create',
+                'pilot' => 'asterix',
+                'plane' => 'F-JUFA',
+                'takeoff_time' => '10.00',
+                'landing_time' => '10.30',
+                'start' => '100',
+                'end' => '100.5',
+            ];
+
+            $this->canAccess($browser, $fligt['url']);
+            $browser
+                ->select('vapilid', $fligt['pilot'])
+                ->select('vamacid', $fligt['plane'])
+                ->type('vahdeb', $fligt['takeoff_time'])
+                ->type('vahfin', $fligt['landing_time'])
+                ->type('vacdeb', $fligt['start'])
+                ->type('vacfin', $fligt['end']);
+
+            $browser->screenshot('a_before_flight');
+
+            $browser
+                ->press('#validate')
+                ->assertDontSee('404');
+            
+            $browser->screenshot('after_flight');
+
+            $asterix_new_total = $account_handler->AccountTotal($asterix_id);
+            $this->assertLessThan(0.000001, $asterix_total - $price - $asterix_new_total, "Asterix account total = " . $asterix_new_total);
+        });
+    }
+
+    /**
+     * Logout
+     * @depends testPlaneFlight
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');
