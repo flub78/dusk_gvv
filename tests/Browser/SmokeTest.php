@@ -279,7 +279,6 @@ class SmokeTest extends GvvDuskTestCase {
             foreach ($movements as $movement) {
                 $account_handler->AccountingLineWithCheck($movement);
             }
-
         });
     }
 
@@ -301,11 +300,12 @@ class SmokeTest extends GvvDuskTestCase {
 
             /* 
             TODO: move to HTML times
-            TODO: Check that there is one more flight after creation
             TODO: Check that the plane account has been credited
             TODO: Find the flight back to delete
             TODO: check that the pilot is reimbursed after flight deletion 
             */
+
+            $flight_number = $total = $this->TableTotal($browser, "vols_avion/page");
 
             $fligt = [
                 'url' => 'vols_avion/create',
@@ -318,6 +318,7 @@ class SmokeTest extends GvvDuskTestCase {
             ];
 
             $this->canAccess($browser, $fligt['url']);
+
             $browser
                 ->select('vapilid', $fligt['pilot'])
                 ->select('vamacid', $fligt['plane'])
@@ -335,7 +336,13 @@ class SmokeTest extends GvvDuskTestCase {
             $browser->screenshot('after_flight');
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
+
             $this->assertLessThan(0.000001, $asterix_total - $price - $asterix_new_total, "Asterix account total = " . $asterix_new_total);
+
+            $new_flight_number = $total = $this->TableTotal($browser, "vols_avion/page");
+
+            $this->assertEquals($flight_number + 1, $new_flight_number, "Flight number = " . $new_flight_number);
+
         });
     }
 
