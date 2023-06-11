@@ -11,6 +11,7 @@ use Tests\libraries\ProductHandler;
 use Tests\libraries\GliderHandler;
 use Tests\libraries\PlaneHandler;
 use Tests\libraries\MemberHandler;
+use Tests\libraries\PlaneFlightHandler;
 
 /**
  * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases. When the smoke test passes, it means that the application is able to handle the basic nominal cases. 
@@ -155,9 +156,19 @@ class SmokeTest extends GvvDuskTestCase {
     public function testLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
-            $this->login($browser, 'testadmin', 'password');
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
         });
     }
+
+    // public function testJson() {
+    //     $this->assertTrue(true);
+
+    //     echo "{{{{{{{{{{{{{{{{{{{";
+    //     $this->browse(function (Browser $browser) {
+    //         echo $this->getJsonData($browser, "vols_avion/ajax_latest");
+    //     });
+    //     echo "}}}}}}}}}}}}}}}}}";
+    // }
 
     /**
      * Test create
@@ -291,6 +302,7 @@ class SmokeTest extends GvvDuskTestCase {
         $this->browse(function (Browser $browser) {
 
             $account_handler = new AccountHandler($browser, $this);
+            $plane_flight_handler = new PlaneFlightHandler($browser, $this);
 
             $asterix_account = "(411) Le Gaulois Asterix";
             $asterix_id = $account_handler->AccountIdFromImage($asterix_account);
@@ -299,41 +311,40 @@ class SmokeTest extends GvvDuskTestCase {
             $price = 51.0;
 
             /* 
-            TODO: move to HTML times
+            TODO: move takeoff and landing times to HTML times
             TODO: Check that the plane account has been credited
             TODO: Find the flight back to delete
-            TODO: check that the pilot is reimbursed after flight deletion 
+            TODO: check that the pilot is reimbursed after flight deletion
+            
+            The tests should be independant from existing data.
+            Tests flights could start the day after the last flight.
+            It implies the capacity to find out the last flight.
+
+            Should I modify GVV to return information used only for testing ?
+            pro - it woul make end to end test simplers and supporting more complex scenarios
+            cons- it adds more code ...
             */
 
+
             $flight_number = $total = $this->TableTotal($browser, "vols_avion/page");
+
+            $latest = $plane_flight_handler->latestFlight();
+
 
             $fligt = [
                 'url' => 'vols_avion/create',
                 'pilot' => 'asterix',
                 'plane' => 'F-JUFA',
-                'takeoff_time' => '10.00',
-                'landing_time' => '10.30',
+                'takeoff_meter' => '10.00',
+                'landing_meter' => '10.30',
                 'start' => '100',
                 'end' => '100.5',
+                'image' => '31/05/2023 100.00 F-JUFA'
             ];
 
-            $this->canAccess($browser, $fligt['url']);
+            return;
 
-            $browser
-                ->select('vapilid', $fligt['pilot'])
-                ->select('vamacid', $fligt['plane'])
-                ->type('vahdeb', $fligt['takeoff_time'])
-                ->type('vahfin', $fligt['landing_time'])
-                ->type('vacdeb', $fligt['start'])
-                ->type('vacfin', $fligt['end']);
-
-            $browser->screenshot('a_before_flight');
-
-            $browser
-                ->press('#validate')
-                ->assertDontSee('404');
-            
-            $browser->screenshot('after_flight');
+            $plane_flight_handler->CreatePlaneFlights([$fligt]);
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
 

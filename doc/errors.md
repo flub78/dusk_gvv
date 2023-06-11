@@ -1,6 +1,22 @@
 # List of development errors
 
-This is jst a list of errors which have slow down the development speed. I just hope that by keeping traces of them, they will be easier to avoid in the future
+This is just a list of errors that I have encountered during development. By keeping traces of them, they will be easier to avoid in the future.
+
+Software developemnt is a slow process even for an experimented developer. The biggest factor which slows it down, and maybe the point which can be improved, it all the cases when the software does not behave as expected.
+
+This is an analysis of the time spent to wonder why something does not work compared to the time used to tackle an issue after another and progression regularly toward the objective.
+
+It may be because of bugs. Note that most bugs fixed during the development process are even not called bugs. They are just uncomplete states of the software. Even with frequent commits they are fixed before the commit. However time to diagnostic them can be significant especially that they are frequent.
+
+Other cases are environment issues, corrupted databases, incorrect deployments, wrong environment. Some of them maybe plenty stupid like starting to debug a modification that does not work just to discover that you forgot to save a file.
+
+Most of the time these issues are a discrepency betwwen your mental model of the reality and the reality.
+
+Numerous reasons:
+
+* raw ignorance, you just do not know how to do something.
+* ignorance of a detail, you know how to do something but you missed a point and now you have to do a whole diagnostic campaign to find out the reason of the problem.
+* Abstraction leaking, you develop at some abstraction level but something at a lower level of abstraction is making problems (hardware failure, memory corruption, down server, running our of resources, etc.). Note that you usually do dot have to most appropriate tools to work on these issues.
 
 ## wrong naming
 
@@ -13,14 +29,14 @@ nothing to say.
   
 ## missing parenthesis
 
-(signalled by VSC ...)
+(signalled by VSC but I ignored the warning)
 
-## interface
+## Test interface
 
 attempt to click on something not visible
 
 ## Call of the wrong method
-type instead of select
+"type" instead of "select"
 
 ## Context
 use of $this in the wrong context
@@ -32,3 +48,18 @@ Non breaking spaces inside an input field.
 ## Exact comparison on float
 
 Rounding has to be taken into account
+
+## Blank page 
+
+    http://localhost/gvv2/index.php/comptes/general
+
+    in index.php
+        define('ENVIRONMENT', 'development');
+
+    Fatal error: Uncaught Error: Call to a member function row() on bool in C:\Users\frede\Dropbox\xampp\htdocs\gvv2\application\models\ecritures_model.php on line 423
+
+    select * from ecritures,comptes
+    #1194 - La table 'ecritures' est marquée 'crashed' et devrait être réparée
+
+
+

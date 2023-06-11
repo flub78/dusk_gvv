@@ -20,11 +20,13 @@ class GvvDuskTestCase extends DuskTestCase {
      */
     public function login($browser, $username, $password) {
         $browser->visit(new Login)
+            ->screenshot('before_login')
             ->waitForText('Utilisateur')
             ->waitForText('Peignot')
             ->type('username', $username)
             ->type('password', $password)
             ->press('input[type="submit"]')
+            ->screenshot('after_login')
             ->assertSee('Planeurs');
 
         sleep(2);
@@ -96,6 +98,26 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->screenshot('page_' . str_replace('/', '_', $suburl));
     }
 
+    /**
+     * Get json data from a page.
+     */
+    public function getJsonData($browser, $suburl) {
+
+        $url = $this->url . 'index.php/' . $suburl;
+        
+        // if ($this->verbose()) echo ("Visiting $url\n");
+
+        // $browser->visit($url);
+
+        // $json = $browser->script('return JSON.stringify(window.data);')[0];
+        echo "url = $url\n";
+        $content = file_get_contents($url);
+        echo "content = $content\n";
+        $json = json_decode($content, true);
+        var_dump($json);
+
+        return $json;
+    }
 
     /**
      * Checks if the test runs in verbose mode.
