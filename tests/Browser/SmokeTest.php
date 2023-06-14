@@ -325,35 +325,34 @@ class SmokeTest extends GvvDuskTestCase {
             cons- it adds more code ...
             */
 
-
-            $flight_number = $total = $this->TableTotal($browser, "vols_avion/page");
-
             $latest = $plane_flight_handler->latestFlight();
-
+            $dateFormat = "d/m/Y";
+            if ($latest) {
+                $latest_date = $latest->vadate;
+                $date = new \DateTime($latest_date);
+                $date->modify('+1 day');
+                $flightDate = $date->format($dateFormat);
+            } else {
+                $flightDate = date($dateFormat); 
+            }
 
             $fligt = [
                 'url' => 'vols_avion/create',
+                'date' => $flightDate,
                 'pilot' => 'asterix',
                 'plane' => 'F-JUFA',
                 'takeoff_meter' => '10.00',
                 'landing_meter' => '10.30',
                 'start' => '100',
                 'end' => '100.5',
-                'image' => '31/05/2023 100.00 F-JUFA'
+                'image' => $flightDate . ' 100.00 F-JUFA'
             ];
-
-            return;
 
             $plane_flight_handler->CreatePlaneFlights([$fligt]);
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
 
             $this->assertLessThan(0.000001, $asterix_total - $price - $asterix_new_total, "Asterix account total = " . $asterix_new_total);
-
-            $new_flight_number = $total = $this->TableTotal($browser, "vols_avion/page");
-
-            $this->assertEquals($flight_number + 1, $new_flight_number, "Flight number = " . $new_flight_number);
-
         });
     }
 

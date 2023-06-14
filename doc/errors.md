@@ -61,5 +61,7 @@ Rounding has to be taken into account
     select * from ecritures,comptes
     #1194 - La table 'ecritures' est marquée 'crashed' et devrait être réparée
 
+## Dusk tests cannot run in development mode
 
+When index.php is not in production mode, the warnings on the display disturb the tests.
 
