@@ -51,11 +51,15 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->assertSee('Utilisateur');
     }
 
+    public function fullUrl($suburl) {
+        return $this->url . 'index.php/' . $suburl;
+    }
+
     /**
      * Checks if the user can access a page.
      */
     public function canAccess($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues = []) {
-        $url = $this->url . 'index.php/' . $suburl;
+        $url = $this->fullUrl($suburl);
         if ($this->verbose()) {
             echo ("Visiting $url\n");
         }
@@ -82,7 +86,7 @@ class GvvDuskTestCase extends DuskTestCase {
      * Checks if the user can access a test page.
      */
     public function canAccessTest($browser, $suburl, $mustFind = [], $mustNotFind = [], $inputValues = []) {
-        $url = $this->url . 'index.php/' . $suburl;
+        $url =  $this->fullUrl($suburl);
         if ($this->verbose()) echo ("Visiting $url\n");
         $browser->visit($url);
         sleep(2);
@@ -103,11 +107,7 @@ class GvvDuskTestCase extends DuskTestCase {
      */
     public function getJsonData($browser, $suburl) {
 
-        $url = $this->url . 'index.php/' . $suburl;
-        
-        // if ($this->verbose()) echo ("Visiting $url\n");
-
-        // $browser->visit($url);
+        $url =  $this->fullUrl($suburl);
 
         // $json = $browser->script('return JSON.stringify(window.data);')[0];
         echo "url = $url\n";

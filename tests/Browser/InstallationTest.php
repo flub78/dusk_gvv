@@ -33,7 +33,7 @@ class InstallationTest extends GvvDuskTestCase {
                 ->assertSee("Fin de la procédure d'installation");
 
             $this->login($browser, $user, $password);
-            $browser->visit($this->url . 'index.php/migration')
+            $browser->visit($this->fullUrl('migration'))
                 ->assertSee('Migration de la base de données')
                 ->press("Valider")
                 ->assertSee('à jour');

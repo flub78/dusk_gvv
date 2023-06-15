@@ -45,7 +45,8 @@ class CIUnitTest extends GvvDuskTestCase {
                 $this->canAccessTest($browser, $page['url'], $ms, $mustNotSee, $page['inputValues'] ?? []);
             }
             
-            $browser->visit($this->url . 'index.php/calendar');
+            $browser->visit($this->fullUrl('calendar'));
+
             $this->logout($browser);
 
         });

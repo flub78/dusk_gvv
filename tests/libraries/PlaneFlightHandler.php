@@ -149,7 +149,7 @@ class PlaneFlightHandler {
      */
     public function latestFlight() {
 
-        $url = $this->tc->url . 'index.php/' . 'api/vols_avion/ajax_latest';
+        $url = $this->tc->fullUrl('api/vols_avion/ajax_latest');
         $json = file_get_contents($url);
         $obj = json_decode($json);
         if ($obj) return $obj[0];
@@ -161,7 +161,8 @@ class PlaneFlightHandler {
      */
     public function allFlights($date = "") {
 
-        $url = $this->tc->url . 'index.php/' . 'api/vols_avion/get';
+        $url = $this->tc->fullUrl('api/vols_avion/get');
+
         $json = file_get_contents($url);
         $obj = json_decode($json);
         if ($obj) return $obj;
