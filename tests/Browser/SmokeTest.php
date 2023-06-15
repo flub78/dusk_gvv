@@ -160,16 +160,6 @@ class SmokeTest extends GvvDuskTestCase {
         });
     }
 
-    // public function testJson() {
-    //     $this->assertTrue(true);
-
-    //     echo "{{{{{{{{{{{{{{{{{{{";
-    //     $this->browse(function (Browser $browser) {
-    //         echo $this->getJsonData($browser, "vols_avion/ajax_latest");
-    //     });
-    //     echo "}}}}}}}}}}}}}}}}}";
-    // }
-
     /**
      * Test create
      * @depends testLogin
@@ -341,10 +331,10 @@ class SmokeTest extends GvvDuskTestCase {
                 'date' => $flightDate,
                 'pilot' => 'asterix',
                 'plane' => 'F-JUFA',
-                'takeoff_meter' => '10.00',
-                'landing_meter' => '10.30',
-                'start' => '100',
-                'end' => '100.5',
+                'start_time' => '10.00',
+                'end_time' => '10.30',
+                'start_meter' => '100',
+                'end_meter' => '100.5',
                 'image' => $flightDate . ' 100.00 F-JUFA'
             ];
 

@@ -8,7 +8,7 @@ use Exception;
 
 class GvvDuskTestCase extends DuskTestCase {
 
-    protected $url;
+    public $url;
 
     function __construct() {
         parent::__construct();

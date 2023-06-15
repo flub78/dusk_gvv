@@ -27,9 +27,12 @@ Solution : be consistent on naming across places.
 ## forgot to return the result ..
 nothing to say.
   
-## missing parenthesis
+## Syntax errors
 
-(signalled by VSC but I ignored the warning)
+* missing parenthesis
+* extra brackets
+
+(usually signalled in red by VSC)
 
 ## Test interface
 
