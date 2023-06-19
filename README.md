@@ -86,5 +86,7 @@ For individual tests:
 
     php artisan dusk --color=always --browse tests/Browser/SmokeTest.php
 
+    php artisan dusk --color=always --browse tests/Browser/DbInitTest.php
+
 If the tests are run on a Dropbox shared file system, disable synchronisation to avoid errors.
 
