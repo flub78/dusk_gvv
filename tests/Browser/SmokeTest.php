@@ -12,6 +12,7 @@ use Tests\libraries\GliderHandler;
 use Tests\libraries\PlaneHandler;
 use Tests\libraries\MemberHandler;
 use Tests\libraries\PlaneFlightHandler;
+use Tests\libraries\GliderFlightHandler;
 
 /**
  * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases. When the smoke test passes, it means that the application is able to handle the basic nominal cases. 
@@ -88,7 +89,9 @@ class SmokeTest extends GvvDuskTestCase {
         ];
 
         $this->products = [
-            ['ref' => 'remorqué', 'description' => 'Remorqué', 'prix' => '25', 'account' => 'Remorqués', 'codec' => '706'],
+            ['ref' => 'Remorqué 500m', 'description' => 'Remorqué 500', 'prix' => '25', 'account' => 'Remorqués', 'codec' => '706'],
+            ['ref' => 'Remorqué 300m', 'description' => 'Remorqué 300', 'prix' => '15', 'account' => 'Remorqués', 'codec' => '706'],
+            ['ref' => 'Remorqué 100m', 'description' => 'Remorqué 100', 'prix' => '3', 'account' => 'Remorqués', 'codec' => '706'],
             ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706'],
             ['ref' => 'treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706'],        
             ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
@@ -128,23 +131,6 @@ class SmokeTest extends GvvDuskTestCase {
             ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'remorqueur' => false ]
         ];
     }
-
-    // protected function setUp(): void {
-    //     echo "setup\n";
-    // }
-
-    // protected function tearDown(): void {
-    //     echo "teardown\n";
-    // }
-
-    // public static function setUpBeforeClass(): void {
-    //     //echo "setup before class\n";
-    // }
-
-    // public static function tearDownAfterClass(): void {
-    //     //echo "teardown after class\n";
-    // }
-
 
     /*************
      * Test cases
@@ -188,8 +174,6 @@ class SmokeTest extends GvvDuskTestCase {
     /**
      * Test AccountMovements
      * @depends testCreateData
-     * 
-     * TODO: Check all kind of movements
      */
     public function testAccountMovements() {
         // $this->markTestSkipped('must be revisited.');
@@ -284,7 +268,7 @@ class SmokeTest extends GvvDuskTestCase {
     }
 
     /**
-     * Logout
+     * test plane flight creation
      * @depends testAccountMovements
      */
     public function testPlaneFlight() {
@@ -339,6 +323,89 @@ class SmokeTest extends GvvDuskTestCase {
             ];
 
             $plane_flight_handler->CreatePlaneFlights([$fligt]);
+
+            $asterix_new_total = $account_handler->AccountTotal($asterix_id);
+
+            $this->assertLessThan(0.000001, $asterix_total - $price - $asterix_new_total, "Asterix account total = " . $asterix_new_total);
+        });
+    }
+
+    /**
+     * test glider flight creation
+     * @depends testAccountMovements
+     */
+    public function testGliderFlight() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            $this->assertTrue(true);
+
+            $account_handler = new AccountHandler($browser, $this);
+            $glider_flight_handler = new GliderFlightHandler($browser, $this);
+
+            $asterix_account = "(411) Le Gaulois Asterix";
+            $asterix_id = $account_handler->AccountIdFromImage($asterix_account);
+            $asterix_total = $account_handler->AccountTotal($asterix_id);
+
+            $price = 51.0;
+
+            /* 
+            TODO: move takeoff and landing times to HTML times
+            TODO: Check that the plane account has been credited
+            TODO: Find the flight back to delete
+            TODO: check that the pilot is reimbursed after flight deletion
+            
+            The tests should be independant from existing data.
+            Tests flights could start the day after the last flight.
+            It implies the capacity to find out the last flight.
+
+            Should I modify GVV to return information used only for testing ?
+            pro - it woul make end to end test simplers and supporting more complex scenarios
+            cons- it adds more code ...
+            */
+
+            $latest = $glider_flight_handler->latestFlight();
+
+            $dateFormat = "d/m/Y";
+            if ($latest) {
+                $latest_date = $latest->vpdate;
+                $date = new \DateTime($latest_date);
+                $date->modify('+1 day');
+                $flightDate = $date->format($dateFormat);
+            } else {
+                $flightDate = date($dateFormat); 
+            }
+
+            /* for select values must be passed, not images
+               for radio buttons
+                <div class="me-3 mb-2">
+                    Lancement:
+                        Treuil<input type="radio" name="vpautonome" value="1" id="Treuil">
+                        Autonome<input type="radio" name="vpautonome" value="2" id="Autonome">
+                        Remorqué<input type="radio" name="vpautonome" value="3" checked="checked" id="Remorqué">
+                        Extérieur<input type="radio" name="vpautonome" value="4" id="Extérieur">
+                </div>
+                $browser->radio('size', 'large');  // use name and value
+
+                Only some combination are coherent instructor implies DC, R launch implies tow pilot, etc.
+                no coherency controls are done.
+            */
+            $fligt = [
+                'url' => 'vols_planeur/create',
+                'date' => $flightDate,
+                'pilot' => 'asterix',
+                'glider' => 'F-CGAA',
+                'instructor' => 'panoramix',         // implies DC
+                'start_time' => '10:00',
+                'end_time' => '10:30',
+                'tow_pilot' => 'abraracourcix',
+                'tow_plane' => 'F-JUFA',
+                 // 'winch_man' => 'asterix',
+                 'launch' => 'R',   // R, T, A, E
+                'image' => $flightDate . ' 100.00 F-JUFA'
+            ];
+            return;
+            $glider_flight_handler->CreateGliderFlights([$fligt]);
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
 

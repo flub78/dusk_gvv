@@ -10,7 +10,15 @@ use function PHPUnit\Framework\assertSameSize;
 /*
  * Check that the application is initilized with test data
  *
- * It will be the base for feature tests
+ * It will be the base for feature tests.
+ * 
+ * Resource tests (CRUD):
+ * - Check that it is possible to create a resource
+ * - Check that it is possible to read a resource
+ * - Check that it is possible to update a resource
+ * - Check that it is possible to delete a resource
+ * - Check all cases of error in creation/edition
+ * - check indirect modifications (e.g. billing, etc.)
  */
 
 class DbInitTest extends GvvDuskTestCase {
@@ -22,25 +30,16 @@ class DbInitTest extends GvvDuskTestCase {
     public function testInit() {
         $this->browse(function (Browser $browser) {
 
-            $user = "testadmin";
-            $password = "password";
-
             $browser->visit($this->url . 'install/reset.php')
                 ->assertSee("Verification de l'installation")
-                // tables are only dropped when they exist
-                // ->assertSee('drop table achats')
-                // ->assertSee('drop table terrains')
-                ->assertSee('Suppression des images')
                 ->assertSee($this->url . 'install');
-
-            // $browser->clickLink($this->url . 'install');
 
             $browser->visit($this->url . 'install/?db=dusk_tests.sql');
 
             $browser->assertSee('Installation de GVV')
                 ->assertSee("Fin de la procédure d'installation");
 
-            $this->login($browser, $user, $password);
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
             $browser->visit($this->fullUrl('migration'))
                 ->assertSee('Migration de la base de données')
                 ->press("Valider")
