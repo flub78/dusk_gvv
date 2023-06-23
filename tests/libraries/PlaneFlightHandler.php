@@ -33,19 +33,19 @@ class PlaneFlightHandler {
         // echo $date . " " . $plane_flight['date'] . "\n";
         // var_dump($flight);
         if ($date != $plane_flight['date']) {
-            echo "date $date does not match ". $plane_flight['date'] . "\n";
+            // echo "date $date does not match ". $plane_flight['date'] . "\n";
             return false;
         }
         if ($flight->vamacid != $plane_flight['plane']) {
-            echo "plane does not match\n";
+            // echo "plane does not match\n";
             return false;
         }
         if ($flight->vapilid != $plane_flight['pilot']) {
-            echo "pilot does not match\n";
+            // echo "pilot does not match\n";
             return false;
         }
         if ($flight->vacdeb != $plane_flight['start_meter']) {
-            echo "start meter " . $flight->vacdeb . " does not match " .  $plane_flight['start_meter'] . "\n";
+            // echo "start meter " . $flight->vacdeb . " does not match " .  $plane_flight['start_meter'] . "\n";
             return false;
         }
         return true;
@@ -61,6 +61,7 @@ class PlaneFlightHandler {
     public function PlaneFlightExists($plane_flight) {
 
         $flights = $this->allFlights();
+        if (!$flights) return false;
         foreach ($flights as $flight) {
             if ($this->match($flight, $plane_flight)) {
                 return true;
@@ -98,7 +99,7 @@ class PlaneFlightHandler {
 
             $this->tc->assertTrue(
                 $this->PlaneFlightExists($flight),
-                "plane flight exists: " . $flight['plane']
+                "plane flight exists: " . $flight['image']
             );
 
             $new_flight_number = $total = $this->tc->TableTotal($this->browser, "vols_avion/page");

@@ -89,15 +89,15 @@ class SmokeTest extends GvvDuskTestCase {
         ];
 
         $this->products = [
-            ['ref' => 'Remorqué 500m', 'description' => 'Remorqué 500', 'prix' => '25', 'account' => 'Remorqués', 'codec' => '706'],
-            ['ref' => 'Remorqué 300m', 'description' => 'Remorqué 300', 'prix' => '15', 'account' => 'Remorqués', 'codec' => '706'],
-            ['ref' => 'Remorqué 100m', 'description' => 'Remorqué 100', 'prix' => '3', 'account' => 'Remorqués', 'codec' => '706'],
-            ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706'],
-            ['ref' => 'treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706'],        
-            ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
-            ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706'],        
-            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706'], 
-            ['ref' => 'gratuit', 'description' => 'non facturé', 'prix' => '0', 'account' => 'Heures de vol planeur', 'codec' => '706'],           
+            ['ref' => 'Remorqué 500m', 'description' => 'Remorqué 500', 'prix' => '25', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'Remorqué 300m', 'description' => 'Remorqué 300', 'prix' => '15', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'Remorqué 100m', 'description' => 'Remorqué 100', 'prix' => '3', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],        
+            ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],        
+            ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],        
+            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706', "date" => "01/01/2021"], 
+            ['ref' => 'gratuit', 'description' => 'non facturé', 'prix' => '0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],           
         ];
 
         $this->members = [
@@ -305,40 +305,50 @@ class SmokeTest extends GvvDuskTestCase {
                 $latest_date = $latest->vadate;
                 $date = new \DateTime($latest_date);
                 $date->modify('+1 day');
-                $flightDate = $date->format($dateFormat);
             } else {
-                $flightDate = date($dateFormat); 
+                $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
             }
+            $flightDate = $date->format($dateFormat);
+
+            $plane = "F-JUFA";
+            $start_meter = "100.0";
+            $end_meter = $start_meter + 0.5;
+            $image = "$flightDate $start_meter $plane";
 
             $fligt = [
                 'url' => 'vols_avion/create',
                 'date' => $flightDate,
                 'pilot' => 'asterix',
-                'plane' => 'F-JUFA',
+                'plane' => $plane,
                 'start_time' => '10.00',
                 'end_time' => '10.30',
-                'start_meter' => '100',
-                'end_meter' => '100.5',
-                'image' => $flightDate . ' 100.00 F-JUFA'
+                'start_meter' => $start_meter,
+                'end_meter' => $end_meter,
+                'image' => $image
             ];
+            
 
             $plane_flight_handler->CreatePlaneFlights([$fligt]);
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
+            $cost = $asterix_total - $asterix_new_total;
 
-            $this->assertLessThan(0.000001, $asterix_total - $price - $asterix_new_total, "Asterix account total = " . $asterix_new_total);
+            // echo "plane flight asterix total = $asterix_total\n";
+            // echo "plane flight asterix new total = $asterix_new_total\n";
+            // echo "plane flight cost = $cost\n";
+            // echo "plane flight price = $price\n";
+            $this->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
         });
     }
 
     /**
      * test glider flight creation
-     * @depends testAccountMovements
+     * @depends testPlaneFlight
      */
     public function testGliderFlight() {
+        // $this->assertTrue(true); return;
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
-
-            $this->assertTrue(true);
 
             $account_handler = new AccountHandler($browser, $this);
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -347,7 +357,7 @@ class SmokeTest extends GvvDuskTestCase {
             $asterix_id = $account_handler->AccountIdFromImage($asterix_account);
             $asterix_total = $account_handler->AccountTotal($asterix_id);
 
-            $price = 51.0;
+            $price = 40.0;
 
             /* 
             TODO: move takeoff and landing times to HTML times
@@ -371,10 +381,10 @@ class SmokeTest extends GvvDuskTestCase {
                 $latest_date = $latest->vpdate;
                 $date = new \DateTime($latest_date);
                 $date->modify('+1 day');
-                $flightDate = $date->format($dateFormat);
             } else {
-                $flightDate = date($dateFormat); 
+                 $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
             }
+            $flightDate = $date->format($dateFormat);
 
             /* for select values must be passed, not images
                for radio buttons
@@ -404,18 +414,24 @@ class SmokeTest extends GvvDuskTestCase {
                  'launch' => 'R',   // R, T, A, E
                 'image' => $flightDate . ' 100.00 F-JUFA'
             ];
-            return;
+            
             $glider_flight_handler->CreateGliderFlights([$fligt]);
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
+            $cost = $asterix_total - $asterix_new_total;
 
-            $this->assertLessThan(0.000001, $asterix_total - $price - $asterix_new_total, "Asterix account total = " . $asterix_new_total);
+            // echo "glider flight asterix total = $asterix_total\n";
+            // echo "glider flight asterix new total = $asterix_new_total\n";
+            // echo "glider flight cost = $cost\n";
+            // echo "glider flight price = $price\n";
+            $this->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
+
         });
     }
 
     /**
      * Logout
-     * @depends testPlaneFlight
+     * @depends testGliderFlight
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');
