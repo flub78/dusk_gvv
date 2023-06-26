@@ -17,6 +17,8 @@ use Tests\libraries\GliderFlightHandler;
 /**
  * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases. When the smoke test passes, it means that the application is able to handle the basic nominal cases. 
  * 
+ * This test is also used to generate a standard data test set for others tests.
+ * 
  * Dependencies
  * - Planeur depends on product for the hour price
  * - product depends on accounts
@@ -311,7 +313,7 @@ class SmokeTest extends GvvDuskTestCase {
             $flightDate = $date->format($dateFormat);
 
             $plane = "F-JUFA";
-            $start_meter = "100.0";
+            $start_meter = 100.0;
             $end_meter = $start_meter + 0.5;
             $image = "$flightDate $start_meter $plane";
 
@@ -350,12 +352,7 @@ class SmokeTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $account_handler = new AccountHandler($browser, $this);
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
-
-            $asterix_account = "(411) Le Gaulois Asterix";
-            $asterix_id = $account_handler->AccountIdFromImage($asterix_account);
-            $asterix_total = $account_handler->AccountTotal($asterix_id);
 
             $price = 40.0;
 
@@ -412,19 +409,12 @@ class SmokeTest extends GvvDuskTestCase {
                 'tow_plane' => 'F-JUFA',
                  // 'winch_man' => 'asterix',
                  'launch' => 'R',   // R, T, A, E
-                'image' => $flightDate . ' 100.00 F-JUFA'
+                'image' => $flightDate . ' 100.00 F-JUFA',
+                'account' => "(411) Le Gaulois Asterix",
+                'price' => $price,
             ];
             
             $glider_flight_handler->CreateGliderFlights([$fligt]);
-
-            $asterix_new_total = $account_handler->AccountTotal($asterix_id);
-            $cost = $asterix_total - $asterix_new_total;
-
-            // echo "glider flight asterix total = $asterix_total\n";
-            // echo "glider flight asterix new total = $asterix_new_total\n";
-            // echo "glider flight cost = $cost\n";
-            // echo "glider flight price = $price\n";
-            $this->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
 
         });
     }

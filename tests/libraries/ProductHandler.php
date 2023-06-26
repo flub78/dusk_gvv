@@ -63,7 +63,7 @@ use Tests\libraries\AccountHandler;
                 // Create product
                 $this->tc->canAccess($this->browser, "tarifs/create", ['Tarif']);
                 $this->browser
-                    ->type('date', $elt['date'])
+                    ->type('date', $elt['date'] . "\n")
                     ->type('reference', $elt['ref'])
                     ->type('description', $elt['description'])
                     ->type('prix', $elt['prix'])

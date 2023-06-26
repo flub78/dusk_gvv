@@ -136,7 +136,10 @@ class GvvDuskTestCase extends DuskTestCase {
             $this->canAccess($browser, $route, $mustSee);
         }
 
-        $counter = $browser->text('#DataTables_Table_0_info');
+        $counter_selector = '#DataTables_Table_0_info';
+        $browser->waitFor($counter_selector);
+        $browser->scrollIntoView($counter_selector);
+        $counter = $browser->text($counter_selector);
         // echo "Counter: $counter";
         $pattern = '/(\d+) à (\d+) sur (\d+) éléments/';
         if (preg_match($pattern, $counter, $matches)) {

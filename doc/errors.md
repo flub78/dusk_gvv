@@ -68,3 +68,7 @@ Rounding has to be taken into account
 
 When index.php is not in production mode, the warnings on the display disturb the tests.
 
+## Element not yet displayed, page not loaded
+
+use $browser->waitFor('.selector');
+

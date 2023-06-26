@@ -76,6 +76,8 @@ class PlaneFlightHandler {
     public function CreatePlaneFlights($list = []) {
         foreach ($list as $flight) {
 
+            // var_dump($flight);
+
             $flight_number = $total = $this->tc->TableTotal($this->browser, "vols_avion/page");
 
             $this->tc->canAccess($this->browser, $flight['url']);

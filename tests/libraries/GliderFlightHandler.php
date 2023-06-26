@@ -10,6 +10,8 @@ namespace Tests\libraries;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
+use Tests\libraries\AccountCodeHandler;
+
 class GliderFlightHandler {
 
     private $browser;
@@ -74,9 +76,15 @@ class GliderFlightHandler {
      * Create glider flights.
      */
     public function CreateGliderFlights($list = []) {
+
+        $account_handler = new AccountHandler($this->browser, $this->tc);
+
         foreach ($list as $flight) {
 
-            $flight_number = $total = $this->tc->TableTotal($this->browser, "vols_planeur/page");
+            $flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
+
+            $account_id = $account_handler->AccountIdFromImage($flight['account']);
+            $total = $account_handler->AccountTotal($account_id);
 
             $this->tc->canAccess($this->browser, $flight['url']);
 
@@ -130,9 +138,16 @@ class GliderFlightHandler {
                 "glider flight exists: " . $flight['glider']
             );
 
-            $new_flight_number = $total = $this->tc->TableTotal($this->browser, "vols_planeur/page");
+            $new_flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
             
             $this->tc->assertEquals($flight_number + 1, $new_flight_number, "Flight number = " . $new_flight_number);
+
+            $new_total = $account_handler->AccountTotal($account_id);
+            $cost = $total - $new_total;
+
+            $price = $flight['price'];
+            $this->tc->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
+
         }
     }
 
