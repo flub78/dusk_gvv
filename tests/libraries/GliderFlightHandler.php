@@ -100,14 +100,6 @@ class GliderFlightHandler {
                 $this->browser->select('vpinst', $flight['instructor']);
             }
 
-            if (array_key_exists('tow_pilot', $flight)) {
-                $this->browser->radio('vpautonome', '3');
-                $this->browser->select('pilote_remorqueur', $flight['tow_pilot']);
-            }
-            if (array_key_exists('tow_plane', $flight)) {
-                $this->browser->radio('vpautonome', '3');
-                $this->browser->select('remorqueur', $flight['tow_plane']);
-            }
             if (array_key_exists('launch', $flight)) {
                 switch($flight['launch']) {
                     case 'R':
@@ -124,7 +116,20 @@ class GliderFlightHandler {
                         break;
                 }
             }
-                
+
+            if (array_key_exists('tow_pilot', $flight)) {
+                $this->browser->radio('vpautonome', '3');
+                $this->browser->select('pilote_remorqueur', $flight['tow_pilot']);
+            }
+            if (array_key_exists('tow_plane', $flight)) {
+                $this->browser->radio('vpautonome', '3');
+                $this->browser->select('remorqueur', $flight['tow_plane']);
+            }
+            if (array_key_exists('whinch_man', $flight)) {
+                $this->browser->radio('vpautonome', '1');
+                $this->browser->select('remorqueur', $flight['whinch_man']);
+            }
+
             $this->browser->screenshot('before_glider_flight');
 
             $this->browser

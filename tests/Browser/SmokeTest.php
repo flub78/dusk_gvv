@@ -95,7 +95,7 @@ class SmokeTest extends GvvDuskTestCase {
             ['ref' => 'Remorqué 300m', 'description' => 'Remorqué 300', 'prix' => '15', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'Remorqué 100m', 'description' => 'Remorqué 100', 'prix' => '3', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
-            ['ref' => 'treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],        
+            ['ref' => 'Treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],        
             ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],        
             ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],        
             ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706', "date" => "01/01/2021"], 
@@ -354,8 +354,6 @@ class SmokeTest extends GvvDuskTestCase {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
 
-            $price = 40.0;
-
             /* 
             TODO: move takeoff and landing times to HTML times
             TODO: Check that the plane account has been credited
@@ -397,24 +395,38 @@ class SmokeTest extends GvvDuskTestCase {
                 Only some combination are coherent instructor implies DC, R launch implies tow pilot, etc.
                 no coherency controls are done.
             */
-            $fligt = [
-                'url' => 'vols_planeur/create',
-                'date' => $flightDate,
-                'pilot' => 'asterix',
-                'glider' => 'F-CGAA',
-                'instructor' => 'panoramix',         // implies DC
-                'start_time' => '10:00',
-                'end_time' => '10:30',
-                'tow_pilot' => 'abraracourcix',
-                'tow_plane' => 'F-JUFA',
-                 // 'winch_man' => 'asterix',
-                 'launch' => 'R',   // R, T, A, E
-                'image' => $flightDate . ' 100.00 F-JUFA',
-                'account' => "(411) Le Gaulois Asterix",
-                'price' => $price,
-            ];
-            
-            $glider_flight_handler->CreateGliderFlights([$fligt]);
+            $flights = [
+                [
+                    'url' => 'vols_planeur/create',
+                    'date' => $flightDate,
+                    'pilot' => 'asterix',
+                    'glider' => 'F-CGAA',
+                    'instructor' => 'panoramix',         // implies DC
+                    'start_time' => '10:00',
+                    'end_time' => '10:30',
+                    'tow_pilot' => 'abraracourcix',
+                    'tow_plane' => 'F-JUFA',
+                    // 'winch_man' => 'asterix',
+                    'launch' => 'R',   // R, T, A, E
+                    'account' => "(411) Le Gaulois Asterix",
+                    'price' => 40.0,
+                ],
+                [
+                    'url' => 'vols_planeur/create',
+                    'date' => $flightDate,
+                    'pilot' => 'goudurix',
+                    'glider' => 'F-CGAA',
+                    'instructor' => 'panoramix',         // implies DC
+                    'start_time' => '11:00',
+                    'end_time' => '12:15',
+                    'winch_man' => 'asterix',
+                    'launch' => 'T',   // R, T, A, E
+                    'account' => "(411) Le Gaulois Goudurix",
+                    'price' => 45.5,
+                ],                
+        ];
+
+            $glider_flight_handler->CreateGliderFlights($flights);
 
         });
     }
