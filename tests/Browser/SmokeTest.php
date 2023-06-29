@@ -401,7 +401,8 @@ class SmokeTest extends GvvDuskTestCase {
                     'date' => $flightDate,
                     'pilot' => 'asterix',
                     'glider' => 'F-CGAA',
-                    'instructor' => 'panoramix',         // implies DC
+                    'instructor' => 'panoramix',
+                    'DC' =>  true,       
                     'start_time' => '10:00',
                     'end_time' => '10:30',
                     'tow_pilot' => 'abraracourcix',
@@ -416,7 +417,8 @@ class SmokeTest extends GvvDuskTestCase {
                     'date' => $flightDate,
                     'pilot' => 'goudurix',
                     'glider' => 'F-CGAA',
-                    'instructor' => 'panoramix',         // implies DC
+                    'instructor' => 'panoramix',
+                    'DC' =>  true,       
                     'start_time' => '11:00',
                     'end_time' => '12:15',
                     'winch_man' => 'asterix',

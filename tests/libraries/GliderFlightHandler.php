@@ -53,7 +53,7 @@ class GliderFlightHandler {
             return false;
         }
         return true;
-    }   
+    }
 
 
     /** 
@@ -95,23 +95,30 @@ class GliderFlightHandler {
                 ->type('vpcdeb', $flight['start_time'])
                 ->type('vpcfin', $flight['end_time']);
 
-            if (array_key_exists('instructor', $flight)) {
+            if (array_key_exists('DC', $flight) && $flight['DC']) {
                 $this->browser->check('vpdc');
+            }
+
+            if (array_key_exists('instructor', $flight)) {
                 $this->browser->select('vpinst', $flight['instructor']);
             }
 
+            if (array_key_exists('passenger', $flight)) {
+                $this->browser->select('vppassager', $flight['passenger']);
+            }
+
             if (array_key_exists('launch', $flight)) {
-                switch($flight['launch']) {
+                switch ($flight['launch']) {
                     case 'R':
                         $this->browser->radio('vpautonome', '3');
                         break;
                     case 'T':
                         $this->browser->radio('vpautonome', '1');
                         break;
-                    case 'A':   
+                    case 'A':
                         $this->browser->radio('vpautonome', '2');
                         break;
-                    case 'E':   
+                    case 'E':
                         $this->browser->radio('vpautonome', '4');
                         break;
                 }
@@ -138,21 +145,33 @@ class GliderFlightHandler {
 
             $this->browser->screenshot('after_glider_flight');
 
-            $this->tc->assertTrue(
+            if (array_key_exists('error', $flight) && $flight['error']) {
+                $error = $flight['error'];
+                $flight_exists = false;
+                $created = 0;
+                $price = 0.0;
+            } else {
+                $flight_exists = true;
+                $error = false;
+                $created = 1;
+                $price = $flight['price'];
+            }
+
+            $this->tc->assertEquals(
+                $flight_exists,
                 $this->GliderFlightExists($flight),
                 "glider flight exists: " . $flight['glider']
             );
 
             $new_flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
-            
-            $this->tc->assertEquals($flight_number + 1, $new_flight_number, "Flight number = " . $new_flight_number);
+
+            $this->tc->assertEquals($flight_number + $created, $new_flight_number, "Flight number = " . $new_flight_number);
 
             $new_total = $account_handler->AccountTotal($account_id);
             $cost = $total - $new_total;
 
-            $price = $flight['price'];
-            $this->tc->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
 
+            $this->tc->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
         }
     }
 
