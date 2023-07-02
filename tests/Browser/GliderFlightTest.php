@@ -18,6 +18,14 @@ use function PHPUnit\Framework\assertSameSize;
  * - Check that it is possible to delete a resource
  * - Check all cases of error in creation/edition
  * - check indirect modifications (e.g. billing, etc.)
+ * 
+ * - checks that only two seaters accept two pilots
+ * - checks that flights are rejected when the pilot or glider are already in flight
+ * 
+ * TODO:
+ *  - attempt for negative duration
+ *  - shared flights
+ *  - certificates
  */
 
 class GliderFlightTest extends GvvDuskTestCase {
@@ -213,7 +221,7 @@ class GliderFlightTest extends GvvDuskTestCase {
     /*
      * Generat conflicting flights from an array
      */
-    private function generateConflictingFlights($tab = []) {
+    private function generateConflictingFlights($tab = [], $error = "") {
         $flights = [];
 
         $dateFormat = "d/m/Y";
@@ -231,10 +239,12 @@ class GliderFlightTest extends GvvDuskTestCase {
             'start_time' => $line[2],
             'end_time' => $line[3],
             'account' => "(411) Le Gaulois " . ucfirst($line[0]),
-            'error' => "pilote déja en vol",
-            'comment' => "pilote en vol",
             ];
 
+            if ($error) {
+                $flight['error'] = $error;
+                $flight['comment'] = $error;
+            }
             $flights[] = $flight;
         }
         return $flights;
@@ -280,17 +290,39 @@ class GliderFlightTest extends GvvDuskTestCase {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
 
-            $dateFormat = "d/m/Y";
+            $rejected = [
+                ["asterix", "F-CGAA", "10:00", "10:30"],
+                ["asterix", "F-CGAB", "09:00", "10:00"],
+                ["asterix", "F-CGAB", "09:30", "10:15"],
 
-            $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
-           
-            $flightDate = $date->format($dateFormat);
+                ["asterix", "F-CGAB", "09:30", "10:35"],
+                ["asterix", "F-CGAB", "09:30", "12:30"],
 
-            $schedule = [
-                ["asterix" , "F-CGAA", "10:00", "10:30"]
+                ["asterix", "F-CGAB", "10:15", "10:35"],
+                ["asterix", "F-CGAB", "10:30", "12:30"],
+                ["asterix", "F-CGAB", "10:30", "12:20"],
+
+                ["goudurix", "F-CGAA", "10:00", "10:30"],
+                ["goudurix", "F-CGAA", "09:45", "10:15"],
+                ["goudurix", "F-CGAA", "09:45", "10:35"],
+                ["goudurix", "F-CGAA", "09:45", "12:30"],
+                ["goudurix", "F-CGAA", "10:15", "10:25"],
+                ["goudurix", "F-CGAA", "10:15", "10:35"],
+                ["goudurix", "F-CGAA", "10:15", "12:35"],
             ];
 
-            $flights = $this->generateConflictingFlights($schedule);
+            $accepted = [
+                ["asterix", "F-CGAA", "09:00", "09:59"],
+                ["asterix", "F-CGAA", "10:31", "10:59"],
+                ["asterix", "F-CGAA", "12:16", "13:00"],
+            ];
+
+            $rejected_flights = $this->generateConflictingFlights($rejected , "machine ou pilote en vol");
+            $accepted_flights = $this->generateConflictingFlights($accepted);
+            $flights = $rejected_flights + $accepted_flights;
+
+            $this->canAccess($browser, 'vols_planeur');
+            $browser->screenshot('before_conflicting_flights');
 
             $glider_flight_handler->CreateGliderFlights($flights);    
         });

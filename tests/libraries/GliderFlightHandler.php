@@ -81,7 +81,7 @@ class GliderFlightHandler {
 
         foreach ($list as $flight) {
 
-            var_dump($flight);
+            // var_dump($flight);
 
             $flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
@@ -152,13 +152,11 @@ class GliderFlightHandler {
             $this->browser->screenshot('after_glider_flight');
 
             if (array_key_exists('error', $flight) && $flight['error']) {
-                echo ">>>>>>>>>>>>>>>>>>>>>>>>     error\n";
                 $error = $flight['error'];
                 $flight_exists = false;
                 $created = 0;
                 $price = 0.0;
             } else {
-                echo ">>>>>>>>>>>>>>>>>>>>>>>>     no error expected\n";
                 $flight_exists = true;
                 $error = false;
                 $created = 1;
