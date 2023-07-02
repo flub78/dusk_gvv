@@ -91,6 +91,10 @@ class PlaneFlightHandler {
                 ->type('vacdeb', $flight['start_meter'])
                 ->type('vacfin', $flight['end_meter']);
 
+            if (array_key_exists('comment', $flight)) {
+                $this->browser->type('vaobs', $flight['comment']);
+            }
+
             $this->browser->screenshot('a_before_flight');
 
             $this->browser

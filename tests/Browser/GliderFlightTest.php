@@ -97,10 +97,9 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'DC' =>  true,       
                     'start_time' => '10:00',
                     'end_time' => '10:30',
+                    'launch' => 'R',   // R, T, A, E
                     'tow_pilot' => 'abraracourcix',
                     'tow_plane' => 'F-JUFA',
-                    // 'winch_man' => 'asterix',
-                    'launch' => 'R',   // R, T, A, E
                     'account' => "(411) Le Gaulois Asterix",
                     'price' => 40.0,
                 ],
@@ -117,6 +116,21 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'launch' => 'T',   // R, T, A, E
                     'account' => "(411) Le Gaulois Goudurix",
                     'price' => 45.5,
+                ],
+                [
+                    'url' => 'vols_planeur/create',
+                    'date' => $flightDate,
+                    'pilot' => 'asterix',
+                    'glider' => 'F-CGAB',
+                    'DC' =>  false,        
+                    'start_time' => '11:00',
+                    'end_time' => '12:15',
+                    'launch' => 'T',   // R, T, A, E
+                    'launch' => 'R',   // R, T, A, E
+                    'tow_pilot' => 'abraracourcix',
+                    'tow_plane' => 'F-JUFA',
+                    'account' => "(411) Le Gaulois Asterix",
+                    'price' => 62.5,
                 ],             
             ];
 
@@ -195,9 +209,96 @@ class GliderFlightTest extends GvvDuskTestCase {
         });
     }
 
+
+    /*
+     * Generat conflicting flights from an array
+     */
+    private function generateConflictingFlights($tab = []) {
+        $flights = [];
+
+        $dateFormat = "d/m/Y";
+
+        $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+       
+        $flightDate = $date->format($dateFormat);
+
+        foreach ($tab as $line) {
+            $flight = [
+            'url' => 'vols_planeur/create',
+            'date' => $flightDate,
+            'pilot' => $line[0],
+            'glider' => $line[1],
+            'start_time' => $line[2],
+            'end_time' => $line[3],
+            'account' => "(411) Le Gaulois " . ucfirst($line[0]),
+            'error' => "pilote déja en vol",
+            'comment' => "pilote en vol",
+            ];
+
+            $flights[] = $flight;
+        }
+        return $flights;
+    }
+
+    /**
+     * Checks that correct fields are displayed depending on the fact aht the machine is single seat or not
+     * 
+     * @depends testSingleSeater
+     * 
+     * preconditions:
+     *      Asterix on F-CGAA from 10:00 to 10:30
+     *      Asterix on F-CGAB from 11:00 to 12:15
+     *      Goudurix on F-CGAA from 11:00 to 12:15
+     * 
+     * Test cases
+     *      rejected flights
+     *     - Asterix on F-CGAA from 10:00 to 10:30  flight duplicated
+     *     - Asterix on F-CGAB from 09:00 to 10:00
+     *     - Asterix on F-CGAB from 09:30 to 10:15
+     *     - Asterix on F-CGAB from 09:30 to 10:35  * missed + start not filled in the edit form
+     *     - Asterix on F-CGAB from 09:30 to 12:30  * missed + start not filled in the edit form
+     *     - Asterix on F-CGAB from 10:15 to 10:35
+     *     - Asterix on F-CGAB from 10:15 to 12:30
+     *     - Asterix on F-CGAB from 10:15 to 10:20 
+     * 
+     *     rejected flights
+     *      - Goudurix on F-CGAA from 10:00 to 10:30
+     *      - Goudurix on F-CGAA from 09:45 to 10:15
+     *      - Goudurix on F-CGAA from 09:45 to 10:35
+     *      - Goudurix on F-CGAA from 09:45 to 12:30
+     *      - Goudurix on F-CGAA from 10:15 to 10:25
+     *      - Goudurix on F-CGAA from 10:15 to 10:35
+     *      - Goudurix on F-CGAA from 10:15 to 12:35
+     * 
+     *      Accepted flights
+     *      - Asterix on F-CGAA from 09:00 to 09:59
+     *      - Asterix on F-CGAA from 10:31 to 10:59
+     *      - Asterix on F-CGAA from 12:16 to 13:00
+     */
+    public function testInFlight() {
+        $this->browse(function (Browser $browser) {
+
+            $glider_flight_handler = new GliderFlightHandler($browser, $this);
+
+            $dateFormat = "d/m/Y";
+
+            $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+           
+            $flightDate = $date->format($dateFormat);
+
+            $schedule = [
+                ["asterix" , "F-CGAA", "10:00", "10:30"]
+            ];
+
+            $flights = $this->generateConflictingFlights($schedule);
+
+            $glider_flight_handler->CreateGliderFlights($flights);    
+        });
+    }
+
     /**
      * Logout
-     * @depends testSingleSeater
+     * @depends testInFlight
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');

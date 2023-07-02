@@ -81,6 +81,8 @@ class GliderFlightHandler {
 
         foreach ($list as $flight) {
 
+            var_dump($flight);
+
             $flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
             $account_id = $account_handler->AccountIdFromImage($flight['account']);
@@ -137,6 +139,10 @@ class GliderFlightHandler {
                 $this->browser->select('remorqueur', $flight['whinch_man']);
             }
 
+            if (array_key_exists('comment', $flight)) {
+                $this->browser->type('vpobs', $flight['comment']);
+            }
+
             $this->browser->screenshot('before_glider_flight');
 
             $this->browser
@@ -146,32 +152,39 @@ class GliderFlightHandler {
             $this->browser->screenshot('after_glider_flight');
 
             if (array_key_exists('error', $flight) && $flight['error']) {
+                echo ">>>>>>>>>>>>>>>>>>>>>>>>     error\n";
                 $error = $flight['error'];
                 $flight_exists = false;
                 $created = 0;
                 $price = 0.0;
             } else {
+                echo ">>>>>>>>>>>>>>>>>>>>>>>>     no error expected\n";
                 $flight_exists = true;
                 $error = false;
                 $created = 1;
                 $price = $flight['price'];
             }
 
-            $this->tc->assertEquals(
-                $flight_exists,
-                $this->GliderFlightExists($flight),
-                "glider flight exists: " . $flight['glider']
-            );
+            // In case of duplicate the flight exists before the test
+            // so it is not pertinent to check its existence
+            if (!$error) {
+                $this->tc->assertEquals(
+                    $flight_exists,
+                    $this->GliderFlightExists($flight),
+                    "glider flight exists: " . $flight['glider']
+                );
+            }
 
             $new_flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
             $this->tc->assertEquals($flight_number + $created, $new_flight_number, "Flight number = " . $new_flight_number);
 
-            $new_total = $account_handler->AccountTotal($account_id);
-            $cost = $total - $new_total;
+            if (array_key_exists('price', $flight)) {
+                $new_total = $account_handler->AccountTotal($account_id);
+                $cost = $total - $new_total;
 
-
-            $this->tc->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
+                $this->tc->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
+            }
         }
     }
 
