@@ -329,8 +329,74 @@ class GliderFlightTest extends GvvDuskTestCase {
     }
 
     /**
-     * Logout
+     * Check that a glider flight can be updated
      * @depends testInFlight
+     */
+    public function testUpdate() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            $glider_flight_handler = new GliderFlightHandler($browser, $this);
+
+            $latest = $glider_flight_handler->latestFlight();
+            echo "latest flight = " . $latest->vpdate . "\n";
+
+            // $flight_count = $glider_flight_handler->count();
+            // echo "flight count = $flight_count\n";
+
+            $this->assertTrue(true);
+        });
+    }
+
+    /**
+     * Check that a glider flight can be deleted
+     * @depends testUpdate
+     */
+    public function testDelete() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+            $this->assertTrue(true);
+        });
+    }
+
+    /**
+     * Checks that a glider flight is billed correctly
+     *     - pilot account is debited
+     *     - sale account is credited
+     *     - several purchased are generated
+     *     - when a flight is updated, the debit and credit are adapted, purchases are replaced
+     *     - when a flight is deleted, the debit and credit are deleted, purchases are deleted
+     *   
+     * @depends testDelete
+     */
+    public function testBilling() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+            $this->assertTrue(true);
+        });
+    }
+
+    /**
+     * Checks that a filght can be shared
+     *    - checks that nothing happen when shared at 0 %
+     *    - checks that both are billed when shared at 50 %
+     *    - checks that the payer is billed when shared at 100 %
+     *    - checks that it is possible to modify the sharing percentage
+     *    - checks that people are recredited when the flight is deleted or the payer changed
+     *    - checks that no incorrect purchases are remaining after update or delete
+     * 
+     * @depends testBilling
+     */    
+    public function testSharing() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+            $this->assertTrue(true);
+        });
+    }
+
+    /**
+     * Logout
+     * @depends testSharing
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');

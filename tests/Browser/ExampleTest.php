@@ -52,7 +52,10 @@ class ExampleTest extends DuskTestCase {
     public function testGvv() {
         global $cnt;
         $this->browse(function (Browser $browser) {
-            $browser->visit('https://gvv-live.flub78.net/index.php/')
+            $url = "'https://gvv-live.flub78.net/index.php/";
+            $url = "https://gvv.planeur-abbeville.fr/index.php/";
+
+            $browser->visit($url)
                 ->assertSee('GVV');
             $browser->screenshot('GVV');
         });
