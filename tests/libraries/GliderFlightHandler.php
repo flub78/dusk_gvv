@@ -187,6 +187,23 @@ class GliderFlightHandler {
     }
 
     /**
+     * Update a glider flight   
+     */
+    public function UpdateGliderFLight($flight) {
+        $id = $flight['vpid'];
+        $url = "vols_planeur/edit/$id";
+        $this->tc->canAccess($this->browser, $url);
+
+        if (array_key_exists('comment', $flight)) {
+            $this->browser->type('vpobs', $flight['comment']);
+        }
+        
+        $this->browser
+            ->press('#validate')
+            ->assertDontSee('404');
+}
+
+    /**
      * Get the latest flight in the database
      */
     public function latestFlight() {
@@ -209,5 +226,14 @@ class GliderFlightHandler {
         $obj = json_decode($json);
         if ($obj) return $obj;
         return null;
+    }
+
+    public function count() {
+        $url = $this->tc->fullUrl('api/vols_planeur/count');
+
+        $json = file_get_contents($url);
+        $obj = json_decode($json);
+        if ($obj) return $obj->count;
+        return -1;        
     }
 }

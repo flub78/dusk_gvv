@@ -339,12 +339,24 @@ class GliderFlightTest extends GvvDuskTestCase {
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
 
             $latest = $glider_flight_handler->latestFlight();
-            echo "latest flight = " . $latest->vpdate . "\n";
+            // echo "latest flight = " . $latest->vpid . "\n";
 
-            // $flight_count = $glider_flight_handler->count();
+            $flight_count = $glider_flight_handler->count();
             // echo "flight count = $flight_count\n";
 
-            $this->assertTrue(true);
+            $modified_comment = "modified comment";
+
+            $flight = [
+                'vpid' => $latest->vpid,
+                'comment' => $modified_comment,
+            ];
+            $glider_flight_handler->UpdateGliderFLight($flight);
+
+            $latest = $glider_flight_handler->latestFlight();
+            $this->assertEquals($modified_comment, $latest->vpobs);
+
+            $new_count = $glider_flight_handler->count();
+            $this->assertEquals($flight_count, $new_count);
         });
     }
 
@@ -355,7 +367,17 @@ class GliderFlightTest extends GvvDuskTestCase {
     public function testDelete() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
-            $this->assertTrue(true);
+
+            $glider_flight_handler = new GliderFlightHandler($browser, $this);
+
+            $latest = $glider_flight_handler->latestFlight();
+
+            $flight_count = $glider_flight_handler->count();
+
+            $this->canAccess($browser, 'vols_planeur/delete/' . $latest->vpid);
+
+            $new_count = $glider_flight_handler->count();
+            $this->assertEquals($flight_count - 1, $new_count);
         });
     }
 
