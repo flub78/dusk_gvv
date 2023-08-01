@@ -6,8 +6,9 @@ use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
 use Tests\libraries\GliderFlightHandler;
+use Tests\libraries\AccountHandler;
 
-use function PHPUnit\Framework\assertSameSize;
+// use function PHPUnit\Framework\assertSameSize;
 
 /*
  * 
@@ -395,7 +396,108 @@ class GliderFlightTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
-        });
+
+            $glider_flight_handler = new GliderFlightHandler($browser, $this);
+            $account_handler = new AccountHandler($browser, $this);
+
+            $latest = $glider_flight_handler->latestFlight();
+
+            $dateFormat = "d/m/Y";
+            if ($latest) {
+                $latest_date = $latest->vpdate;
+                $date = new \DateTime($latest_date);
+                $date->modify('+1 day');
+            } else {
+                $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+            }
+            $flightDate = $date->format($dateFormat);
+
+            /**
+             * Test cases
+             *   - club glider + tow plane + higher altitude
+             *   - private glider + tow plane
+             *   - club glider more than three hours + winch
+             *   - external glider winch
+             *   - forfait billing
+             */
+
+            $asterix_acount_image = "(411) Le Gaulois Asterix";
+            $launch_acount_image = "(706) Remorqués";
+            $glider_time_acount_image = "(706) Heures de vol planeur";
+
+            $flights = [
+                [
+                    'url' => 'vols_planeur/create',
+                    'date' => $flightDate,
+                    'pilot' => 'asterix',
+                    'glider' => 'F-CGAA',
+                    'instructor' => 'panoramix',
+                    'DC' =>  true,       
+                    'start_time' => '10:00',
+                    'end_time' => '10:30',
+                    'launch' => 'R',   // R, T, A, E
+                    'tow_pilot' => 'abraracourcix',
+                    'tow_plane' => 'F-JUFA',
+                    'account' => $asterix_acount_image,
+                    'price' => 40.0,
+                ],
+            ];
+
+            // context recording
+            $asterix_account_id = $account_handler->AccountIdFromImage($asterix_acount_image);
+            $launch_account_id = $account_handler->AccountIdFromImage($launch_acount_image);
+            $glider_time_account_id = $account_handler->AccountIdFromImage($glider_time_acount_image);
+
+            $asterix_balance = $account_handler->AccountTotal($asterix_account_id);
+            $launch_balance = $account_handler->AccountTotal($launch_account_id);
+            $glider_time_balance = $account_handler->AccountTotal($glider_time_account_id);
+
+            $purchases_count = $this->TableTotal($browser, "achats/page");
+            $lines_count = $this->TableTotal($browser, "compta/page");
+ 
+            // Glider flight creation
+            $glider_flight_handler->CreateGliderFlights($flights);
+
+            // new context recording
+            $new_purchases_count = $this->TableTotal($browser, "achats/page");
+            $new_lines_count = $this->TableTotal($browser, "compta/page");
+
+            $asterix_new_balance = $account_handler->AccountTotal($asterix_account_id);
+            $launch_new_balance = $account_handler->AccountTotal($launch_account_id);
+            $glider_time_new_balance = $account_handler->AccountTotal($glider_time_account_id);
+
+            echo "\n";
+            echo "asterix balance = $asterix_balance\n";
+            echo "asterix new balance" . $asterix_new_balance . "\n";
+            echo "launch balance = $launch_balance\n";
+            echo "launch new balance" . $launch_new_balance . "\n";
+            echo "glider time balance = $glider_time_balance\n";
+            echo "glider time new balance" . $glider_time_new_balance . "\n";
+
+            echo "created purchase = " . ($new_purchases_count - $purchases_count) . "\n";
+            echo "created lines = " . ($new_lines_count - $lines_count) . "\n";
+            
+            $launch_cost = $launch_new_balance - $launch_balance;
+            $time_cost = $glider_time_new_balance - $glider_time_balance;
+            $asterix_cost = $asterix_new_balance - $asterix_balance;
+
+            echo "launch cost = $launch_cost\n";
+            echo "time cost = $time_cost\n";
+            echo "asterix cost = $asterix_cost\n";
+
+            // assertions
+            $epsilon = 0.000001;
+            $this->assertEquals(2, $new_purchases_count - $purchases_count, "wrong number of purchases");
+            $this->assertEquals(2, $new_lines_count - $lines_count, "wrong number of lines");
+            $this->assertEqualsWithDelta(25.0, $launch_cost, $epsilon, "wrong launch cost $launch_cost");
+            $this->assertEqualsWithDelta(15.0, $time_cost, $epsilon, "wrong time cost = $time_cost");
+            $this->assertEqualsWithDelta(-40.0, $asterix_cost, $epsilon, "wrong asterix cost = $asterix_cost");
+
+            // flight update
+ 
+            // Flight delete
+            
+        }); // end of browse callback
     }
 
     /**

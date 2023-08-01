@@ -181,7 +181,9 @@ class GliderFlightHandler {
                 $new_total = $account_handler->AccountTotal($account_id);
                 $cost = $total - $new_total;
 
-                $this->tc->assertLessThan(0.000001, abs($cost - $price), "Flight cost $cost = $price");
+                $epsilon = 0.000001;
+                //$this->tc->assertLessThan($epsilon, abs($cost - $price), "Flight cost $cost = $price");
+                $this->tc->assertEqualsWithDelta($price, $cost, $epsilon, "Flight cost $cost = $price");
             }
         }
     }
