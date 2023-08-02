@@ -402,9 +402,22 @@ class GliderFlightTest extends GvvDuskTestCase {
     }
 
     /**
+     * Compare two contexts
+     */
+    public function CompareContexes($ctx1, $ctx2) {
+        $res = [];
+        foreach ($ctx1['balance'] as $name => $balance) {
+            $res['balance'][$name] = $ctx2['balance'][$name] - $balance;
+        }
+        $res ['purchases'] = $ctx2['purchases'] - $ctx1['purchases'];
+        $res['lines'] = $ctx2['lines'] - $ctx1['lines'];
+        return $res;
+    }
+
+    /**
      * Display the context
      */
-    public function DisplayContext ($context, $when = "") {
+    public function DisplayContext($context, $when = "") {
         echo "\n";
         echo "Context $when:\n";
         foreach ($context['balance'] as $name => $balance) {
@@ -415,6 +428,18 @@ class GliderFlightTest extends GvvDuskTestCase {
     }
 
     /**
+     * Checks expected differences in test context.
+     * Evaluate phpunit assertions
+     */
+    public function ExpectedDifferences($expected, $actual, $where = "", $epsilon = 0.000001) {
+        foreach ($actual['balance'] as $name => $value) {
+            $this->assertEqualsWithDelta($value, $actual['balance'][$name], $epsilon, "expected balance difference $name $where = " . $expected['balance'][$name]);
+        }
+        $this->assertEquals($expected['purchases'], $actual['purchases'], "Expected purchases difference $where = " . $expected['purchases']);
+        $this->assertEquals($expected['lines'], $actual['lines'], "Expected lines difference $where = " . $expected['lines']);
+    }
+
+    /**
      * Checks that a glider flight is billed correctly
      *     - pilot account is debited
      *     - sale account is credited
@@ -422,7 +447,12 @@ class GliderFlightTest extends GvvDuskTestCase {
      *     - when a flight is updated, the debit and credit are adapted, purchases are replaced
      *     - when a flight is deleted, the debit and credit are deleted, purchases are deleted
      *   
-     * @depends testDelete
+     * Test cases
+     *   - club glider + tow plane + higher altitude
+     *   - private glider + tow plane
+     *   - club glider more than three hours + winch
+     *   - external glider winch
+     *   - forfait billing     * @depends testDelete
      */
     public function testBilling() {
         // $this->markTestSkipped('must be revisited.');
@@ -443,15 +473,6 @@ class GliderFlightTest extends GvvDuskTestCase {
                 $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
             }
             $flightDate = $date->format($dateFormat);
-
-            /**
-             * Test cases
-             *   - club glider + tow plane + higher altitude
-             *   - private glider + tow plane
-             *   - club glider more than three hours + winch
-             *   - external glider winch
-             *   - forfait billing
-             */
 
             $asterix_acount_image = "(411) Le Gaulois Asterix";
             $launch_acount_image = "(706) Remorqués";
@@ -481,65 +502,47 @@ class GliderFlightTest extends GvvDuskTestCase {
             $launch_account_id = $account_handler->AccountIdFromImage($launch_acount_image);
             $glider_time_account_id = $account_handler->AccountIdFromImage($glider_time_acount_image);
 
-            $asterix_balance = $account_handler->AccountTotal($asterix_account_id);
-            $launch_balance = $account_handler->AccountTotal($launch_account_id);
-            $glider_time_balance = $account_handler->AccountTotal($glider_time_account_id);
-
-            $purchases_count = $this->TableTotal($browser, "achats/page");
-            $lines_count = $this->TableTotal($browser, "compta/page");
-
             $acounts = [
-                'asterix' => $asterix_account_id, 
-                'launch account' => $launch_account_id, 
-                'glider time account' => $glider_time_account_id];
+                'asterix' => $asterix_account_id,
+                'launch account' => $launch_account_id,
+                'glider time account' => $glider_time_account_id
+            ];
 
             $context = $this->FlightAndBillingContext($browser, $acounts);
             $this->DisplayContext($context, "Initial context");
 
             // Glider flight creation
             $glider_flight_handler->CreateGliderFlights($flights);
-            $id = $glider_flight_handler->latestFlight();
+            $id = $glider_flight_handler->latestFlight()->vpid;
 
             // new context recording
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
             $this->DisplayContext($new_context, "After creation of the first flight");
+            $deltas = $this->CompareContexes($context, $new_context);
+            $expected = [
+                'balance' => ['asterix' => -46.0, 'launch account' => 31.0, 'glider time account' => 15.0],
+                'purchases' => 3,
+                'lines' => 3
+            ];
+            $this->ExpectedDifferences($expected, $deltas, "after creation of the first flight");
 
-            $new_purchases_count = $this->TableTotal($browser, "achats/page");
-            $new_lines_count = $this->TableTotal($browser, "compta/page");
-
-            $asterix_new_balance = $account_handler->AccountTotal($asterix_account_id);
-            $launch_new_balance = $account_handler->AccountTotal($launch_account_id);
-            $glider_time_new_balance = $account_handler->AccountTotal($glider_time_account_id);
-
-            echo "\n";
-            echo "asterix balance = $asterix_balance\n";
-            echo "asterix new balance" . $asterix_new_balance . "\n";
-            echo "launch balance = $launch_balance\n";
-            echo "launch new balance" . $launch_new_balance . "\n";
-            echo "glider time balance = $glider_time_balance\n";
-            echo "glider time new balance" . $glider_time_new_balance . "\n";
-
-            echo "created purchase = " . ($new_purchases_count - $purchases_count) . "\n";
-            echo "created lines = " . ($new_lines_count - $lines_count) . "\n";
-
-            $launch_cost = $launch_new_balance - $launch_balance;
-            $time_cost = $glider_time_new_balance - $glider_time_balance;
-            $asterix_cost = $asterix_new_balance - $asterix_balance;
-
-            echo "launch cost = $launch_cost\n";
-            echo "time cost = $time_cost\n";
-            echo "asterix cost = $asterix_cost\n";
-
-            // assertions
-            $epsilon = 0.000001;
-            $this->assertEquals(3, $new_purchases_count - $purchases_count, "wrong number of purchases");
-            $this->assertEquals(3, $new_lines_count - $lines_count, "wrong number of lines");
-            $this->assertEqualsWithDelta(31.0, $launch_cost, $epsilon, "wrong launch cost $launch_cost");
-            $this->assertEqualsWithDelta(15.0, $time_cost, $epsilon, "wrong time cost = $time_cost");
-            $this->assertEqualsWithDelta(-46.0, $asterix_cost, $epsilon, "wrong asterix cost = $asterix_cost");
-
-            // flight update
-            $update = ['vpid' => $id];
+            // Increase time flight and switch to a 300 m
+            $update = [
+                'vpid' => $id,
+                'end_time' => '11:00', // 30 minutes more, 15 €
+                'altitude' => '200',  // 300 meters - 1 purchase and lines, - 16 €
+            ];
+            $glider_flight_handler->UpdateGliderFLight($update);
+            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $this->DisplayContext($new_context, "After switch to 300 m");
+            $deltas = $this->CompareContexes($context, $new_context);
+            var_dump($deltas);
+            $expected = [
+                'balance' => ['asterix' => -30.0, 'launch account' => 15.0, 'glider time account' => 30.0],
+                'purchases' => 2,
+                'lines' => 2
+            ];
+            $this->ExpectedDifferences($expected, $deltas, "After switch to 300 m");
 
             // Flight delete
 
