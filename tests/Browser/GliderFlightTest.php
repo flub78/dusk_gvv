@@ -103,7 +103,7 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'pilot' => 'asterix',
                     'glider' => 'F-CGAA',
                     'instructor' => 'panoramix',
-                    'DC' =>  true,       
+                    'DC' =>  true,
                     'start_time' => '10:00',
                     'end_time' => '10:30',
                     'launch' => 'R',   // R, T, A, E
@@ -118,7 +118,7 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'pilot' => 'goudurix',
                     'glider' => 'F-CGAA',
                     'instructor' => 'panoramix',
-                    'DC' =>  true,        
+                    'DC' =>  true,
                     'start_time' => '11:00',
                     'end_time' => '12:15',
                     'winch_man' => 'asterix',
@@ -131,7 +131,7 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'date' => $flightDate,
                     'pilot' => 'asterix',
                     'glider' => 'F-CGAB',
-                    'DC' =>  false,        
+                    'DC' =>  false,
                     'start_time' => '11:00',
                     'end_time' => '12:15',
                     'launch' => 'T',   // R, T, A, E
@@ -140,7 +140,7 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'tow_plane' => 'F-JUFA',
                     'account' => "(411) Le Gaulois Asterix",
                     'price' => 62.5,
-                ],             
+                ],
             ];
 
             $glider_flight_handler->CreateGliderFlights($flights);
@@ -175,7 +175,7 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'date' => $flightDate,
                     'pilot' => 'goudurix',
                     'glider' => 'F-CGAB',
-                    'passenger' => 'panoramix', 
+                    'passenger' => 'panoramix',
                     'start_time' => '13:00',
                     'end_time' => '13:30',
                     'winch_man' => 'asterix',
@@ -183,7 +183,7 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'account' => "(411) Le Gaulois Goudurix",
                     'price' => 23.0,
                     'error' => "no passenger on single seater",
-                ],                                
+                ],
             ];
 
             $this->canAccess($browser, 'vols_planeur/create');
@@ -214,7 +214,6 @@ class GliderFlightTest extends GvvDuskTestCase {
                 ->assertVisible('#vpdc')
                 ->assertVisible('#vppassager')
                 ->assertMissing('#vpinst');
-                
         });
     }
 
@@ -228,18 +227,18 @@ class GliderFlightTest extends GvvDuskTestCase {
         $dateFormat = "d/m/Y";
 
         $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
-       
+
         $flightDate = $date->format($dateFormat);
 
         foreach ($tab as $line) {
             $flight = [
-            'url' => 'vols_planeur/create',
-            'date' => $flightDate,
-            'pilot' => $line[0],
-            'glider' => $line[1],
-            'start_time' => $line[2],
-            'end_time' => $line[3],
-            'account' => "(411) Le Gaulois " . ucfirst($line[0]),
+                'url' => 'vols_planeur/create',
+                'date' => $flightDate,
+                'pilot' => $line[0],
+                'glider' => $line[1],
+                'start_time' => $line[2],
+                'end_time' => $line[3],
+                'account' => "(411) Le Gaulois " . ucfirst($line[0]),
             ];
 
             if ($error) {
@@ -318,14 +317,14 @@ class GliderFlightTest extends GvvDuskTestCase {
                 ["asterix", "F-CGAA", "12:16", "13:00"],
             ];
 
-            $rejected_flights = $this->generateConflictingFlights($rejected , "machine ou pilote en vol");
+            $rejected_flights = $this->generateConflictingFlights($rejected, "machine ou pilote en vol");
             $accepted_flights = $this->generateConflictingFlights($accepted);
             $flights = $rejected_flights + $accepted_flights;
 
             $this->canAccess($browser, 'vols_planeur');
             $browser->screenshot('before_conflicting_flights');
 
-            $glider_flight_handler->CreateGliderFlights($flights);    
+            $glider_flight_handler->CreateGliderFlights($flights);
         });
     }
 
@@ -383,6 +382,39 @@ class GliderFlightTest extends GvvDuskTestCase {
     }
 
     /**
+     * Fetch the test context.
+     * Extract from the database the data that will be used to check the billing.
+     * Typically:
+     *      - balance of typicall accounts
+     *      - number of purchases in the system
+     *      - number of acounting lines in the system
+     */
+    public function FlightAndBillingContext($browser, $account_ids = []) {
+        $account_handler = new AccountHandler($browser, $this);
+
+        $res = [];
+        foreach ($account_ids as $name => $account_id) {
+            $res['balance'][$name] =  $account_handler->AccountTotal($account_id);
+        }
+        $res['purchases'] = $this->TableTotal($browser, "achats/page");
+        $res['lines'] = $this->TableTotal($browser, "compta/page");
+        return $res;
+    }
+
+    /**
+     * Display the context
+     */
+    public function DisplayContext ($context, $when = "") {
+        echo "\n";
+        echo "Context $when:\n";
+        foreach ($context['balance'] as $name => $balance) {
+            echo "$name balance = $balance\n";
+        }
+        echo "purchases = " . $context['purchases'] . "\n";
+        echo "lines = " . $context['lines'] . "\n";
+    }
+
+    /**
      * Checks that a glider flight is billed correctly
      *     - pilot account is debited
      *     - sale account is credited
@@ -432,14 +464,15 @@ class GliderFlightTest extends GvvDuskTestCase {
                     'pilot' => 'asterix',
                     'glider' => 'F-CGAA',
                     'instructor' => 'panoramix',
-                    'DC' =>  true,       
+                    'DC' =>  true,
                     'start_time' => '10:00',
                     'end_time' => '10:30',
                     'launch' => 'R',   // R, T, A, E
+                    'altitude' => '700',
                     'tow_pilot' => 'abraracourcix',
                     'tow_plane' => 'F-JUFA',
                     'account' => $asterix_acount_image,
-                    'price' => 40.0,
+                    'price' => 46.0,
                 ],
             ];
 
@@ -454,11 +487,23 @@ class GliderFlightTest extends GvvDuskTestCase {
 
             $purchases_count = $this->TableTotal($browser, "achats/page");
             $lines_count = $this->TableTotal($browser, "compta/page");
- 
+
+            $acounts = [
+                'asterix' => $asterix_account_id, 
+                'launch account' => $launch_account_id, 
+                'glider time account' => $glider_time_account_id];
+
+            $context = $this->FlightAndBillingContext($browser, $acounts);
+            $this->DisplayContext($context, "Initial context");
+
             // Glider flight creation
             $glider_flight_handler->CreateGliderFlights($flights);
+            $id = $glider_flight_handler->latestFlight();
 
             // new context recording
+            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $this->DisplayContext($new_context, "After creation of the first flight");
+
             $new_purchases_count = $this->TableTotal($browser, "achats/page");
             $new_lines_count = $this->TableTotal($browser, "compta/page");
 
@@ -476,7 +521,7 @@ class GliderFlightTest extends GvvDuskTestCase {
 
             echo "created purchase = " . ($new_purchases_count - $purchases_count) . "\n";
             echo "created lines = " . ($new_lines_count - $lines_count) . "\n";
-            
+
             $launch_cost = $launch_new_balance - $launch_balance;
             $time_cost = $glider_time_new_balance - $glider_time_balance;
             $asterix_cost = $asterix_new_balance - $asterix_balance;
@@ -487,16 +532,17 @@ class GliderFlightTest extends GvvDuskTestCase {
 
             // assertions
             $epsilon = 0.000001;
-            $this->assertEquals(2, $new_purchases_count - $purchases_count, "wrong number of purchases");
-            $this->assertEquals(2, $new_lines_count - $lines_count, "wrong number of lines");
-            $this->assertEqualsWithDelta(25.0, $launch_cost, $epsilon, "wrong launch cost $launch_cost");
+            $this->assertEquals(3, $new_purchases_count - $purchases_count, "wrong number of purchases");
+            $this->assertEquals(3, $new_lines_count - $lines_count, "wrong number of lines");
+            $this->assertEqualsWithDelta(31.0, $launch_cost, $epsilon, "wrong launch cost $launch_cost");
             $this->assertEqualsWithDelta(15.0, $time_cost, $epsilon, "wrong time cost = $time_cost");
-            $this->assertEqualsWithDelta(-40.0, $asterix_cost, $epsilon, "wrong asterix cost = $asterix_cost");
+            $this->assertEqualsWithDelta(-46.0, $asterix_cost, $epsilon, "wrong asterix cost = $asterix_cost");
 
             // flight update
- 
+            $update = ['vpid' => $id];
+
             // Flight delete
-            
+
         }); // end of browse callback
     }
 
@@ -510,7 +556,7 @@ class GliderFlightTest extends GvvDuskTestCase {
      *    - checks that no incorrect purchases are remaining after update or delete
      * 
      * @depends testBilling
-     */    
+     */
     public function testSharing() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {

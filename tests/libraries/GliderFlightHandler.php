@@ -73,6 +73,81 @@ class GliderFlightHandler {
     }
 
     /** 
+     * Fill the Glider flight form
+     * 
+     * This method is used to fill the glider flight form with the data in the $flight array.
+     */
+    public function FillFields($flight) {
+
+        if (array_key_exists('date', $flight)) {
+            $this->browser->type('vpdate', $flight['date'] . "\n");
+        }
+        if (array_key_exists('pilot', $flight)) {
+            $this->browser->select('vppilid', $flight['pilot']);
+        }
+        if (array_key_exists('glider', $flight)) {
+            $this->browser->select('vpmacid', $flight['glider']);
+        }
+        if (array_key_exists('start_time', $flight)) {
+            $this->browser->type('vpcdeb', $flight['start_time']);
+        }
+        if (array_key_exists('end_time', $flight)) {
+            $this->browser->type('vpcfin', $flight['end_time']);
+        }
+
+        if (array_key_exists('DC', $flight) && $flight['DC']) {
+            $this->browser->check('vpdc');
+        }
+
+        if (array_key_exists('instructor', $flight)) {
+            $this->browser->select('vpinst', $flight['instructor']);
+        }
+
+        if (array_key_exists('passenger', $flight)) {
+            $this->browser->select('vppassager', $flight['passenger']);
+        }
+
+        if (array_key_exists('launch', $flight)) {
+            switch ($flight['launch']) {
+                case 'R':
+                    $this->browser->radio('vpautonome', '3');
+                    break;
+                case 'T':
+                    $this->browser->radio('vpautonome', '1');
+                    break;
+                case 'A':
+                    $this->browser->radio('vpautonome', '2');
+                    break;
+                case 'E':
+                    $this->browser->radio('vpautonome', '4');
+                    break;
+            }
+        }
+
+        if (array_key_exists('tow_pilot', $flight)) {
+            $this->browser->radio('vpautonome', '3');
+            $this->browser->select('pilote_remorqueur', $flight['tow_pilot']);
+        }
+        if (array_key_exists('tow_plane', $flight)) {
+            $this->browser->radio('vpautonome', '3');
+            $this->browser->select('remorqueur', $flight['tow_plane']);
+        }
+
+        if (array_key_exists('altitude', $flight)) {
+            $this->browser->type('vpaltrem', $flight['altitude']);
+        }
+
+        if (array_key_exists('whinch_man', $flight)) {
+            $this->browser->radio('vpautonome', '1');
+            $this->browser->select('remorqueur', $flight['whinch_man']);
+        }
+
+        if (array_key_exists('comment', $flight)) {
+            $this->browser->type('vpobs', $flight['comment']);
+        }
+    }
+
+    /** 
      * Create glider flights.
      */
     public function CreateGliderFlights($list = []) {
@@ -90,58 +165,7 @@ class GliderFlightHandler {
 
             $this->tc->canAccess($this->browser, $flight['url']);
 
-            $this->browser
-                ->type('vpdate', $flight['date'] . "\n")
-                ->select('vppilid', $flight['pilot'])
-                ->select('vpmacid', $flight['glider'])
-                ->type('vpcdeb', $flight['start_time'])
-                ->type('vpcfin', $flight['end_time']);
-
-            if (array_key_exists('DC', $flight) && $flight['DC']) {
-                $this->browser->check('vpdc');
-            }
-
-            if (array_key_exists('instructor', $flight)) {
-                $this->browser->select('vpinst', $flight['instructor']);
-            }
-
-            if (array_key_exists('passenger', $flight)) {
-                $this->browser->select('vppassager', $flight['passenger']);
-            }
-
-            if (array_key_exists('launch', $flight)) {
-                switch ($flight['launch']) {
-                    case 'R':
-                        $this->browser->radio('vpautonome', '3');
-                        break;
-                    case 'T':
-                        $this->browser->radio('vpautonome', '1');
-                        break;
-                    case 'A':
-                        $this->browser->radio('vpautonome', '2');
-                        break;
-                    case 'E':
-                        $this->browser->radio('vpautonome', '4');
-                        break;
-                }
-            }
-
-            if (array_key_exists('tow_pilot', $flight)) {
-                $this->browser->radio('vpautonome', '3');
-                $this->browser->select('pilote_remorqueur', $flight['tow_pilot']);
-            }
-            if (array_key_exists('tow_plane', $flight)) {
-                $this->browser->radio('vpautonome', '3');
-                $this->browser->select('remorqueur', $flight['tow_plane']);
-            }
-            if (array_key_exists('whinch_man', $flight)) {
-                $this->browser->radio('vpautonome', '1');
-                $this->browser->select('remorqueur', $flight['whinch_man']);
-            }
-
-            if (array_key_exists('comment', $flight)) {
-                $this->browser->type('vpobs', $flight['comment']);
-            }
+            $this->FillFields($flight);
 
             $this->browser->screenshot('before_glider_flight');
 
@@ -196,14 +220,12 @@ class GliderFlightHandler {
         $url = "vols_planeur/edit/$id";
         $this->tc->canAccess($this->browser, $url);
 
-        if (array_key_exists('comment', $flight)) {
-            $this->browser->type('vpobs', $flight['comment']);
-        }
-        
+        $this->FillFields($flight);
+
         $this->browser
             ->press('#validate')
             ->assertDontSee('404');
-}
+    }
 
     /**
      * Get the latest flight in the database
@@ -236,6 +258,6 @@ class GliderFlightHandler {
         $json = file_get_contents($url);
         $obj = json_decode($json);
         if ($obj) return $obj->count;
-        return -1;        
+        return -1;
     }
 }
