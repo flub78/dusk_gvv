@@ -124,6 +124,24 @@ class GliderFlightHandler {
             }
         }
 
+        if (array_key_exists('payeur', $flight)) {
+            $this->browser->select('payeur', $flight['payeur']);
+        }
+        
+        if (array_key_exists('pourcentage', $flight)) {
+            switch ($flight['pourcentage']) {
+                case '0':
+                    $this->browser->radio('pourcentage', '0');
+                    break;
+                case '50':
+                    $this->browser->radio('pourcentage', '50');
+                    break;
+                case '100':
+                    $this->browser->radio('pourcentage', '100');
+                    break;
+            }
+        }
+
         if (array_key_exists('tow_pilot', $flight)) {
             $this->browser->radio('vpautonome', '3');
             $this->browser->select('pilote_remorqueur', $flight['tow_pilot']);
