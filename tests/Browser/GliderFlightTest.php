@@ -529,27 +529,28 @@ class GliderFlightTest extends GvvDuskTestCase {
             ];
             $this->ExpectedDifferences($expected, $deltas, "After VI");
 
-            // // Private glider per owner
-            // $glider_owner = [
-            //     "immat" => "F-CGAA",
-            //     "type_proprio" => "Privé",
-            //     "proprietaire" => "asterix",
-            // ];
-            // $glider_handler->UpdateGlider($glider_owner);
+            // Private glider per owner
+            $glider_owner = [
+                "immat" => "F-CGAA",
+                "type_proprio" => "Privé",
+                "proprietaire" => "asterix",
+            ];
+            $glider_handler->UpdateGlider($glider_owner);
 
-            // $update = [
-            //     'vpid' => $id,
-            //     'categorie' => 'standard',
-            // ];
-            // $glider_flight_handler->UpdateGliderFLight($update);
-            // $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            // $deltas = $this->CompareContexes($context, $new_context);
-            // $expected = [
-            //     'balance' => ['asterix' => -8.0, 'launch account' => 8.0, 'glider time account' => 0.0],
-            //     'purchases' => 1,
-            //     'lines' => 1
-            // ];
-            // $this->ExpectedDifferences($expected, $deltas, "Private glider");
+            $update = [
+                'vpid' => $id,
+                'categorie' => 'standard',
+            ];
+            $glider_flight_handler->UpdateGliderFLight($update);
+            
+            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $deltas = $this->CompareContexes($context, $new_context);
+            $expected = [
+                'balance' => ['asterix' => -8.0, 'launch account' => 8.0, 'glider time account' => 0.0],
+                'purchases' => 1,
+                'lines' => 1
+            ];
+            $this->ExpectedDifferences($expected, $deltas, "Private glider");
 
             // Private glider per not owner
 

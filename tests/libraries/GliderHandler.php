@@ -48,6 +48,7 @@ class GliderHandler {
     }
 
     public function FillFields($glider) {
+
         if (array_key_exists('construct', $glider)) {
             $this->browser->type('mpconstruc', $glider['construct']);
         }
@@ -78,10 +79,6 @@ class GliderHandler {
 
         if (array_key_exists('nb_places', $glider)) {
             $this->browser->type('mpbiplace', $glider['nb_places']);
-        }
-
-        if (array_key_exists('type_proprio', $glider)) {
-            $this->browser->type('mpbiplace', $glider['type_proprio']);
         }
 
         if (array_key_exists('type_proprio', $glider)) {
@@ -167,7 +164,9 @@ class GliderHandler {
 
         $this->browser
             ->press('#validate')
-            ->assertDontSee('404');             
+            ->assertDontSee('404')
+            ->assertDontSee('Le champ ');
+    
     }
 
 }

@@ -34,7 +34,7 @@ class GliderFlightHandler {
         $fdate = new \DateTime($flight->vpdate);
         $date = $fdate->format($dateFormat);
         // echo $date . " " . $gliders_flight['date'] . "\n";
-        // var_dump($flight);
+
         if ($date != $gliders_flight['date']) {
             // echo "date $date does not match ". $gliders_flight['date'] . "\n";
             return false;
@@ -191,8 +191,6 @@ class GliderFlightHandler {
 
         foreach ($list as $flight) {
 
-            // var_dump($flight);
-
             $flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
             $account_id = $account_handler->AccountIdFromImage($flight['account']);
@@ -260,6 +258,7 @@ class GliderFlightHandler {
         $this->browser
             ->press('#validate')
             ->assertDontSee('404');
+        
     }
 
     /**
