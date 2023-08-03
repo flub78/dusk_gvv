@@ -10,7 +10,7 @@ namespace Tests\libraries;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
- class GliderHandler {
+class GliderHandler {
 
     private $browser;
     private $tc;
@@ -47,6 +47,91 @@ namespace Tests\libraries;
         return false;
     }
 
+    public function FillFields($glider) {
+        if (array_key_exists('construct', $glider)) {
+            $this->browser->type('mpconstruc', $glider['construct']);
+        }
+
+        if (array_key_exists('type', $glider)) {
+            $this->browser->type('mpmodele', $glider['type']);
+        }
+
+        if (array_key_exists('immat', $glider)) {
+            $this->browser->type('mpimmat', $glider['immat']);
+        }
+
+        if (array_key_exists('numc', $glider)) {
+            $this->browser->type('mpnumc', $glider['numc']);
+        }
+
+        if (array_key_exists('prix', $glider)) {
+            $this->browser->select('mprix', $glider['prix']);
+        }
+
+        if (array_key_exists('prix_forfait', $glider)) {
+            $this->browser->select('mprix_forfait', $glider['prix_forfait']);
+        }
+
+        if (array_key_exists('prix_moteur', $glider)) {
+            $this->browser->select('mprix_moteur', $glider['prix_moteur']);
+        }
+
+        if (array_key_exists('nb_places', $glider)) {
+            $this->browser->type('mpbiplace', $glider['nb_places']);
+        }
+
+        if (array_key_exists('type_proprio', $glider)) {
+            $this->browser->type('mpbiplace', $glider['type_proprio']);
+        }
+
+        if (array_key_exists('type_proprio', $glider)) {
+            switch ($glider['type_proprio']) {
+                case 'Club':
+                    $this->browser->radio('mpprive', "0");
+                    break;
+                case 'Privé':
+                    $this->browser->radio('mpprive', "1");
+                    break;
+                case 'Extérieur':
+                    $this->browser->radio('mpprive', "2");
+                    break;
+            }
+        }
+
+        if (array_key_exists('proprio', $glider)) {
+            $this->browser->select('proprio', $glider['proprio']);
+        }
+
+        if (array_key_exists('banalise', $glider)) {
+            if ($glider['banalise']) 
+                $this->browser->check('banalise');
+            else
+                $this->browser->uncheck('banalise');
+        }
+
+        if (array_key_exists('autonome', $glider)) {
+            if ($glider['autonome']) 
+                $this->browser->check('mpautonome');
+            else
+                $this->browser->uncheck('mpautonome');
+        }
+
+        if (array_key_exists('treuillable', $glider)) {
+            if ($glider['treuillable']) 
+                $this->browser->check('mptreuil');
+            else
+                $this->browser->uncheck('mptreuil');
+        }
+
+        if (array_key_exists('active', $glider)) {
+            if ($glider['active']) 
+                $this->browser->check('actif');
+            else
+                $this->browser->uncheck('actif');
+        }
+
+    }
+
     /** 
      * Create gliders
      */
@@ -56,29 +141,10 @@ namespace Tests\libraries;
 
                 // Create product
                 $this->tc->canAccess($this->browser, "planeur/create", ['Planeur']);
-                $this->browser
-                    ->type('mpconstruc', $elt['construct'])
-                    ->type('mpmodele', $elt['type'])
-                    ->type('mpimmat', $elt['immat']);
 
-                if (array_key_exists('numc', $elt)) {
-                    $this->browser->type('mpnumc', $elt['numc']);
-                }
+                $this->FillFields($elt);
 
-                if (array_key_exists('prix', $elt)) {
-                    $this->browser->select('mprix', $elt['prix']);
-                }
-
-                if (array_key_exists('prix_forfait', $elt)) {
-                    $this->browser->select('mprix_forfait', $elt['prix_forfait']);
-                }
-
-                if (array_key_exists('prix_moteur', $elt)) {
-                    $this->browser->select('mprix_moteur', $elt['prix_moteur']);
-                }
-
-                $this->browser->type('mpbiplace', $elt['nb_places'])
-                    ->press('#validate');
+                $this->browser->press('#validate');
             }
             $image = $this->gliderImage($elt);
             $this->tc->assertTrue(
@@ -87,4 +153,21 @@ namespace Tests\libraries;
             );
         }
     }
+
+    /** 
+     * Update glider
+     */
+    public function UpdateGlider($glider) {
+
+        $id = $glider['immat'];
+        $url = "planeur/edit/$id";
+        $this->tc->canAccess($this->browser, $url);
+
+        $this->FillFields($glider);
+
+        $this->browser
+            ->press('#validate')
+            ->assertDontSee('404');             
+    }
+
 }

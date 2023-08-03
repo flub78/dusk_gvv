@@ -124,10 +124,27 @@ class GliderFlightHandler {
             }
         }
 
+        if (array_key_exists('categorie', $flight)) {
+            switch ($flight['categorie']) {
+                case 'VI':
+                    $this->browser->radio('vpcategorie', '1');
+                    break;
+                case 'standard':
+                    $this->browser->radio('vpcategorie', '0');
+                    break;
+                case 'VE':
+                    $this->browser->radio('vpcategorie', '2');
+                    break;
+                case 'concours':
+                    $this->browser->radio('vpcategorie', '3');
+                    break;
+            }
+        }
+
         if (array_key_exists('payeur', $flight)) {
             $this->browser->select('payeur', $flight['payeur']);
         }
-        
+
         if (array_key_exists('pourcentage', $flight)) {
             switch ($flight['pourcentage']) {
                 case '0':

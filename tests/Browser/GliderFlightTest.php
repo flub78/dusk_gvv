@@ -7,8 +7,7 @@ use Tests\GvvDuskTestCase;
 
 use Tests\libraries\GliderFlightHandler;
 use Tests\libraries\AccountHandler;
-
-// use function PHPUnit\Framework\assertSameSize;
+use Tests\libraries\GliderHandler;
 
 /*
  * 
@@ -431,6 +430,7 @@ class GliderFlightTest extends GvvDuskTestCase {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
             $account_handler = new AccountHandler($browser, $this);
+            $glider_handler = new GliderHandler($browser, $this);
 
             $latest = $glider_flight_handler->latestFlight();
             $flightDate = $this->NextDate($latest);
@@ -513,6 +513,54 @@ class GliderFlightTest extends GvvDuskTestCase {
                 'lines' => 2
             ];
             $this->ExpectedDifferences($expected, $deltas, "After switch to winch");
+
+            // VI
+            $update = [
+                'vpid' => $id,
+                'categorie' => 'VI', // 6 hours so 90 €
+            ];
+            $glider_flight_handler->UpdateGliderFLight($update);
+            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $deltas = $this->CompareContexes($context, $new_context);
+            $expected = [
+                'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'glider time account' => 0.0],
+                'purchases' => 0,
+                'lines' => 0
+            ];
+            $this->ExpectedDifferences($expected, $deltas, "After VI");
+
+            // // Private glider per owner
+            // $glider_owner = [
+            //     "immat" => "F-CGAA",
+            //     "type_proprio" => "Privé",
+            //     "proprietaire" => "asterix",
+            // ];
+            // $glider_handler->UpdateGlider($glider_owner);
+
+            // $update = [
+            //     'vpid' => $id,
+            //     'categorie' => 'standard',
+            // ];
+            // $glider_flight_handler->UpdateGliderFLight($update);
+            // $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            // $deltas = $this->CompareContexes($context, $new_context);
+            // $expected = [
+            //     'balance' => ['asterix' => -8.0, 'launch account' => 8.0, 'glider time account' => 0.0],
+            //     'purchases' => 1,
+            //     'lines' => 1
+            // ];
+            // $this->ExpectedDifferences($expected, $deltas, "Private glider");
+
+            // Private glider per not owner
+
+
+            // Back to a clubl ownership
+            $glider_owner = [
+                "immat" => "F-CGAA",
+                "type_proprio" => "Club",
+                "proprietaire" => "",
+            ];
+            $glider_handler->UpdateGlider($glider_owner);
 
             // Flight delete
             $this->canAccess($browser, 'vols_planeur/delete/' . $id);
