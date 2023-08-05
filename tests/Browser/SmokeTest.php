@@ -354,21 +354,6 @@ class SmokeTest extends GvvDuskTestCase {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
 
-            /* 
-            TODO: move takeoff and landing times to HTML times
-            TODO: Check that the plane account has been credited
-            TODO: Find the flight back to delete
-            TODO: check that the pilot is reimbursed after flight deletion
-            
-            The tests should be independant from existing data.
-            Tests flights could start the day after the last flight.
-            It implies the capacity to find out the last flight.
-
-            Should I modify GVV to return information used only for testing ?
-            pro - it woul make end to end test simplers and supporting more complex scenarios
-            cons- it adds more code ...
-            */
-
             $latest = $glider_flight_handler->latestFlight();
 
             $dateFormat = "d/m/Y";

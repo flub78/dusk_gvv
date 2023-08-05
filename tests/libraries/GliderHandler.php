@@ -139,10 +139,14 @@ class GliderHandler {
                 // Create product
                 $this->tc->canAccess($this->browser, "planeur/create", ['Planeur']);
 
-                $this->FillFields($elt);
-
-                $this->browser->press('#validate');
+            } else {
+                // Update product
+                $id = $elt['immat'];
+                $this->tc->canAccess($this->browser, "planeur/edit/$id");
             }
+            $this->FillFields($elt);
+            $this->browser->press('#validate');
+
             $image = $this->gliderImage($elt);
             $this->tc->assertTrue(
                 $this->GliderExists($elt),

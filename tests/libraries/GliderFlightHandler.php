@@ -191,6 +191,9 @@ class GliderFlightHandler {
 
         foreach ($list as $flight) {
 
+            // echo "Creating flight : \n";
+            // print_r($flight);
+
             $flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
             $account_id = $account_handler->AccountIdFromImage($flight['account']);
