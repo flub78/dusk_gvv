@@ -22,10 +22,29 @@ This tests checks that the pages can be accessed or not according to the user ro
 
 Run the CI Unit tests and checks that they do not report errors.
 
+## Smoke test
+
+Basic flight creation and billing.
+Accounting lines creation.
+
+## Backup Restore
+
+The restore function is used to initialize the tests.
+
+## Flight tests
+
+Detailled tests of flights.
+* CRUD
+* Rejected flights
+* Check of the billing after several cases of flights, both after creation and modification. Especially checks that pilots are reimbursed after flight cancellation or modifications.
+* Shared costs tests.
+  
 ## Tests to develop
 
-* Smoke test
-* Backup/Restore test
-* Email and forgotten password
+* Emails and forgotten password
 * CRUD for all resources
 
+* Accounting tests
+    * Accounting lines CRUD
+    * End of year reports
+    * 

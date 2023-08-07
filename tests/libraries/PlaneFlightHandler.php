@@ -138,4 +138,13 @@ class PlaneFlightHandler {
         if ($obj) return $obj;
         return null;
     }
+
+    public function count() {
+        $url = $this->tc->fullUrl('api/vols_avion/count');
+
+        $json = file_get_contents($url);
+        $obj = json_decode($json);
+        if ($obj) return $obj->count;
+        return -1;
+    }    
 }

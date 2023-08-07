@@ -185,7 +185,7 @@ class GliderFlightTest extends AircraftFlightTest {
     }
 
     /**
-     * Checks that correct fields are displayed depending on the fact aht the machine is single seat or not
+     * Test that flights are rejected when the pilot or glider are already in flight
      * 
      * @depends testSingleSeater
      * 

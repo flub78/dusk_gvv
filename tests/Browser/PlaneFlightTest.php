@@ -55,13 +55,12 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testLogin
      */
     public function testCreate() {
-        $this->assertTrue(true); return;
+        $this->assertTrue(true);
         $this->browse(function (Browser $browser) {
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
 
             $latest = $plane_flight_handler->latestFlight();
-            var_dump($latest);
             $flightDate = $this->NextDate($latest, 'vadate');
 
             $flights = [
@@ -69,89 +68,44 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'url' => 'vols_avion/create',
                     'date' => $flightDate,
                     'pilot' => 'asterix',
-                    'plane' => 'F-CGAA',
+                    'plane' => 'F-JUFA',
                     'instructor' => 'panoramix',
                     'DC' =>  true,
-                    'start_time' => '10:00',
-                    'end_time' => '10:30',
-                    'launch' => 'R',   // R, T, A, E
-                    'tow_pilot' => 'abraracourcix',
-                    'tow_plane' => 'F-JUFA',
+                    'start_time' => '10.00',
+                    'end_time' => '10.30',
+                    'start_meter' => '100.50',
+                    'end_meter' => '100.90',
                     'account' => "(411) Le Gaulois Asterix",
-                    'price' => 40.0,
+                    'price' => 40.8,
                 ],
                 [
                     'url' => 'vols_avion/create',
                     'date' => $flightDate,
                     'pilot' => 'goudurix',
-                    'plane' => 'F-CGAA',
+                    'plane' => 'F-JUFA',
                     'instructor' => 'panoramix',
                     'DC' =>  true,
-                    'start_time' => '11:00',
-                    'end_time' => '12:15',
-                    'winch_man' => 'asterix',
-                    'launch' => 'T',   // R, T, A, E
+                    'start_time' => '11.00',
+                    'end_time' => '12.15',
+                    'start_meter' => '100.50',
+                    'end_meter' => '101.00',
                     'account' => "(411) Le Gaulois Goudurix",
-                    'price' => 45.5,
-                ],
-                [
-                    'url' => 'vols_avion/create',
-                    'date' => $flightDate,
-                    'pilot' => 'asterix',
-                    'plane' => 'F-CGAB',
-                    'DC' =>  false,
-                    'start_time' => '11:00',
-                    'end_time' => '12:15',
-                    'launch' => 'T',   // R, T, A, E
-                    'launch' => 'R',   // R, T, A, E
-                    'tow_pilot' => 'abraracourcix',
-                    'tow_plane' => 'F-JUFA',
-                    'account' => "(411) Le Gaulois Asterix",
-                    'price' => 62.5,
+                    'price' => 51.0,
                 ],
             ];
 
+            $id = 0;
+            $flights[$id]['image'] = 
+                $flights[$id]['date'] . " " . 
+                $flights[$id]['start_meter'] . " " .
+                $flights[$id]['plane'];
+            $id = 1;
+            $flights[$id]['image'] = 
+                $flights[$id]['date'] . " " . 
+                $flights[$id]['start_meter'] . " " .
+                $flights[$id]['plane'];
+
             $plane_flight_handler->CreatePlaneFlights($flights);
-        });
-    }
-
-    /**
-     * Checks that correct fields are displayed depending on the fact aht the machine is single seat or not
-     * 
-     * @depends testCreate
-     */
-    public function testSingleSeater() {
-        $this->assertTrue(true); return;
-        $this->browse(function (Browser $browser) {
-
-            $this->canAccess($browser, 'vols_avion/create');
-
-            // Two seater
-            $browser->select('vpmacid', 'F-CGAA')
-                ->pause(1000)
-                ->assertVisible('#vpdc')
-                ->assertVisible('#vppassager')
-                ->assertMissing('#vpinst');
-
-            // Set DC
-            $browser->check('vpdc')
-                ->pause(1000)
-                ->assertVisible('#vpinst')
-                ->assertMissing('#vppassager');
-
-            // Single seater
-            $browser->select('vpmacid', 'F-CGAB')
-                ->pause(1000)
-                ->assertMissing('#vpdc')
-                ->assertMissing('#vppassager')
-                ->assertMissing('#vpinst');
-
-            // Back to two seaters
-            $browser->select('vpmacid', 'F-CGAA')
-                ->pause(1000)
-                ->assertVisible('#vpdc')
-                ->assertVisible('#vppassager')
-                ->assertMissing('#vpinst');
         });
     }
 
@@ -189,39 +143,37 @@ class PlaneFlightTest extends AircraftFlightTest {
     }
 
     /**
-     * Checks that correct fields are displayed depending on the fact aht the machine is single seat or not
-     * 
-     * @depends testSingleSeater
+     * Checks that flights are rejected when the pilot or plane are already in flight
      * 
      * preconditions:
-     *      Asterix on F-CGAA from 10:00 to 10:30
-     *      Asterix on F-CGAB from 11:00 to 12:15
-     *      Goudurix on F-CGAA from 11:00 to 12:15
+     *      Asterix on F-JUFA from 10:00 to 10:30
+     *      Asterix on F-GUFB from 11:00 to 12:15
+     *      Goudurix on F-JUFA from 11:00 to 12:15
      * 
      * Test cases
      *      rejected flights
-     *     - Asterix on F-CGAA from 10:00 to 10:30  flight duplicated
-     *     - Asterix on F-CGAB from 09:00 to 10:00
-     *     - Asterix on F-CGAB from 09:30 to 10:15
-     *     - Asterix on F-CGAB from 09:30 to 10:35  * missed + start not filled in the edit form
-     *     - Asterix on F-CGAB from 09:30 to 12:30  * missed + start not filled in the edit form
-     *     - Asterix on F-CGAB from 10:15 to 10:35
-     *     - Asterix on F-CGAB from 10:15 to 12:30
-     *     - Asterix on F-CGAB from 10:15 to 10:20 
+     *     - Asterix on F-JUFA from 10:00 to 10:30  flight duplicated
+     *     - Asterix on F-GUFB from 09:00 to 10:00
+     *     - Asterix on F-GUFB from 09:30 to 10:15
+     *     - Asterix on F-GUFB from 09:30 to 10:35  * missed + start not filled in the edit form
+     *     - Asterix on F-GUFB from 09:30 to 12:30  * missed + start not filled in the edit form
+     *     - Asterix on F-GUFB from 10:15 to 10:35
+     *     - Asterix on F-GUFB from 10:15 to 12:30
+     *     - Asterix on F-GUFB from 10:15 to 10:20 
      * 
      *     rejected flights
-     *      - Goudurix on F-CGAA from 10:00 to 10:30
-     *      - Goudurix on F-CGAA from 09:45 to 10:15
-     *      - Goudurix on F-CGAA from 09:45 to 10:35
-     *      - Goudurix on F-CGAA from 09:45 to 12:30
-     *      - Goudurix on F-CGAA from 10:15 to 10:25
-     *      - Goudurix on F-CGAA from 10:15 to 10:35
-     *      - Goudurix on F-CGAA from 10:15 to 12:35
+     *      - Goudurix on F-JUFA from 10:00 to 10:30
+     *      - Goudurix on F-JUFA from 09:45 to 10:15
+     *      - Goudurix on F-JUFA from 09:45 to 10:35
+     *      - Goudurix on F-JUFA from 09:45 to 12:30
+     *      - Goudurix on F-JUFA from 10:15 to 10:25
+     *      - Goudurix on F-JUFA from 10:15 to 10:35
+     *      - Goudurix on F-JUFA from 10:15 to 12:35
      * 
      *      Accepted flights
-     *      - Asterix on F-CGAA from 09:00 to 09:59
-     *      - Asterix on F-CGAA from 10:31 to 10:59
-     *      - Asterix on F-CGAA from 12:16 to 13:00
+     *      - Asterix on F-JUFA from 09:00 to 09:59
+     *      - Asterix on F-JUFA from 10:31 to 10:59
+     *      - Asterix on F-JUFA from 12:16 to 13:00
      */
     public function testInFlight() {
         $this->assertTrue(true); return;
@@ -230,30 +182,30 @@ class PlaneFlightTest extends AircraftFlightTest {
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
 
             $rejected = [
-                ["asterix", "F-CGAA", "10:00", "10:30"],
-                ["asterix", "F-CGAB", "09:00", "10:00"],
-                ["asterix", "F-CGAB", "09:30", "10:15"],
+                ["asterix", "F-JUFA", "10.00", "10.30"],
+                ["asterix", "F-GUFB", "09.00", "10.00"],
+                ["asterix", "F-GUFB", "09.30", "10.15"],
 
-                ["asterix", "F-CGAB", "09:30", "10:35"],
-                ["asterix", "F-CGAB", "09:30", "12:30"],
+                ["asterix", "F-GUFB", "09.30", "10.35"],
+                ["asterix", "F-GUFB", "09.30", "12.30"],
 
-                ["asterix", "F-CGAB", "10:15", "10:35"],
-                ["asterix", "F-CGAB", "10:30", "12:30"],
-                ["asterix", "F-CGAB", "10:30", "12:20"],
+                ["asterix", "F-GUFB", "10.15", "10.35"],
+                ["asterix", "F-GUFB", "10.30", "12.30"],
+                ["asterix", "F-GUFB", "10.30", "12.20"],
 
-                ["goudurix", "F-CGAA", "10:00", "10:30"],
-                ["goudurix", "F-CGAA", "09:45", "10:15"],
-                ["goudurix", "F-CGAA", "09:45", "10:35"],
-                ["goudurix", "F-CGAA", "09:45", "12:30"],
-                ["goudurix", "F-CGAA", "10:15", "10:25"],
-                ["goudurix", "F-CGAA", "10:15", "10:35"],
-                ["goudurix", "F-CGAA", "10:15", "12:35"],
+                ["goudurix", "F-JUFA", "10.00", "10.30"],
+                ["goudurix", "F-JUFA", "09.45", "10.15"],
+                ["goudurix", "F-JUFA", "09.45", "10.35"],
+                ["goudurix", "F-JUFA", "09.45", "12.30"],
+                ["goudurix", "F-JUFA", "10.15", "10.25"],
+                ["goudurix", "F-JUFA", "10.15", "10.35"],
+                ["goudurix", "F-JUFA", "10.15", "12.35"],
             ];
 
             $accepted = [
-                ["asterix", "F-CGAA", "09:00", "09:59"],
-                ["asterix", "F-CGAA", "10:31", "10:59"],
-                ["asterix", "F-CGAA", "12:16", "13:00"],
+                ["asterix", "F-JUFA", "09.00", "09.59"],
+                ["asterix", "F-JUFA", "10.31", "10.59"],
+                ["asterix", "F-JUFA", "12.16", "13.00"],
             ];
 
             $rejected_flights = $this->generateConflictingFlights($rejected, "machine ou pilote en vol");
@@ -272,7 +224,6 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testInFlight
      */
     public function testUpdate() {
-        // $this->markTestSkipped('must be revisited.');
         $this->assertTrue(true); return;
         $this->browse(function (Browser $browser) {
 
@@ -303,7 +254,6 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testUpdate
      */
     public function testDelete() {
-        // $this->markTestSkipped('must be revisited.');
         $this->assertTrue(true); return;
         $this->browse(function (Browser $browser) {
 
@@ -339,7 +289,6 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testDelete
      */
     public function testBilling() {
-        // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);return;
 
@@ -359,11 +308,11 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'url' => 'vols_avion/create',
                     'date' => $flightDate,
                     'pilot' => 'asterix',
-                    'plane' => 'F-CGAA',
+                    'plane' => 'F-JUFA',
                     'instructor' => 'panoramix',
                     'DC' =>  true,
-                    'start_time' => '10:00',
-                    'end_time' => '10:30',
+                    'start_time' => '10.00',
+                    'end_time' => '10.30',
                     'launch' => 'R',   // R, T, A, E
                     'altitude' => '700',
                     'tow_pilot' => 'abraracourcix',
@@ -400,7 +349,7 @@ class PlaneFlightTest extends AircraftFlightTest {
             // Increase time flight and switch to a 300 m
             $update = [
                 'vpid' => $id,
-                'end_time' => '11:00', // 30 minutes more, 30 €
+                'end_time' => '11.00', // 30 minutes more, 30 €
                 'altitude' => '200',  // 300 meters - 1 purchase and lines, - 16 €
             ];
             $plane_flight_handler->UpdatePlaneFLight($update);
@@ -416,7 +365,7 @@ class PlaneFlightTest extends AircraftFlightTest {
             // Winch and flight of more than 3 hours
             $update = [
                 'vpid' => $id,
-                'end_time' => '16:00', // 6 hours so 90 €
+                'end_time' => '16.00', // 6 hours so 90 €
                 'launch' => 'T'
             ];
             $plane_flight_handler->UpdatePlaneFLight($update);
@@ -446,7 +395,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Private plane per owner
             $plane_owner = [
-                "immat" => "F-CGAA",
+                "immat" => "F-JUFA",
                 "type_proprio" => "Privé",
                 "proprietaire" => "asterix",
             ];
@@ -472,7 +421,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Back to a clubl ownership
             $plane_owner = [
-                "immat" => "F-CGAA",
+                "immat" => "F-JUFA",
                 "type_proprio" => "Club",
                 "proprietaire" => "",
             ];
@@ -503,7 +452,6 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testBilling
      */
     public function testSharing() {
-        // $this->markTestSkipped('must be revisited.');
         $this->assertTrue(true); return;
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true); return;
@@ -526,11 +474,11 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'url' => 'vols_avion/create',
                     'date' => $flightDate,
                     'pilot' => 'asterix',
-                    'plane' => 'F-CGAA',
+                    'plane' => 'F-JUFA',
                     'instructor' => 'panoramix',
                     'DC' =>  true,
-                    'start_time' => '10:00',
-                    'end_time' => '10:30',
+                    'start_time' => '10.00',
+                    'end_time' => '10.30',
                     'launch' => 'R',   // R, T, A, E
                     'altitude' => '700',
                     'tow_pilot' => 'abraracourcix',
