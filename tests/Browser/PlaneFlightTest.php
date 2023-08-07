@@ -32,6 +32,24 @@ use Tests\libraries\PlaneHandler;
 class PlaneFlightTest extends AircraftFlightTest {
 
     /**
+     * Check that the installation can be reset and installed
+     *
+     * @return void
+     */
+    public function testInit() {
+        parent::testInit();
+    }
+
+    /**
+     * Login
+     * 
+     * @depends testInit
+     */
+    public function testLogin() {
+        parent::testLogin();
+    }
+
+    /**
      * Test creation of correct flights
      * 
      * @depends testLogin
@@ -316,7 +334,9 @@ class PlaneFlightTest extends AircraftFlightTest {
      *   - private plane + tow plane
      *   - club plane more than three hours + winch
      *   - external plane winch
-     *   - forfait billing     * @depends testDelete
+     *   - forfait billing     
+     * 
+     * @depends testDelete
      */
     public function testBilling() {
         // $this->markTestSkipped('must be revisited.');
@@ -692,4 +712,11 @@ class PlaneFlightTest extends AircraftFlightTest {
         }); // end of browse callback
     }
 
+    /**
+     * Logout
+     * @depends testSharing
+     */
+    public function testLogout() {
+        parent::testLogout();
+    }
 }

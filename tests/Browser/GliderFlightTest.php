@@ -30,6 +30,25 @@ use Tests\libraries\GliderHandler;
 class GliderFlightTest extends AircraftFlightTest { 
 
     /**
+     * Check that the installation can be reset and installed
+     *
+     * @return void
+     */
+    public function testInit() {
+        parent::testInit();
+    }
+
+    /**
+     * Login
+     * 
+     * @depends testInit
+     */
+    public function testLogin() {
+        parent::testLogin();
+    }
+
+
+    /**
      * Test creation of correct flights
      * 
      * @depends testLogin
@@ -248,7 +267,6 @@ class GliderFlightTest extends AircraftFlightTest {
      * @depends testInFlight
      */
     public function testUpdate() {
-        // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -278,7 +296,6 @@ class GliderFlightTest extends AircraftFlightTest {
      * @depends testUpdate
      */
     public function testDelete() {
-        // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -307,10 +324,11 @@ class GliderFlightTest extends AircraftFlightTest {
      *   - private glider + tow plane
      *   - club glider more than three hours + winch
      *   - external glider winch
-     *   - forfait billing     * @depends testDelete
+     *   - forfait billing     
+     * 
+     * @depends testDelete
      */
     public function testBilling() {
-        // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
@@ -474,7 +492,6 @@ class GliderFlightTest extends AircraftFlightTest {
      * @depends testBilling
      */
     public function testSharing() {
-        // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
@@ -682,4 +699,11 @@ class GliderFlightTest extends AircraftFlightTest {
         }); // end of browse callback
     }
 
+    /**
+     * Logout
+     * @depends testSharing
+     */
+    public function testLogout() {
+        parent::testLogout();
+    }
 }

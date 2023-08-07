@@ -58,11 +58,8 @@ class AircraftFlightTest extends GvvDuskTestCase {
 
     /**
      * Login
-     * 
-     * @depends testInit
      */
     public function testLogin() {
-        // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
         });
@@ -126,17 +123,10 @@ class AircraftFlightTest extends GvvDuskTestCase {
         $this->assertEquals($expected['lines'], $actual['lines'], "Expected lines difference $where = " . $expected['lines']);
     }
 
-
-
-
-
     /**
      * Logout
-     * @depends testSharing
      */
     public function testLogout() {
-        // $this->markTestSkipped('must be revisited.');
-        $this->assertTrue(true); return;
         $this->browse(function (Browser $browser) {
             $this->logout($browser);
         });
