@@ -71,7 +71,47 @@ class PlaneFlightHandler {
     }
 
     /** 
-     * Create planes
+     * Fill the plane flight form
+     * 
+     * This method is used to fill the plane flight form with the data in the $flight array.
+     */
+    public function FillFields($flight) {
+
+        if (array_key_exists('date', $flight)) {
+            $this->browser->type('vadate', $flight['date'] . "\n");
+        }
+
+        if (array_key_exists('pilot', $flight)) {
+            $this->browser->select('vapilid', $flight['pilot']);
+        }
+
+        if (array_key_exists('plane', $flight)) {
+            $this->browser->select('vamacid', $flight['plane']);
+        }
+
+        if (array_key_exists('start_time', $flight)) {
+            $this->browser->type('vahdeb', $flight['start_time']);
+        }
+
+        if (array_key_exists('end_time', $flight)) {
+            $this->browser->type('vahfin', $flight['end_time']);
+        }
+
+        if (array_key_exists('start_meter', $flight)) {
+            $this->browser->type('vacdeb', $flight['start_meter']);
+        }
+
+        if (array_key_exists('end_meter', $flight)) {
+            $this->browser->type('vacfin', $flight['end_meter']);
+        }
+
+        if (array_key_exists('comment', $flight)) {
+            $this->browser->type('vaobs', $flight['comment']);
+        }
+    }
+
+    /** 
+     * Create plane flights
      */
     public function CreatePlaneFlights($list = []) {
         foreach ($list as $flight) {
@@ -82,18 +122,7 @@ class PlaneFlightHandler {
 
             $this->tc->canAccess($this->browser, $flight['url']);
 
-            $this->browser
-                ->type('vadate', $flight['date'])
-                ->select('vapilid', $flight['pilot'])
-                ->select('vamacid', $flight['plane'])
-                ->type('vahdeb', $flight['start_time'])
-                ->type('vahfin', $flight['end_time'])
-                ->type('vacdeb', $flight['start_meter'])
-                ->type('vacfin', $flight['end_meter']);
-
-            if (array_key_exists('comment', $flight)) {
-                $this->browser->type('vaobs', $flight['comment']);
-            }
+            $this->FillFields($flight);
 
             $this->browser->screenshot('a_before_flight');
 
@@ -114,6 +143,21 @@ class PlaneFlightHandler {
         }
     }
 
+    /** 
+     * Update plane flight
+     */
+    public function UpdatePlaneFlight($flight) {
+        $id = $flight['vaid'];
+        $url = "vols_avion/edit/$id";
+        $this->tc->canAccess($this->browser, $url);
+
+        $this->FillFields($flight);
+
+        $this->browser
+            ->press('#validate')
+            ->assertDontSee('404');        
+    }
+    
     /**
      * Get the latest flight in the database
      */

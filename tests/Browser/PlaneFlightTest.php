@@ -236,7 +236,7 @@ class PlaneFlightTest extends AircraftFlightTest {
             $modified_comment = "modified comment";
 
             $flight = [
-                'vpid' => $latest->vpid,
+                'vaid' => $latest->vaid,
                 'comment' => $modified_comment,
             ];
             $plane_flight_handler->UpdatePlaneFLight($flight);
@@ -263,7 +263,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             $flight_count = $plane_flight_handler->count();
 
-            $this->canAccess($browser, 'vols_avion/delete/' . $latest->vpid);
+            $this->canAccess($browser, 'vols_avion/delete/' . $latest->vaid);
 
             $new_count = $plane_flight_handler->count();
             $this->assertEquals($flight_count - 1, $new_count);
@@ -334,7 +334,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Plane flight creation
             $plane_flight_handler->CreatePlaneFlights($flights);
-            $id = $plane_flight_handler->latestFlight()->vpid;
+            $id = $plane_flight_handler->latestFlight()->vaid;
 
             // new context recording
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
@@ -348,7 +348,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Increase time flight and switch to a 300 m
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'end_time' => '11.00', // 30 minutes more, 30 €
                 'altitude' => '200',  // 300 meters - 1 purchase and lines, - 16 €
             ];
@@ -364,7 +364,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Winch and flight of more than 3 hours
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'end_time' => '16.00', // 6 hours so 90 €
                 'launch' => 'T'
             ];
@@ -380,7 +380,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // VI
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'categorie' => 'VI', // 6 hours so 90 €
             ];
             $plane_flight_handler->UpdatePlaneFLight($update);
@@ -402,7 +402,7 @@ class PlaneFlightTest extends AircraftFlightTest {
             $plane_handler->UpdatePlane($plane_owner);
 
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'categorie' => 'standard',
             ];
             $plane_flight_handler->UpdatePlaneFLight($update);
@@ -502,7 +502,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Plane flight creation
             $plane_flight_handler->CreatePlaneFlights($flights);
-            $id = $plane_flight_handler->latestFlight()->vpid;
+            $id = $plane_flight_handler->latestFlight()->vaid;
 
             // new context recording
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
@@ -523,7 +523,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Set a payer, no percentage
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'payeur' => 'goudurix',
 
             ];
@@ -547,7 +547,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Set the percentage to 100
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'payeur' => 'goudurix',
                 'pourcentage' => 100
             ];
@@ -571,7 +571,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Set the percentage to 50
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'payeur' => 'goudurix',
                 'pourcentage' => 50
             ];
@@ -596,7 +596,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Back  to 100
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'payeur' => 'panoramix',
                 'pourcentage' => 100
             ];
@@ -620,7 +620,7 @@ class PlaneFlightTest extends AircraftFlightTest {
 
             // Back to 0 %
             $update = [
-                'vpid' => $id,
+                'vaid' => $id,
                 'pourcentage' => 0
             ];
             $plane_flight_handler->UpdatePlaneFLight($update);
