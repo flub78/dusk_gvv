@@ -224,7 +224,7 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testInFlight
      */
     public function testUpdate() {
-        $this->assertTrue(true); return;
+        $this->assertTrue(true); 
         $this->browse(function (Browser $browser) {
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
@@ -242,7 +242,7 @@ class PlaneFlightTest extends AircraftFlightTest {
             $plane_flight_handler->UpdatePlaneFLight($flight);
 
             $latest = $plane_flight_handler->latestFlight();
-            $this->assertEquals($modified_comment, $latest->vpobs);
+            $this->assertEquals($modified_comment, $latest->vaobs);
 
             $new_count = $plane_flight_handler->count();
             $this->assertEquals($flight_count, $new_count);
@@ -254,7 +254,7 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testUpdate
      */
     public function testDelete() {
-        $this->assertTrue(true); return;
+        $this->assertTrue(true); 
         $this->browse(function (Browser $browser) {
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
