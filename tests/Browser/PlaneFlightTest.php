@@ -290,7 +290,7 @@ class PlaneFlightTest extends AircraftFlightTest {
      */
     public function testBilling() {
         $this->browse(function (Browser $browser) {
-            $this->assertTrue(true);return;
+            $this->assertTrue(true);
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
             $account_handler = new AccountHandler($browser, $this);
@@ -300,7 +300,6 @@ class PlaneFlightTest extends AircraftFlightTest {
             $flightDate = $this->NextDate($latest, 'vadate');
 
             $asterix_acount_image = "(411) Le Gaulois Asterix";
-            $launch_acount_image = "(706) Remorqués";
             $plane_time_acount_image = "(706) Heures de vol ULM";
 
             $flights = [
@@ -313,19 +312,21 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'DC' =>  true,
                     'start_time' => '10.00',
                     'end_time' => '10.30',
-                    'launch' => 'R',   // R, T, A, E
-                    'altitude' => '700',
-                    'tow_pilot' => 'abraracourcix',
-                    'tow_plane' => 'F-JUFA',
+                    'start_meter' => '100.0',
+                    'end_meter' => '100.50',
                     'account' => $asterix_acount_image,
-                    'price' => 46.0,
+                    'price' => 51.0,
                 ],
             ];
+            $id = 0;
+            $flights[$id]['image'] = 
+                $flights[$id]['date'] . " " . 
+                $flights[$id]['start_meter'] . " " .
+                $flights[$id]['plane'];
 
             // context recording
             $acounts = [
                 'asterix' => $account_handler->AccountIdFromImage($asterix_acount_image),
-                'launch account' => $account_handler->AccountIdFromImage($launch_acount_image),
                 'plane time account' => $account_handler->AccountIdFromImage($plane_time_acount_image)
             ];
 
@@ -340,99 +341,83 @@ class PlaneFlightTest extends AircraftFlightTest {
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
-                'balance' => ['asterix' => -46.0, 'launch account' => 31.0, 'plane time account' => 15.0],
-                'purchases' => 3,
-                'lines' => 3
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "after creation of the first flight");
-
-            // Increase time flight and switch to a 300 m
-            $update = [
-                'vaid' => $id,
-                'end_time' => '11.00', // 30 minutes more, 30 €
-                'altitude' => '200',  // 300 meters - 1 purchase and lines, - 16 €
-            ];
-            $plane_flight_handler->UpdatePlaneFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -45.0, 'launch account' => 15.0, 'plane time account' => 30.0],
-                'purchases' => 2,
-                'lines' => 2
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After switch to 300 m");
-
-            // Winch and flight of more than 3 hours
-            $update = [
-                'vaid' => $id,
-                'end_time' => '16.00', // 6 hours so 90 €
-                'launch' => 'T'
-            ];
-            $plane_flight_handler->UpdatePlaneFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -98.0, 'launch account' => 8.0, 'plane time account' => 90.0],
-                'purchases' => 2,
-                'lines' => 2
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After switch to winch");
-
-            // VI
-            $update = [
-                'vaid' => $id,
-                'categorie' => 'VI', // 6 hours so 90 €
-            ];
-            $plane_flight_handler->UpdatePlaneFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'plane time account' => 0.0],
-                'purchases' => 0,
-                'lines' => 0
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After VI");
-
-            // Private plane per owner
-            $plane_owner = [
-                "immat" => "F-JUFA",
-                "type_proprio" => "Privé",
-                "proprietaire" => "asterix",
-            ];
-            $plane_handler->UpdatePlane($plane_owner);
-
-            $update = [
-                'vaid' => $id,
-                'categorie' => 'standard',
-            ];
-            $plane_flight_handler->UpdatePlaneFLight($update);
-            
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -8.0, 'launch account' => 8.0, 'plane time account' => 0.0],
+                'balance' => ['asterix' => -51.0, 'plane time account' => 51.0],
                 'purchases' => 1,
                 'lines' => 1
             ];
-            $this->ExpectedDifferences($expected, $deltas, "Private plane");
+            $this->ExpectedDifferences($expected, $deltas, "after creation of the first flight");
 
-            // Private plane per not owner
-
-
-            // Back to a clubl ownership
-            $plane_owner = [
-                "immat" => "F-JUFA",
-                "type_proprio" => "Club",
-                "proprietaire" => "",
+            // Increase time flight 
+            $update = [
+                'vaid' => $id,
+                'end_time' => '11.00', // 30 minutes more, 30 €
+                'end_meter' => '101.00',
             ];
-            $plane_handler->UpdatePlane($plane_owner);
+            $plane_flight_handler->UpdatePlaneFLight($update);
+            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $deltas = $this->CompareContexes($context, $new_context);
+            $expected = [
+                'balance' => ['asterix' => -102.0, 'plane time account' => 102.0],
+                'purchases' => 1,
+                'lines' => 1
+            ];
+            $this->ExpectedDifferences($expected, $deltas, "After time increase");
+
+            // // VI
+            // $update = [
+            //     'vaid' => $id,
+            //     'categorie' => 'VI', // 6 hours so 90 €
+            // ];
+            // $plane_flight_handler->UpdatePlaneFLight($update);
+            // $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            // $deltas = $this->CompareContexes($context, $new_context);
+            // $expected = [
+            //     'balance' => ['asterix' => 0.0, 'plane time account' => 0.0],
+            //     'purchases' => 0,
+            //     'lines' => 0
+            // ];
+            // $this->ExpectedDifferences($expected, $deltas, "After VI");
+
+            // // Private plane per owner
+            // $plane_owner = [
+            //     "immat" => "F-JUFA",
+            //     "type_proprio" => "Privé",
+            //     "proprietaire" => "asterix",
+            // ];
+            // $plane_handler->UpdatePlane($plane_owner);
+
+            // $update = [
+            //     'vaid' => $id,
+            //     'categorie' => 'standard',
+            // ];
+            // $plane_flight_handler->UpdatePlaneFLight($update);
+            
+            // $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            // $deltas = $this->CompareContexes($context, $new_context);
+            // $expected = [
+            //     'balance' => ['asterix' => -8.0, 'plane time account' => 0.0],
+            //     'purchases' => 1,
+            //     'lines' => 1
+            // ];
+            // $this->ExpectedDifferences($expected, $deltas, "Private plane");
+
+            // // Private plane per not owner
+
+
+            // // Back to a clubl ownership
+            // $plane_owner = [
+            //     "immat" => "F-JUFA",
+            //     "type_proprio" => "Club",
+            //     "proprietaire" => "",
+            // ];
+            // $plane_handler->UpdatePlane($plane_owner);
 
             // Flight delete
             $this->canAccess($browser, 'vols_avion/delete/' . $id);
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
-                'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'plane time account' => 0.0],
+                'balance' => ['asterix' => 0.0, 'plane time account' => 0.0],
                 'purchases' => 0,
                 'lines' => 0
             ];
@@ -465,7 +450,6 @@ class PlaneFlightTest extends AircraftFlightTest {
             $asterix_acount_image = "(411) Le Gaulois Asterix";
             $goudurix_acount_image = "(411) Le Gaulois Goudurix";
             $panoramix_acount_image = "(411) Le Gaulois Panoramix";
-            $launch_acount_image = "(706) Remorqués";
             $plane_time_acount_image = "(706) Heures de vol ULM";
 
             // first a flight with no payer (default)
@@ -479,10 +463,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'DC' =>  true,
                     'start_time' => '10.00',
                     'end_time' => '10.30',
-                    'launch' => 'R',   // R, T, A, E
-                    'altitude' => '700',
-                    'tow_pilot' => 'abraracourcix',
-                    'tow_plane' => 'F-JUFA',
                     'account' => $asterix_acount_image,
                     'price' => 46.0,
                 ],
@@ -493,7 +473,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                 'asterix' => $account_handler->AccountIdFromImage($asterix_acount_image),
                 'goudurix' => $account_handler->AccountIdFromImage($goudurix_acount_image),
                 'panoramix' => $account_handler->AccountIdFromImage($panoramix_acount_image),
-                'launch account' => $account_handler->AccountIdFromImage($launch_acount_image),
                 'plane time account' => $account_handler->AccountIdFromImage($plane_time_acount_image)
             ];
 
@@ -513,7 +492,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => -46.0,
                     'goudurix' => 0.0,
                     'panoramix' => 0.0,
-                    'launch account' => 31.0,
                     'plane time account' => 15.0
                 ],
                 'purchases' => 3,
@@ -537,7 +515,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => -46.0,
                     'goudurix' => 0.0,
                     'panoramix' => 0.0,
-                    'launch account' => 31.0,
                     'plane time account' => 15.0
                 ],
                 'purchases' => 3,
@@ -561,7 +538,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => 0.0,
                     'goudurix' => -46.0,
                     'panoramix' => 0.0,
-                    'launch account' => 31.0,
                     'plane time account' => 15.0
                 ],
                 'purchases' => 3,
@@ -585,7 +561,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => -23.0,
                     'goudurix' => -23.0,
                     'panoramix' => 0.0,
-                    'launch account' => 31.0,
                     'plane time account' => 15.0
                 ],
                 'purchases' => 6,
@@ -610,7 +585,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => 0.0,
                     'goudurix' => 0.0,
                     'panoramix' => -46.0,
-                    'launch account' => 31.0,
                     'plane time account' => 15.0
                 ],
                 'purchases' => 3,
@@ -633,7 +607,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => -46.0,
                     'goudurix' => 0.0,
                     'panoramix' => 0.0,
-                    'launch account' => 31.0,
                     'plane time account' => 15.0
                 ],
                 'purchases' => 3,
@@ -650,7 +623,6 @@ class PlaneFlightTest extends AircraftFlightTest {
                     'asterix' => 0.0,
                     'goudurix' => 0.0,
                     'panoramix' => 0.0,
-                    'launch account' => 0.0,
                     'plane time account' => 0.0
                 ],
                 'purchases' => 0,
