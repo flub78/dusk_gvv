@@ -363,20 +363,20 @@ class PlaneFlightTest extends AircraftFlightTest {
             ];
             $this->ExpectedDifferences($expected, $deltas, "After time increase");
 
-            // // VI
-            // $update = [
-            //     'vaid' => $id,
-            //     'categorie' => 'VI', // 6 hours so 90 €
-            // ];
-            // $plane_flight_handler->UpdatePlaneFLight($update);
-            // $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            // $deltas = $this->CompareContexes($context, $new_context);
-            // $expected = [
-            //     'balance' => ['asterix' => 0.0, 'plane time account' => 0.0],
-            //     'purchases' => 0,
-            //     'lines' => 0
-            // ];
-            // $this->ExpectedDifferences($expected, $deltas, "After VI");
+            // VI
+            $update = [
+                'vaid' => $id,
+                'categorie' => 'VI', // 6 hours so 90 €
+            ];
+            $plane_flight_handler->UpdatePlaneFLight($update);
+            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $deltas = $this->CompareContexes($context, $new_context);
+            $expected = [
+                'balance' => ['asterix' => 0.0, 'plane time account' => 0.0],
+                'purchases' => 0,
+                'lines' => 0
+            ];
+            $this->ExpectedDifferences($expected, $deltas, "After VI");
 
             // // Private plane per owner
             // $plane_owner = [

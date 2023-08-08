@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="73" assertions="3691" errors="0" warnings="0" failures="0" skipped="0" time="870.244111">
-    <testsuite name="Browser Test Suite" tests="73" assertions="3691" errors="0" warnings="0" failures="0" skipped="0" time="870.244111">
-      <testsuite name="Tests\Browser\AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" tests="5" assertions="566" errors="0" warnings="0" failures="0" skipped="0" time="76.346767">
-        <testcase name="testAdminAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="11" assertions="142" time="14.969541"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="54" assertions="117" time="12.660637"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="98" assertions="116" time="23.453313"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="132" assertions="92" time="12.493325"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="163" assertions="99" time="12.769951"/>
+  <testsuite name="" tests="73" assertions="3743" errors="0" warnings="0" failures="0" skipped="0" time="959.872950">
+    <testsuite name="Browser Test Suite" tests="73" assertions="3743" errors="0" warnings="0" failures="0" skipped="0" time="959.872950">
+      <testsuite name="Tests\Browser\AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" tests="5" assertions="566" errors="0" warnings="0" failures="0" skipped="0" time="68.371435">
+        <testcase name="testAdminAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="11" assertions="142" time="14.861017"/>
+        <testcase name="testMembresAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="54" assertions="117" time="12.060883"/>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="98" assertions="116" time="17.416093"/>
+        <testcase name="testAvionsAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="132" assertions="92" time="11.001140"/>
+        <testcase name="testComptaAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="163" assertions="99" time="13.032303"/>
       </testsuite>
-      <testsuite name="Tests\Browser\AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" tests="3" assertions="15" errors="0" warnings="0" failures="0" skipped="0" time="16.081391">
-        <testcase name="testInit" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="33" assertions="12" time="11.942083"/>
-        <testcase name="testLogin" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="62" assertions="2" time="3.577426"/>
-        <testcase name="testLogout" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="129" assertions="1" time="0.561882"/>
+      <testsuite name="Tests\Browser\AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" tests="3" assertions="15" errors="0" warnings="0" failures="0" skipped="0" time="16.254126">
+        <testcase name="testInit" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="33" assertions="12" time="11.725118"/>
+        <testcase name="testLogin" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="62" assertions="2" time="3.994868"/>
+        <testcase name="testLogout" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="129" assertions="1" time="0.534140"/>
       </testsuite>
-      <testsuite name="Tests\Browser\BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" tests="5" assertions="529" errors="0" warnings="0" failures="0" skipped="0" time="68.215308">
-        <testcase name="testAdminAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="11" assertions="129" time="15.189098"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="59" assertions="117" time="13.129105"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="103" assertions="116" time="18.142074"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="143" assertions="68" time="9.555348"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="175" assertions="99" time="12.199684"/>
+      <testsuite name="Tests\Browser\BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" tests="5" assertions="529" errors="0" warnings="0" failures="0" skipped="0" time="63.516706">
+        <testcase name="testAdminAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="11" assertions="129" time="14.043554"/>
+        <testcase name="testMembresAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="59" assertions="117" time="12.254744"/>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="103" assertions="116" time="16.075175"/>
+        <testcase name="testAvionsAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="143" assertions="68" time="9.359379"/>
+        <testcase name="testComptaAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="175" assertions="99" time="11.783853"/>
       </testsuite>
-      <testsuite name="Tests\Browser\CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" tests="5" assertions="510" errors="0" warnings="0" failures="0" skipped="0" time="57.622537">
-        <testcase name="testAdminAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="11" assertions="119" time="12.503028"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="55" assertions="108" time="10.204670"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="99" assertions="107" time="14.841037"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="134" assertions="85" time="9.756505"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="166" assertions="91" time="10.317297"/>
+      <testsuite name="Tests\Browser\CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" tests="5" assertions="510" errors="0" warnings="0" failures="0" skipped="0" time="71.983303">
+        <testcase name="testAdminAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="11" assertions="119" time="17.910596"/>
+        <testcase name="testMembresAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="55" assertions="108" time="12.442195"/>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="99" assertions="107" time="18.863572"/>
+        <testcase name="testAvionsAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="134" assertions="85" time="11.034579"/>
+        <testcase name="testComptaAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="166" assertions="91" time="11.732362"/>
       </testsuite>
-      <testsuite name="Tests\Browser\CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" tests="1" assertions="108" errors="0" warnings="0" failures="0" skipped="0" time="41.513947">
-        <testcase name="testAccess" class="Tests\Browser\CIUnitTest" classname="Tests.Browser.CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" line="13" assertions="108" time="41.513947"/>
+      <testsuite name="Tests\Browser\CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" tests="1" assertions="108" errors="0" warnings="0" failures="0" skipped="0" time="45.674130">
+        <testcase name="testAccess" class="Tests\Browser\CIUnitTest" classname="Tests.Browser.CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" line="13" assertions="108" time="45.674130"/>
       </testsuite>
-      <testsuite name="Tests\Browser\DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" tests="4" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="16.303820">
-        <testcase name="testInit" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="30" assertions="12" time="11.645029"/>
-        <testcase name="testLogin" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="61" assertions="2" time="4.203399"/>
-        <testcase name="testTest" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="73" assertions="1" time="0.011015"/>
-        <testcase name="testLogout" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="84" assertions="1" time="0.444376"/>
+      <testsuite name="Tests\Browser\DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" tests="4" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="16.000751">
+        <testcase name="testInit" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="30" assertions="12" time="11.855377"/>
+        <testcase name="testLogin" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="61" assertions="2" time="3.697054"/>
+        <testcase name="testTest" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="73" assertions="1" time="0.011085"/>
+        <testcase name="testLogout" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="84" assertions="1" time="0.437235"/>
       </testsuite>
-      <testsuite name="Tests\Browser\ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="6.722542">
-        <testcase name="testBasicExample" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="25" assertions="1" time="4.778859"/>
-        <testcase name="testGoogleSearch" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="39" assertions="1" time="0.571452"/>
-        <testcase name="testGvv" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="52" assertions="1" time="1.372232"/>
+      <testsuite name="Tests\Browser\ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="28.464857">
+        <testcase name="testBasicExample" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="25" assertions="1" time="15.299627"/>
+        <testcase name="testGoogleSearch" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="39" assertions="1" time="2.189760"/>
+        <testcase name="testGvv" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="52" assertions="1" time="10.975471"/>
       </testsuite>
-      <testsuite name="Tests\Browser\GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" tests="10" assertions="518" errors="0" warnings="0" failures="0" skipped="0" time="258.774472">
-        <testcase name="testInit" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="37" assertions="12" time="10.967010"/>
-        <testcase name="testLogin" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="46" assertions="2" time="3.391540"/>
-        <testcase name="testCreate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="56" assertions="36" time="21.364257"/>
-        <testcase name="testSingleSeater" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="120" assertions="11" time="4.755315"/>
-        <testcase name="testInFlight" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="222" assertions="90" time="89.279326"/>
-        <testcase name="testUpdate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="269" assertions="3" time="1.615227"/>
-        <testcase name="testDelete" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="298" assertions="1" time="1.306783"/>
-        <testcase name="testBilling" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="331" assertions="135" time="55.957069">
+      <testsuite name="Tests\Browser\GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" tests="10" assertions="518" errors="0" warnings="0" failures="0" skipped="0" time="252.639659">
+        <testcase name="testInit" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="37" assertions="12" time="13.104957"/>
+        <testcase name="testLogin" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="46" assertions="2" time="3.747911"/>
+        <testcase name="testCreate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="56" assertions="36" time="20.708283"/>
+        <testcase name="testSingleSeater" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="120" assertions="11" time="4.733356"/>
+        <testcase name="testInFlight" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="222" assertions="90" time="87.314031"/>
+        <testcase name="testUpdate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="269" assertions="3" time="1.581527"/>
+        <testcase name="testDelete" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="298" assertions="1" time="1.025092"/>
+        <testcase name="testBilling" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="331" assertions="135" time="51.931264">
           <system-out>
 Context Initial context:
 asterix balance = -53.5
@@ -60,7 +60,7 @@ purchases = 5
 lines = 14
 </system-out>
         </testcase>
-        <testcase name="testSharing" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="494" assertions="227" time="69.680550">
+        <testcase name="testSharing" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="494" assertions="227" time="68.041611">
           <system-out>
 Context Initial Sharing context:
 asterix balance = -53.5
@@ -126,62 +126,70 @@ purchases = 8
 lines = 17
 </system-out>
         </testcase>
-        <testcase name="testLogout" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="706" assertions="1" time="0.457397"/>
+        <testcase name="testLogout" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="706" assertions="1" time="0.451629"/>
       </testsuite>
-      <testsuite name="Tests\Browser\InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="6.441474">
-        <testcase name="testReset" class="Tests\Browser\InstallationTest" classname="Tests.Browser.InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" line="16" assertions="10" time="6.441474"/>
+      <testsuite name="Tests\Browser\InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="9.268353">
+        <testcase name="testReset" class="Tests\Browser\InstallationTest" classname="Tests.Browser.InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" line="16" assertions="10" time="9.268353"/>
       </testsuite>
-      <testsuite name="Tests\Browser\LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" tests="3" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="9.805108">
-        <testcase name="testHome" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="15" assertions="3" time="1.165276"/>
-        <testcase name="testFirstLogin" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="29" assertions="6" time="4.192738"/>
-        <testcase name="testAccess" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="45" assertions="5" time="4.447094"/>
+      <testsuite name="Tests\Browser\LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" tests="3" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="13.169165">
+        <testcase name="testHome" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="15" assertions="3" time="2.971934"/>
+        <testcase name="testFirstLogin" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="29" assertions="6" time="5.265275"/>
+        <testcase name="testAccess" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="45" assertions="5" time="4.931956"/>
       </testsuite>
-      <testsuite name="Tests\Browser\MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" tests="2" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="9.181542">
-        <testcase name="testHome" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="14" assertions="3" time="1.155131"/>
-        <testcase name="testFirstLogin" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="28" assertions="11" time="8.026411"/>
+      <testsuite name="Tests\Browser\MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" tests="2" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="12.624513">
+        <testcase name="testHome" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="14" assertions="3" time="2.557635"/>
+        <testcase name="testFirstLogin" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="28" assertions="11" time="10.066877"/>
       </testsuite>
-      <testsuite name="Tests\Browser\PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" tests="5" assertions="536" errors="0" warnings="0" failures="0" skipped="0" time="58.433562">
-        <testcase name="testAdminAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="21" assertions="135" time="13.316624"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="65" assertions="108" time="10.683958"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="110" assertions="107" time="14.503692"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="146" assertions="84" time="9.537853"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="178" assertions="102" time="10.391435"/>
+      <testsuite name="Tests\Browser\PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" tests="5" assertions="536" errors="0" warnings="0" failures="0" skipped="0" time="68.619717">
+        <testcase name="testAdminAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="21" assertions="135" time="17.884728"/>
+        <testcase name="testMembresAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="65" assertions="108" time="11.188446"/>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="110" assertions="107" time="17.371489"/>
+        <testcase name="testAvionsAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="146" assertions="84" time="10.644604"/>
+        <testcase name="testComptaAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="178" assertions="102" time="11.530450"/>
       </testsuite>
-      <testsuite name="Tests\Browser\PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" tests="9" assertions="27" errors="0" warnings="0" failures="0" skipped="0" time="25.781629">
-        <testcase name="testInit" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="39" assertions="12" time="11.509406"/>
-        <testcase name="testLogin" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="48" assertions="2" time="3.360762"/>
-        <testcase name="testCreate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="57" assertions="7" time="10.417915"/>
-        <testcase name="testInFlight" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="178" assertions="1" time="0.007464"/>
-        <testcase name="testUpdate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="226" assertions="1" time="0.007303"/>
-        <testcase name="testDelete" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="256" assertions="1" time="0.006958"/>
-        <testcase name="testBilling" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="291" assertions="1" time="0.008512"/>
-        <testcase name="testSharing" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="454" assertions="1" time="0.007178"/>
-        <testcase name="testLogout" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="667" assertions="1" time="0.456130"/>
+      <testsuite name="Tests\Browser\PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" tests="9" assertions="79" errors="0" warnings="0" failures="0" skipped="0" time="59.551203">
+        <testcase name="testInit" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="39" assertions="12" time="14.161718"/>
+        <testcase name="testLogin" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="48" assertions="2" time="3.793111"/>
+        <testcase name="testCreate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="57" assertions="7" time="10.757422"/>
+        <testcase name="testInFlight" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="178" assertions="1" time="0.008561"/>
+        <testcase name="testUpdate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="226" assertions="4" time="1.707397"/>
+        <testcase name="testDelete" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="256" assertions="2" time="1.207414"/>
+        <testcase name="testBilling" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="291" assertions="49" time="27.417231">
+          <system-out>
+Context Initial context:
+asterix balance = 8.2
+plane time account balance = 91.8
+purchases = 2
+lines = 11
+</system-out>
+        </testcase>
+        <testcase name="testSharing" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="439" assertions="1" time="0.008047"/>
+        <testcase name="testLogout" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="639" assertions="1" time="0.490301"/>
       </testsuite>
-      <testsuite name="Tests\Browser\PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="9.967011">
-        <testcase name="testAccess" class="Tests\Browser\PlaneurTest" classname="Tests.Browser.PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" line="13" assertions="10" time="9.967011"/>
+      <testsuite name="Tests\Browser\PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="14.193572">
+        <testcase name="testAccess" class="Tests\Browser\PlaneurTest" classname="Tests.Browser.PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" line="13" assertions="10" time="14.193572"/>
       </testsuite>
-      <testsuite name="Tests\Browser\SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" tests="6" assertions="243" errors="0" warnings="0" failures="0" skipped="0" time="114.223779">
-        <testcase name="testLogin" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="144" assertions="2" time="4.132553"/>
-        <testcase name="testCreateData" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="155" assertions="32" time="33.407190"/>
-        <testcase name="testAccountMovements" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="180" assertions="172" time="52.525179"/>
-        <testcase name="testPlaneFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="276" assertions="12" time="7.491826"/>
-        <testcase name="testGliderFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="350" assertions="24" time="16.109223"/>
-        <testcase name="testLogout" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="425" assertions="1" time="0.557809"/>
+      <testsuite name="Tests\Browser\SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" tests="6" assertions="243" errors="0" warnings="0" failures="0" skipped="0" time="124.249413">
+        <testcase name="testLogin" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="144" assertions="2" time="4.437151"/>
+        <testcase name="testCreateData" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="155" assertions="32" time="35.892957"/>
+        <testcase name="testAccountMovements" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="180" assertions="172" time="57.781497"/>
+        <testcase name="testPlaneFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="276" assertions="12" time="7.822971"/>
+        <testcase name="testGliderFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="350" assertions="24" time="17.661515"/>
+        <testcase name="testLogout" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="425" assertions="1" time="0.653322"/>
       </testsuite>
-      <testsuite name="Tests\Browser\TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" tests="5" assertions="39" errors="0" warnings="0" failures="0" skipped="0" time="34.364661">
-        <testcase name="testLogin" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="121" assertions="2" time="4.614156"/>
-        <testcase name="testCreate" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="132" assertions="12" time="9.225810"/>
-        <testcase name="testCreateErrors" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="150" assertions="14" time="9.025116"/>
-        <testcase name="testDelete" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="160" assertions="10" time="10.933427"/>
-        <testcase name="testLogout" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="176" assertions="1" time="0.566151"/>
+      <testsuite name="Tests\Browser\TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" tests="5" assertions="39" errors="0" warnings="0" failures="0" skipped="0" time="35.673305">
+        <testcase name="testLogin" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="121" assertions="2" time="5.961363"/>
+        <testcase name="testCreate" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="132" assertions="12" time="9.705989"/>
+        <testcase name="testCreateErrors" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="150" assertions="14" time="9.081432"/>
+        <testcase name="testDelete" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="160" assertions="10" time="10.422705"/>
+        <testcase name="testLogout" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="176" assertions="1" time="0.501816"/>
       </testsuite>
-      <testsuite name="Tests\Browser\UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" tests="5" assertions="533" errors="0" warnings="0" failures="0" skipped="0" time="60.464561">
-        <testcase name="testAdminAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="21" assertions="135" time="14.785393"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="65" assertions="108" time="11.394089"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="110" assertions="105" time="12.872649"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="146" assertions="83" time="10.391233"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="178" assertions="102" time="11.021196"/>
+      <testsuite name="Tests\Browser\UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" tests="5" assertions="533" errors="0" warnings="0" failures="0" skipped="0" time="59.618742">
+        <testcase name="testAdminAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="21" assertions="135" time="15.326072"/>
+        <testcase name="testMembresAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="65" assertions="108" time="10.843203"/>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="110" assertions="105" time="12.815200"/>
+        <testcase name="testAvionsAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="146" assertions="83" time="10.108201"/>
+        <testcase name="testComptaAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="178" assertions="102" time="10.526066"/>
       </testsuite>
     </testsuite>
   </testsuite>

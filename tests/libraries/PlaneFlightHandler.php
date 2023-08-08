@@ -105,6 +105,23 @@ class PlaneFlightHandler {
             $this->browser->type('vacfin', $flight['end_meter']);
         }
 
+        if (array_key_exists('categorie', $flight)) {
+            switch ($flight['categorie']) {
+                case 'VI':
+                    $this->browser->radio('vacategorie', '1');
+                    break;
+                case 'standard':
+                    $this->browser->radio('vacategorie', '0');
+                    break;
+                case 'VE':
+                    $this->browser->radio('vacategorie', '2');
+                    break;
+                case 'remorquage':
+                    $this->browser->radio('vacategorie', '3');
+                    break;
+            }
+        }
+
         if (array_key_exists('comment', $flight)) {
             $this->browser->type('vaobs', $flight['comment']);
         }
