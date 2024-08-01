@@ -42,8 +42,20 @@ and a testadmin / password acount must exists
 
 ## In case of incorrect chrome-driver version
 
+This command does not work with the latest versions of chromedriver
+
     php artisan dusk:chrome-driver
 
+To update
+
+    https://googlechromelabs.github.io/chrome-for-testing/
+
+    choose stable, download the win64 version.
+
+    unzip, copy into C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\bin
+
+    rename as chromedriver-win.exe
+    
 ## Generating tests
 
     php artisan dusk:make LoginTest
@@ -54,11 +66,15 @@ and a testadmin / password acount must exists
 
 ## GVV testing
 
-Even if it is still actively maintained, regarding automated testing GVV can be considered legacy.
+Even if it is still actively maintained, most GVV automated tests were obsolete in april 2023.
 
-* as phpunit was poorly integrated with CodeIgniter 2.x, the unit tests are written with CIUnit which cannot generate junit.xml
-
-* I'll try to regain control with Dusk tests. They may be a little slow for some purpose but at least it is a way to get minimal automated test covergage.
+* as phpunit was poorly integrated with CodeIgniter 2.x, the initial unit tests are written with CIUnit which cannot generate junit.xml
+ 
+* phpunit tests were limited to some libraries and helpers no controllers and they were not working anymore. A the time of the project start phpunit was not officialy supported in CodeIgniter. Some third parties have provided partial support but these project are no more maintained.
+  
+* End to end tests were developed in Ruby with watir. The environment was difficult to deploy, it implied to master another programing language and the tests were made obsolete by the swith of the GUI to Bootstrap.
+  
+* this project is an effort to regain control with Dusk tests. They may be a little slow for some purpose but at least it is a way to get minimal automated test covergage.
 
 * One difficulty comes the table dependencies, accounts and membres are needed to create gliders, gileders and pilots are required to create flights, etc.
 
@@ -66,7 +82,10 @@ Even if it is still actively maintained, regarding automated testing GVV can be 
 
 There is no automatic update of the project under test. It must be done manually or by the CI/CD pipeline.
 
-## Tests execution
+## Running Tests
+
+    GVV must be up and running on a target machine (the target machine can be your local computer). The target machine must have the correct PHP version installed (PHP 7.x in 2023). The Dusk tests require PHP > 8.1.x. This setting is done inside the test execution console before to launch the tests.
+
 
     php artisan dusk --browse
     or

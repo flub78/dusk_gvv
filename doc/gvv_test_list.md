@@ -41,10 +41,14 @@ Detailled tests of flights.
   
 ## Tests to develop
 
-* Emails and forgotten password
-* CRUD for all resources
-
 * Accounting tests
     * Accounting lines CRUD
+      * impact on accounts
+      * Sales and payments
+      *  
     * End of year reports
-    * 
+    * End of year operations
+    * Freeze date
+  
+* Emails and forgotten password
+* CRUD for all resources

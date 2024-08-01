@@ -1,195 +1,865 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="73" assertions="3743" errors="0" warnings="0" failures="0" skipped="0" time="959.872950">
-    <testsuite name="Browser Test Suite" tests="73" assertions="3743" errors="0" warnings="0" failures="0" skipped="0" time="959.872950">
-      <testsuite name="Tests\Browser\AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" tests="5" assertions="566" errors="0" warnings="0" failures="0" skipped="0" time="68.371435">
-        <testcase name="testAdminAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="11" assertions="142" time="14.861017"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="54" assertions="117" time="12.060883"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="98" assertions="116" time="17.416093"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="132" assertions="92" time="11.001140"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="163" assertions="99" time="13.032303"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" tests="3" assertions="15" errors="0" warnings="0" failures="0" skipped="0" time="16.254126">
-        <testcase name="testInit" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="33" assertions="12" time="11.725118"/>
-        <testcase name="testLogin" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="62" assertions="2" time="3.994868"/>
-        <testcase name="testLogout" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="129" assertions="1" time="0.534140"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" tests="5" assertions="529" errors="0" warnings="0" failures="0" skipped="0" time="63.516706">
-        <testcase name="testAdminAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="11" assertions="129" time="14.043554"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="59" assertions="117" time="12.254744"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="103" assertions="116" time="16.075175"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="143" assertions="68" time="9.359379"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="175" assertions="99" time="11.783853"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" tests="5" assertions="510" errors="0" warnings="0" failures="0" skipped="0" time="71.983303">
-        <testcase name="testAdminAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="11" assertions="119" time="17.910596"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="55" assertions="108" time="12.442195"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="99" assertions="107" time="18.863572"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="134" assertions="85" time="11.034579"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="166" assertions="91" time="11.732362"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" tests="1" assertions="108" errors="0" warnings="0" failures="0" skipped="0" time="45.674130">
-        <testcase name="testAccess" class="Tests\Browser\CIUnitTest" classname="Tests.Browser.CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" line="13" assertions="108" time="45.674130"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" tests="4" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="16.000751">
-        <testcase name="testInit" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="30" assertions="12" time="11.855377"/>
-        <testcase name="testLogin" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="61" assertions="2" time="3.697054"/>
-        <testcase name="testTest" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="73" assertions="1" time="0.011085"/>
-        <testcase name="testLogout" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="84" assertions="1" time="0.437235"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="28.464857">
-        <testcase name="testBasicExample" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="25" assertions="1" time="15.299627"/>
-        <testcase name="testGoogleSearch" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="39" assertions="1" time="2.189760"/>
-        <testcase name="testGvv" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="52" assertions="1" time="10.975471"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" tests="10" assertions="518" errors="0" warnings="0" failures="0" skipped="0" time="252.639659">
-        <testcase name="testInit" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="37" assertions="12" time="13.104957"/>
-        <testcase name="testLogin" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="46" assertions="2" time="3.747911"/>
-        <testcase name="testCreate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="56" assertions="36" time="20.708283"/>
-        <testcase name="testSingleSeater" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="120" assertions="11" time="4.733356"/>
-        <testcase name="testInFlight" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="222" assertions="90" time="87.314031"/>
-        <testcase name="testUpdate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="269" assertions="3" time="1.581527"/>
-        <testcase name="testDelete" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="298" assertions="1" time="1.025092"/>
-        <testcase name="testBilling" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="331" assertions="135" time="51.931264">
-          <system-out>
-Context Initial context:
-asterix balance = -53.5
-launch account balance = 73
-glider time account balance = 52.5
-purchases = 5
-lines = 14
-</system-out>
+  <testsuite name="" tests="75" assertions="2" errors="46" warnings="0" failures="0" skipped="28" time="135.111197">
+    <testsuite name="Browser Test Suite" tests="75" assertions="2" errors="46" warnings="0" failures="0" skipped="28" time="135.111197">
+      <testsuite name="Tests\Browser\AccountingLinesTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AccountingLinesTest.php" tests="2" assertions="0" errors="1" warnings="0" failures="0" skipped="1" time="3.030407">
+        <testcase name="testLogin" class="Tests\Browser\AccountingLinesTest" classname="Tests.Browser.AccountingLinesTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AccountingLinesTest.php" line="20" assertions="0" time="3.030407">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AccountingLinesTest::testLogin
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AccountingLinesTest.php:22</error>
         </testcase>
-        <testcase name="testSharing" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="494" assertions="227" time="68.041611">
-          <system-out>
-Context Initial Sharing context:
-asterix balance = -53.5
-goudurix balance = 200.34
-panoramix balance = 25.5
-launch account balance = 73
-glider time account balance = 52.5
-purchases = 5
-lines = 14
-
-Context After first created flight:
-asterix balance = -99.5
-goudurix balance = 200.34
-panoramix balance = 25.5
-launch account balance = 104
-glider time account balance = 67.5
-purchases = 8
-lines = 17
-
-Context After payer setting:
-asterix balance = -99.5
-goudurix balance = 200.34
-panoramix balance = 25.5
-launch account balance = 104
-glider time account balance = 67.5
-purchases = 8
-lines = 17
-
-Context After 100 percent:
-asterix balance = -53.5
-goudurix balance = 154.34
-panoramix balance = 25.5
-launch account balance = 104
-glider time account balance = 67.5
-purchases = 8
-lines = 17
-
-Context After 50 percent:
-asterix balance = -76.5
-goudurix balance = 177.34
-panoramix balance = 25.5
-launch account balance = 104
-glider time account balance = 67.5
-purchases = 11
-lines = 20
-
-Context Back to 100 percent:
-asterix balance = -53.5
-goudurix balance = 200.34
-panoramix balance = -20.5
-launch account balance = 104
-glider time account balance = 67.5
-purchases = 8
-lines = 17
-
-Context Back to 0 percent:
-asterix balance = -99.5
-goudurix balance = 200.34
-panoramix balance = 25.5
-launch account balance = 104
-glider time account balance = 67.5
-purchases = 8
-lines = 17
-</system-out>
+        <testcase name="testLogout" class="Tests\Browser\AccountingLinesTest" classname="Tests.Browser.AccountingLinesTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AccountingLinesTest.php" line="32" assertions="0" time="0.000000">
+          <skipped/>
         </testcase>
-        <testcase name="testLogout" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="706" assertions="1" time="0.451629"/>
       </testsuite>
-      <testsuite name="Tests\Browser\InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="9.268353">
-        <testcase name="testReset" class="Tests\Browser\InstallationTest" classname="Tests.Browser.InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" line="16" assertions="10" time="9.268353"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" tests="3" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="13.169165">
-        <testcase name="testHome" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="15" assertions="3" time="2.971934"/>
-        <testcase name="testFirstLogin" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="29" assertions="6" time="5.265275"/>
-        <testcase name="testAccess" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="45" assertions="5" time="4.931956"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" tests="2" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="12.624513">
-        <testcase name="testHome" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="14" assertions="3" time="2.557635"/>
-        <testcase name="testFirstLogin" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="28" assertions="11" time="10.066877"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" tests="5" assertions="536" errors="0" warnings="0" failures="0" skipped="0" time="68.619717">
-        <testcase name="testAdminAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="21" assertions="135" time="17.884728"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="65" assertions="108" time="11.188446"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="110" assertions="107" time="17.371489"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="146" assertions="84" time="10.644604"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="178" assertions="102" time="11.530450"/>
-      </testsuite>
-      <testsuite name="Tests\Browser\PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" tests="9" assertions="79" errors="0" warnings="0" failures="0" skipped="0" time="59.551203">
-        <testcase name="testInit" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="39" assertions="12" time="14.161718"/>
-        <testcase name="testLogin" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="48" assertions="2" time="3.793111"/>
-        <testcase name="testCreate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="57" assertions="7" time="10.757422"/>
-        <testcase name="testInFlight" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="178" assertions="1" time="0.008561"/>
-        <testcase name="testUpdate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="226" assertions="4" time="1.707397"/>
-        <testcase name="testDelete" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="256" assertions="2" time="1.207414"/>
-        <testcase name="testBilling" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="291" assertions="49" time="27.417231">
-          <system-out>
-Context Initial context:
-asterix balance = 8.2
-plane time account balance = 91.8
-purchases = 2
-lines = 11
-</system-out>
+      <testsuite name="Tests\Browser\AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" tests="5" assertions="0" errors="5" warnings="0" failures="0" skipped="0" time="14.416225">
+        <testcase name="testAdminAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="11" assertions="0" time="2.987558">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AdminAccessTest::testAdminAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php:13</error>
         </testcase>
-        <testcase name="testSharing" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="439" assertions="1" time="0.008047"/>
-        <testcase name="testLogout" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="639" assertions="1" time="0.490301"/>
+        <testcase name="testMembresAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="54" assertions="0" time="2.930838">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AdminAccessTest::testMembresAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php:56</error>
+        </testcase>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="98" assertions="0" time="2.822069">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AdminAccessTest::testPlaneursAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php:100</error>
+        </testcase>
+        <testcase name="testAvionsAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="132" assertions="0" time="2.825770">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AdminAccessTest::testAvionsAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php:134</error>
+        </testcase>
+        <testcase name="testComptaAccess" class="Tests\Browser\AdminAccessTest" classname="Tests.Browser.AdminAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php" line="163" assertions="0" time="2.849990">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AdminAccessTest::testComptaAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AdminAccessTest.php:164</error>
+        </testcase>
       </testsuite>
-      <testsuite name="Tests\Browser\PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="14.193572">
-        <testcase name="testAccess" class="Tests\Browser\PlaneurTest" classname="Tests.Browser.PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" line="13" assertions="10" time="14.193572"/>
+      <testsuite name="Tests\Browser\AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" tests="3" assertions="0" errors="3" warnings="0" failures="0" skipped="0" time="8.715657">
+        <testcase name="testInit" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="33" assertions="0" time="3.007970">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AircraftFlightTest::testInit
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php:34</error>
+        </testcase>
+        <testcase name="testLogin" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="62" assertions="0" time="2.866447">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AircraftFlightTest::testLogin
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php:63</error>
+        </testcase>
+        <testcase name="testLogout" class="Tests\Browser\AircraftFlightTest" classname="Tests.Browser.AircraftFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php" line="129" assertions="0" time="2.841239">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\AircraftFlightTest::testLogout
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php:130</error>
+        </testcase>
       </testsuite>
-      <testsuite name="Tests\Browser\SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" tests="6" assertions="243" errors="0" warnings="0" failures="0" skipped="0" time="124.249413">
-        <testcase name="testLogin" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="144" assertions="2" time="4.437151"/>
-        <testcase name="testCreateData" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="155" assertions="32" time="35.892957"/>
-        <testcase name="testAccountMovements" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="180" assertions="172" time="57.781497"/>
-        <testcase name="testPlaneFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="276" assertions="12" time="7.822971"/>
-        <testcase name="testGliderFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="350" assertions="24" time="17.661515"/>
-        <testcase name="testLogout" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="425" assertions="1" time="0.653322"/>
+      <testsuite name="Tests\Browser\BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" tests="5" assertions="0" errors="5" warnings="0" failures="0" skipped="0" time="14.595816">
+        <testcase name="testAdminAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="11" assertions="0" time="3.069488">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\BureauAccessTest::testAdminAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php:13</error>
+        </testcase>
+        <testcase name="testMembresAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="59" assertions="0" time="2.940098">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\BureauAccessTest::testMembresAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php:61</error>
+        </testcase>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="103" assertions="0" time="2.890462">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\BureauAccessTest::testPlaneursAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php:105</error>
+        </testcase>
+        <testcase name="testAvionsAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="143" assertions="0" time="2.893854">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\BureauAccessTest::testAvionsAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php:145</error>
+        </testcase>
+        <testcase name="testComptaAccess" class="Tests\Browser\BureauAccessTest" classname="Tests.Browser.BureauAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php" line="175" assertions="0" time="2.801914">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\BureauAccessTest::testComptaAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\BureauAccessTest.php:176</error>
+        </testcase>
       </testsuite>
-      <testsuite name="Tests\Browser\TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" tests="5" assertions="39" errors="0" warnings="0" failures="0" skipped="0" time="35.673305">
-        <testcase name="testLogin" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="121" assertions="2" time="5.961363"/>
-        <testcase name="testCreate" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="132" assertions="12" time="9.705989"/>
-        <testcase name="testCreateErrors" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="150" assertions="14" time="9.081432"/>
-        <testcase name="testDelete" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="160" assertions="10" time="10.422705"/>
-        <testcase name="testLogout" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="176" assertions="1" time="0.501816"/>
+      <testsuite name="Tests\Browser\CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" tests="5" assertions="0" errors="5" warnings="0" failures="0" skipped="0" time="14.530766">
+        <testcase name="testAdminAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="11" assertions="0" time="3.033273">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\CAAccessTest::testAdminAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php:13</error>
+        </testcase>
+        <testcase name="testMembresAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="55" assertions="0" time="2.908071">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\CAAccessTest::testMembresAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php:57</error>
+        </testcase>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="99" assertions="0" time="2.906372">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\CAAccessTest::testPlaneursAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php:101</error>
+        </testcase>
+        <testcase name="testAvionsAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="134" assertions="0" time="2.907616">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\CAAccessTest::testAvionsAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php:136</error>
+        </testcase>
+        <testcase name="testComptaAccess" class="Tests\Browser\CAAccessTest" classname="Tests.Browser.CAAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php" line="166" assertions="0" time="2.775434">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\CAAccessTest::testComptaAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CAAccessTest.php:167</error>
+        </testcase>
       </testsuite>
-      <testsuite name="Tests\Browser\UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" tests="5" assertions="533" errors="0" warnings="0" failures="0" skipped="0" time="59.618742">
-        <testcase name="testAdminAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="21" assertions="135" time="15.326072"/>
-        <testcase name="testMembresAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="65" assertions="108" time="10.843203"/>
-        <testcase name="testPlaneursAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="110" assertions="105" time="12.815200"/>
-        <testcase name="testAvionsAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="146" assertions="83" time="10.108201"/>
-        <testcase name="testComptaAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="178" assertions="102" time="10.526066"/>
+      <testsuite name="Tests\Browser\CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="3.045553">
+        <testcase name="testAccess" class="Tests\Browser\CIUnitTest" classname="Tests.Browser.CIUnitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php" line="13" assertions="0" time="3.045553">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\CIUnitTest::testAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\CIUnitTest.php:14</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" tests="4" assertions="0" errors="1" warnings="0" failures="0" skipped="3" time="3.011615">
+        <testcase name="testInit" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="30" assertions="0" time="3.011615">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\DbInitTest::testInit
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php:31</error>
+        </testcase>
+        <testcase name="testLogin" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="61" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testTest" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="73" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testLogout" class="Tests\Browser\DbInitTest" classname="Tests.Browser.DbInitTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\DbInitTest.php" line="84" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" tests="3" assertions="0" errors="3" warnings="0" failures="0" skipped="0" time="8.763154">
+        <testcase name="testBasicExample" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="25" assertions="0" time="3.077195">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\ExampleTest::testBasicExample
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php:27</error>
+        </testcase>
+        <testcase name="testGoogleSearch" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="39" assertions="0" time="2.846605">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\ExampleTest::testGoogleSearch
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php:42</error>
+        </testcase>
+        <testcase name="testGvv" class="Tests\Browser\ExampleTest" classname="Tests.Browser.ExampleTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php" line="52" assertions="0" time="2.839354">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\ExampleTest::testGvv
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\ExampleTest.php:54</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" tests="10" assertions="0" errors="1" warnings="0" failures="0" skipped="9" time="3.101938">
+        <testcase name="testInit" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="37" assertions="0" time="3.101938">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\GliderFlightTest::testInit
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php:34
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php:38</error>
+        </testcase>
+        <testcase name="testLogin" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="46" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCreate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="56" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testSingleSeater" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="120" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testInFlight" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="222" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testUpdate" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="269" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testDelete" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="298" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testBilling" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="331" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testSharing" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="494" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testLogout" class="Tests\Browser\GliderFlightTest" classname="Tests.Browser.GliderFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\GliderFlightTest.php" line="706" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="3.052402">
+        <testcase name="testReset" class="Tests\Browser\InstallationTest" classname="Tests.Browser.InstallationTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php" line="16" assertions="0" time="3.052402">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\InstallationTest::testReset
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\InstallationTest.php:17</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" tests="3" assertions="0" errors="3" warnings="0" failures="0" skipped="0" time="8.822388">
+        <testcase name="testHome" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="15" assertions="0" time="3.113070">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\LoginTest::testHome
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php:16</error>
+        </testcase>
+        <testcase name="testFirstLogin" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="29" assertions="0" time="2.854793">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\LoginTest::testFirstLogin
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php:30</error>
+        </testcase>
+        <testcase name="testAccess" class="Tests\Browser\LoginTest" classname="Tests.Browser.LoginTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php" line="45" assertions="0" time="2.854525">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\LoginTest::testAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\LoginTest.php:46</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" tests="2" assertions="0" errors="2" warnings="0" failures="0" skipped="0" time="5.897617">
+        <testcase name="testHome" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="14" assertions="0" time="3.063391">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\MotdTest::testHome
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php:15</error>
+        </testcase>
+        <testcase name="testFirstLogin" class="Tests\Browser\MotdTest" classname="Tests.Browser.MotdTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php" line="28" assertions="0" time="2.834225">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\MotdTest::testFirstLogin
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\MotdTest.php:29</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" tests="5" assertions="0" errors="5" warnings="0" failures="0" skipped="0" time="14.472928">
+        <testcase name="testAdminAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="21" assertions="0" time="3.023845">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlanchisteAccessTest::testAdminAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php:23</error>
+        </testcase>
+        <testcase name="testMembresAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="65" assertions="0" time="2.836472">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlanchisteAccessTest::testMembresAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php:67</error>
+        </testcase>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="110" assertions="0" time="2.905070">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlanchisteAccessTest::testPlaneursAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php:112</error>
+        </testcase>
+        <testcase name="testAvionsAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="146" assertions="0" time="2.844357">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlanchisteAccessTest::testAvionsAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php:148</error>
+        </testcase>
+        <testcase name="testComptaAccess" class="Tests\Browser\PlanchisteAccessTest" classname="Tests.Browser.PlanchisteAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php" line="178" assertions="0" time="2.863185">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlanchisteAccessTest::testComptaAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlanchisteAccessTest.php:180</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" tests="9" assertions="2" errors="2" warnings="0" failures="0" skipped="6" time="5.909763">
+        <testcase name="testInit" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="39" assertions="0" time="3.049207">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlaneFlightTest::testInit
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\AircraftFlightTest.php:34
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php:40</error>
+        </testcase>
+        <testcase name="testLogin" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="48" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCreate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="57" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testInFlight" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="178" assertions="1" time="0.010026"/>
+        <testcase name="testUpdate" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="226" assertions="1" time="2.850530">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlaneFlightTest::testUpdate
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php:228</error>
+        </testcase>
+        <testcase name="testDelete" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="256" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testBilling" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="291" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testSharing" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="439" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testLogout" class="Tests\Browser\PlaneFlightTest" classname="Tests.Browser.PlaneFlightTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneFlightTest.php" line="639" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="3.029795">
+        <testcase name="testAccess" class="Tests\Browser\PlaneurTest" classname="Tests.Browser.PlaneurTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php" line="13" assertions="0" time="3.029795">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\PlaneurTest::testAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\PlaneurTest.php:15</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" tests="6" assertions="0" errors="1" warnings="0" failures="0" skipped="5" time="3.082598">
+        <testcase name="testLogin" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="144" assertions="0" time="3.082598">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\SmokeTest::testLogin
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php:146</error>
+        </testcase>
+        <testcase name="testCreateData" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="155" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testAccountMovements" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="180" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testPlaneFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="276" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testGliderFlight" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="350" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testLogout" class="Tests\Browser\SmokeTest" classname="Tests.Browser.SmokeTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\SmokeTest.php" line="425" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" tests="5" assertions="0" errors="1" warnings="0" failures="0" skipped="4" time="3.096164">
+        <testcase name="testLogin" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="121" assertions="0" time="3.096164">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\TerrainTest::testLogin
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php:123</error>
+        </testcase>
+        <testcase name="testCreate" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="132" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCreateErrors" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="150" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testDelete" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="160" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testLogout" class="Tests\Browser\TerrainTest" classname="Tests.Browser.TerrainTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\TerrainTest.php" line="176" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Browser\UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" tests="5" assertions="0" errors="5" warnings="0" failures="0" skipped="0" time="14.536411">
+        <testcase name="testAdminAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="21" assertions="0" time="3.111204">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\UserAccessTest::testAdminAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php:23</error>
+        </testcase>
+        <testcase name="testMembresAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="65" assertions="0" time="2.829343">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\UserAccessTest::testMembresAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php:67</error>
+        </testcase>
+        <testcase name="testPlaneursAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="110" assertions="0" time="2.888285">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\UserAccessTest::testPlaneursAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php:112</error>
+        </testcase>
+        <testcase name="testAvionsAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="146" assertions="0" time="2.851516">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\UserAccessTest::testAvionsAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php:148</error>
+        </testcase>
+        <testcase name="testComptaAccess" class="Tests\Browser\UserAccessTest" classname="Tests.Browser.UserAccessTest" file="C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php" line="178" assertions="0" time="2.856063">
+          <error type="Facebook\WebDriver\Exception\SessionNotCreatedException">Tests\Browser\UserAccessTest::testComptaAccess
+Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 113
+Current browser version is 127.0.6533.74 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:130
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:359
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:129
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\DuskTestCase.php:43
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:219
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\framework\src\Illuminate\Support\helpers.php:234
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:218
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:98
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:66
+C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\tests\Browser\UserAccessTest.php:180</error>
+        </testcase>
       </testsuite>
     </testsuite>
   </testsuite>
