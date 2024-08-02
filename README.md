@@ -42,11 +42,11 @@ and a testadmin / password acount must exists
 
 ## In case of incorrect chrome-driver version
 
-This command does not work with the latest versions of chromedriver
+The following command does not work any more with the latest versions of chromedriver
 
     php artisan dusk:chrome-driver
 
-To update
+Current method
 
     https://googlechromelabs.github.io/chrome-for-testing/
 
@@ -84,8 +84,14 @@ There is no automatic update of the project under test. It must be done manually
 
 ## Running Tests
 
-    GVV must be up and running on a target machine (the target machine can be your local computer). The target machine must have the correct PHP version installed (PHP 7.x in 2023). The Dusk tests require PHP > 8.1.x. This setting is done inside the test execution console before to launch the tests.
+    The GVV server to test must be up and running. (maybe locally). The target machine must have the correct PHP version installed (PHP 7.x in 2023). The Dusk tests require PHP > 8.1.x. This setting is done inside the test execution console before to launch the tests.
 
+    Environment variables must be set to the correct values.
+    TARGET
+    TEST_USER
+    TEST_PASSWORD
+
+    Test execution does not require a local WEB server, only a WEB server for the program under test.
 
     php artisan dusk --browse
     or
