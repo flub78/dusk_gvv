@@ -4,9 +4,20 @@ namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
+use PHPUnit\Framework\Assert;
 
 class AdminAccessTest extends GvvDuskTestCase {
 
+
+    public function testEnv() {
+        $this->browse(function (Browser $browser) {
+            $base_url = env('TARGET');
+
+            Assert::assertNotEmpty($base_url, "TARGET env var is not set");
+            Assert::assertNotEmpty(env('TEST_USER'), "TEST_USER env var is not set");
+            Assert::assertNotEmpty(env('TEST_PASSWORD'), "TEST_PASSWORD env var is not set");
+        });
+    }
 
     public function testAdminAccess() {
         // $this->markTestSkipped('Speedup during dev.');

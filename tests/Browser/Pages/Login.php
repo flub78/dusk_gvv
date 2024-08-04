@@ -5,16 +5,14 @@ namespace Tests\Browser\Pages;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page;
 
-class Login extends Page
-{
+class Login extends Page {
     /**
      * Get the URL for the page.
      *
      * @return string
      */
-    public function url()
-    {
-        $base_url = env('TARGET', 'https://gvv.flub78.net/gvv/');
+    public function url() {
+        $base_url = env('TARGET');
         return $base_url . 'index.php/auth/login';
     }
 
@@ -24,8 +22,7 @@ class Login extends Page
      * @param  Browser  $browser
      * @return void
      */
-    public function assert(Browser $browser)
-    {
+    public function assert(Browser $browser) {
         $browser->assertSee('Utilisateur');
     }
 
@@ -34,8 +31,7 @@ class Login extends Page
      *
      * @return array
      */
-    public function elements()
-    {
+    public function elements() {
         return [
             '@element' => '#selector',
         ];
