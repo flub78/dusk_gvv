@@ -61,7 +61,21 @@ class PlaneFlightTest extends AircraftFlightTest {
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
 
             $latest = $plane_flight_handler->latestFlight();
-            $flightDate = $this->NextDate($latest, 'vadate');
+            $dateFormat = "d/m/Y";
+            if ($latest) {
+                // There is a flight, we take the date of the last flight and add one day
+                $latest_date = $latest->vadate;
+                $date = new \DateTime($latest_date);
+                $date->modify('+1 day');
+
+                $now = new \DateTime('Europe/Paris');
+                if ($now->format('Y') != $date->format('Y')) {
+                    $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+                }
+            } else {
+                $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+            }
+            $flightDate = $date->format($dateFormat);
 
             $flights = [
                 [
@@ -95,13 +109,13 @@ class PlaneFlightTest extends AircraftFlightTest {
             ];
 
             $id = 0;
-            $flights[$id]['image'] = 
-                $flights[$id]['date'] . " " . 
+            $flights[$id]['image'] =
+                $flights[$id]['date'] . " " .
                 $flights[$id]['start_meter'] . " " .
                 $flights[$id]['plane'];
             $id = 1;
-            $flights[$id]['image'] = 
-                $flights[$id]['date'] . " " . 
+            $flights[$id]['image'] =
+                $flights[$id]['date'] . " " .
                 $flights[$id]['start_meter'] . " " .
                 $flights[$id]['plane'];
 
@@ -176,7 +190,8 @@ class PlaneFlightTest extends AircraftFlightTest {
      *      - Asterix on F-JUFA from 12:16 to 13:00
      */
     public function testInFlight() {
-        $this->assertTrue(true); return;
+        $this->assertTrue(true);
+        return;
         $this->browse(function (Browser $browser) {
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
@@ -224,7 +239,7 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testInFlight
      */
     public function testUpdate() {
-        $this->assertTrue(true); 
+        $this->assertTrue(true);
         $this->browse(function (Browser $browser) {
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
@@ -254,7 +269,7 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testUpdate
      */
     public function testDelete() {
-        $this->assertTrue(true); 
+        $this->assertTrue(true);
         $this->browse(function (Browser $browser) {
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
@@ -319,8 +334,8 @@ class PlaneFlightTest extends AircraftFlightTest {
                 ],
             ];
             $id = 0;
-            $flights[$id]['image'] = 
-                $flights[$id]['date'] . " " . 
+            $flights[$id]['image'] =
+                $flights[$id]['date'] . " " .
                 $flights[$id]['start_meter'] . " " .
                 $flights[$id]['plane'];
 
@@ -391,7 +406,7 @@ class PlaneFlightTest extends AircraftFlightTest {
             //     'categorie' => 'standard',
             // ];
             // $plane_flight_handler->UpdatePlaneFLight($update);
-            
+
             // $new_context = $this->FlightAndBillingContext($browser, $acounts);
             // $deltas = $this->CompareContexes($context, $new_context);
             // $expected = [
@@ -437,9 +452,11 @@ class PlaneFlightTest extends AircraftFlightTest {
      * @depends testBilling
      */
     public function testSharing() {
-        $this->assertTrue(true); return;
+        $this->assertTrue(true);
+        return;
         $this->browse(function (Browser $browser) {
-            $this->assertTrue(true); return;
+            $this->assertTrue(true);
+            return;
 
             $plane_flight_handler = new PlaneFlightHandler($browser, $this);
             $account_handler = new AccountHandler($browser, $this);
@@ -613,7 +630,7 @@ class PlaneFlightTest extends AircraftFlightTest {
                 'lines' => 3
             ];
             $this->ExpectedDifferences($expected, $deltas, "Back to 0 percent");
-            
+
             // Flight delete
             $this->canAccess($browser, 'vols_avion/delete/' . $id);
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
