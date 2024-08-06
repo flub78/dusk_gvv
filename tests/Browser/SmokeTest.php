@@ -15,8 +15,7 @@ use Tests\libraries\PlaneFlightHandler;
 use Tests\libraries\GliderFlightHandler;
 
 /**
- * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases. When the smoke test passes, it means that the application is able to handle the basic nominal cases. 
- * 
+ * The smoke test creates enough pilots, planes, terrains, flights, accounts, etc. to test a set of basic nominal cases. 
  * This test is also used to generate a standard data test set for others tests.
  * 
  * Dependencies
@@ -95,42 +94,54 @@ class SmokeTest extends GvvDuskTestCase {
             ['ref' => 'Remorqué 300m', 'description' => 'Remorqué 300', 'prix' => '15', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'Remorqué 100m', 'description' => 'Remorqué 100', 'prix' => '3', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
-            ['ref' => 'Treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],        
-            ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],        
-            ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],        
-            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706', "date" => "01/01/2021"], 
-            ['ref' => 'gratuit', 'description' => 'non facturé', 'prix' => '0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],           
+            ['ref' => 'Treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'gratuit', 'description' => 'non facturé', 'prix' => '0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
         ];
 
         $this->members = [
-            ['id' => 'asterix', 'nom' => 'Le Gaulois', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
-            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
-            'treuillard' => true ],
+            [
+                'id' => 'asterix', 'nom' => 'Le Gaulois', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
+                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+                'treuillard' => true
+            ],
 
-            ['id' => 'goudurix', 'nom' => 'Le Gaulois', 'prenom' => 'Goudurix', 'email' => 'goudurix@flub78.net',
-            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Village Gaulois'],
+            [
+                'id' => 'goudurix', 'nom' => 'Le Gaulois', 'prenom' => 'Goudurix', 'email' => 'goudurix@flub78.net',
+                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Village Gaulois'
+            ],
 
-            ['id' => 'panoramix', 'nom' => 'Le Gaulois', 'prenom' => 'Panoramix', 'email' => 'panoramix@flub78.net',
-            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
-            'fi_planeur' => true , 'fe_planeur' => true, 'fi_avion' => true , 'fe_avion' => true],
+            [
+                'id' => 'panoramix', 'nom' => 'Le Gaulois', 'prenom' => 'Panoramix', 'email' => 'panoramix@flub78.net',
+                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+                'fi_planeur' => true, 'fe_planeur' => true, 'fi_avion' => true, 'fe_avion' => true
+            ],
 
-            ['id' => 'abraracourcix', 'nom' => 'Le Gaulois', 'prenom' => 'Abraracourcix', 'email' => 'abraracourcix@flub78.net',
-            'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
-            'remorqueur' => true],
+            [
+                'id' => 'abraracourcix', 'nom' => 'Le Gaulois', 'prenom' => 'Abraracourcix', 'email' => 'abraracourcix@flub78.net',
+                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+                'remorqueur' => true
+            ],
 
         ];
 
         $this->gliders = [
-            ['immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher',
-             'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'],
-            ['immat' => 'F-CGAB', 'type' => 'Pégase', 'nb_places' => '1', 'numc' => 'EG', 'construct' => 'Centrair',
-            'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'],
+            [
+                'immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher',
+                'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'
+            ],
+            [
+                'immat' => 'F-CGAB', 'type' => 'Pégase', 'nb_places' => '1', 'numc' => 'EG', 'construct' => 'Centrair',
+                'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'
+            ],
             ['immat' => 'F-CGAC', 'type' => 'DG800', 'nb_places' => '1', 'numc' => 'AC', 'construct' => 'DG'],
         ];
 
         $this->planes = [
-            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'remorqueur' => true, 'prix' => 'hdv-ULM', 'prix_dc' => 'hdv-ULM' ],
-            ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'remorqueur' => false ]
+            ['immat' => 'F-JUFA', 'type' => 'Dynamic', 'nb_places' => '2', 'construct' => 'Aeropol', 'remorqueur' => true, 'prix' => 'hdv-ULM', 'prix_dc' => 'hdv-ULM'],
+            ['immat' => 'F-GUFB', 'type' => 'DR400', 'nb_places' => '4', 'construct' => 'Robin', 'remorqueur' => false]
         ];
     }
 
@@ -162,7 +173,7 @@ class SmokeTest extends GvvDuskTestCase {
             $glider_handler = new GliderHandler($browser, $this);
             $plane_handler = new PlaneHandler($browser, $this);
             $member_handler = new MemberHandler($browser, $this);
-            
+
             $account_code_handler->CreateAccountCodes($this->accountsChart);
             $account_handler->CreateAccounts($this->accounts);
             $product_handler->CreateProducts($this->products);
@@ -191,68 +202,86 @@ class SmokeTest extends GvvDuskTestCase {
             $this->assertGreaterThan('-1', $asterix_id,  "Asterix account id = " . $asterix_id);
 
             $movements = [
-                ['url' => 'compta/reglement_pilote',
-                'account1' => '(512) Banque',
-                'account2' => '(411) Le Gaulois Asterix',
-                'amount' => '100',
-                'description' => "Avance sur vols",
-                'reference' => "AV-1"],
+                [
+                    'url' => 'compta/reglement_pilote',
+                    'account1' => '(512) Banque',
+                    'account2' => '(411) Le Gaulois Asterix',
+                    'amount' => '100',
+                    'description' => "Avance sur vols",
+                    'reference' => "AV-1"
+                ],
 
-                ['url' => 'compta/reglement_pilote',
-                'account1' => '(512) Banque',
-                'account2' => '(411) Le Gaulois Goudurix',
-                'amount' => '250.47',
-                'description' => "Avance avec décimals",
-                'reference' => "Petites pièces"],
+                [
+                    'url' => 'compta/reglement_pilote',
+                    'account1' => '(512) Banque',
+                    'account2' => '(411) Le Gaulois Goudurix',
+                    'amount' => '250.47',
+                    'description' => "Avance avec décimals",
+                    'reference' => "Petites pièces"
+                ],
 
-                ['url' => 'compta/factu_pilote',
-                'account1' => '(411) Le Gaulois Goudurix',
-                'account2' => '(706) Remorqués',
-                'amount' => '23',
-                'description' => "Facturation manuelle de remorqués",
-                'reference' => "Facture d'un autre club"],
+                [
+                    'url' => 'compta/factu_pilote',
+                    'account1' => '(411) Le Gaulois Goudurix',
+                    'account2' => '(706) Remorqués',
+                    'amount' => '23',
+                    'description' => "Facturation manuelle de remorqués",
+                    'reference' => "Facture d'un autre club"
+                ],
 
-                ['url' => 'compta/recettes',
-                'account1' => '(512) Banque',
-                'account2' => '(74) Subventions',
-                'amount' => '500',
-                'description' => "Subvention d'aide à la formation",
-                'reference' => "Relevé CDN"],
+                [
+                    'url' => 'compta/recettes',
+                    'account1' => '(512) Banque',
+                    'account2' => '(74) Subventions',
+                    'amount' => '500',
+                    'description' => "Subvention d'aide à la formation",
+                    'reference' => "Relevé CDN"
+                ],
 
-                ['url' => 'compta/avoir_fournisseur',
-                'account1' => '(401) Atelier de la Somme',
-                'account2' => '(615) Entretien',
-                'amount' => '350',
-                'description' => "Trop perçu sur facture",
-                'reference' => "Facture 4712"],
+                [
+                    'url' => 'compta/avoir_fournisseur',
+                    'account1' => '(401) Atelier de la Somme',
+                    'account2' => '(615) Entretien',
+                    'amount' => '350',
+                    'description' => "Trop perçu sur facture",
+                    'reference' => "Facture 4712"
+                ],
 
-                ['url' => 'compta/depenses',
-                'account1' => '(606) Essence plus huile',
-                'account2' => '(512) Banque',
-                'amount' => '125.5',
-                'description' => "Achat d'essence",
-                'reference' => "Chèque 413"],
+                [
+                    'url' => 'compta/depenses',
+                    'account1' => '(606) Essence plus huile',
+                    'account2' => '(512) Banque',
+                    'amount' => '125.5',
+                    'description' => "Achat d'essence",
+                    'reference' => "Chèque 413"
+                ],
 
-                ['url' => 'compta/credit_pilote',
-                'account1' => '(606) Frais de bureau',
-                'account2' => '(411) Le Gaulois Panoramix',
-                'amount' => '25.5',
-                'description' => "Remboursement fournitures de bureau",
-                'reference' => "Facture XX78"],
+                [
+                    'url' => 'compta/credit_pilote',
+                    'account1' => '(606) Frais de bureau',
+                    'account2' => '(411) Le Gaulois Panoramix',
+                    'amount' => '25.5',
+                    'description' => "Remboursement fournitures de bureau",
+                    'reference' => "Facture XX78"
+                ],
 
-                ['url' => 'compta/debit_pilote',
-                'account1' => '(411) Le Gaulois Goudurix',
-                'account2' => '(512) Banque',
-                'amount' => '27.13',
-                'description' => "Remboursement de solde pilote",
-                'reference' => "Chèque CDN1027"],
+                [
+                    'url' => 'compta/debit_pilote',
+                    'account1' => '(411) Le Gaulois Goudurix',
+                    'account2' => '(512) Banque',
+                    'amount' => '27.13',
+                    'description' => "Remboursement de solde pilote",
+                    'reference' => "Chèque CDN1027"
+                ],
 
-                ['url' => 'compta/utilisation_avoir_fournisseur',
-                'account1' => '(615) Entretien',
-                'account2' => '(401) Atelier de la Somme',
-                'amount' => '350',
-                'description' => "Utilisation avoir fournisseur",
-                'reference' => "Facture 4712"],
+                [
+                    'url' => 'compta/utilisation_avoir_fournisseur',
+                    'account1' => '(615) Entretien',
+                    'account2' => '(401) Atelier de la Somme',
+                    'amount' => '350',
+                    'description' => "Utilisation avoir fournisseur",
+                    'reference' => "Facture 4712"
+                ],
 
                 // ['url' => 'compta/virement',
                 // 'account1' => '(512) Banque',
@@ -304,9 +333,15 @@ class SmokeTest extends GvvDuskTestCase {
             $latest = $plane_flight_handler->latestFlight();
             $dateFormat = "d/m/Y";
             if ($latest) {
+                // There is a flight, we take the date of the last flight and add one day
                 $latest_date = $latest->vadate;
                 $date = new \DateTime($latest_date);
                 $date->modify('+1 day');
+
+                $now = new \DateTime('Europe/Paris');
+                if ($now->format('Y') != $date->format('Y')) {
+                    $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+                }
             } else {
                 $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
             }
@@ -328,7 +363,7 @@ class SmokeTest extends GvvDuskTestCase {
                 'end_meter' => $end_meter,
                 'image' => $image
             ];
-            
+
 
             $plane_flight_handler->CreatePlaneFlights([$fligt]);
 
@@ -361,8 +396,13 @@ class SmokeTest extends GvvDuskTestCase {
                 $latest_date = $latest->vpdate;
                 $date = new \DateTime($latest_date);
                 $date->modify('+1 day');
+
+                $now = new \DateTime('Europe/Paris');
+                if ($now->format('Y') != $date->format('Y')) {
+                    $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+                }
             } else {
-                 $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
+                $date = new \DateTime('first day of January this year', new \DateTimeZone('Europe/Paris'));
             }
             $flightDate = $date->format($dateFormat);
 
@@ -387,7 +427,7 @@ class SmokeTest extends GvvDuskTestCase {
                     'pilot' => 'asterix',
                     'glider' => 'F-CGAA',
                     'instructor' => 'panoramix',
-                    'DC' =>  true,       
+                    'DC' =>  true,
                     'start_time' => '10:00',
                     'end_time' => '10:30',
                     'tow_pilot' => 'abraracourcix',
@@ -396,6 +436,7 @@ class SmokeTest extends GvvDuskTestCase {
                     'launch' => 'R',   // R, T, A, E
                     'account' => "(411) Le Gaulois Asterix",
                     'price' => 40.0,
+                    'vplieudeco' => 'LFOI',
                 ],
                 [
                     'url' => 'vols_planeur/create',
@@ -403,18 +444,18 @@ class SmokeTest extends GvvDuskTestCase {
                     'pilot' => 'goudurix',
                     'glider' => 'F-CGAA',
                     'instructor' => 'panoramix',
-                    'DC' =>  true,       
+                    'DC' =>  true,
                     'start_time' => '11:00',
                     'end_time' => '12:15',
                     'winch_man' => 'asterix',
                     'launch' => 'T',   // R, T, A, E
                     'account' => "(411) Le Gaulois Goudurix",
                     'price' => 45.5,
-                ],                
-        ];
+                    'vplieudeco' => 'LFOI',
+                ],
+            ];
 
             $glider_flight_handler->CreateGliderFlights($flights);
-
         });
     }
 

@@ -49,7 +49,7 @@ class PlaneFlightHandler {
             return false;
         }
         return true;
-    }   
+    }
 
 
     /** 
@@ -145,7 +145,8 @@ class PlaneFlightHandler {
 
             $this->browser
                 ->press('#validate')
-                ->assertDontSee('404');
+                ->assertDontSee('404')
+                ->assertDontSee('existe pas dans les tarifs');
 
             $this->browser->screenshot('after_flight');
 
@@ -155,7 +156,7 @@ class PlaneFlightHandler {
             );
 
             $new_flight_number = $total = $this->tc->TableTotal($this->browser, "vols_avion/page");
-            
+
             $this->tc->assertEquals($flight_number + 1, $new_flight_number, "Flight number = " . $new_flight_number);
         }
     }
@@ -172,9 +173,9 @@ class PlaneFlightHandler {
 
         $this->browser
             ->press('#validate')
-            ->assertDontSee('404');        
+            ->assertDontSee('404');
     }
-    
+
     /**
      * Get the latest flight in the database
      */
@@ -207,5 +208,5 @@ class PlaneFlightHandler {
         $obj = json_decode($json);
         if ($obj) return $obj->count;
         return -1;
-    }    
+    }
 }

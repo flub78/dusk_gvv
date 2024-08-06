@@ -145,6 +145,10 @@ class GliderFlightHandler {
             $this->browser->select('payeur', $flight['payeur']);
         }
 
+        if (array_key_exists('vplieudeco', $flight)) {
+            $this->browser->select('vplieudeco', $flight['vplieudeco']);
+        }
+
         if (array_key_exists('pourcentage', $flight)) {
             switch ($flight['pourcentage']) {
                 case '0':
@@ -207,7 +211,8 @@ class GliderFlightHandler {
 
             $this->browser
                 ->press('#validate')
-                ->assertDontSee('404');
+                ->assertDontSee('404')
+                ->assertDontSee('existe pas dans les tarifs');
 
             $this->browser->screenshot('after_glider_flight');
 
@@ -242,7 +247,6 @@ class GliderFlightHandler {
                 $cost = $total - $new_total;
 
                 $epsilon = 0.000001;
-                //$this->tc->assertLessThan($epsilon, abs($cost - $price), "Flight cost $cost = $price");
                 $this->tc->assertEqualsWithDelta($price, $cost, $epsilon, "Flight cost $cost = $price");
             }
         }
@@ -261,7 +265,6 @@ class GliderFlightHandler {
         $this->browser
             ->press('#validate')
             ->assertDontSee('404');
-        
     }
 
     /**

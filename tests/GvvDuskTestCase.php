@@ -5,6 +5,7 @@ namespace Tests;
 use Tests\DuskTestCase;
 use Tests\Browser\Pages\Login;
 use Exception;
+use PHPUnit\Framework\Assert;
 
 class GvvDuskTestCase extends DuskTestCase {
 
@@ -19,6 +20,10 @@ class GvvDuskTestCase extends DuskTestCase {
      * Login as a user.
      */
     public function login($browser, $username, $password) {
+
+        Assert::assertNotEmpty($username, "TEST_USER env var is not set");
+        Assert::assertNotEmpty($password, "TEST_PASSWORD env var is not set");
+
         $browser->visit(new Login)
             ->screenshot('before_login')
             ->waitForText('Utilisateur')
@@ -181,5 +186,4 @@ class GvvDuskTestCase extends DuskTestCase {
         }
         return $sel;
     }
-
 }
