@@ -27,7 +27,7 @@ use Tests\libraries\GliderHandler;
  *  - certificates
  */
 
-class GliderFlightTest extends AircraftFlightTest { 
+class GliderFlightTest extends AircraftFlightTest {
 
     /**
      * Check that the installation can be reset and installed
@@ -76,6 +76,7 @@ class GliderFlightTest extends AircraftFlightTest {
                     'tow_plane' => 'F-JUFA',
                     'account' => "(411) Le Gaulois Asterix",
                     'price' => 40.0,
+                    'vplieudeco' => 'LFOI',
                 ],
                 [
                     'url' => 'vols_planeur/create',
@@ -90,6 +91,7 @@ class GliderFlightTest extends AircraftFlightTest {
                     'launch' => 'T',   // R, T, A, E
                     'account' => "(411) Le Gaulois Goudurix",
                     'price' => 45.5,
+                    'vplieudeco' => 'LFOI',
                 ],
                 [
                     'url' => 'vols_planeur/create',
@@ -105,6 +107,7 @@ class GliderFlightTest extends AircraftFlightTest {
                     'tow_plane' => 'F-JUFA',
                     'account' => "(411) Le Gaulois Asterix",
                     'price' => 62.5,
+                    'vplieudeco' => 'LFOI',
                 ],
             ];
 
@@ -446,7 +449,7 @@ class GliderFlightTest extends AircraftFlightTest {
                 'categorie' => 'standard',
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
-            
+
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -679,7 +682,7 @@ class GliderFlightTest extends AircraftFlightTest {
                 'lines' => 3
             ];
             $this->ExpectedDifferences($expected, $deltas, "Back to 0 percent");
-            
+
             // Flight delete
             $this->canAccess($browser, 'vols_planeur/delete/' . $id);
             $new_context = $this->FlightAndBillingContext($browser, $acounts);
