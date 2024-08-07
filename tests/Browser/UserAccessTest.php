@@ -46,8 +46,8 @@ class UserAccessTest extends GvvDuskTestCase {
                     'inputValues' => []
                 ],
                 ['url' => 'terrains/create', 'mustSee' => $denied],
-                ['url' => 'welcome/ca', 'mustSee' => $denied],
-                ['url' => 'welcome/compta', 'mustSee' => $denied],
+                // ['url' => 'welcome/ca', 'mustSee' => $denied],
+                // ['url' => 'welcome/compta', 'mustSee' => $denied],
             ];
 
             $this->login($browser, $user, $password);

@@ -141,6 +141,7 @@ class PlaneFlightHandler {
 
             $this->FillFields($flight);
 
+            $this->browser->script('window.scrollTo(0,document.body.scrollHeight)');
             $this->browser->screenshot('a_before_flight');
 
             $this->browser
@@ -170,6 +171,8 @@ class PlaneFlightHandler {
         $this->tc->canAccess($this->browser, $url);
 
         $this->FillFields($flight);
+
+        $this->browser->script('window.scrollTo(0,document.body.scrollHeight)');
 
         $this->browser
             ->press('#validate')

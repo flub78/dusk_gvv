@@ -208,6 +208,8 @@ class GliderFlightHandler {
             $this->FillFields($flight);
 
             $this->browser->screenshot('before_glider_flight');
+            $this->browser->script('window.scrollTo(0,document.body.scrollHeight)');
+            $this->browser->screenshot('before_glider_flight_after_scrolling');
 
             $this->browser
                 ->press('#validate')
@@ -261,6 +263,10 @@ class GliderFlightHandler {
         $this->tc->canAccess($this->browser, $url);
 
         $this->FillFields($flight);
+
+        $this->browser->script('window.scrollTo(0,document.body.scrollHeight)');
+
+        sleep(1);
 
         $this->browser
             ->press('#validate')
