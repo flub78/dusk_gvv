@@ -13,7 +13,7 @@ class GvvDuskTestCase extends DuskTestCase {
 
     function __construct() {
         parent::__construct();
-        $this->url = env('TARGET', 'https://gvv.flub78.net/gvv/');
+        $this->url = env('TARGET');
     }
 
     /**
@@ -27,6 +27,7 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->visit(new Login)
             ->screenshot('before_login')
             ->waitForText('Utilisateur')
+            ->waitForText('Mot de passe')
             ->waitForText('Peignot')
             ->type('username', $username)
             ->type('password', $password)
@@ -44,16 +45,19 @@ class GvvDuskTestCase extends DuskTestCase {
         $browser->click('@user_icon')
             ->clickLink('Quitter')
             ->waitForText('Utilisateur')
-            ->assertSee('Utilisateur');
+            ->assertSee('Utilisateur')
+            ->assertSee('Mot de passe');
     }
 
     public function IsLoggedIn($browser) {
-        $browser->assertSee('Compta');
+        $browser->assertSee('Membres')
+            ->assertSee('Planeurs');
     }
 
     public function IsLoggedOut($browser) {
         $browser->assertDontSee('Planeurs');
-        $browser->assertSee('Utilisateur');
+        $browser->assertSee('Utilisateur')
+            ->assertSee('Mot de passe');
     }
 
     public function fullUrl($suburl) {
@@ -68,8 +72,11 @@ class GvvDuskTestCase extends DuskTestCase {
         if ($this->verbose()) {
             echo ("Visiting $url\n");
         }
+        $browser->storeConsoleLog('console1.log');
+        $browser->storeSource('source1.html');
         $browser->visit($url)
             ->waitForText('Peignot');
+        $browser->storeConsoleLog('console2.log');
 
         foreach ($mustFind as $str) {
             if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
