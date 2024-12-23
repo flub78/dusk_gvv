@@ -50,12 +50,23 @@ Current method
 
     https://googlechromelabs.github.io/chrome-for-testing/
 
+### On Windows
+
     choose stable, download the win64 version.
 
     unzip, copy into C:\Users\frede\Dropbox\xampp\htdocs\dusk_gvv\vendor\laravel\dusk\bin
 
     rename as chromedriver-win.exe
-    
+
+### On Linux
+
+    choose stable, download the Linux64 version.
+
+    unzip, copy into vendor/laravel/dusk/bin
+
+    rename as chromedriver-linux
+
+
 ## Generating tests
 
     php artisan dusk:make LoginTest
