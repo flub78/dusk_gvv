@@ -168,6 +168,9 @@ class GliderHandler {
 
         $this->FillFields($glider);
 
+        $this->browser->scrollIntoView('#validate')
+            ->waitFor('#validate');
+
         $this->browser
             ->press('#validate')
             ->assertDontSee('404')

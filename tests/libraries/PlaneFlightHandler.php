@@ -174,6 +174,9 @@ class PlaneFlightHandler {
 
         $this->browser->script('window.scrollTo(0,document.body.scrollHeight)');
 
+        $this->browser->scrollIntoView('#validate')
+            ->waitFor('#validate');
+
         $this->browser
             ->press('#validate')
             ->assertDontSee('404');
