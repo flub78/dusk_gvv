@@ -100,33 +100,32 @@ class GliderHandler {
         }
 
         if (array_key_exists('banalise', $glider)) {
-            if ($glider['banalise']) 
+            if ($glider['banalise'])
                 $this->browser->check('banalise');
             else
                 $this->browser->uncheck('banalise');
         }
 
         if (array_key_exists('autonome', $glider)) {
-            if ($glider['autonome']) 
+            if ($glider['autonome'])
                 $this->browser->check('mpautonome');
             else
                 $this->browser->uncheck('mpautonome');
         }
 
         if (array_key_exists('treuillable', $glider)) {
-            if ($glider['treuillable']) 
+            if ($glider['treuillable'])
                 $this->browser->check('mptreuil');
             else
                 $this->browser->uncheck('mptreuil');
         }
 
         if (array_key_exists('active', $glider)) {
-            if ($glider['active']) 
+            if ($glider['active'])
                 $this->browser->check('actif');
             else
                 $this->browser->uncheck('actif');
         }
-
     }
 
     /** 
@@ -138,14 +137,17 @@ class GliderHandler {
 
                 // Create product
                 $this->tc->canAccess($this->browser, "planeur/create", ['Planeur']);
-
             } else {
                 // Update product
                 $id = $elt['immat'];
                 $this->tc->canAccess($this->browser, "planeur/edit/$id");
             }
             $this->FillFields($elt);
-            $this->browser->press('#validate');
+            $this->browser->scrollIntoView('#validate');
+
+            $this->browser
+                ->waitFor('#validate')
+                ->press('#validate');
 
             $image = $this->gliderImage($elt);
             $this->tc->assertTrue(
@@ -170,7 +172,5 @@ class GliderHandler {
             ->press('#validate')
             ->assertDontSee('404')
             ->assertDontSee('Le champ ');
-    
     }
-
 }
