@@ -58,15 +58,19 @@ class UploadTest extends GvvDuskTestCase {
     public function testUploadOnCreate() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
+
+            // Check that the test image exists
             $image_path = base_path('tests/fixtures/images/asterix.jpeg');
             $this->assertFileExists($image_path);
 
+            // load the membre/create page
             $this->canAccess($browser, "membre/create/", ['Fiche de membre']);
 
             $browser->attach('userfile', $image_path);
             $browser->press('button_photo');
             $browser->screenshot('error_upload_image');
 
+            // Check that an error has been reported
             $browser->assertSee('Vous n\'avez pas de fiche personnelle');
         });
     }
@@ -82,15 +86,42 @@ class UploadTest extends GvvDuskTestCase {
             $image_path = base_path('tests/fixtures/images/asterix.jpeg');
             $this->assertFileExists($image_path);
 
+            // load the page of an existing member
             $this->canAccess($browser, "membre/edit/asterix", ['Fiche de membre', 'Asterix']);
 
+            // Check if there is already an image
+
+            $existing_photo = $browser->resolver->find('#photo');
+            if ($existing_photo) {
+                // There is a photo, adapt the test behavior
+                $browser->assertVisible('#delete_photo');
+                $browser->assertPresent('#delete_photo');
+
+                $browser->press('#delete_photo');
+            } else {
+                // There is no photo
+                $browser->assertNotPresent('#delete_photo');
+            }
+
+            // Upload the image
             $browser->attach('userfile', $image_path);
             $browser->screenshot('upload_image_before_upload');
             $browser->press('button_photo');
             $browser->screenshot('upload_image_after_upload');
 
-
             $browser->assertDontSee('Vous n\'avez pas de fiche personnelle');
+
+            $browser->assertVisible('#photo');
+            $browser->assertVisible('#delete_photo');
+
+            // if there was no prexisting photo
+            if (!$existing_photo) {
+                // delete the photo that has just been uploaded
+                $browser->press('#delete_photo');
+
+                $browser->assertNotPresent('#photo');
+                $browser->assertNotPresent('#delete_photo');
+            }
         });
     }
 
