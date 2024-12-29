@@ -49,40 +49,23 @@ class UploadTest extends GvvDuskTestCase {
      * Test upload image
      * @depends testLogin
      */
-    public function testUploadOnCreate() {
+    public function testNoUploadOnCreate() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $upload_dir = "/var/www/html/gvv.net/uploads/";
-            $initial_count = 0;
-            if (is_dir($upload_dir)) {
-                $initial_count = count(glob($upload_dir . '*'));
-            }
-
-            // Check that the test image exists
-            $image_path = base_path('tests/fixtures/images/asterix.jpeg');
-            $this->assertFileExists($image_path);
 
             // load the membre/create page
             $this->canAccess($browser, "membre/create/", ['Fiche de membre']);
 
-            $browser->attach('userfile', $image_path);
-            $browser->press('button_photo');
-            $browser->screenshot('error_upload_image');
-
-            // Check that an error has been reported
-            $browser->assertSee('Vous n\'avez pas de fiche personnelle');
-
-            if (is_dir($upload_dir)) {
-                $final_count = count(glob($upload_dir . '*'));
-                $this->assertEquals($initial_count, $final_count, "no file left in case of error");
-            }
+            $browser->assertMissing('#photo');
+            $browser->assertMissing('#delete_photo');
+            $browser->assertMissing('#picture_id');
         });
     }
 
     /**
      * Test upload image
-     * @depends testLogin
+     * @depends testNoUploadOnCreate
      */
     public function testUploadOnEdit() {
         // $this->markTestSkipped('must be revisited.');
@@ -162,7 +145,7 @@ class UploadTest extends GvvDuskTestCase {
 
     /**
      * Logout
-     * @depends testUploadOnCreate
+     * @depends testUploadOnEdit
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');
