@@ -143,9 +143,8 @@ class GliderHandler {
                 $this->tc->canAccess($this->browser, "planeur/edit/$id");
             }
             $this->FillFields($elt);
-            $this->browser->scrollIntoView('#validate');
 
-            $this->browser
+            $this->browser->scrollIntoView('#validate')
                 ->waitFor('#validate')
                 ->press('#validate');
 
@@ -169,9 +168,7 @@ class GliderHandler {
         $this->FillFields($glider);
 
         $this->browser->scrollIntoView('#validate')
-            ->waitFor('#validate');
-
-        $this->browser
+            ->waitFor('#validate')
             ->press('#validate')
             ->assertDontSee('404')
             ->assertDontSee('Le champ ');
