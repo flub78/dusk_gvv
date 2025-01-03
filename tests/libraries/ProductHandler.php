@@ -12,7 +12,7 @@ use Tests\libraries\AccountHandler;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
- class ProductHandler {
+class ProductHandler {
 
     private $browser;
     private $tc;
@@ -44,7 +44,7 @@ use Tests\libraries\AccountHandler;
         }
         return false;
     }
-    
+
     /** 
      * Create products
      */
@@ -68,6 +68,8 @@ use Tests\libraries\AccountHandler;
                     ->type('description', $elt['description'])
                     ->type('prix', $elt['prix'])
                     ->select('compte', $account_id)
+                    ->scrollIntoView('#validate')
+                    ->waitFor('#validate')
                     ->press('#validate');
             }
             $this->tc->assertTrue(
@@ -76,6 +78,4 @@ use Tests\libraries\AccountHandler;
             );
         }
     }
-
-    
 }

@@ -10,7 +10,7 @@ namespace Tests\libraries;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
- class PlaneHandler {
+class PlaneHandler {
 
     private $browser;
     private $tc;
@@ -64,8 +64,10 @@ namespace Tests\libraries;
                     // <input type="checkbox" name="macrem" value="1" id="macrem">
                     $this->browser->check('macrem');
                 }
-                
+
                 $this->browser->type('macplaces', $elt['nb_places'])
+                    ->scrollIntoView('#validate')
+                    ->waitFor('#validate')
                     ->press('#validate');
             }
             $this->tc->assertTrue(
@@ -74,7 +76,4 @@ namespace Tests\libraries;
             );
         }
     }
-
-
-
 }

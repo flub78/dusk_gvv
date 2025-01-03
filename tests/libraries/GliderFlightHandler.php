@@ -212,6 +212,8 @@ class GliderFlightHandler {
             $this->browser->screenshot('before_glider_flight_after_scrolling');
 
             $this->browser
+                ->scrollIntoView('#validate')
+                ->waitFor('#validate')
                 ->press('#validate')
                 ->assertDontSee('404')
                 ->assertDontSee('existe pas dans les tarifs');
@@ -269,6 +271,8 @@ class GliderFlightHandler {
         sleep(1);
 
         $this->browser
+            ->scrollIntoView('#validate')
+            ->waitFor('#validate')
             ->press('#validate')
             ->assertDontSee('404');
     }

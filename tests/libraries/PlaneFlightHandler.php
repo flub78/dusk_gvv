@@ -145,6 +145,8 @@ class PlaneFlightHandler {
             $this->browser->screenshot('a_before_flight');
 
             $this->browser
+                ->scrollIntoView('#validate')
+                ->waitFor('#validate')
                 ->press('#validate')
                 ->assertDontSee('404')
                 ->assertDontSee('existe pas dans les tarifs');
@@ -178,6 +180,8 @@ class PlaneFlightHandler {
             ->waitFor('#validate');
 
         $this->browser
+            ->scrollIntoView('#validate')
+            ->waitFor('#validate')
             ->press('#validate')
             ->assertDontSee('404');
     }

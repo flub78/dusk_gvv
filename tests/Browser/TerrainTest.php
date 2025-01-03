@@ -55,6 +55,8 @@ class TerrainTest extends GvvDuskTestCase {
                 ->type('nom', $terrain['nom'])
                 ->type('freq1', $terrain['freq1'])
                 ->type('comment', $terrain['comment'])
+                ->scrollIntoView('#validate')
+                ->waitFor('#validate')
                 ->press('#validate')
                 ->assertSee('Terrains');
 
@@ -101,6 +103,8 @@ class TerrainTest extends GvvDuskTestCase {
                 ->type('nom', $terrain['nom'])
                 ->type('freq1', $terrain['freq1'])
                 ->type('comment', $terrain['comment'])
+                ->scrollIntoView('#validate')
+                ->waitFor('#validate')
                 ->press('#validate')
                 ->assertSee("L'élément existe déjà");
 

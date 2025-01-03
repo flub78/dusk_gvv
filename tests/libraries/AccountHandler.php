@@ -10,7 +10,7 @@ namespace Tests\libraries;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
- class AccountHandler {
+class AccountHandler {
 
     private $browser;
     private $tc;
@@ -70,7 +70,7 @@ namespace Tests\libraries;
      * Find the account ID from a member
      */
     public function AccountIdFromMember($member) {
- 
+
         $image = "(411) " . $member['nom'] . " " . $member['prenom'];
 
         return $this->AccountIdFromImage($image);
@@ -83,14 +83,14 @@ namespace Tests\libraries;
         $this->tc->canAccess($this->browser, "compta/journal_compte/" . $account_id, ["Compte", "Solde au", "débiteur", "créditeur"]);
 
         $debit = $this->browser->inputValue('current_debit');
-        $credit = $this->browser->inputValue('current_credit'); 
+        $credit = $this->browser->inputValue('current_credit');
 
         // be careful to non breaking spaces
-        $search = [' ', '€', ',', chr(0xC2).chr(0xA0)];
+        $search = [' ', '€', ',', chr(0xC2) . chr(0xA0)];
         $replace = ['', '', '.', ''];
         $debit = str_replace($search, $replace, $debit);
         $credit = str_replace($search, $replace, $credit);
-        
+
         if ($debit == "") {
             $debit = 0.0;
         } else {
@@ -100,7 +100,7 @@ namespace Tests\libraries;
             $credit = 0.0;
         } else {
             $credit = floatval($credit);
-        }    
+        }
         $total = $credit - $debit;
         return $total;
     }
@@ -108,8 +108,8 @@ namespace Tests\libraries;
     /**
      * Create an accounting line
      */
-    public function AccountingLine ($line) {
-        
+    public function AccountingLine($line) {
+
         $act1 = $this->AccountIdFromImage($line['account1']);
         $act2 = $this->AccountIdFromImage($line['account2']);
         $this->tc->canAccess($this->browser, $line['url'], []);
@@ -119,22 +119,24 @@ namespace Tests\libraries;
         }
 
         $this->browser
-        ->select('compte1', $act1)
-        ->select('compte2', $act2)
-        ->type('montant', $line['amount'])
-        ->type('description', $line['description'])
-        ->type('num_cheque', $line['reference']);
+            ->select('compte1', $act1)
+            ->select('compte2', $act2)
+            ->type('montant', $line['amount'])
+            ->type('description', $line['description'])
+            ->type('num_cheque', $line['reference']);
 
         if (array_key_exists('verified', $line)) {
             $this->browser->select('gel');
         }
 
         $this->browser
-        ->press('#validate')
-        ->assertDontSee('404');
+            ->scrollIntoView('#validate')
+            ->waitFor('#validate')
+            ->press('#validate')
+            ->assertDontSee('404');
     }
 
-    public function AccountingLineWithCheck ($line) {
+    public function AccountingLineWithCheck($line) {
 
         $account1_id = $this->AccountIdFromImage($line['account1']);
         $account2_id = $this->AccountIdFromImage($line['account2']);
@@ -156,12 +158,17 @@ namespace Tests\libraries;
         // echo "account2_new_total = $account2_new_total\n";
 
         $amount = $line['amount'];
-        $this->tc->assertLessThan(0.000001, $account1_total - $amount - $account1_new_total, 
-            "total pour " . $line['account1']);
+        $this->tc->assertLessThan(
+            0.000001,
+            $account1_total - $amount - $account1_new_total,
+            "total pour " . $line['account1']
+        );
 
-        $this->tc->assertLessThan(0.000001, $account2_total + $amount - $account2_new_total, 
-            "total pour " . $line['account2']);
-
+        $this->tc->assertLessThan(
+            0.000001,
+            $account2_total + $amount - $account2_new_total,
+            "total pour " . $line['account2']
+        );
     }
 
     /** 
@@ -176,6 +183,8 @@ namespace Tests\libraries;
                     ->type('nom', $account['nom'])
                     ->type('desc', $account['comment'])
                     ->select('codec', $account['codec'])
+                    ->scrollIntoView('#validate')
+                    ->waitFor('#validate')
                     ->press('#validate');
             }
             $this->tc->assertTrue(

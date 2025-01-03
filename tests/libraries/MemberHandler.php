@@ -10,7 +10,7 @@ namespace Tests\libraries;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
- class MemberHandler {
+class MemberHandler {
 
     private $browser;
     private $tc;
@@ -21,7 +21,7 @@ namespace Tests\libraries;
         $this->tc = $test_context;
     }
 
-        /** 
+    /** 
      * Check that a member exists.
      */
     public function MemberExists($member) {
@@ -55,7 +55,7 @@ namespace Tests\libraries;
                 // ElementClickInterceptedException: element click intercepted: Element is not clickable at point (57, 1633)
                 $this->browser->script("window.scrollTo(57, 1635);");
                 sleep(2);
-                
+
                 if (array_key_exists('treuillard', $elt)) {
                     // <input type="checkbox" name="mniveau[]" value="524288">
                     $this->browser->check('mniveau[]', '524288');
@@ -84,7 +84,8 @@ namespace Tests\libraries;
 
                 $this->browser
                     ->type('comment', $elt['id'])
-                    // ->scrollIntoView('#validate') does not change anything
+                    ->scrollIntoView('#validate')
+                    ->waitFor('#validate')
                     ->press('#validate');
             }
             $this->tc->assertTrue(

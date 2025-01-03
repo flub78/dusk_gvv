@@ -10,7 +10,7 @@ namespace Tests\libraries;
  * The persistence is managed by the WEB application and as we only have access to the WEB interface methods to retreive the information may be indirect.
  */
 
- class AccountCodeHandler {
+class AccountCodeHandler {
 
     private $browser;
     private $tc;
@@ -21,7 +21,7 @@ namespace Tests\libraries;
         $this->tc = $test_context;
     }
 
-        /** 
+    /** 
      * Check that an account code exists.
      * 
      * The account code list is extracted from the dropdown select of the comptes/create page.
@@ -52,6 +52,8 @@ namespace Tests\libraries;
                 $this->browser
                     ->type('pcode', $element['codec'])
                     ->type('pdesc', $element['desc'])
+                    ->scrollIntoView('#validate')
+                    ->waitFor('#validate')
                     ->press('#validate');
             }
             $this->tc->assertTrue(
@@ -60,6 +62,4 @@ namespace Tests\libraries;
             );
         }
     }
-
-
 }
