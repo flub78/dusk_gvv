@@ -12,10 +12,22 @@ The first principles would push to create the text context before every test. No
 
 The second one would push to reuse contexts.
 
-## Data initialisation
+## Dusk Data set
 
 Some tests like GliderFlight or PlaneFLight tests rely on preexisting data. They set the data by resetting and reinstalling GVV with 'install/?db=dusk_tests.sql'.
 
 dusk_tests.sql must create all data on which the end to end test rely.
+
+By default the dusk initialization database contains:
+* 4 members
+* 3 gliders
+* a whole set of airfields
+* 2 airplanes
+* 4 pilot accounts
+* 4 expenses and income accounts
+* One bank account
+* a few accounting lines
+
+Note that the data set has been generated in a defined year (the curent one is 2023). You must take that into account if you run your tests during a different year.
 
 
