@@ -12,4 +12,10 @@ The first principles would push to create the text context before every test. No
 
 The second one would push to reuse contexts.
 
+## Data initialisation
+
+Some tests like GliderFlight or PlaneFLight tests rely on preexisting data. They set the data by resetting and reinstalling GVV with 'install/?db=dusk_tests.sql'.
+
+dusk_tests.sql must create all data on which the end to end test rely.
+
 

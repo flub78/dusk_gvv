@@ -42,8 +42,16 @@ class GvvDuskTestCase extends DuskTestCase {
      * Logout as a user.
      */
     public function logout($browser) {
-        $browser->click('@user_icon')
-            ->clickLink('Quitter')
+
+        $url = $this->fullUrl('auth/logout');
+
+        $browser->visit($url)
+            // it's a detail but
+            // the commented alternative look for the user icon and submenu
+            // they are not visible without a working Internet connection
+            // Invoking directly the logout url is more robust
+            // $browser->click('@user_icon')
+            //     ->clickLink('Quitter')
             ->waitForText('Utilisateur')
             ->assertSee('Utilisateur')
             ->assertSee('Mot de passe');
