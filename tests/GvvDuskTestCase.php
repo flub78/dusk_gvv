@@ -6,6 +6,8 @@ use Tests\DuskTestCase;
 use Tests\Browser\Pages\Login;
 use Exception;
 use PHPUnit\Framework\Assert;
+use Laravel\Dusk\Browser;
+
 
 class GvvDuskTestCase extends DuskTestCase {
 
@@ -200,5 +202,37 @@ class GvvDuskTestCase extends DuskTestCase {
             $sel[$values[0]] = $values[1];
         }
         return $sel;
+    }
+
+    /**
+     * Check that the installation can be reset and installed
+     * Reset the dusk test data.
+     *
+     * @return void
+     */
+    public function testInit() {
+        $this->browse(function (Browser $browser) {
+
+            $browser->visit($this->url . 'install/reset.php')
+                ->assertSee("Verification de l'installation")
+                ->assertSee($this->url . 'install');
+
+            $browser->visit($this->url . 'install/?db=dusk_tests.sql');
+
+            $browser->assertSee('Installation de GVV')
+                ->assertSee("Fin de la procédure d'installation");
+
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
+            $browser->visit($this->fullUrl('migration'))
+                ->assertSee('Migration de la base de données')
+                ->press("Valider")
+                ->assertSee('à jour');
+
+            // Check that the database contains expected data
+            $this->assertEquals(3, $this->TableTotal($browser, "planeur/page"));
+            $this->assertEquals(2, $this->TableTotal($browser, "avion/page"));
+            $this->assertEquals(4, $this->TableTotal($browser, "membre/page"));
+            $this->logout($browser);
+        });
     }
 }

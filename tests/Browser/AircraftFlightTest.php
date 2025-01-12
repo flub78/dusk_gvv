@@ -24,37 +24,7 @@ class AircraftFlightTest extends GvvDuskTestCase {
         }
         return $date->format($dateFormat);
     }
-    
-    /**
-     * Check that the installation can be reset and installed
-     *
-     * @return void
-     */
-    public function testInit() {
-        $this->browse(function (Browser $browser) {
 
-            $browser->visit($this->url . 'install/reset.php')
-                ->assertSee("Verification de l'installation")
-                ->assertSee($this->url . 'install');
-
-            $browser->visit($this->url . 'install/?db=dusk_tests.sql');
-
-            $browser->assertSee('Installation de GVV')
-                ->assertSee("Fin de la procédure d'installation");
-
-            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
-            $browser->visit($this->fullUrl('migration'))
-                ->assertSee('Migration de la base de données')
-                ->press("Valider")
-                ->assertSee('à jour');
-
-            // Check that the database contains expected data
-            $this->assertEquals(3, $this->TableTotal($browser, "planeur/page"));
-            $this->assertEquals(2, $this->TableTotal($browser, "avion/page"));
-            $this->assertEquals(4, $this->TableTotal($browser, "membre/page"));
-            $this->logout($browser);
-        });
-    }
 
     /**
      * Login

@@ -126,7 +126,18 @@ class AttachmentsTest extends GvvDuskTestCase {
      */
 
     /**
+     * Check that the installation can be reset and installed
+     *
+     * @return void
+     */
+    public function testInit() {
+        parent::testInit();
+    }
+
+    /**
      * Login
+     * 
+     * @depends testInit
      */
     public function testLogin() {
         // $this->markTestSkipped('must be revisited.');
@@ -136,52 +147,51 @@ class AttachmentsTest extends GvvDuskTestCase {
     }
 
     /**
-     * Test create
-     * @depends testLogin
+     * Stat of the test
+     * @depends testInit
      */
-    public function testCreate() {
-        // $this->markTestSkipped('must be revisited.');
+    public function testNoAttachment() {
         $this->browse(function (Browser $browser) {
+            $url = $this->fullUrl("attachments");
+            $browser->visit($url)
+                ->assertSee('Justificatifs')
+                ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
 
-            $total = $this->TableTotal($browser, "terrains/page");
-            $this->assertGreaterThan(0, $total, "Terrains Table contains some entries");
+            $url = $this->fullUrl("comptes/general");
+            $browser->visit($url)
+                ->assertSee('Balance des comptes')
+                ->assertSee("Affichage de l'élement 1 à 12 sur 12 éléments")
+                ->assertSee('Achats non stockés de matières et fournitures');
 
-            $this->createTerrain($browser, $this->terrains);
+            $url = $this->fullUrl("comptes/page/606");
+            $browser->visit($url)
+                ->assertSee('Balance des comptes Classe 606')
+                ->assertSee("Affichage de l'élement 1 à 3 sur 3 éléments")
+                ->assertSee('Essence plus huile')
+                ->assertSee('Frais de bureau');
 
-            $new_total = $this->TableTotal($browser, "terrains/page", ["Terrains"]);
-            $this->assertEquals($new_total, $total + count($this->terrains), "Terrains Table contains more entries");
+            // <a href="http://gvv.net/index.php/compta/journal_compte/298">Essence plus huile</a>
+            $browser->waitFor('a')
+                ->assertSeeLink('Essence plus huile');
+            $href = $browser->attribute("a[href*='journal_compte']", 'href');
+            $browser->visit($href)
+                ->assertSee('Essence plus huile');
+
+            $browser->select('year', '2023')
+                ->assertSee('Chèque 413')
+                ->assertSee('2023');
         });
-    }
 
-    /**
-     * Test create errors
-     * @depends testCreate
-     */
-    public function testCreateErrors() {
-        $this->browse(function (Browser $browser) {
-            $this->createTerrainError($browser, $this->terrains);
-        });
-    }
 
-    /**
-     * Test delete
-     * @depends testCreateErrors
-     */
-    public function testDelete() {
-        $this->browse(function (Browser $browser) {
 
-            $total = $this->TableTotal($browser, "terrains/page");
 
-            $this->deleteTerrain($browser, $this->terrains);
 
-            $new_total = $this->TableTotal($browser, "terrains/page", ["Terrains"]);
-            $this->assertEquals($new_total, $total - count($this->terrains), "Terrains Table contains less entries");
-        });
+        // <a href="http://gvv.net/index.php/compta/journal_compte/297">Frais de bureau</a>
     }
 
     /**
      * Logout
-     * @depends testDelete
+     * @depends testNoAttachment
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');
