@@ -121,6 +121,21 @@ class AttachmentsTest extends GvvDuskTestCase {
         }
     }
 
+    // Function to extract the href of the edit icon of a table row
+    public function getHrefFromTableRow($browser, $pattern) {
+
+        return $browser->script([
+            "return document.evaluate(
+                \"//tr[contains(., '$pattern')]//td[1]//a\", 
+                document, 
+                null, 
+                XPathResult.FIRST_ORDERED_NODE_TYPE, 
+                null
+            ).singleNodeValue.getAttribute('href');"
+        ])[0];
+        // return $browser->attribute("table tr:contains('" . $pattern . "') td:first-child a", 'href');
+    }
+
     /**
      * Test cases
      */
@@ -152,17 +167,21 @@ class AttachmentsTest extends GvvDuskTestCase {
      */
     public function testNoAttachment() {
         $this->browse(function (Browser $browser) {
+
+            // the global attachment page with no attachments
             $url = $this->fullUrl("attachments");
             $browser->visit($url)
                 ->assertSee('Justificatifs')
                 ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
 
+            // Balance des comptes
             $url = $this->fullUrl("comptes/general");
             $browser->visit($url)
                 ->assertSee('Balance des comptes')
                 ->assertSee("Affichage de l'élement 1 à 12 sur 12 éléments")
                 ->assertSee('Achats non stockés de matières et fournitures');
 
+            // Les comptes de classe 606
             $url = $this->fullUrl("comptes/page/606");
             $browser->visit($url)
                 ->assertSee('Balance des comptes Classe 606')
@@ -170,6 +189,7 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('Essence plus huile')
                 ->assertSee('Frais de bureau');
 
+            // Le compte Essence plus huile
             // <a href="http://gvv.net/index.php/compta/journal_compte/298">Essence plus huile</a>
             $browser->waitFor('a')
                 ->assertSeeLink('Essence plus huile');
@@ -180,13 +200,19 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->select('year', '2023')
                 ->assertSee('Chèque 413')
                 ->assertSee('2023');
+
+            // extract the edit link from the table
+            $href = $this->getHrefFromTableRow($browser, 'Chèque 413');
+
+            echo "href = " . $href;
+
+            // $browser->visit($href)
+            //     ->assertSee('Chèque 413')
+            //     ->assertSee('Ecriture comptable')
+            //     ->assertSee('Justificatifs');
+
+            // <a href="http://gvv.net/index.php/compta/journal_compte/297">Frais de bureau</a>
         });
-
-
-
-
-
-        // <a href="http://gvv.net/index.php/compta/journal_compte/297">Frais de bureau</a>
     }
 
     /**
