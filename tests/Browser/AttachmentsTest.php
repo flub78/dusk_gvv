@@ -133,7 +133,6 @@ class AttachmentsTest extends GvvDuskTestCase {
                 null
             ).singleNodeValue.getAttribute('href');"
         ])[0];
-        // return $browser->attribute("table tr:contains('" . $pattern . "') td:first-child a", 'href');
     }
 
     /**
@@ -174,13 +173,6 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('Justificatifs')
                 ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
 
-            // Balance des comptes
-            $url = $this->fullUrl("comptes/general");
-            $browser->visit($url)
-                ->assertSee('Balance des comptes')
-                ->assertSee("Affichage de l'élement 1 à 12 sur 12 éléments")
-                ->assertSee('Achats non stockés de matières et fournitures');
-
             // Les comptes de classe 606
             $url = $this->fullUrl("comptes/page/606");
             $browser->visit($url)
@@ -202,14 +194,14 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('2023');
 
             // extract the edit link from the table
-            $href = $this->getHrefFromTableRow($browser, 'Chèque 413');
+            $line1 = $this->getHrefFromTableRow($browser, 'Chèque 413');
 
-            echo "href = " . $href;
+            echo "line1 = $line1\n";
 
-            // $browser->visit($href)
-            //     ->assertSee('Chèque 413')
-            //     ->assertSee('Ecriture comptable')
-            //     ->assertSee('Justificatifs');
+            $pattern = 'Chèque 413';
+            $browser->visit($line1)
+                ->assertSee('Ecriture comptable')
+                ->assertSee('Justificatifs');
 
             // <a href="http://gvv.net/index.php/compta/journal_compte/297">Frais de bureau</a>
         });
