@@ -12,11 +12,6 @@ use Tests\GvvDuskTestCase;
  * 
  * The tests rely on the methods order.
  * 
- * There is quite a lot of dependencies to pre-existing data :
- *      attachments depends on accounting lines
- *      accounting lines depends on accounts
- *      accounts depends on planc
- *  
  */
 class AttachmentsTest extends GvvDuskTestCase {
 
@@ -24,11 +19,9 @@ class AttachmentsTest extends GvvDuskTestCase {
     function __construct() {
         parent::__construct();
 
-        // var_dump($this->terrains);
-        $this->terrains = [
-            ['oaci' => "LFAA", 'nom' => "Trifouillis", 'freq1' => "123.45", 'comment' => "Mon terrain"],
-            ['oaci' => "LFAB", 'nom' => "Les Oies", 'freq1' => "123.45", 'comment' => "Mon second terrain"]
-        ];
+        $this->attachments = "";
+        $this->line1 = "";
+        $this->line2 = "";
     }
 
     // protected function setUp(): void {
@@ -121,6 +114,19 @@ class AttachmentsTest extends GvvDuskTestCase {
         }
     }
 
+    /**
+     * Returns the number of files in UPLOAD_DIR or -1 if UPLOAD_DIR does not exist
+     */
+    public function filesInUploadDir() {
+        if (getenv('UPLOAD_DIR') && is_dir(getenv('UPLOAD_DIR'))) {
+            $files = scandir(getenv('UPLOAD_DIR'));
+            $fileCount = count(array_diff($files, array('.', '..')));
+            return $fileCount;
+        }
+        return -1;
+    }
+
+
     // Function to extract the href of the edit icon of a table row
     public function getHrefFromTableRow($browser, $pattern) {
 
@@ -133,6 +139,16 @@ class AttachmentsTest extends GvvDuskTestCase {
                 null
             ).singleNodeValue.getAttribute('href');"
         ])[0];
+    }
+
+    // search the edit link of an accounting line
+    public function searchEditLink($browser, $pattern, $year) {
+
+        $browser->select('year', $year)
+            ->assertSee($pattern)
+            ->assertSee($year);
+
+        return $this->getHrefFromTableRow($browser, $pattern);
     }
 
     /**
@@ -161,17 +177,15 @@ class AttachmentsTest extends GvvDuskTestCase {
     }
 
     /**
-     * Stat of the test
-     * @depends testInit
+     * This test search the Dusk test database in order to find two accounting lines
+     * to which It will be possible to add attachments.
      */
-    public function testNoAttachment() {
+    public function searchLines() {
         $this->browse(function (Browser $browser) {
 
             // the global attachment page with no attachments
-            $url = $this->fullUrl("attachments");
-            $browser->visit($url)
-                ->assertSee('Justificatifs')
-                ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
+            $urlAttach = $this->fullUrl("attachments");
+            $this->attachments = $urlAttach;
 
             // Les comptes de classe 606
             $url = $this->fullUrl("comptes/page/606");
@@ -189,27 +203,66 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->visit($href)
                 ->assertSee('Essence plus huile');
 
-            $browser->select('year', '2023')
-                ->assertSee('Chèque 413')
-                ->assertSee('2023');
-
             // extract the edit link from the table
-            $line1 = $this->getHrefFromTableRow($browser, 'Chèque 413');
+            $line1 = $this->searchEditLink($browser, 'Chèque 413', '2023');
+            $this->line1 = $line1;
 
-            echo "line1 = $line1\n";
-
-            $pattern = 'Chèque 413';
             $browser->visit($line1)
                 ->assertSee('Ecriture comptable')
                 ->assertSee('Justificatifs');
 
-            // <a href="http://gvv.net/index.php/compta/journal_compte/297">Frais de bureau</a>
+            // ============================================================
+            // Les comptes de banque http://gvv.net/index.php/comptes/page/512
+            $url = $this->fullUrl("comptes/page/512");
+            $browser->visit($url)
+                ->assertSee('Balance des comptes Classe 512')
+                ->assertSee("Affichage de l'élement 1 à 2 sur 2 éléments")
+                ->assertSee('Banque');
+
+            // Le compte Banque
+            // <a href="http://gvv.net/index.php/compta/journal_compte/294">Banque</a>
+            $browser->waitFor('a')
+                ->assertSeeLink('Banque');
+            $href = $browser->attribute("a[href*='journal_compte']", 'href');
+            $browser->visit($href)
+                ->assertSee('Banque');
+
+            // extract the edit link from the table
+            $line2 = $this->searchEditLink($browser, 'Avance sur vols', '2023');
+            $this->line2 = $line2;
+        });
+    }
+
+    /**
+     * testAttachmentCRUD
+     * At this point two accounting lines have been identified
+     * @depends testLogin
+     */
+    public function testAttachmentCRUD() {
+
+        $this->searchLines();
+
+        $this->browse(function (Browser $browser) {
+
+            // echo "line1 = " . $this->line1 . "\n";
+            // echo "line2 = " . $this->line2 . "\n";
+            // echo "attachments = " . $this->attachments . "\n";
+
+            $browser->visit($this->attachments)
+                ->assertSee('Justificatifs')
+                ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
+
+            $browser->visit($this->line1);
+            // click on the add icon
+            $browser->click('a[href*="attachments/create"]')
+                ->assertSee('Justificatifs');
+            echo "PHP working directory = " . getcwd() . "\n";
         });
     }
 
     /**
      * Logout
-     * @depends testNoAttachment
+     * @depends testAttachmentCRUD
      */
     public function testLogout() {
         // $this->markTestSkipped('must be revisited.');
