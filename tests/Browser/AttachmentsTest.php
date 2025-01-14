@@ -10,7 +10,28 @@ use Tests\GvvDuskTestCase;
  * 
  * php artisan dusk --color=always --browse tests/Browser/AttachmentsTest.php
  * 
- * The tests rely on the methods order.
+ * The tests rely on the methods order.est scenario is:
+ * 
+ * 1. reset the database to start with well defined data
+ * 2. find the edit urls of two accounting lines
+ * 3. add a text attachment to the first line
+ * 4. add a pdf attachment to the first line
+ * 5. add an image attachment to the second line
+ * 6. add a big picture attachment to the second line
+ * 
+ * 7. Check that we have 4 more attachments
+ * 8. Check that clicking attachments opens the attachment
+ * 9. Check that the big picture has been compressed
+ * 
+ * 10. Replace the text attachment with another one
+ * 11. Check that we get the second one when we click on it
+ * 
+ * 12. Delete the text attachment
+ * 13. Check that we have 3 attachments in the storage
+ * 14. And only 1 is displayed for the first line
+ * 
+ * 15. Delete all created attachments
+ * 16. Check that we have 0 attachments
  * 
  */
 class AttachmentsTest extends GvvDuskTestCase {
@@ -252,11 +273,16 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('Justificatifs')
                 ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
 
+            // Adding an attachment to the first line
             $browser->visit($this->line1);
             // click on the add icon
             $browser->click('a[href*="attachments/create"]')
                 ->assertSee('Justificatifs');
-            echo "PHP working directory = " . getcwd() . "\n";
+
+            $initial_file_count = $this->filesInUploadDir();
+            echo "file_count = " . $initial_file_count . "\n";
+            $fixtures_dir = getcwd() . "/tests/fixtures/";
+            echo "fixtures_dir = " . $fixtures_dir . "\n";
         });
     }
 
