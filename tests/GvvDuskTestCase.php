@@ -84,8 +84,17 @@ class GvvDuskTestCase extends DuskTestCase {
         }
         $browser->storeConsoleLog('console1.log');
         $browser->storeSource('source1.html');
-        $browser->visit($url)
-            ->waitForText('Peignot');
+        $browser->visit($url);
+        $browser->pause(2000);  // wait for 2 seconds
+
+        // You can also scroll by pixels
+        $browser->script('window.scrollBy(0, 500);'); // Scroll down 500 pixels
+
+        $browser->script('window.scrollTo(0, document.body.scrollHeight);');
+
+        $browser->pause(1000);  // Wait for 1 second after scrolling
+
+        $browser->waitForText('Peignot', 10);
         $browser->storeConsoleLog('console2.log');
 
         foreach ($mustFind as $str) {
