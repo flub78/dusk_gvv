@@ -79,6 +79,8 @@ class GliderFlightHandler {
      */
     public function FillFields($flight) {
 
+        $this->browser->script('document.body.style.zoom = "0.5"');
+
         if (array_key_exists('date', $flight)) {
             $this->browser->type('vpdate', $flight['date'] . "\n");
         }
@@ -184,6 +186,7 @@ class GliderFlightHandler {
         if (array_key_exists('comment', $flight)) {
             $this->browser->type('vpobs', $flight['comment']);
         }
+        $this->browser->script('document.body.style.zoom = "1.0"');
     }
 
     /** 
