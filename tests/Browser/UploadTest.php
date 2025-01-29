@@ -90,10 +90,13 @@ class UploadTest extends GvvDuskTestCase {
             $existing_photo = $browser->resolver->find('#photo');
             if ($existing_photo) {
                 // There is a photo, adapt the test behavior
+                $browser->scrollIntoView('#delete_photo');
                 $browser->assertVisible('#delete_photo');
                 $browser->assertPresent('#delete_photo');
 
-                $browser->press('#delete_photo');
+                // Delete the photo 
+                $browser->clickAtXPath("//button[@id='delete_photo']");
+                // $browser->press('#delete_photo');
 
                 if (is_dir($upload_dir)) {
                     $new_count = count(glob($upload_dir . '*'));
@@ -107,8 +110,25 @@ class UploadTest extends GvvDuskTestCase {
 
             // Upload the image
             $browser->attach('userfile', $image_path);
+
+            $browser->script(
+                "document.getElementById('button_photo').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });"
+            );
+            $browser->waitFor('#button_photo')
+                ->assertVisible('#button_photo');
+
+            $browser->scrollIntoView('#button_photo');
             $browser->screenshot('upload_image_before_upload');
-            $browser->press('button_photo');
+
+            // $browser->press('#button_photo');
+            $browser->script([
+                "document.querySelector('#button_photo').scrollIntoView({ behavior: 'smooth', block: 'center' });",
+                "document.querySelector('#button_photo').click();"
+            ]);
+
             $browser->screenshot('upload_image_after_upload');
 
             $browser->assertDontSee('Vous n\'avez pas de fiche personnelle');
