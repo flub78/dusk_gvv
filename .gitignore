@@ -19,3 +19,5 @@ tests/reports/junit.xml
 tests/reports/junit.xml
 composer.lock
 setenv.sh
+index.html
+testsreportsjunit.xml
