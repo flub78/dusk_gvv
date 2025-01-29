@@ -198,17 +198,17 @@ class AttachmentsTest extends GvvDuskTestCase {
     }
 
     /**
-     * This test search the Dusk test database in order to find two accounting lines
+     * This function search two accounting lines
      * to which It will be possible to add attachments.
      */
     public function searchLines() {
         $this->browse(function (Browser $browser) {
 
-            // the global attachment page with no attachments
+            // store the attachment page url for later
             $urlAttach = $this->fullUrl("attachments");
             $this->attachments = $urlAttach;
 
-            // Les comptes de classe 606
+            // Affiche les comptes de classe 606
             $url = $this->fullUrl("comptes/page/606");
             $browser->visit($url)
                 ->assertSee('Balance des comptes Classe 606')
@@ -221,8 +221,10 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->waitFor('a')
                 ->assertSeeLink('Essence plus huile');
             $href = $browser->attribute("a[href*='journal_compte']", 'href');
+
+            echo "visiting : " . $href;
             $browser->visit($href)
-                ->assertSee('Essence plus huile');
+                ->assertValue('input[name="desc"]', 'Essence plus huile');
 
             // extract the edit link from the table
             $line1 = $this->searchEditLink($browser, 'Chèque 413', '2023');
@@ -245,8 +247,9 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->waitFor('a')
                 ->assertSeeLink('Banque');
             $href = $browser->attribute("a[href*='journal_compte']", 'href');
+            echo "visiting : " . $href;
             $browser->visit($href)
-                ->assertSee('Banque');
+                ->assertValue('input[name="desc"]', 'Banque');
 
             // extract the edit link from the table
             $line2 = $this->searchEditLink($browser, 'Avance sur vols', '2023');
