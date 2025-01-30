@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
-use Tests\Browser\AircraftFlightTest;
+use Tests\Browser\BillingTest;
 
 use Tests\libraries\GliderFlightHandler;
 use Tests\libraries\AccountHandler;
@@ -27,7 +27,7 @@ use Tests\libraries\GliderHandler;
  *  - certificates
  */
 
-class GliderFlightTest extends AircraftFlightTest {
+class GliderFlightTest extends BillingTest {
 
     /**
      * Check that the installation can be reset and installed

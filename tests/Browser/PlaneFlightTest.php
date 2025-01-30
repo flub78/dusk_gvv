@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
-use Tests\Browser\AircraftFlightTest;
+use Tests\Browser\BillingTest;
 
 
 use Tests\libraries\PlaneFlightHandler;
@@ -29,7 +29,7 @@ use Tests\libraries\PlaneHandler;
  *  - certificates
  */
 
-class PlaneFlightTest extends AircraftFlightTest {
+class PlaneFlightTest extends BillingTest {
 
     /**
      * Check that the installation can be reset and installed

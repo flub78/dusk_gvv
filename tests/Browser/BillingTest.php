@@ -11,7 +11,7 @@ use Tests\libraries\AccountHandler;
  * Common functions used by several classes of aircraft tests
  */
 
-class AircraftFlightTest extends GvvDuskTestCase {
+class BillingTest extends GvvDuskTestCase {
 
     public function NextDate($latest, $dateAttr = "vpdate") {
         $dateFormat = "d/m/Y";
