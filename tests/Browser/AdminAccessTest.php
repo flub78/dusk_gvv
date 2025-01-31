@@ -6,6 +6,9 @@ use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 use PHPUnit\Framework\Assert;
 
+/**
+ * Test that an admin user can access to all the application pages
+ */
 class AdminAccessTest extends GvvDuskTestCase {
 
 

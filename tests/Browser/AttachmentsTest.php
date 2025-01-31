@@ -88,54 +88,6 @@ class AttachmentsTest extends GvvDuskTestCase {
     }
 
     /**
-     * Test delete elements, GVV just ignore the command when elements are selected several times
-     * 
-     * @depends testTerrainCRUD
-     * @param Browser $browser
-     * @param array $terrains
-     */
-    public function deleteTerrain($browser, $terrains = []) {
-
-        foreach ($terrains as $terrain) {
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $total = $this->TableTotal($browser);
-
-            $this->canAccess($browser, "terrains/delete/" . $terrain['oaci'], ['Terrains']);
-            $new_total = $this->TableTotal($browser);
-
-            $this->assertEquals($total - 1, $new_total, "Terrain deleted, total = " . $new_total);
-        }
-    }
-
-    /**
-     * Test create elements that already exist
-     */
-    public function createTerrainError($browser, $terrains = []) {
-
-        foreach ($terrains as $terrain) {
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $total = $this->TableTotal($browser);
-
-            $this->canAccess($browser, "terrains/create", ['Planeur']);
-
-            $browser
-                ->type('oaci', $terrain['oaci'])
-                ->type('nom', $terrain['nom'])
-                ->type('freq1', $terrain['freq1'])
-                ->type('comment', $terrain['comment'])
-                ->scrollIntoView('#validate')
-                ->waitFor('#validate')
-                ->press('#validate')
-                ->assertSee("L'élément existe déjà");
-
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $new_total = $this->TableTotal($browser);
-
-            $this->assertEquals($total, $new_total, "No Terrain created, total = " . $new_total);
-        }
-    }
-
-    /**
      * Returns the number of files in UPLOAD_DIR or -1 if UPLOAD_DIR does not exist
      */
     public function filesInUploadDir() {
@@ -283,9 +235,9 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('Justificatifs');
 
             $initial_file_count = $this->filesInUploadDir();
-            echo "file_count = " . $initial_file_count . "\n";
+            // echo "file_count = " . $initial_file_count . "\n";
             $fixtures_dir = getcwd() . "/tests/fixtures/";
-            echo "fixtures_dir = " . $fixtures_dir . "\n";
+            // echo "fixtures_dir = " . $fixtures_dir . "\n";
         });
     }
 

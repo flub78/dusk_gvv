@@ -8,7 +8,7 @@ use Tests\GvvDuskTestCase;
 use Tests\libraries\AccountHandler;
 
 /*
- * Common functions used by several classes of aircraft tests
+ * Common functions used by several classes of tests
  */
 
 class BillingTest extends GvvDuskTestCase {

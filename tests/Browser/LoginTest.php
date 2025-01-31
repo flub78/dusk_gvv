@@ -5,6 +5,9 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
+/**
+ * basic login test
+ */
 class LoginTest extends GvvDuskTestCase {
 
     /**

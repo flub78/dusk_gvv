@@ -8,7 +8,7 @@ use Tests\GvvDuskTestCase;
 use function PHPUnit\Framework\assertSameSize;
 
 /*
- * Check that the application is initilized with test data
+ * Check that the application is initialized with test data
  *
  * It will be the base for feature tests.
  * 
@@ -72,7 +72,7 @@ class DbInitTest extends GvvDuskTestCase {
      */
     public function testTest() {
         $this->browse(function (Browser $browser) {
-            
+
             $this->assertNotNull($browser);
         });
     }

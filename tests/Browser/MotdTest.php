@@ -1,9 +1,13 @@
 <?php
 
 namespace Tests\Browser;
+
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
+/**
+ * Test of the message of the day
+ */
 class MotdTest extends GvvDuskTestCase {
 
     /**
@@ -46,7 +50,6 @@ class MotdTest extends GvvDuskTestCase {
             $this->login($browser, 'testadmin', 'password');
             $browser->assertDontSee($motd);
             $this->logout($browser);
-
         });
     }
 }

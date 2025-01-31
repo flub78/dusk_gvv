@@ -5,6 +5,9 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
+/**
+ * Test access of users with bureau privileges
+ */
 class BureauAccessTest extends GvvDuskTestCase {
 
 

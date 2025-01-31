@@ -5,6 +5,9 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
+/**
+ * Test access of users with CA privileges
+ */
 class CAAccessTest extends GvvDuskTestCase {
 
 
