@@ -86,7 +86,8 @@ class SmokeTest extends GvvDuskTestCase {
             ['nom' => "Heures de vol planeur", 'codec' => '706', 'comment' => "Heures de vol planeur"],
             ['nom' => "Remorqués", 'codec' => '706', 'comment' => "Remorqués"],
             ['nom' => "Heures de vol ULM", 'codec' => '706', 'comment' => "Heures de vol ULM"],
-            ['nom' => "Subventions", 'codec' => '74', 'comment' => "Subventions"]
+            ['nom' => "Subventions", 'codec' => '74', 'comment' => "Subventions"],
+            ['nom' => "Ventes diverses", 'codec' => '707', 'comment' => "Ventes diverses"]
         ];
 
         $this->products = [
@@ -99,29 +100,54 @@ class SmokeTest extends GvvDuskTestCase {
             ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'hdv-ULM', 'description' => 'Heure de vol ULM', 'prix' => '102', 'account' => 'Heures de vol ULM', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'gratuit', 'description' => 'non facturé', 'prix' => '0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'bobb', 'description' => 'Bob bleu', 'prix' => '25', 'account' => 'Ventes diverses', 'codec' => '707', "date" => "01/01/2021"],
+            ['ref' => 'tsbl', 'description' => 'T-shirt bleu', 'prix' => '10', 'account' => 'Ventes diverses', 'codec' => '707', "date" => "01/01/2021"]
         ];
 
         $this->members = [
             [
-                'id' => 'asterix', 'nom' => 'Le Gaulois', 'prenom' => 'Asterix', 'email' => 'asterix@flub78.net',
-                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+                'id' => 'asterix',
+                'nom' => 'Le Gaulois',
+                'prenom' => 'Asterix',
+                'email' => 'asterix@flub78.net',
+                'adresse' => '1 rue des menhirs',
+                'code_postal' => '78000',
+                'ville' => 'Lutèce',
                 'treuillard' => true
             ],
 
             [
-                'id' => 'goudurix', 'nom' => 'Le Gaulois', 'prenom' => 'Goudurix', 'email' => 'goudurix@flub78.net',
-                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Village Gaulois'
+                'id' => 'goudurix',
+                'nom' => 'Le Gaulois',
+                'prenom' => 'Goudurix',
+                'email' => 'goudurix@flub78.net',
+                'adresse' => '1 rue des menhirs',
+                'code_postal' => '78000',
+                'ville' => 'Village Gaulois'
             ],
 
             [
-                'id' => 'panoramix', 'nom' => 'Le Gaulois', 'prenom' => 'Panoramix', 'email' => 'panoramix@flub78.net',
-                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
-                'fi_planeur' => true, 'fe_planeur' => true, 'fi_avion' => true, 'fe_avion' => true
+                'id' => 'panoramix',
+                'nom' => 'Le Gaulois',
+                'prenom' => 'Panoramix',
+                'email' => 'panoramix@flub78.net',
+                'adresse' => '1 rue des menhirs',
+                'code_postal' => '78000',
+                'ville' => 'Lutèce',
+                'fi_planeur' => true,
+                'fe_planeur' => true,
+                'fi_avion' => true,
+                'fe_avion' => true
             ],
 
             [
-                'id' => 'abraracourcix', 'nom' => 'Le Gaulois', 'prenom' => 'Abraracourcix', 'email' => 'abraracourcix@flub78.net',
-                'adresse' => '1 rue des menhirs', 'code_postal' => '78000', 'ville' => 'Lutèce',
+                'id' => 'abraracourcix',
+                'nom' => 'Le Gaulois',
+                'prenom' => 'Abraracourcix',
+                'email' => 'abraracourcix@flub78.net',
+                'adresse' => '1 rue des menhirs',
+                'code_postal' => '78000',
+                'ville' => 'Lutèce',
                 'remorqueur' => true
             ],
 
@@ -129,12 +155,21 @@ class SmokeTest extends GvvDuskTestCase {
 
         $this->gliders = [
             [
-                'immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher',
-                'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'
+                'immat' => 'F-CGAA',
+                'type' => 'Ask21',
+                'nb_places' => '2',
+                'construct' => 'Alexander Schleicher',
+                'prix' => 'hdv-planeur',
+                'prix_forfait' => 'hdv-planeur-forfait'
             ],
             [
-                'immat' => 'F-CGAB', 'type' => 'Pégase', 'nb_places' => '1', 'numc' => 'EG', 'construct' => 'Centrair',
-                'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'
+                'immat' => 'F-CGAB',
+                'type' => 'Pégase',
+                'nb_places' => '1',
+                'numc' => 'EG',
+                'construct' => 'Centrair',
+                'prix' => 'hdv-planeur',
+                'prix_forfait' => 'hdv-planeur-forfait'
             ],
             ['immat' => 'F-CGAC', 'type' => 'DG800', 'nb_places' => '1', 'numc' => 'AC', 'construct' => 'DG'],
         ];
