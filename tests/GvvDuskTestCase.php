@@ -25,6 +25,7 @@ class GvvDuskTestCase extends DuskTestCase {
 
         Assert::assertNotEmpty($username, "TEST_USER env var is not set");
         Assert::assertNotEmpty($password, "TEST_PASSWORD env var is not set");
+        Assert::assertNotEmpty(env('TARGET'), "TARGET env var is not set");
 
         $browser->visit(new Login)
             ->screenshot('before_login')

@@ -37,6 +37,7 @@ class UploadTest extends GvvDuskTestCase {
 
     /**
      * Login
+     * @depends testInit
      */
     public function testLogin() {
         // $this->markTestSkipped('must be revisited.');
@@ -71,7 +72,10 @@ class UploadTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $upload_dir = "/var/www/html/gvv.net/uploads/";
+            $install_dir = getenv('INSTALL_DIR');
+            $this->assertNotEmpty($install_dir, 'INSTALL_DIR environment variable must be defined');
+            $upload_dir = $install_dir . 'uploads/';
+
             $initial_count = 0;
 
             // if the upload directory exists, count the number of files in it
