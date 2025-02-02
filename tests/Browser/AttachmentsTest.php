@@ -62,37 +62,12 @@ class AttachmentsTest extends GvvDuskTestCase {
     }
 
     /**
-     * Test create elements
-     */
-    public function createTerrain($browser, $terrains = []) {
-
-        $total = $this->TableTotal($browser);
-        foreach ($terrains as $terrain) {
-
-            $this->canAccess($browser, "terrains/create", ['Code OACI']);
-            $browser
-                ->type('oaci', $terrain['oaci'])
-                ->type('nom', $terrain['nom'])
-                ->type('freq1', $terrain['freq1'])
-                ->type('comment', $terrain['comment'])
-                ->scrollIntoView('#validate')
-                ->waitFor('#validate')
-                ->press('#validate')
-                ->assertSee('Terrains');
-
-            $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-        }
-
-        $new_total = $this->TableTotal($browser);
-        $this->assertEquals($total + count($terrains), $new_total, "Terrain created, total = " . $new_total);
-    }
-
-    /**
      * Returns the number of files in UPLOAD_DIR or -1 if UPLOAD_DIR does not exist
      */
     public function filesInUploadDir() {
-        if (getenv('UPLOAD_DIR') && is_dir(getenv('UPLOAD_DIR'))) {
-            $files = scandir(getenv('UPLOAD_DIR'));
+        $upload_dir = getenv('INSTALL_DIR') . 'uploads/attachments/' . date('Y') . '/';
+        if (is_dir($upload_dir)) {
+            $files = scandir($upload_dir);
             $fileCount = count(array_diff($files, array('.', '..')));
             return $fileCount;
         }
