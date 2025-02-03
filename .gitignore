@@ -21,3 +21,4 @@ composer.lock
 setenv.sh
 index.html
 testsreportsjunit.xml
+tests/reports/gvv_under_test.log
