@@ -30,9 +30,10 @@ def process_logs(file_path):
                     warning = match.group(1)
                     warning_counts[warning] += 1
                 elif match := re.search(ERROR_PATTERN, line):
-                    match = re.search(ARROW_PATTERN, line)
-                    error = match.group(1)
-                    error_msg_counts[error] += 1
+                    if (not re.search(r'errors=0', line)):
+                        match = re.search(ARROW_PATTERN, line)
+                        error = match.group(1)
+                        error_msg_counts[error] += 1
 
         # Print sorted results by frequency
         total_errors = sum(error_counts.values())
@@ -58,12 +59,13 @@ def process_logs(file_path):
         # Generate CSV with error counts
         csv_filename = file_path.rsplit('.', 1)[0] + '.csv'
         with open(csv_filename, "w", encoding="utf-8") as csv_file:
-            csv_file.write("Pattern,Count\n")
-            csv_file.write(f"LANG_PATTERN,{sum(error_counts.values())}\n")
-            csv_file.write(f"NOTICE_PATTERN,{sum(notice_counts.values())}\n")
-            csv_file.write(f"WARNING_PATTERN,{sum(warning_counts.values())}\n")
-            csv_file.write(f"ERROR_PATTERN,{sum(error_msg_counts.values())}\n")
-
+            # csv_file.write("Pattern,Count\n")
+            # csv_file.write(f"LANG_PATTERN,{sum(error_counts.values())}\n")
+            # csv_file.write(f"NOTICE_PATTERN,{sum(notice_counts.values())}\n")
+            # csv_file.write(f"WARNING_PATTERN,{sum(warning_counts.values())}\n")
+            # csv_file.write(f"ERROR_PATTERN,{sum(error_msg_counts.values())}\n")
+            csv_file.write("Lang,Notices,Warnings,Errors\n")
+            csv_file.write(f"{sum(error_counts.values())},{sum(notice_counts.values())},{sum(warning_counts.values())},{sum(error_msg_counts.values())}\n")
         print(f"\nError counts have been written to {csv_filename}")
 
     except FileNotFoundError:
