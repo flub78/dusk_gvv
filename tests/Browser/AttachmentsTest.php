@@ -45,22 +45,6 @@ class AttachmentsTest extends GvvDuskTestCase {
         $this->line2 = "";
     }
 
-    // protected function setUp(): void {
-    //     echo "setup\n";
-    // }
-
-    // protected function tearDown(): void {
-    //     echo "teardown\n";
-    // }
-
-    public static function setUpBeforeClass(): void {
-        //echo "setup before class\n";
-    }
-
-    public static function tearDownAfterClass(): void {
-        //echo "teardown after class\n";
-    }
-
     /**
      * Returns the number of files in UPLOAD_DIR or -1 if UPLOAD_DIR does not exist
      */
@@ -74,21 +58,6 @@ class AttachmentsTest extends GvvDuskTestCase {
         return -1;
     }
 
-
-    // Function to extract the href of the edit icon of a table row
-    public function getHrefFromTableRow($browser, $pattern) {
-
-        return $browser->script([
-            "return document.evaluate(
-                \"//tr[contains(., '$pattern')]//td[1]//a\", 
-                document, 
-                null, 
-                XPathResult.FIRST_ORDERED_NODE_TYPE, 
-                null
-            ).singleNodeValue.getAttribute('href');"
-        ])[0];
-    }
-
     // search the edit link of an accounting line
     public function searchEditLink($browser, $pattern, $year) {
 
@@ -96,7 +65,8 @@ class AttachmentsTest extends GvvDuskTestCase {
             ->assertSee($pattern)
             ->assertSee($year);
 
-        return $this->getHrefFromTableRow($browser, $pattern);
+        $href = $this->getHrefFromTableRow($browser, $pattern);
+        return $href;
     }
 
     /**
@@ -149,7 +119,6 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSeeLink('Essence plus huile');
             $href = $browser->attribute("a[href*='journal_compte']", 'href');
 
-            echo "visiting : " . $href;
             $browser->visit($href)
                 ->assertValue('input[name="desc"]', 'Essence plus huile');
 
@@ -174,7 +143,6 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->waitFor('a')
                 ->assertSeeLink('Banque');
             $href = $browser->attribute("a[href*='journal_compte']", 'href');
-            echo "visiting : " . $href;
             $browser->visit($href)
                 ->assertValue('input[name="desc"]', 'Banque');
 
@@ -195,10 +163,6 @@ class AttachmentsTest extends GvvDuskTestCase {
 
         $this->browse(function (Browser $browser) {
 
-            // echo "line1 = " . $this->line1 . "\n";
-            // echo "line2 = " . $this->line2 . "\n";
-            // echo "attachments = " . $this->attachments . "\n";
-
             $browser->visit($this->attachments)
                 ->assertSee('Justificatifs')
                 ->assertSee("Affichage de l'élement 0 à 0 sur 0 éléments");
@@ -209,10 +173,8 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->click('a[href*="attachments/create"]')
                 ->assertSee('Justificatifs');
 
-            $initial_file_count = $this->filesInUploadDir();
-            // echo "file_count = " . $initial_file_count . "\n";
-            $fixtures_dir = getcwd() . "/tests/fixtures/";
-            // echo "fixtures_dir = " . $fixtures_dir . "\n";
+            // $initial_file_count = $this->filesInUploadDir();
+            // $fixtures_dir = getcwd() . "/tests/fixtures/";
         });
     }
 

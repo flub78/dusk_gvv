@@ -245,4 +245,25 @@ class GvvDuskTestCase extends DuskTestCase {
             $this->logout($browser);
         });
     }
+
+    // Function to extract the href of the edit icon of a table row
+    public function getHrefFromTableRow($browser, $pattern) {
+
+        return $browser->script([
+            "return document.evaluate(
+                    \"//tr[contains(., '$pattern')]//td[1]//a\", 
+                    document, 
+                    null, 
+                    XPathResult.FIRST_ORDERED_NODE_TYPE, 
+                    null
+                ).singleNodeValue.getAttribute('href');"
+        ])[0];
+    }
+
+    // Function to extract the id of an element from the table view
+    public function getIdFromTable($browser, $pattern) {
+        $href = $this->getHrefFromTableRow($browser, $pattern);
+
+        return basename($href);
+    }
 }
