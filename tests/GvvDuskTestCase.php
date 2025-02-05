@@ -267,4 +267,25 @@ class GvvDuskTestCase extends DuskTestCase {
 
         return basename($href);
     }
+
+    /**
+     * Function to extract a column value from a table row
+     */
+    public function getColumnFromTableRow($browser, $table_id, $pattern, $index) {
+
+        $result = $browser->script(
+            "return (function(tableId, pattern, index) {
+                const selector = tableId + ' tbody tr';
+                const row = Array.from(document.querySelectorAll(selector)).find(
+                    row => row.textContent.includes(pattern)
+                );
+                return row?.querySelector('td:nth-child(' + index + ')')?.innerHTML;
+            })(
+                " . json_encode($table_id) . ",
+                " . json_encode($pattern) . ",
+                " . json_encode($index) . "
+            );"
+        )[0];
+        return $result;
+    }
 }

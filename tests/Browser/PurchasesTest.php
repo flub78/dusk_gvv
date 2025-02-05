@@ -7,6 +7,20 @@ use Tests\Browser\BillingTest;
 
 use Tests\libraries\AccountHandler;
 
+function toDecimal($input) {
+    if (empty(trim($input))) {
+        return 0.0;
+    }
+
+    // Remove non-breaking spaces and currency symbols
+    $cleaned = preg_replace('/[^\d,.-]/u', '', html_entity_decode($input));
+
+    // Replace comma with dot for decimal format
+    $decimal = str_replace(',', '.', $cleaned);
+
+    return is_numeric($decimal) ? (float) $decimal : 0.0;
+}
+
 /*
  * 
  * Purchase tests
@@ -58,9 +72,6 @@ class PurchasesTest extends BillingTest {
             $asterix_acount_image = "(411) Le Gaulois Asterix";
             $launch_acount_image = "(706) Remorqués";
 
-            // 'url' => 'comptes/page/411'
-            // $this->canAccess($browser, $page['url'], $ms, $mns, $page['inputValues'] ?? []);
-
             // Soldes pilotes
             $url = $this->fullUrl('comptes/page/411');
             if ($this->verbose()) {
@@ -73,42 +84,13 @@ class PurchasesTest extends BillingTest {
 
             $asterix_compte_id = $this->getIdFromTable($browser, 'Le Gaulois Asterix');
 
-            $debit = "";
-            $credit = "";
-            $this->assertEquals($asterix_compte_id, 305);
-
-
-            $browser->screenshot('debugging');
-
-
             $table_id = "#DataTables_Table_0";
             $pattern = "Asterix";
-            $index = 6;
 
-            $result = $browser->script(
-                "return (function(tableId, pattern, index) {
-                    const selector = tableId + ' tbody tr';
-                    const row = Array.from(document.querySelectorAll(selector)).find(
-                        row => row.textContent.includes(pattern)
-                    );
-                    return {
-                        debug: {receivedTableId: tableId, receivedPattern: pattern, receivedIndex: index},
-                        result: row?.querySelector('td:nth-child(' + index + ')')?.innerHTML
-                    };
-                })(
-                    " . json_encode($table_id) . ",
-                    " . json_encode($pattern) . ",
-                    " . json_encode($index) . "
-                );"
-            )[0];
-
-
-            //                 const table_id = "#DataTables_Table_0";
-            // const pattern = "Asterix";
-            //const index = 6;
-            var_dump($result);
-            // echo ("HTML: $result\n");
-
+            $debit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 5));
+            $credit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 6));
+            $solde = $credit - $debit;
+            echo ("$asterix_compte_id: $debit $credit $solde\n");
         }); // end of browse callback
     }
 
