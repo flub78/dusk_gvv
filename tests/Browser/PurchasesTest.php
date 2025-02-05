@@ -78,33 +78,37 @@ class PurchasesTest extends BillingTest {
             $this->assertEquals($asterix_compte_id, 305);
 
 
-            $browser->screenshot('debuging');
+            $browser->screenshot('debugging');
 
 
             $table_id = "#DataTables_Table_0";
             $pattern = "Asterix";
             $index = 6;
 
-            $result = $browser->script('
-                const table_id = "#DataTables_Table_0";
-                const pattern = "Asterix";
-                const index = 6;
-                const selector = table_id + " tbody tr";
-                const index_selector = "td:nth-child(" + index + ")";
-                const row = Array.from(document.querySelectorAll(selector)).find(
-                row => row.textContent.includes(pattern)
-                );
-                return row?.querySelector("td:nth-child(6)").innerHTML;
-            ', [$table_id, $pattern, $index])[0];
+            $result = $browser->script(
+                "return (function(tableId, pattern, index) {
+                    const selector = tableId + ' tbody tr';
+                    const row = Array.from(document.querySelectorAll(selector)).find(
+                        row => row.textContent.includes(pattern)
+                    );
+                    return {
+                        debug: {receivedTableId: tableId, receivedPattern: pattern, receivedIndex: index},
+                        result: row?.querySelector('td:nth-child(' + index + ')')?.innerHTML
+                    };
+                })(
+                    " . json_encode($table_id) . ",
+                    " . json_encode($pattern) . ",
+                    " . json_encode($index) . "
+                );"
+            )[0];
+
 
             //                 const table_id = "#DataTables_Table_0";
             // const pattern = "Asterix";
-            // const index = 6;
+            //const index = 6;
+            var_dump($result);
+            // echo ("HTML: $result\n");
 
-            echo ("HTML: $result\n");
-
-            // $balances = $this->getAccountBalances($browser, 'Asterix');
-            // var_dump($balances);
         }); // end of browse callback
     }
 
