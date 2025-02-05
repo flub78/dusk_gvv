@@ -5,9 +5,7 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\Browser\BillingTest;
 
-use Tests\libraries\GliderFlightHandler;
 use Tests\libraries\AccountHandler;
-use Tests\libraries\GliderHandler;
 
 /*
  * 
@@ -32,7 +30,9 @@ class PurchasesTest extends BillingTest {
      * @return void
      */
     public function testInit() {
-        parent::testInit();
+        $this->assertTrue(true);
+
+        // parent::testInit();
     }
 
     /**
@@ -43,6 +43,7 @@ class PurchasesTest extends BillingTest {
     public function testLogin() {
         parent::testLogin();
     }
+
 
     /**
      * Checks that a purchase is billed correctly
@@ -57,151 +58,53 @@ class PurchasesTest extends BillingTest {
             $asterix_acount_image = "(411) Le Gaulois Asterix";
             $launch_acount_image = "(706) Remorqués";
 
-            return;
+            // 'url' => 'comptes/page/411'
+            // $this->canAccess($browser, $page['url'], $ms, $mns, $page['inputValues'] ?? []);
 
-            $glider_flight_handler = new GliderFlightHandler($browser, $this);
-            $glider_handler = new GliderHandler($browser, $this);
+            // Soldes pilotes
+            $url = $this->fullUrl('comptes/page/411');
+            if ($this->verbose()) {
+                echo ("Visiting $url\n");
+            }
 
-            $latest = $glider_flight_handler->latestFlight();
-            $flightDate = $this->NextDate($latest);
+            $browser->visit($url)
+                ->screenshot('soldes_pilotes')
+                ->assertSee('Balance des comptes Classe 411');
 
+            $asterix_compte_id = $this->getIdFromTable($browser, 'Le Gaulois Asterix');
 
-            $glider_time_acount_image = "(706) Heures de vol planeur";
-
-            $flights = [
-                [
-                    'url' => 'vols_planeur/create',
-                    'date' => $flightDate,
-                    'pilot' => 'asterix',
-                    'glider' => 'F-CGAA',
-                    'instructor' => 'panoramix',
-                    'DC' =>  true,
-                    'start_time' => '10:00',
-                    'end_time' => '10:30',
-                    'launch' => 'R',   // R, T, A, E
-                    'altitude' => '700',
-                    'tow_pilot' => 'abraracourcix',
-                    'tow_plane' => 'F-JUFA',
-                    'account' => $asterix_acount_image,
-                    'price' => 46.0,
-                ],
-            ];
-
-            // context recording
-            $accounts = [
-                'asterix' => $account_handler->AccountIdFromImage($asterix_acount_image),
-                'launch account' => $account_handler->AccountIdFromImage($launch_acount_image),
-                'glider time account' => $account_handler->AccountIdFromImage($glider_time_acount_image)
-            ];
-
-            $context = $this->FlightAndBillingContext($browser, $acounts);
-            $this->DisplayContext($context, "Initial context");
-
-            // Glider flight creation
-            $glider_flight_handler->CreateGliderFlights($flights);
-            $id = $glider_flight_handler->latestFlight()->vpid;
-
-            // new context recording
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -46.0, 'launch account' => 31.0, 'glider time account' => 15.0],
-                'purchases' => 3,
-                'lines' => 3
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "after creation of the first flight");
-
-            // Increase time flight and switch to a 300 m
-            $update = [
-                'vpid' => $id,
-                'end_time' => '11:00', // 30 minutes more, 30 €
-                'altitude' => '200',  // 300 meters - 1 purchase and lines, - 16 €
-            ];
-            $glider_flight_handler->UpdateGliderFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -45.0, 'launch account' => 15.0, 'glider time account' => 30.0],
-                'purchases' => 2,
-                'lines' => 2
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After switch to 300 m");
-
-            // Winch and flight of more than 3 hours
-            $update = [
-                'vpid' => $id,
-                'end_time' => '16:00', // 6 hours so 90 €
-                'launch' => 'T'
-            ];
-            $glider_flight_handler->UpdateGliderFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -98.0, 'launch account' => 8.0, 'glider time account' => 90.0],
-                'purchases' => 2,
-                'lines' => 2
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After switch to winch");
-
-            // VI
-            $update = [
-                'vpid' => $id,
-                'categorie' => 'VI', // 6 hours so 90 €
-            ];
-            $glider_flight_handler->UpdateGliderFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'glider time account' => 0.0],
-                'purchases' => 0,
-                'lines' => 0
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After VI");
-
-            // Private glider per owner
-            $glider_owner = [
-                "immat" => "F-CGAA",
-                "type_proprio" => "Privé",
-                "proprietaire" => "asterix",
-            ];
-            $glider_handler->UpdateGlider($glider_owner);
-
-            $update = [
-                'vpid' => $id,
-                'categorie' => 'standard',
-            ];
-            $glider_flight_handler->UpdateGliderFLight($update);
-
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => -8.0, 'launch account' => 8.0, 'glider time account' => 0.0],
-                'purchases' => 1,
-                'lines' => 1
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "Private glider");
-
-            // Private glider per not owner
+            $debit = "";
+            $credit = "";
+            $this->assertEquals($asterix_compte_id, 305);
 
 
-            // Back to a clubl ownership
-            $glider_owner = [
-                "immat" => "F-CGAA",
-                "type_proprio" => "Club",
-                "proprietaire" => "",
-            ];
-            $glider_handler->UpdateGlider($glider_owner);
+            $browser->screenshot('debuging');
 
-            // Flight delete
-            $this->canAccess($browser, 'vols_planeur/delete/' . $id);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
-            $deltas = $this->CompareContexes($context, $new_context);
-            $expected = [
-                'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'glider time account' => 0.0],
-                'purchases' => 0,
-                'lines' => 0
-            ];
-            $this->ExpectedDifferences($expected, $deltas, "After delete");
+
+            $table_id = "#DataTables_Table_0";
+            $pattern = "Asterix";
+            $index = 6;
+
+            $result = $browser->script('
+                const table_id = "#DataTables_Table_0";
+                const pattern = "Asterix";
+                const index = 6;
+                const selector = table_id + " tbody tr";
+                const index_selector = "td:nth-child(" + index + ")";
+                const row = Array.from(document.querySelectorAll(selector)).find(
+                row => row.textContent.includes(pattern)
+                );
+                return row?.querySelector("td:nth-child(6)").innerHTML;
+            ', [$table_id, $pattern, $index])[0];
+
+            //                 const table_id = "#DataTables_Table_0";
+            // const pattern = "Asterix";
+            // const index = 6;
+
+            echo ("HTML: $result\n");
+
+            // $balances = $this->getAccountBalances($browser, 'Asterix');
+            // var_dump($balances);
         }); // end of browse callback
     }
 

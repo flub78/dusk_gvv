@@ -11,7 +11,7 @@ use Tests\libraries\AccountHandler;
  * Common functions used by several classes of tests
  */
 
-class BillingTest extends GvvDuskTestCase {
+abstract class BillingTest extends GvvDuskTestCase {
 
     public function NextDate($latest, $dateAttr = "vpdate") {
         $dateFormat = "d/m/Y";

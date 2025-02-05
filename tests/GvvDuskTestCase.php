@@ -260,6 +260,7 @@ class GvvDuskTestCase extends DuskTestCase {
         ])[0];
     }
 
+
     // Function to extract the id of an element from the table view
     public function getIdFromTable($browser, $pattern) {
         $href = $this->getHrefFromTableRow($browser, $pattern);
