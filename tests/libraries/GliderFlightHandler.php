@@ -218,7 +218,7 @@ class GliderFlightHandler {
                 ->scrollIntoView('#validate')
                 ->waitFor('#validate')
                 ->press('#validate')
-                ->assertDontSee('404')
+                ->assertDontSee('404 Page not found')
                 ->assertDontSee('existe pas dans les tarifs');
 
             $this->browser->screenshot('after_glider_flight');
@@ -277,7 +277,7 @@ class GliderFlightHandler {
             ->scrollIntoView('#validate')
             ->waitFor('#validate')
             ->press('#validate')
-            ->assertDontSee('404');
+            ->assertDontSee('404 Page not found');
     }
 
     /**

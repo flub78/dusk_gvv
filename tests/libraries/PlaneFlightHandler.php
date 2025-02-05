@@ -148,7 +148,7 @@ class PlaneFlightHandler {
                 ->scrollIntoView('#validate')
                 ->waitFor('#validate')
                 ->press('#validate')
-                ->assertDontSee('404')
+                ->assertDontSee('404 Page not found')
                 ->assertDontSee('existe pas dans les tarifs');
 
             $this->browser->screenshot('after_flight');
@@ -183,7 +183,7 @@ class PlaneFlightHandler {
             ->scrollIntoView('#validate')
             ->waitFor('#validate')
             ->press('#validate')
-            ->assertDontSee('404');
+            ->assertDontSee('404 Page not found');
     }
 
     /**

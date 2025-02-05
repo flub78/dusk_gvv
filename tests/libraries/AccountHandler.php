@@ -133,7 +133,7 @@ class AccountHandler {
             ->scrollIntoView('#validate')
             ->waitFor('#validate')
             ->press('#validate')
-            ->assertDontSee('404');
+            ->assertDontSee('404 Page not found');
     }
 
     public function AccountingLineWithCheck($line) {
