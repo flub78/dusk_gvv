@@ -69,14 +69,14 @@ class PurchasesTest extends BillingTest {
             $this->assertTrue(true);
 
             $account_handler = new AccountHandler($browser, $this);
-            $asterix_acount_image = "(411) Le Gaulois Asterix";
-            $launch_acount_image = "(706) Remorqués";
+            $sale_acount_image = "(707) Ventes diverses";
+            $sale_account_id =  $account_handler->AccountIdFromImage($sale_acount_image);
+            $initial_sale_balance = $account_handler->AccountTotal($sale_account_id);
+
+            echo "Initial balance of $sale_acount_image: $sale_account_id: $initial_sale_balance\n";
 
             // Soldes pilotes
             $url = $this->fullUrl('comptes/page/411');
-            if ($this->verbose()) {
-                echo ("Visiting $url\n");
-            }
 
             $browser->visit($url)
                 ->screenshot('soldes_pilotes')
@@ -84,17 +84,60 @@ class PurchasesTest extends BillingTest {
 
             $asterix_compte_id = $this->getIdFromTable($browser, 'Le Gaulois Asterix');
 
+            // Solde Asterix depuis soldes pilotes
             $table_id = "#DataTables_Table_0";
             $pattern = "Asterix";
 
             $debit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 5));
             $credit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 6));
-            $solde = $credit - $debit;
-            echo ("$asterix_compte_id: $debit $credit $solde\n");
+            $inital_asterix_balance = $credit - $debit;
+
+            // Solde Asterix depuis son compte
+            $total = $account_handler->AccountTotal($asterix_compte_id);
+            $this->assertEquals($inital_asterix_balance, $total);
+
+            $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
+            $browser->script('document.body.style.zoom = "0.5"');
+
+            // Ajoute 2 achats
+            $browser->click('#panel-achats > .accordion-button')
+                ->scrollIntoView('#validation_achat')
+                ->waitFor('#validation_achat');
+            $browser->click('#select2-product_selector-container');
+
+            $browser->type('quantite', '2')
+                ->click('.form-group:nth-child(4) > .form-control')
+                ->type('.form-group:nth-child(4) > .form-control', '2 bobs')
+                ->click('#validation_achat');
+
+            // $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
+            // $sale_new_balance = $account_handler->AccountTotal($sale_account_id);
+
+            // $this->assertEquals($asterix_new_balance, $inital_asterix_balance - 20);
+            // $this->assertEquals($sale_new_balance, $initial_sale_balance + 20);
+
+            // Modifie la quantié
+            // $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
+            // $browser->click('#panel-achats > .accordion-button')
+            //     ->scrollIntoView('#validation_achat')
+            //     ->waitFor('#validation_achat');
+
+            $browser->click('td:nth-child(1) .icon')
+                ->type('quantite', '1')
+                ->click('[name="saisie"]')
+                ->type('#description', '1 seul bob')
+                ->click('#validate');
+
+            // Supprime la ligne
+            $browser->click('td:nth-child(2) .icon');
+            // ->assertDialogOpened('Etes vous sûr de vouloir supprimer la ligne du 06/02/2025 Le Gaulois Asterix-Ventes diverses 20.00 1 seul bob?');
+
+            $browser->acceptDialog()
+                ->visit('/comptes/page/411');
+
+            $browser->script('document.body.style.zoom = "1.0"');
         }); // end of browse callback
     }
-
-
 
     /**
      * Logout
