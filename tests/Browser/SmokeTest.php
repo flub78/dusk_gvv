@@ -196,7 +196,7 @@ class SmokeTest extends GvvDuskTestCase {
 
     /**
      * Test create
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
     public function testCreateData() {
         // $this->markTestSkipped('must be revisited.');

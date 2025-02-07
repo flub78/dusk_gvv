@@ -15,7 +15,7 @@ class LoginTest extends GvvDuskTestCase {
      *
      * @return void
      */
-    public function testHome() {
+    public function testCheckThatItIToAccessHomePage() {
         $this->browse(function (Browser $browser) {
             $browser->visit($this->url)
                 ->assertSee('GVV')
@@ -29,7 +29,7 @@ class LoginTest extends GvvDuskTestCase {
      *
      * @return void
      */
-    public function testFirstLogin() {
+    public function testCheckLoginAndLogout() {
         $this->browse(function (Browser $browser) {
 
             $this->login($browser, 'testadmin', 'password');
@@ -45,7 +45,7 @@ class LoginTest extends GvvDuskTestCase {
         });
     }
 
-    public function testAccess() {
+    public function testCheckBasicAccessFvorConnectedUsers() {
         $this->browse(function (Browser $browser) {
             $this->login($browser, 'testadmin', 'password');
             $this->canAccess($browser, "vols_planeur/page", ['Compta', 'Planche']);

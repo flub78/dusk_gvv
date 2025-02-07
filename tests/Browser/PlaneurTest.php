@@ -10,13 +10,19 @@ use Tests\libraries\GliderHandler;
 class PlaneurTest extends GvvDuskTestCase {
 
 
-    public function testAccess() {
+    public function testCheckBasicAccessFvorConnectedUsers() {
 
         $this->browse(function (Browser $browser) {
 
-            $glider = ['immat' => 'F-CGAA', 'type' => 'Ask21', 'nb_places' => '2', 'construct' => 'Alexander Schleicher',
-            'prix' => 'hdv-planeur', 'prix_forfait' => 'hdv-planeur-forfait'];
-    
+            $glider = [
+                'immat' => 'F-CGAA',
+                'type' => 'Ask21',
+                'nb_places' => '2',
+                'construct' => 'Alexander Schleicher',
+                'prix' => 'hdv-planeur',
+                'prix_forfait' => 'hdv-planeur-forfait'
+            ];
+
 
             $glider_handler = new GliderHandler($browser, $this);
 

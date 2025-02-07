@@ -1,7 +1,9 @@
 <?php
+
 /**
  * A Browser test to check CI Unit Tests
  */
+
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
@@ -10,7 +12,7 @@ use Tests\GvvDuskTestCase;
 class CIUnitTest extends GvvDuskTestCase {
 
 
-    public function testAccess() {
+    public function testCheckUnitTestsExecution() {
         $this->browse(function (Browser $browser) {
 
             $user = "testadmin";
@@ -20,7 +22,7 @@ class CIUnitTest extends GvvDuskTestCase {
 
             $pages = [
                 ['url' => 'tests/test_helpers', 'mustSee' => ['Passed']],
-        //        ['url' => 'tests/test_libraries', 'mustSee' => ['Passed']],
+                //        ['url' => 'tests/test_libraries', 'mustSee' => ['Passed']],
                 ['url' => 'achats/test', 'mustSee' => ['Passed']],
                 ['url' => 'admin/test', 'mustSee' => ['Passed']],
                 ['url' => 'categorie/test', 'mustSee' => ['Passed']],
@@ -39,16 +41,15 @@ class CIUnitTest extends GvvDuskTestCase {
             ];
 
             $this->login($browser, $user, $password);
-                        
+
             foreach ($pages as $page) {
                 $ms = array_merge($mustSee, $page['mustSee']);
                 $this->canAccessTest($browser, $page['url'], $ms, $mustNotSee, $page['inputValues'] ?? []);
             }
-            
+
             $browser->visit($this->fullUrl('calendar'));
 
             $this->logout($browser);
-
         });
     }
 }

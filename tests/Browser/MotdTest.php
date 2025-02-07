@@ -15,7 +15,7 @@ class MotdTest extends GvvDuskTestCase {
      *
      * @return void
      */
-    public function testHome() {
+    public function testCheckThatItIToAccessHomePage() {
         $this->browse(function (Browser $browser) {
             $browser->visit($this->url)
                 ->assertSee('GVV')
@@ -29,7 +29,7 @@ class MotdTest extends GvvDuskTestCase {
      *
      * @return void
      */
-    public function testFirstLogin() {
+    public function testCheckLoginAndLogout() {
         $this->browse(function (Browser $browser) {
 
             $motd = 'Message du jour';

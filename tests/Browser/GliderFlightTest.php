@@ -35,25 +35,25 @@ class GliderFlightTest extends BillingTest {
      * @return void
      */
     public function testCheckInstallationProcedure() {
-        parent::testInit();
+        parent::testCheckInstallationProcedure();
     }
 
     /**
      * Login
      * 
-     * @depends testInit
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
-        parent::testLogin();
+        parent::testCheckThatUserCanLogin();
     }
 
 
     /**
      * Test creation of correct flights
      * 
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
-    public function testCreate() {
+    public function testGliderFlightsCreationAndBilling() {
         $this->browse(function (Browser $browser) {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -118,9 +118,9 @@ class GliderFlightTest extends BillingTest {
     /**
      * Checks that correct fields are displayed depending on the fact aht the machine is single seat or not
      * 
-     * @depends testCreate
+     * @depends testGliderFlightsCreationAndBilling
      */
-    public function testSingleSeater() {
+    public function testCheckThatCorrectFieldsAreVisibleAccordingToSelection() {
         $this->browse(function (Browser $browser) {
 
             $this->canAccess($browser, 'vols_planeur/create');
@@ -190,7 +190,7 @@ class GliderFlightTest extends BillingTest {
     /**
      * Test that flights are rejected when the pilot or glider are already in flight
      * 
-     * @depends testSingleSeater
+     * @depends testChekcThatCorrectFieldsAreVisibleAccordingToSelection
      * 
      * preconditions:
      *      Asterix on F-CGAA from 10:00 to 10:30
@@ -222,7 +222,7 @@ class GliderFlightTest extends BillingTest {
      *      - Asterix on F-CGAA from 10:31 to 10:59
      *      - Asterix on F-CGAA from 12:16 to 13:00
      */
-    public function testInFlight() {
+    public function testCheckThatFlightsAreRejectedWhenInFlight() {
         $this->browse(function (Browser $browser) {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -269,7 +269,7 @@ class GliderFlightTest extends BillingTest {
      * Check that a glider flight can be updated
      * @depends testInFlight
      */
-    public function testUpdate() {
+    public function testCheckFlightUpdate() {
         $this->browse(function (Browser $browser) {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -296,9 +296,9 @@ class GliderFlightTest extends BillingTest {
 
     /**
      * Check that a glider flight can be deleted
-     * @depends testUpdate
+     * @depends testCheckFlightUpdate
      */
-    public function testDelete() {
+    public function testCheckFlightDelete() {
         $this->browse(function (Browser $browser) {
 
             $glider_flight_handler = new GliderFlightHandler($browser, $this);
@@ -329,9 +329,9 @@ class GliderFlightTest extends BillingTest {
      *   - external glider winch
      *   - forfait billing     
      * 
-     * @depends testDelete
+     * @depends testCheckFlightDelete
      */
-    public function testBilling() {
+    public function testCheckFlightBilling() {
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
@@ -492,9 +492,9 @@ class GliderFlightTest extends BillingTest {
      *    - checks that people are recredited when the flight is deleted or the payer changed
      *    - checks that no incorrect purchases are remaining after update or delete
      * 
-     * @depends testBilling
+     * @depends testCheckFlightBilling
      */
-    public function testSharing() {
+    public function testCheckSharedFlightsBilling() {
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
@@ -704,9 +704,9 @@ class GliderFlightTest extends BillingTest {
 
     /**
      * Logout
-     * @depends testSharing
+     * @depends testCheckSharedFlightsBilling
      */
     public function testCheckThatUserCanLogout() {
-        parent::testLogout();
+        parent::testCheckThatUserCanLogout();
     }
 }

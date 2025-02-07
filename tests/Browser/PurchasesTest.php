@@ -46,23 +46,23 @@ class PurchasesTest extends BillingTest {
     public function testCheckInstallationProcedure() {
         $this->assertTrue(true);
 
-        // parent::testInit();
+        // parent::testCheckInstallationProcedure();
     }
 
     /**
      * Login
      * 
-     * @depends testInit
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
-        parent::testLogin();
+        parent::testCheckThatUserCanLogin();
     }
 
 
     /**
      * Checks that a purchase is billed correctly
      * 
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
     public function testBilling() {
         $this->browse(function (Browser $browser) {
@@ -165,6 +165,6 @@ class PurchasesTest extends BillingTest {
      * @depends testBilling
      */
     public function testCheckThatUserCanLogout() {
-        parent::testLogout();
+        parent::testCheckThatUserCanLogout();
     }
 }

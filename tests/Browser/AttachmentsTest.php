@@ -79,13 +79,13 @@ class AttachmentsTest extends GvvDuskTestCase {
      * @return void
      */
     public function testCheckInstallationProcedure() {
-        parent::testInit();
+        parent::testCheckInstallationProcedure();
     }
 
     /**
      * Login
      * 
-     * @depends testInit
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
@@ -155,7 +155,7 @@ class AttachmentsTest extends GvvDuskTestCase {
     /**
      * testAttachmentCRUD
      * At this point two accounting lines have been identified
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
     public function testAttachmentCRUD() {
 

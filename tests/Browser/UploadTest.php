@@ -37,7 +37,7 @@ class UploadTest extends GvvDuskTestCase {
 
     /**
      * Login
-     * @depends testInit
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
@@ -48,7 +48,7 @@ class UploadTest extends GvvDuskTestCase {
 
     /**
      * Test upload image
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
     public function testNoUploadOnCreate() {
         // $this->markTestSkipped('must be revisited.');

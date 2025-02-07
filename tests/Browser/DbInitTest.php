@@ -56,7 +56,7 @@ class DbInitTest extends GvvDuskTestCase {
     /**
      * Login
      * 
-     * @depends testInit
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
@@ -65,21 +65,10 @@ class DbInitTest extends GvvDuskTestCase {
         });
     }
 
-    /**
-     * Test the ...
-     * 
-     * @depends testLogin
-     */
-    public function testTest() {
-        $this->browse(function (Browser $browser) {
-
-            $this->assertNotNull($browser);
-        });
-    }
 
     /**
      * Logout
-     * @depends testTest
+     * @depends testCheckThatUserCanLogin
      */
     public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');

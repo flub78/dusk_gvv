@@ -13,7 +13,7 @@ class InstallationTest extends GvvDuskTestCase {
      *
      * @return void
      */
-    public function testReset() {
+    public function testResetAndInstallation() {
         $this->browse(function (Browser $browser) {
 
             $user = "testadmin";

@@ -33,7 +33,7 @@ class SectionsTest extends GvvDuskTestCase {
 
     /**
      * Logout
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
     public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');

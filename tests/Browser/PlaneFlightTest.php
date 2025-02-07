@@ -37,22 +37,22 @@ class PlaneFlightTest extends BillingTest {
      * @return void
      */
     public function testCheckInstallationProcedure() {
-        parent::testInit();
+        parent::testCheckInstallationProcedure();
     }
 
     /**
      * Login
      * 
-     * @depends testInit
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
-        parent::testLogin();
+        parent::testCheckThatUserCanLogin();
     }
 
     /**
      * Test creation of correct flights
      * 
-     * @depends testLogin
+     * @depends testCheckThatUserCanLogin
      */
     public function testCreate() {
         $this->assertTrue(true);
@@ -654,6 +654,6 @@ class PlaneFlightTest extends BillingTest {
      * @depends testSharing
      */
     public function testCheckThatUserCanLogout() {
-        parent::testLogout();
+        parent::testCheckThatUserCanLogout();
     }
 }
