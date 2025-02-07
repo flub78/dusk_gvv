@@ -11,7 +11,7 @@ use Tests\GvvDuskTestCase;
 class BureauAccessTest extends GvvDuskTestCase {
 
 
-    public function testAdminAccess() {
+    public function testBureauCanAccessToBureauPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -57,7 +57,7 @@ class BureauAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testMembresAccess() {
+    public function testBureauCanAccessToMembresPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -101,7 +101,7 @@ class BureauAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testPlaneursAccess() {
+    public function testBureauCanAccessToPlaneurPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -141,7 +141,7 @@ class BureauAccessTest extends GvvDuskTestCase {
      * Attention les tests sur les pompes sont dépendants de la base de données qui doit être modifiée
      * manuellement avant de faire passer le test. C'est mauvais mais la correction entrainerait la refonte complète des droits de GVV.
      */
-    public function testAvionsAccess() {
+    public function testBureauCanAccessToAvionsPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -173,7 +173,7 @@ class BureauAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testComptaAccess() {
+    public function testBureauCanAccessToComptaPages() {
         $this->browse(function (Browser $browser) {
 
             $user = "testbureau";

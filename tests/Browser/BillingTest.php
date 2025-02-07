@@ -29,7 +29,7 @@ abstract class BillingTest extends GvvDuskTestCase {
     /**
      * Login
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         $this->browse(function (Browser $browser) {
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
         });
@@ -96,7 +96,7 @@ abstract class BillingTest extends GvvDuskTestCase {
     /**
      * Logout
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         $this->browse(function (Browser $browser) {
             $this->logout($browser);
         });

@@ -18,7 +18,7 @@ use Tests\GvvDuskTestCase;
 class UserAccessTest extends GvvDuskTestCase {
 
 
-    public function testAdminAccess() {
+    public function testUserCanAccessToUserPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -62,7 +62,7 @@ class UserAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testMembresAccess() {
+    public function testUserCanAccessToMembrePages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -107,7 +107,7 @@ class UserAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testPlaneursAccess() {
+    public function testUserCanAccessToPlaneurPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -143,7 +143,7 @@ class UserAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testAvionsAccess() {
+    public function testUserCanAccessToAvionPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -175,7 +175,7 @@ class UserAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testComptaAccess() {
+    public function testUserCanAccessToComptaPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 

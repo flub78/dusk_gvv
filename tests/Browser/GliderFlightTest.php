@@ -34,7 +34,7 @@ class GliderFlightTest extends BillingTest {
      *
      * @return void
      */
-    public function testInit() {
+    public function testCheckInstallationProcedure() {
         parent::testInit();
     }
 
@@ -43,7 +43,7 @@ class GliderFlightTest extends BillingTest {
      * 
      * @depends testInit
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         parent::testLogin();
     }
 
@@ -706,7 +706,7 @@ class GliderFlightTest extends BillingTest {
      * Logout
      * @depends testSharing
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         parent::testLogout();
     }
 }

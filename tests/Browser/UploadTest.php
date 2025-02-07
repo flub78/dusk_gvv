@@ -39,7 +39,7 @@ class UploadTest extends GvvDuskTestCase {
      * Login
      * @depends testInit
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->login($browser, 'testadmin', 'password');
@@ -171,7 +171,7 @@ class UploadTest extends GvvDuskTestCase {
      * Logout
      * @depends testUploadOnEdit
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->logout($browser);

@@ -122,7 +122,7 @@ class TerrainTest extends GvvDuskTestCase {
     /**
      * Login
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->login($browser, 'testadmin', 'password');
@@ -177,7 +177,7 @@ class TerrainTest extends GvvDuskTestCase {
      * Logout
      * @depends testDelete
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->logout($browser);

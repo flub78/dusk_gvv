@@ -225,7 +225,7 @@ class GvvDuskTestCase extends DuskTestCase {
      *
      * @return void
      */
-    public function testInit() {
+    public function testCheckInstallationProcedure() {
         $this->browse(function (Browser $browser) {
 
             $browser->visit($this->url . 'install/reset.php')

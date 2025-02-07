@@ -36,7 +36,7 @@ class PlaneFlightTest extends BillingTest {
      *
      * @return void
      */
-    public function testInit() {
+    public function testCheckInstallationProcedure() {
         parent::testInit();
     }
 
@@ -45,7 +45,7 @@ class PlaneFlightTest extends BillingTest {
      * 
      * @depends testInit
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         parent::testLogin();
     }
 
@@ -653,7 +653,7 @@ class PlaneFlightTest extends BillingTest {
      * Logout
      * @depends testSharing
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         parent::testLogout();
     }
 }

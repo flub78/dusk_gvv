@@ -23,7 +23,7 @@ class SectionsTest extends GvvDuskTestCase {
     /**
      * Login
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), "Planeur");
@@ -35,7 +35,7 @@ class SectionsTest extends GvvDuskTestCase {
      * Logout
      * @depends testLogin
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->logout($browser);

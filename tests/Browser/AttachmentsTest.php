@@ -78,7 +78,7 @@ class AttachmentsTest extends GvvDuskTestCase {
      *
      * @return void
      */
-    public function testInit() {
+    public function testCheckInstallationProcedure() {
         parent::testInit();
     }
 
@@ -87,7 +87,7 @@ class AttachmentsTest extends GvvDuskTestCase {
      * 
      * @depends testInit
      */
-    public function testLogin() {
+    public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->login($browser, 'testadmin', 'password');
@@ -182,7 +182,7 @@ class AttachmentsTest extends GvvDuskTestCase {
      * Logout
      * @depends testAttachmentCRUD
      */
-    public function testLogout() {
+    public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
             $this->logout($browser);

@@ -12,7 +12,7 @@ use PHPUnit\Framework\Assert;
 class AdminAccessTest extends GvvDuskTestCase {
 
 
-    public function testEnv() {
+    public function testRequiredEnvironmentVariablesAreSet() {
         $this->browse(function (Browser $browser) {
             $base_url = env('TARGET');
 
@@ -22,7 +22,7 @@ class AdminAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testAdminAccess() {
+    public function testAdminCanAccessToAdminPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -68,7 +68,7 @@ class AdminAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testMembresAccess() {
+    public function testAdminCanAccessToMembresPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -112,7 +112,7 @@ class AdminAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testPlaneursAccess() {
+    public function testAdminCanAccessToPlaneurPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -146,7 +146,7 @@ class AdminAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testAvionsAccess() {
+    public function testAdminCanAccessToAvionPages() {
         // $this->markTestSkipped('Speedup during dev.');
         $this->browse(function (Browser $browser) {
 
@@ -177,7 +177,7 @@ class AdminAccessTest extends GvvDuskTestCase {
         });
     }
 
-    public function testComptaAccess() {
+    public function testAdminCanAccessToComptaPages() {
         $this->browse(function (Browser $browser) {
 
             $user = "testadmin";
