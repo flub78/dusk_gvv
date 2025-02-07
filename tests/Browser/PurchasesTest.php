@@ -64,7 +64,7 @@ class PurchasesTest extends BillingTest {
      * 
      * @depends testCheckThatUserCanLogin
      */
-    public function testBilling() {
+    public function testCheckPurchasesAndAccountBalance() {
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
@@ -162,7 +162,7 @@ class PurchasesTest extends BillingTest {
 
     /**
      * Logout
-     * @depends testBilling
+     * @depends testCheckPurchasesAndAccountBalance
      */
     public function testCheckThatUserCanLogout() {
         parent::testCheckThatUserCanLogout();

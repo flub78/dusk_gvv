@@ -50,7 +50,7 @@ class UploadTest extends GvvDuskTestCase {
      * Test upload image
      * @depends testCheckThatUserCanLogin
      */
-    public function testNoUploadOnCreate() {
+    public function testNoUploadOnCreateForm() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
@@ -66,9 +66,9 @@ class UploadTest extends GvvDuskTestCase {
 
     /**
      * Test upload image
-     * @depends testNoUploadOnCreate
+     * @depends testNoUploadOnCreateForm
      */
-    public function testUploadOnEdit() {
+    public function testItIsPossibleToUploadAFile() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
@@ -169,7 +169,7 @@ class UploadTest extends GvvDuskTestCase {
 
     /**
      * Logout
-     * @depends testUploadOnEdit
+     * @depends testItIsPossibleToUploadAFile
      */
     public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');

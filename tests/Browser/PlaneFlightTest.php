@@ -54,7 +54,7 @@ class PlaneFlightTest extends BillingTest {
      * 
      * @depends testCheckThatUserCanLogin
      */
-    public function testCreate() {
+    public function testPlaneFlightsAndBilling() {
         $this->assertTrue(true);
         $this->browse(function (Browser $browser) {
 
@@ -189,7 +189,7 @@ class PlaneFlightTest extends BillingTest {
      *      - Asterix on F-JUFA from 10:31 to 10:59
      *      - Asterix on F-JUFA from 12:16 to 13:00
      */
-    public function testInFlight() {
+    public function testFlightsAreRejectedWhenInFlight() {
         $this->assertTrue(true);
         return;
         $this->browse(function (Browser $browser) {
@@ -236,9 +236,9 @@ class PlaneFlightTest extends BillingTest {
 
     /**
      * Check that a plane flight can be updated
-     * @depends testInFlight
+     * @depends testFlightsAreRejectedWhenInFlight
      */
-    public function testUpdate() {
+    public function testCheckThatAFlightCanBeUpdated() {
         $this->assertTrue(true);
         $this->browse(function (Browser $browser) {
 
@@ -266,9 +266,9 @@ class PlaneFlightTest extends BillingTest {
 
     /**
      * Check that a plane flight can be deleted
-     * @depends testUpdate
+     * @depends testCheckThatAFlightCanBeUpdated
      */
-    public function testDelete() {
+    public function testCheckThatAFlightCanBeDeleted() {
         $this->assertTrue(true);
         $this->browse(function (Browser $browser) {
 
@@ -301,9 +301,9 @@ class PlaneFlightTest extends BillingTest {
      *   - external plane winch
      *   - forfait billing     
      * 
-     * @depends testDelete
+     * @depends testCheckThatAFlightCanBeDeleted
      */
-    public function testBilling() {
+    public function testCheckFlightBilling() {
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
@@ -449,9 +449,9 @@ class PlaneFlightTest extends BillingTest {
      *    - checks that people are recredited when the flight is deleted or the payer changed
      *    - checks that no incorrect purchases are remaining after update or delete
      * 
-     * @depends testBilling
+     * @depends testCheckFlightBilling
      */
-    public function testSharing() {
+    public function testCheckSharedFlightsBilling() {
         $this->assertTrue(true);
         return;
         $this->browse(function (Browser $browser) {
@@ -651,7 +651,7 @@ class PlaneFlightTest extends BillingTest {
 
     /**
      * Logout
-     * @depends testSharing
+     * @depends testCheckSharedFlightsBilling
      */
     public function testCheckThatUserCanLogout() {
         parent::testCheckThatUserCanLogout();

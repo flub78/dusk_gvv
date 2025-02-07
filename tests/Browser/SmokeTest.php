@@ -198,7 +198,7 @@ class SmokeTest extends GvvDuskTestCase {
      * Test create
      * @depends testCheckThatUserCanLogin
      */
-    public function testCreateData() {
+    public function TestAccountsMachinesMembersCreation() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
@@ -221,7 +221,7 @@ class SmokeTest extends GvvDuskTestCase {
 
     /**
      * Test AccountMovements
-     * @depends testCreateData
+     * @depends TestAccountsMachinesMembersCreation
      */
     public function testAccountMovements() {
         // $this->markTestSkipped('must be revisited.');
@@ -337,7 +337,7 @@ class SmokeTest extends GvvDuskTestCase {
      * test plane flight creation
      * @depends testAccountMovements
      */
-    public function testPlaneFlight() {
+    public function testPlaneFlightsAndBilling() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
@@ -415,9 +415,9 @@ class SmokeTest extends GvvDuskTestCase {
 
     /**
      * test glider flight creation
-     * @depends testPlaneFlight
+     * @depends testPlaneFlightsAndBilling
      */
-    public function testGliderFlight() {
+    public function testGliderFlightsAndBilling() {
         // $this->assertTrue(true); return;
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
@@ -496,7 +496,7 @@ class SmokeTest extends GvvDuskTestCase {
 
     /**
      * Logout
-     * @depends testGliderFlight
+     * @depends testGliderFlightsAndBilling
      */
     public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');

@@ -133,7 +133,7 @@ class TerrainTest extends GvvDuskTestCase {
      * Test create
      * @depends testCheckThatUserCanLogin
      */
-    public function testCreate() {
+    public function testFlightsCanBeCreatedAndBilled() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
@@ -149,9 +149,9 @@ class TerrainTest extends GvvDuskTestCase {
 
     /**
      * Test create errors
-     * @depends testCreate
+     * @depends testFlightsCanBeCreatedAndBilled
      */
-    public function testCreateErrors() {
+    public function testIncorrctFlightsAreRejected() {
         $this->browse(function (Browser $browser) {
             $this->createTerrainError($browser, $this->terrains);
         });
@@ -159,9 +159,9 @@ class TerrainTest extends GvvDuskTestCase {
 
     /**
      * Test delete
-     * @depends testCreateErrors
+     * @depends testIncorrctFlightsAreRejected
      */
-    public function testDelete() {
+    public function testFlightsCanBeDeleted() {
         $this->browse(function (Browser $browser) {
 
             $total = $this->TableTotal($browser, "terrains/page");
@@ -175,7 +175,7 @@ class TerrainTest extends GvvDuskTestCase {
 
     /**
      * Logout
-     * @depends testDelete
+     * @depends testFlightsCanBeDeleted
      */
     public function testCheckThatUserCanLogout() {
         // $this->markTestSkipped('must be revisited.');
