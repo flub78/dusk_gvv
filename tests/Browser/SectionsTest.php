@@ -6,11 +6,15 @@ use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 
 /**
- * Accounting lines CRUD test
+ * Sections
  * 
- * TODO: implement accounting lines test
+ * - check that the user can choose a section at login
+ * - CRUD fo user roles inside sections
+ * - Check that a user who belongs to several sections can select a section 
+ * - Checks that the resources are displayed by section
+ * -
  */
-class AccountingLinesTest extends GvvDuskTestCase {
+class SectionsTest extends GvvDuskTestCase {
 
     /*************
      * Test cases
@@ -22,7 +26,7 @@ class AccountingLinesTest extends GvvDuskTestCase {
     public function testLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
-            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), "Planeur");
         });
     }
 

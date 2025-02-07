@@ -136,6 +136,10 @@ class AccountHandler {
             ->assertDontSee('404 Page not found');
     }
 
+    /**
+     * Pass an accounting line between two accounts
+     * checks that the balance accounts are updated accordingly
+     */
     public function AccountingLineWithCheck($line) {
 
         $account1_id = $this->AccountIdFromImage($line['account1']);
@@ -149,13 +153,6 @@ class AccountHandler {
 
         $account1_new_total = $this->AccountTotal($account1_id);
         $account2_new_total = $this->AccountTotal($account2_id);
-
-        // echo "account1_id = $account1_id\n";
-        // echo "account2_id = $account2_id\n";
-        // echo "account1_total = $account1_total\n";
-        // echo "account2_total = $account2_total\n";
-        // echo "account1_new_total = $account1_new_total\n";
-        // echo "account2_new_total = $account2_new_total\n";
 
         $amount = $line['amount'];
         $this->tc->assertLessThan(

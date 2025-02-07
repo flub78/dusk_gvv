@@ -21,7 +21,7 @@ class GvvDuskTestCase extends DuskTestCase {
     /**
      * Login as a user.
      */
-    public function login($browser, $username, $password) {
+    public function login($browser, $username, $password, $section = "") {
 
         Assert::assertNotEmpty($username, "TEST_USER env var is not set");
         Assert::assertNotEmpty($password, "TEST_PASSWORD env var is not set");
@@ -33,8 +33,13 @@ class GvvDuskTestCase extends DuskTestCase {
             ->waitForText('Mot de passe')
             ->waitForText('Peignot')
             ->type('username', $username)
-            ->type('password', $password)
-            ->press('input[type="submit"]')
+            ->type('password', $password);
+
+        if ($section != "") {
+            $browser->select('section', $section);
+        }
+
+        $browser->press('input[type="submit"]')
             ->screenshot('after_login')
             ->assertSee('Planeurs');
 
