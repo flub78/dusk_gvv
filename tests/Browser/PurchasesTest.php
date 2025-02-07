@@ -73,7 +73,7 @@ class PurchasesTest extends BillingTest {
             $sale_account_id =  $account_handler->AccountIdFromImage($sale_acount_image);
             $initial_sale_balance = $account_handler->AccountTotal($sale_account_id);
 
-            echo "Initial balance of $sale_acount_image: $sale_account_id: $initial_sale_balance\n";
+            // echo "Initial balance of $sale_acount_image: $sale_account_id: $initial_sale_balance\n";
 
             // Soldes pilotes
             $url = $this->fullUrl('comptes/page/411');
@@ -90,31 +90,45 @@ class PurchasesTest extends BillingTest {
 
             $debit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 5));
             $credit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 6));
-            $inital_asterix_balance = $credit - $debit;
+            $initial_asterix_balance = $credit - $debit;
+
+            // echo "Debit: $debit\n";
+            // echo "Credit: $credit\n";
 
             // Solde Asterix depuis son compte
             $total = $account_handler->AccountTotal($asterix_compte_id);
-            $this->assertEquals($inital_asterix_balance, $total);
+            $this->assertEquals($initial_asterix_balance, $total);
 
             $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
             $browser->script('document.body.style.zoom = "0.5"');
 
+            // echo "Initial balance of Asterix: $asterix_compte_id: $initial_asterix_balance\n";
+            // echo "Initial balance of Asterix: $asterix_compte_id: $total\n";
+
+
             // Ajoute 2 achats
-            $browser->click('#panel-achats > .accordion-button')
+            $product = "bobr : 20.00";
+            $browser // ->click('#panel-achats > .accordion-button')
                 ->scrollIntoView('#validation_achat')
                 ->waitFor('#validation_achat');
-            $browser->click('#select2-product_selector-container');
+
+            $browser->click('#select2-product_selector-container')
+                ->waitFor('.select2-search__field')
+                ->type('.select2-search__field', $product)
+                ->waitFor('.select2-results__option')
+                ->click('.select2-results__option');
+            // ->assertSelected('#product_selector', $product);
 
             $browser->type('quantite', '2')
-                ->click('.form-group:nth-child(4) > .form-control')
+                // ->click('.form-group:nth-child(1) > .form-control')
                 ->type('.form-group:nth-child(4) > .form-control', '2 bobs')
                 ->click('#validation_achat');
 
-            // $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
-            // $sale_new_balance = $account_handler->AccountTotal($sale_account_id);
+            $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
+            $sale_new_balance = $account_handler->AccountTotal($sale_account_id);
 
-            // $this->assertEquals($asterix_new_balance, $inital_asterix_balance - 20);
-            // $this->assertEquals($sale_new_balance, $initial_sale_balance + 20);
+            $this->assertEquals($asterix_new_balance, $initial_asterix_balance - 40);
+            $this->assertEquals($sale_new_balance, $initial_sale_balance + 40);
 
             // Modifie la quantié
             // $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
@@ -134,6 +148,13 @@ class PurchasesTest extends BillingTest {
 
             $browser->acceptDialog()
                 ->visit('/comptes/page/411');
+
+            // Are balance back to their initial values ?
+            $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
+            $sale_new_balance = $account_handler->AccountTotal($sale_account_id);
+
+            $this->assertEquals($asterix_new_balance, $initial_asterix_balance);
+            $this->assertEquals($sale_new_balance, $initial_sale_balance);
 
             $browser->script('document.body.style.zoom = "1.0"');
         }); // end of browse callback
