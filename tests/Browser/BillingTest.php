@@ -39,9 +39,9 @@ abstract class BillingTest extends GvvDuskTestCase {
      * Fetch the test context.
      * Extract from the database the data that will be used to check the billing.
      * Typically:
-     *      - balance of typicall accounts
+     *      - balance of typical accounts
      *      - number of purchases in the system
-     *      - number of acounting lines in the system
+     *      - number of accounting lines in the system
      */
     public function FlightAndBillingContext($browser, $account_ids = []) {
         $account_handler = new AccountHandler($browser, $this);

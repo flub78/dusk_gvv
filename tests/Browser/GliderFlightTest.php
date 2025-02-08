@@ -156,7 +156,7 @@ class GliderFlightTest extends BillingTest {
 
 
     /*
-     * Generat conflicting flights from an array
+     * Generate conflicting flights from an array
      */
     private function generateConflictingFlights($tab = [], $error = "") {
         $flights = [];
@@ -342,9 +342,9 @@ class GliderFlightTest extends BillingTest {
             $latest = $glider_flight_handler->latestFlight();
             $flightDate = $this->NextDate($latest);
 
-            $asterix_acount_image = "(411) Le Gaulois Asterix";
-            $launch_acount_image = "(706) Remorqués";
-            $glider_time_acount_image = "(706) Heures de vol planeur";
+            $asterix_account_image = "(411) Le Gaulois Asterix";
+            $launch_account_image = "(706) Remorqués";
+            $glider_time_account_image = "(706) Heures de vol planeur";
 
             $flights = [
                 [
@@ -360,19 +360,19 @@ class GliderFlightTest extends BillingTest {
                     'altitude' => '700',
                     'tow_pilot' => 'abraracourcix',
                     'tow_plane' => 'F-JUFA',
-                    'account' => $asterix_acount_image,
+                    'account' => $asterix_account_image,
                     'price' => 46.0,
                 ],
             ];
 
             // context recording
-            $acounts = [
-                'asterix' => $account_handler->AccountIdFromImage($asterix_acount_image),
-                'launch account' => $account_handler->AccountIdFromImage($launch_acount_image),
-                'glider time account' => $account_handler->AccountIdFromImage($glider_time_acount_image)
+            $accounts = [
+                'asterix' => $account_handler->AccountIdFromImage($asterix_account_image),
+                'launch account' => $account_handler->AccountIdFromImage($launch_account_image),
+                'glider time account' => $account_handler->AccountIdFromImage($glider_time_account_image)
             ];
 
-            $context = $this->FlightAndBillingContext($browser, $acounts);
+            $context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($context, "Initial context");
 
             // Glider flight creation
@@ -380,7 +380,7 @@ class GliderFlightTest extends BillingTest {
             $id = $glider_flight_handler->latestFlight()->vpid;
 
             // new context recording
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => ['asterix' => -46.0, 'launch account' => 31.0, 'glider time account' => 15.0],
@@ -396,7 +396,7 @@ class GliderFlightTest extends BillingTest {
                 'altitude' => '200',  // 300 meters - 1 purchase and lines, - 16 €
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => ['asterix' => -45.0, 'launch account' => 15.0, 'glider time account' => 30.0],
@@ -412,7 +412,7 @@ class GliderFlightTest extends BillingTest {
                 'launch' => 'T'
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => ['asterix' => -98.0, 'launch account' => 8.0, 'glider time account' => 90.0],
@@ -427,7 +427,7 @@ class GliderFlightTest extends BillingTest {
                 'categorie' => 'VI', // 6 hours so 90 €
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'glider time account' => 0.0],
@@ -450,7 +450,7 @@ class GliderFlightTest extends BillingTest {
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
 
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => ['asterix' => -8.0, 'launch account' => 8.0, 'glider time account' => 0.0],
@@ -462,7 +462,7 @@ class GliderFlightTest extends BillingTest {
             // Private glider per not owner
 
 
-            // Back to a clubl ownership
+            // Back to a club ownership
             $glider_owner = [
                 "immat" => "F-CGAA",
                 "type_proprio" => "Club",
@@ -472,7 +472,7 @@ class GliderFlightTest extends BillingTest {
 
             // Flight delete
             $this->canAccess($browser, 'vols_planeur/delete/' . $id);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => ['asterix' => 0.0, 'launch account' => 0.0, 'glider time account' => 0.0],
@@ -484,7 +484,7 @@ class GliderFlightTest extends BillingTest {
     }
 
     /**
-     * Checks that a filght can be shared
+     * Checks that a flight can be shared
      *    - checks that nothing happen when shared at 0 %
      *    - checks that both are billed when shared at 50 %
      *    - checks that the payer is billed when shared at 100 %
@@ -504,11 +504,11 @@ class GliderFlightTest extends BillingTest {
             $latest = $glider_flight_handler->latestFlight();
             $flightDate = $this->NextDate($latest);
 
-            $asterix_acount_image = "(411) Le Gaulois Asterix";
-            $goudurix_acount_image = "(411) Le Gaulois Goudurix";
-            $panoramix_acount_image = "(411) Le Gaulois Panoramix";
-            $launch_acount_image = "(706) Remorqués";
-            $glider_time_acount_image = "(706) Heures de vol planeur";
+            $asterix_account_image = "(411) Le Gaulois Asterix";
+            $goudurix_account_image = "(411) Le Gaulois Goudurix";
+            $panoramix_account_image = "(411) Le Gaulois Panoramix";
+            $launch_account_image = "(706) Remorqués";
+            $glider_time_account_image = "(706) Heures de vol planeur";
 
             // first a flight with no payer (default)
             $flights = [
@@ -525,21 +525,21 @@ class GliderFlightTest extends BillingTest {
                     'altitude' => '700',
                     'tow_pilot' => 'abraracourcix',
                     'tow_plane' => 'F-JUFA',
-                    'account' => $asterix_acount_image,
+                    'account' => $asterix_account_image,
                     'price' => 46.0,
                 ],
             ];
 
             // context recording
-            $acounts = [
-                'asterix' => $account_handler->AccountIdFromImage($asterix_acount_image),
-                'goudurix' => $account_handler->AccountIdFromImage($goudurix_acount_image),
-                'panoramix' => $account_handler->AccountIdFromImage($panoramix_acount_image),
-                'launch account' => $account_handler->AccountIdFromImage($launch_acount_image),
-                'glider time account' => $account_handler->AccountIdFromImage($glider_time_acount_image)
+            $accounts = [
+                'asterix' => $account_handler->AccountIdFromImage($asterix_account_image),
+                'goudurix' => $account_handler->AccountIdFromImage($goudurix_account_image),
+                'panoramix' => $account_handler->AccountIdFromImage($panoramix_account_image),
+                'launch account' => $account_handler->AccountIdFromImage($launch_account_image),
+                'glider time account' => $account_handler->AccountIdFromImage($glider_time_account_image)
             ];
 
-            $context = $this->FlightAndBillingContext($browser, $acounts);
+            $context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($context, "Initial Sharing context");
 
             // Glider flight creation
@@ -547,7 +547,7 @@ class GliderFlightTest extends BillingTest {
             $id = $glider_flight_handler->latestFlight()->vpid;
 
             // new context recording
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($new_context, "After first created flight");
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -571,7 +571,7 @@ class GliderFlightTest extends BillingTest {
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
 
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($new_context, "After payer setting");
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -595,7 +595,7 @@ class GliderFlightTest extends BillingTest {
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
 
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($new_context, "After 100 percent");
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -619,7 +619,7 @@ class GliderFlightTest extends BillingTest {
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
 
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($new_context, "After 50 percent");
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -644,7 +644,7 @@ class GliderFlightTest extends BillingTest {
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
 
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($new_context, "Back to 100 percent");
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -667,7 +667,7 @@ class GliderFlightTest extends BillingTest {
             ];
             $glider_flight_handler->UpdateGliderFLight($update);
 
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $this->DisplayContext($new_context, "Back to 0 percent");
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
@@ -685,7 +685,7 @@ class GliderFlightTest extends BillingTest {
 
             // Flight delete
             $this->canAccess($browser, 'vols_planeur/delete/' . $id);
-            $new_context = $this->FlightAndBillingContext($browser, $acounts);
+            $new_context = $this->FlightAndBillingContext($browser, $accounts);
             $deltas = $this->CompareContexes($context, $new_context);
             $expected = [
                 'balance' => [

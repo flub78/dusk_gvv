@@ -26,7 +26,7 @@ use Tests\libraries\GliderFlightHandler;
  * Pilots
  * - Goudurix is the Student
  * - Panoramix the instructor
- * - Asterix the regular pilot and whinch operator
+ * - Asterix the regular pilot and winch operator
  * - Abraracourcix the tow pilot
  * 
  * Gliders
@@ -94,7 +94,7 @@ class SmokeTest extends GvvDuskTestCase {
             ['ref' => 'Remorqué 500m', 'description' => 'Remorqué 500', 'prix' => '25', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'Remorqué 300m', 'description' => 'Remorqué 300', 'prix' => '15', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'Remorqué 100m', 'description' => 'Remorqué 100', 'prix' => '3', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
-            ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moind de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
+            ['ref' => 'remorqué-25ans', 'description' => 'Remorqué moins de 25 ans', 'prix' => '20', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'Treuillé', 'description' => 'Treuillée', 'prix' => '8', 'account' => 'Remorqués', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'hdv-planeur', 'description' => 'Heure de vol planeur', 'prix' => '30', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
             ['ref' => 'hdv-planeur-forfait', 'description' => 'Heure de vol planeur au forfait', 'prix' => '10.0', 'account' => 'Heures de vol planeur', 'codec' => '706', "date" => "01/01/2021"],
@@ -356,12 +356,12 @@ class SmokeTest extends GvvDuskTestCase {
             TODO: Find the flight back to delete
             TODO: check that the pilot is reimbursed after flight deletion
             
-            The tests should be independant from existing data.
+            The tests should be independent from existing data.
             Tests flights could start the day after the last flight.
             It implies the capacity to find out the last flight.
 
             Should I modify GVV to return information used only for testing ?
-            pro - it woul make end to end test simplers and supporting more complex scenarios
+            pro - it would make end to end test simpler and supporting more complex scenarios
             cons- it adds more code ...
             */
 
@@ -387,7 +387,7 @@ class SmokeTest extends GvvDuskTestCase {
             $end_meter = $start_meter + 0.5;
             $image = "$flightDate $start_meter $plane";
 
-            $fligt = [
+            $flight = [
                 'url' => 'vols_avion/create',
                 'date' => $flightDate,
                 'pilot' => 'asterix',
@@ -400,7 +400,7 @@ class SmokeTest extends GvvDuskTestCase {
             ];
 
 
-            $plane_flight_handler->CreatePlaneFlights([$fligt]);
+            $plane_flight_handler->CreatePlaneFlights([$flight]);
 
             $asterix_new_total = $account_handler->AccountTotal($asterix_id);
             $cost = $asterix_total - $asterix_new_total;
