@@ -198,7 +198,7 @@ class SmokeTest extends GvvDuskTestCase {
      * Test create
      * @depends testCheckThatUserCanLogin
      */
-    public function TestAccountsMachinesMembersCreation() {
+    public function testAccountsMachinesMembersCreation() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
@@ -221,7 +221,7 @@ class SmokeTest extends GvvDuskTestCase {
 
     /**
      * Test AccountMovements
-     * @depends TestAccountsMachinesMembersCreation
+     * @depends testAccountsMachinesMembersCreation
      */
     public function testAccountMovements() {
         // $this->markTestSkipped('must be revisited.');

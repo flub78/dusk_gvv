@@ -131,7 +131,7 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('Justificatifs');
 
             // ============================================================
-            // Les comptes de banque http://gvv.net/index.php/comptes/page/512
+            // Les comptes de banque http://gvv.net/comptes/page/512
             $url = $this->fullUrl("comptes/page/512");
             $browser->visit($url)
                 ->assertSee('Balance des comptes Classe 512')
@@ -139,7 +139,7 @@ class AttachmentsTest extends GvvDuskTestCase {
                 ->assertSee('Banque');
 
             // Le compte Banque
-            // <a href="http://gvv.net/index.php/compta/journal_compte/294">Banque</a>
+            // <a href="http://gvv.net/compta/journal_compte/294">Banque</a>
             $browser->waitFor('a')
                 ->assertSeeLink('Banque');
             $href = $browser->attribute("a[href*='journal_compte']", 'href');

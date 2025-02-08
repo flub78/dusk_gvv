@@ -13,7 +13,7 @@ class Login extends Page {
      */
     public function url() {
         $base_url = env('TARGET');
-        return $base_url . 'index.php/auth/login';
+        return $base_url . 'auth/login';
     }
 
     /**

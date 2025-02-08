@@ -77,7 +77,8 @@ class GvvDuskTestCase extends DuskTestCase {
     }
 
     public function fullUrl($suburl) {
-        return $this->url . 'index.php/' . $suburl;
+        return $this->url . $suburl;
+        // return $this->url . 'index.php/' . $suburl;
     }
 
     /**
@@ -228,11 +229,12 @@ class GvvDuskTestCase extends DuskTestCase {
     public function testCheckInstallationProcedure() {
         $this->browse(function (Browser $browser) {
 
-            $browser->visit($this->url . 'install/reset.php')
+            $url = $this->url . 'install/reset.php';
+            $browser->visit($url)
                 ->assertSee("Verification de l'installation")
                 ->assertSee($this->url . 'install');
 
-            $browser->visit($this->url . 'install/?db=dusk_tests.sql');
+            $browser->visit($this->url . '/install/?db=dusk_tests.sql');
 
             $browser->assertSee('Installation de GVV')
                 ->assertSee("Fin de la procédure d'installation");

@@ -190,7 +190,7 @@ class GliderFlightTest extends BillingTest {
     /**
      * Test that flights are rejected when the pilot or glider are already in flight
      * 
-     * @depends testChekcThatCorrectFieldsAreVisibleAccordingToSelection
+     * @depends testCheckThatCorrectFieldsAreVisibleAccordingToSelection
      * 
      * preconditions:
      *      Asterix on F-CGAA from 10:00 to 10:30
@@ -267,7 +267,7 @@ class GliderFlightTest extends BillingTest {
 
     /**
      * Check that a glider flight can be updated
-     * @depends testInFlight
+     * @depends testCheckThatFlightsAreRejectedWhenInFlight
      */
     public function testCheckFlightUpdate() {
         $this->browse(function (Browser $browser) {
