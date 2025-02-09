@@ -287,6 +287,7 @@ class GliderFlightTest extends BillingTest {
             $glider_flight_handler->UpdateGliderFLight($flight);
 
             $latest = $glider_flight_handler->latestFlight();
+            var_dump($latest);
             $this->assertEquals($modified_comment, $latest->vpobs);
 
             $new_count = $glider_flight_handler->count();
