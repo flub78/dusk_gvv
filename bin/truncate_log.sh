@@ -13,3 +13,6 @@ if [ -f "$full_log_path" ]; then
 else
     echo "No log file found for today ($today)."
 fi
+
+# Delete the test results
+rm -rf "$INSTALL_DIR/results/*.xml"
