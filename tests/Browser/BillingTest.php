@@ -72,13 +72,15 @@ abstract class BillingTest extends GvvDuskTestCase {
      * Display the context
      */
     public function DisplayContext($context, $when = "") {
-        echo "\n";
-        echo "Context $when:\n";
-        foreach ($context['balance'] as $name => $balance) {
-            echo "$name balance = $balance\n";
+        if (false) {
+            echo "\n";
+            echo "Context $when:\n";
+            foreach ($context['balance'] as $name => $balance) {
+                echo "$name balance = $balance\n";
+            }
+            echo "purchases = " . $context['purchases'] . "\n";
+            echo "lines = " . $context['lines'] . "\n";
         }
-        echo "purchases = " . $context['purchases'] . "\n";
-        echo "lines = " . $context['lines'] . "\n";
     }
 
     /**
