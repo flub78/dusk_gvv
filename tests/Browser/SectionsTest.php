@@ -34,8 +34,6 @@ class SectionsTest extends GvvDuskTestCase {
     public function testCheckThatUserCanLoginWithSection() {
         // $this->markTestSkipped('must be revisited.');
 
-
-
         $this->browse(function (Browser $browser) {
 
             $planeur = "1";
@@ -47,9 +45,17 @@ class SectionsTest extends GvvDuskTestCase {
             $plane_total = 2;
 
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), $planeur);
-
             $browser->assertSee('Planeur');
             $this->assertEquals($plane_total, $this->TableTotal($browser, "avion/page"));
+
+            // switch to all and still see the planes 
+            $browser->select('section', $all);
+            $this->assertEquals($plane_total, $this->TableTotal($browser, "avion/page"));
+
+            // switch to general, no planes
+            $browser->select('section', $general);
+            $this->assertEquals(0, $this->TableTotal($browser, "avion/page"));
+
             $this->logout($browser);
         });
     }
