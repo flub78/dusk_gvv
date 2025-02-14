@@ -21,7 +21,7 @@ class GvvDuskTestCase extends DuskTestCase {
     /**
      * Login as a user.
      */
-    public function login($browser, $username, $password, $section = "") {
+    public function login($browser, $username, $password, $section = "1") {
 
         Assert::assertNotEmpty($username, "TEST_USER env var is not set");
         Assert::assertNotEmpty($password, "TEST_PASSWORD env var is not set");
@@ -36,7 +36,8 @@ class GvvDuskTestCase extends DuskTestCase {
             ->type('password', $password);
 
         if ($section != "") {
-            $browser->select('section', $section);
+            $browser->select('section', 1)
+                ->screenshot('after_select_section');
         }
 
         $browser->press('input[type="submit"]')
@@ -239,7 +240,7 @@ class GvvDuskTestCase extends DuskTestCase {
             $browser->assertSee('Installation de GVV')
                 ->assertSee("Fin de la procédure d'installation");
 
-            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'));
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), '1');
             $browser->visit($this->fullUrl('migration'))
                 ->assertSee('Migration de la base de données')
                 ->press("Valider")

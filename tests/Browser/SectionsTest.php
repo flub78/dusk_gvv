@@ -22,11 +22,12 @@ class SectionsTest extends GvvDuskTestCase {
 
     /**
      * Login
+     * @depends testCheckInstallationProcedure
      */
     public function testCheckThatUserCanLogin() {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
-            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), "Planeur");
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), "1");
         });
     }
 
