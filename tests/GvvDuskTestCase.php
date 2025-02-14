@@ -18,14 +18,18 @@ class GvvDuskTestCase extends DuskTestCase {
         $this->url = env('TARGET');
     }
 
+    public function check_environement() {
+        Assert::assertNotEmpty(env('TARGET'), "TARGET env var is not set");
+        Assert::assertNotEmpty(env('TEST_USER'), "TEST_USER env var is not set");
+        Assert::assertNotEmpty(env('TEST_PASSWORD'), "TEST_PASSWORD env var is not set");
+    }
+
     /**
      * Login as a user.
      */
     public function login($browser, $username, $password, $section = "1") {
 
-        Assert::assertNotEmpty($username, "TEST_USER env var is not set");
-        Assert::assertNotEmpty($password, "TEST_PASSWORD env var is not set");
-        Assert::assertNotEmpty(env('TARGET'), "TARGET env var is not set");
+        $this->check_environement();
 
         $browser->visit(new Login)
             ->screenshot('before_login')
@@ -36,7 +40,7 @@ class GvvDuskTestCase extends DuskTestCase {
             ->type('password', $password);
 
         if ($section != "") {
-            $browser->select('section', 1)
+            $browser->select('section', $section)
                 ->screenshot('after_select_section');
         }
 
@@ -228,9 +232,13 @@ class GvvDuskTestCase extends DuskTestCase {
      * @return void
      */
     public function testCheckInstallationProcedure() {
+
+        $this->check_environement();
+
         $this->browse(function (Browser $browser) {
 
             $url = $this->url . 'install/reset.php';
+            // echo "Visiting $url\n";
             $browser->visit($url)
                 ->assertSee("Verification de l'installation")
                 ->assertSee($this->url . 'install');
