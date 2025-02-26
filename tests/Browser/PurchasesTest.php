@@ -6,6 +6,8 @@ use Laravel\Dusk\Browser;
 use Tests\Browser\BillingTest;
 
 use Tests\libraries\AccountHandler;
+use Illuminate\Support\Facades\Log;
+
 
 function toDecimal($input) {
     if (empty(trim($input))) {
@@ -68,12 +70,14 @@ class PurchasesTest extends BillingTest {
         $this->browse(function (Browser $browser) {
             $this->assertTrue(true);
 
+            Log::debug("Vérifie que les comptes changent après un achat");
+            Log::debug("-----------------------------------------------");
             $account_handler = new AccountHandler($browser, $this);
             $sale_acount_image = "(707) Ventes diverses";
             $sale_account_id =  $account_handler->AccountIdFromImage($sale_acount_image);
             $initial_sale_balance = $account_handler->AccountTotal($sale_account_id);
 
-            // echo "Initial balance of $sale_acount_image: $sale_account_id: $initial_sale_balance\n";
+            Log::debug("Initial balance of $sale_acount_image: $sale_account_id = $initial_sale_balance");
 
             // Soldes pilotes
             $url = $this->fullUrl('comptes/page/411');
@@ -88,25 +92,27 @@ class PurchasesTest extends BillingTest {
             $table_id = "#DataTables_Table_0";
             $pattern = "Asterix";
 
-            $debit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 5));
-            $credit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 6));
-            $initial_asterix_balance = $credit - $debit;
+            // for ($i = 0; $i < 7; $i++) {
+            //     $col = $this->getColumnFromTableRow($browser, $table_id, $pattern, $i);
+            //     Log::debug("from 411 $pattern: col $i = $col");
+            // }
 
-            // echo "Debit: $debit\n";
-            // echo "Credit: $credit\n";
+            $debit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 6));
+            $credit = toDecimal($this->getColumnFromTableRow($browser, $table_id, $pattern, 7));
+            Log::debug("from 411 $pattern: Debit = $debit, Credit = $credit");
+            $initial_asterix_balance = $credit - $debit;
 
             // Solde Asterix depuis son compte
             $total = $account_handler->AccountTotal($asterix_compte_id);
+            Log::debug("Solde Asterix: Page 411 = $initial_asterix_balance, Solde compte = $total");
             $this->assertEquals($initial_asterix_balance, $total);
 
             $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
             $browser->script('document.body.style.zoom = "0.5"');
 
-            // echo "Initial balance of Asterix: $asterix_compte_id: $initial_asterix_balance\n";
-            // echo "Initial balance of Asterix: $asterix_compte_id: $total\n";
-
 
             // Ajoute 2 achats
+            Log::debug("Add 2 purchases");
             $product = "bobr : 20.00";
             $browser // ->click('#panel-achats > .accordion-button')
                 ->scrollIntoView('#validation_achat')

@@ -4,6 +4,8 @@ namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
+use Illuminate\Support\Facades\Log;
+
 
 /**
  * Test Attachments
@@ -106,6 +108,7 @@ class AttachmentsTest extends GvvDuskTestCase {
             $this->attachments = $urlAttach;
 
             // Affiche les comptes de classe 606
+            Log::debug("Affiche les comptes de classe 606");
             $url = $this->fullUrl("comptes/page/606");
             $browser->visit($url)
                 ->assertSee('Balance des comptes Classe 606')
@@ -118,6 +121,7 @@ class AttachmentsTest extends GvvDuskTestCase {
             $browser->waitFor('a')
                 ->assertSeeLink('Essence plus huile');
             $href = $browser->attribute("a[href*='journal_compte']", 'href');
+            Log::debug("href: " . $href);
 
             $browser->visit($href)
                 ->assertValue('input[name="desc"]', 'Essence plus huile');
@@ -125,6 +129,7 @@ class AttachmentsTest extends GvvDuskTestCase {
             // extract the edit link from the table
             $line1 = $this->searchEditLink($browser, 'Chèque 413', '2023');
             $this->line1 = $line1;
+            Log::debug("Ligne comptable : " . $line1);
 
             $browser->visit($line1)
                 ->assertSee('Ecriture comptable')

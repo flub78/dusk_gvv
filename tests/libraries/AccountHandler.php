@@ -85,8 +85,13 @@ class AccountHandler {
     public function AccountTotal($account_id) {
         $this->tc->canAccess($this->browser, "compta/journal_compte/" . $account_id, ["Compte", "Solde au", "débiteur", "créditeur"]);
 
+        $this->browser->screenshot("account_total");
+
         $debit = $this->browser->inputValue('current_debit');
         $credit = $this->browser->inputValue('current_credit');
+
+        Log::debug("raw debit = $debit");
+        Log::debug("raw credit = $credit");
 
         // be careful to non breaking spaces
         $search = [' ', '€', ',', chr(0xC2) . chr(0xA0)];
@@ -105,6 +110,7 @@ class AccountHandler {
             $credit = floatval($credit);
         }
         $total = $credit - $debit;
+        Log::debug("solde = $total");
         return $total;
     }
 
