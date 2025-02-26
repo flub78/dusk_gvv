@@ -7,7 +7,8 @@ use Tests\Browser\Pages\Login;
 use Exception;
 use PHPUnit\Framework\Assert;
 use Laravel\Dusk\Browser;
-
+use Illuminate\Support\Facades\Log;
+use ReflectionClass;
 
 class GvvDuskTestCase extends DuskTestCase {
 
@@ -16,6 +17,28 @@ class GvvDuskTestCase extends DuskTestCase {
     function __construct() {
         parent::__construct();
         $this->url = env('TARGET');
+    }
+
+    protected function setUp(): void {
+        parent::setup();
+        $testClass = (new ReflectionClass($this))->getShortName();
+        $testName = $this->getName();
+        Log::info("test started: {$testClass}::{$testName}");
+    }
+
+    /**
+     * Tear down the test environment.
+     *
+     * @return void
+     */
+    protected function tearDown(): void {
+        // Log test completion
+        $testClass = (new ReflectionClass($this))->getShortName();
+        $testName = $this->getName();
+        $status = $this->getStatus() ? 'PASSED' : 'FAILED';
+        Log::info("test completed: {$testClass}::{$testName} - {$status}");
+
+        parent::tearDown();
     }
 
     public function check_environement() {
@@ -28,6 +51,8 @@ class GvvDuskTestCase extends DuskTestCase {
      * Login as a user.
      */
     public function login($browser, $username, $password, $section = "1") {
+
+        Log::info("Login as $username, section $section");
 
         $this->check_environement();
 
@@ -57,6 +82,7 @@ class GvvDuskTestCase extends DuskTestCase {
     public function logout($browser) {
 
         $url = $this->fullUrl('auth/logout');
+        Log::info("Logout");
 
         $browser->visit($url)
             // it's a detail but
@@ -94,6 +120,7 @@ class GvvDuskTestCase extends DuskTestCase {
         if ($this->verbose()) {
             echo ("Visiting $url\n");
         }
+        Log::info("visiting : $url");
         $browser->storeConsoleLog('console1.log');
         $browser->storeSource('source1.html');
         $browser->visit($url);
@@ -234,6 +261,7 @@ class GvvDuskTestCase extends DuskTestCase {
     public function testCheckInstallationProcedure() {
 
         $this->check_environement();
+        Log::info("Test: testCheckInstallationProcedure");
 
         $this->browse(function (Browser $browser) {
 

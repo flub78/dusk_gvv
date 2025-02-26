@@ -2,6 +2,9 @@
 
 namespace Tests\libraries;
 
+use Illuminate\Support\Facades\Log;
+
+
 /**
  * This class manages accounts in the Dusk tet context.
  * 
@@ -109,6 +112,9 @@ class AccountHandler {
      * Create an accounting line
      */
     public function AccountingLine($line) {
+
+        Log::info("accounting line: " . var_export($line, TRUE));
+
 
         $act1 = $this->AccountIdFromImage($line['account1']);
         $act2 = $this->AccountIdFromImage($line['account2']);
