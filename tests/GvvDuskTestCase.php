@@ -337,4 +337,9 @@ class GvvDuskTestCase extends DuskTestCase {
         )[0];
         return $result;
     }
+
+    protected function savePageSource(Browser $browser, $filename = null) {
+        $filename = $filename ?? 'page_source_' . time();
+        $browser->storeSource($filename);
+    }
 }

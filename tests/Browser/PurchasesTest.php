@@ -60,6 +60,34 @@ class PurchasesTest extends BillingTest {
         parent::testCheckThatUserCanLogin();
     }
 
+    /**
+     * Purchase something
+     **/
+    protected function purchase($browser, $account_id, $product, $quantity = 1, $comment = "") {
+
+        $browser->visit($this->fullUrl('compta/journal_compte/' . $account_id));
+        $browser->script('document.body.style.zoom = "0.5"');
+
+
+        // Ajoute 2 achats
+        Log::debug("purchase $quantity $product");
+        $browser // ->click('#panel-achats > .accordion-button')
+            ->scrollIntoView('#validation_achat')
+            ->waitFor('#validation_achat');
+
+        $browser->click('#select2-product_selector-container')
+            ->waitFor('.select2-search__field')
+            ->type('.select2-search__field', $product)
+            ->waitFor('.select2-results__option')
+            ->click('.select2-results__option');
+        // ->assertSelected('#product_selector', $product);
+
+        $browser->type('quantite', $quantity);
+        // ->click('.form-group:nth-child(1) > .form-control')
+        if ($comment) $browser->type('.form-group:nth-child(4) > .form-control', $comment);
+
+        $browser->click('#validation_achat');
+    }
 
     /**
      * Checks that a purchase is billed correctly
@@ -107,28 +135,8 @@ class PurchasesTest extends BillingTest {
             Log::debug("Solde Asterix: Page 411 = $initial_asterix_balance, Solde compte = $total");
             $this->assertEquals($initial_asterix_balance, $total);
 
-            $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
-            $browser->script('document.body.style.zoom = "0.5"');
-
-
-            // Ajoute 2 achats
-            Log::debug("Add 2 purchases");
-            $product = "bobr : 20.00";
-            $browser // ->click('#panel-achats > .accordion-button')
-                ->scrollIntoView('#validation_achat')
-                ->waitFor('#validation_achat');
-
-            $browser->click('#select2-product_selector-container')
-                ->waitFor('.select2-search__field')
-                ->type('.select2-search__field', $product)
-                ->waitFor('.select2-results__option')
-                ->click('.select2-results__option');
-            // ->assertSelected('#product_selector', $product);
-
-            $browser->type('quantite', '2')
-                // ->click('.form-group:nth-child(1) > .form-control')
-                ->type('.form-group:nth-child(4) > .form-control', '2 bobs')
-                ->click('#validation_achat');
+            $this->purchase($browser, $asterix_compte_id, "bobr : 20.00", $quantity = 2, $comment = "2 bobs");
+            // $this->purchase($browser, $asterix_compte_id, "Treuillé : 8.00", $quantity = 1, $comment = "");
 
             $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
             $sale_new_balance = $account_handler->AccountTotal($sale_account_id);
@@ -148,12 +156,16 @@ class PurchasesTest extends BillingTest {
                 ->type('#description', '1 seul bob')
                 ->click('#validate');
 
+            $browser->screenshot('before_purchase_delete');
+            $this->savePageSource($browser, 'before_purchase_delete');
             // Supprime la ligne
+            // The selector td:nth-child(2) .icon in PurchasesTest.php targets an element with class .icon that is inside the second table cell (td) of a row.
             $browser->click('td:nth-child(2) .icon');
             // ->assertDialogOpened('Etes vous sûr de vouloir supprimer la ligne du 06/02/2025 Le Gaulois Asterix-Ventes diverses 20.00 1 seul bob?');
 
             $browser->acceptDialog()
                 ->visit('/comptes/page/411');
+            $browser->click('td:nth-child(2) .icon');
 
             // Are balance back to their initial values ?
             $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
