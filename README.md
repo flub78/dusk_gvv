@@ -66,6 +66,8 @@ Current method
 
     rename as chromedriver-linux
 
+    If chromedriver is running, restart it.
+
 
 ## Generating tests
 

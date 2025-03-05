@@ -155,7 +155,7 @@ class PlanchisteAccessTest extends GvvDuskTestCase {
 
             $pages = [
                 ['url' => 'vols_avion/page', 'mustSee' => ['Planche des vols avion']],
-                ['url' => 'vols_avion/create', 'mustSee' => ['Vol Avion', 'avitaillement']],
+                ['url' => 'vols_avion/create', 'mustSee' => ['Vol Avion', 'Avitaillement']],
                 ['url' => 'avion/page', 'mustSee' => ['Avions']],
                 ['url' => 'avion/create', 'mustSee' => $denied],
                 ['url' => 'vols_avion/statistic', 'mustSee' => ['Statistiques avion', 'Par mois', 'Par machine', 'Activité avion par mois']],

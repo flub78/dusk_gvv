@@ -138,7 +138,12 @@ class GvvDuskTestCase extends DuskTestCase {
 
         foreach ($mustFind as $str) {
             if ($this->verbose()) echo ($suburl . ': assertSee: ' . $str . "\n");
-            $browser->assertSee($str);
+            $browser
+                ->maximize()
+                // ->screenshot('assertSee_' . $str)
+                ->assertSourceHas($str)
+                ->waitForText($str)
+                ->assertSee($str);
         }
         foreach ($mustNotFind as $str) {
             if ($this->verbose()) echo ($suburl . ': assertDontSee: ' . $str . "\n");
