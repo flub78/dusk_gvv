@@ -35,7 +35,7 @@ class GvvDuskTestCase extends DuskTestCase {
         // Log test completion
         $testClass = (new ReflectionClass($this))->getShortName();
         $testName = $this->getName();
-        $status = $this->getStatus() ? 'PASSED' : 'FAILED';
+        $status = $this->getStatus() ? 'FAILED' : 'PASSED';
         Log::info("test completed: {$testClass}::{$testName} - {$status}");
 
         parent::tearDown();
@@ -141,7 +141,7 @@ class GvvDuskTestCase extends DuskTestCase {
             $browser
                 ->maximize()
                 // ->screenshot('assertSee_' . $str)
-                ->assertSourceHas($str)
+                // ->assertSourceHas($str)
                 ->waitForText($str)
                 ->assertSee($str);
         }

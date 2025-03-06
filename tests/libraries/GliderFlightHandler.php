@@ -11,6 +11,8 @@ namespace Tests\libraries;
  */
 
 use Tests\libraries\AccountCodeHandler;
+use Illuminate\Support\Facades\Log;
+
 
 class GliderFlightHandler {
 
@@ -198,8 +200,7 @@ class GliderFlightHandler {
 
         foreach ($list as $flight) {
 
-            // echo "Creating flight : \n";
-            // print_r($flight);
+            Log::debug("Creating glider flight : " . var_export($flight, true));
 
             $flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
@@ -238,6 +239,7 @@ class GliderFlightHandler {
             // In case of duplicate the flight exists before the test
             // so it is not pertinent to check its existence
             if (!$error) {
+                Log::debug("glider flight creation with no error, check that the flight exist ");
                 $this->tc->assertEquals(
                     $flight_exists,
                     $this->GliderFlightExists($flight),
@@ -248,13 +250,15 @@ class GliderFlightHandler {
             $new_flight_number = $this->tc->TableTotal($this->browser, "vols_planeur/page");
 
             $this->tc->assertEquals($flight_number + $created, $new_flight_number, "Flight number = " . $new_flight_number);
+            Log::debug("glider flight creation with no error, check that there is one addition flight inthe list ");
 
             if (array_key_exists('price', $flight)) {
                 $new_total = $account_handler->AccountTotal($account_id);
                 $cost = $total - $new_total;
 
+                Log::debug("glider flight creation check that the pilot account has been modified ");
                 $epsilon = 0.000001;
-                $this->tc->assertEqualsWithDelta($price, $cost, $epsilon, "Flight cost $cost = $price");
+                $this->tc->assertEqualsWithDelta($price, $cost, $epsilon, "Flight cost $cost = expected $price");
             }
         }
     }
