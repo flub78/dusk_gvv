@@ -144,11 +144,7 @@ class PurchasesTest extends BillingTest {
             $this->assertEquals($asterix_new_balance, $initial_asterix_balance - 40);
             $this->assertEquals($sale_new_balance, $initial_sale_balance + 40);
 
-            // Modifie la quantié
-            // $browser->visit($this->fullUrl('compta/journal_compte/' . $asterix_compte_id));
-            // $browser->click('#panel-achats > .accordion-button')
-            //     ->scrollIntoView('#validation_achat')
-            //     ->waitFor('#validation_achat');
+            // Modifie la quantité
 
             $browser->click('td:nth-child(1) .icon')
                 ->type('quantite', '1')
@@ -158,14 +154,15 @@ class PurchasesTest extends BillingTest {
 
             $browser->screenshot('before_purchase_delete');
             $this->savePageSource($browser, 'before_purchase_delete');
+
             // Supprime la ligne
             // The selector td:nth-child(2) .icon in PurchasesTest.php targets an element with class .icon that is inside the second table cell (td) of a row.
             $browser->click('td:nth-child(2) .icon');
-            // ->assertDialogOpened('Etes vous sûr de vouloir supprimer la ligne du 06/02/2025 Le Gaulois Asterix-Ventes diverses 20.00 1 seul bob?');
 
             $browser->acceptDialog()
                 ->visit('/comptes/page/411');
-            $browser->click('td:nth-child(2) .icon');
+
+            // $this->deleteRowByPattern($browser, '1 seul bob', $tableSelector = 'tbody', $acceptDIalog = TRUE);
 
             // Are balance back to their initial values ?
             $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);

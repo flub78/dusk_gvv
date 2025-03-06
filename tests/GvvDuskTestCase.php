@@ -309,7 +309,6 @@ class GvvDuskTestCase extends DuskTestCase {
         ])[0];
     }
 
-
     // Function to extract the id of an element from the table view
     public function getIdFromTable($browser, $pattern) {
         $href = $this->getHrefFromTableRow($browser, $pattern);
@@ -341,5 +340,34 @@ class GvvDuskTestCase extends DuskTestCase {
     protected function savePageSource(Browser $browser, $filename = null) {
         $filename = $filename ?? 'page_source_' . time();
         $browser->storeSource($filename);
+    }
+
+    /**
+     * Delete a table row that matches a specific pattern.
+     *
+     * @param \Laravel\Dusk\Browser $browser The browser instance
+     * @param string|array $pattern The pattern(s) to match in the row
+     * @param string $tableSelector Optional custom table selector, defaults to 'tbody'
+     * @return void
+     */
+    public function deleteRowByPattern(Browser $browser, $pattern, $tableSelector = 'tbody', $acceptDIalog = TRUE) {
+        // Convert single pattern to array
+        $patterns = is_array($pattern) ? $pattern : [$pattern];
+
+        $browser->waitFor($tableSelector)
+            ->with($tableSelector, function ($table) use ($patterns) {
+                // Build the selector by combining patterns
+                $selector = 'tr';
+                foreach ($patterns as $pattern) {
+                    $selector .= ':contains("' . $pattern . '")';
+                }
+
+                // Find the matching row and click its delete button
+                $table->whenAvailable($selector, function ($row) {
+                    $row->element('a[href*="/delete/"]')->click();
+                });
+            });
+
+        if ($acceptDIalog) $browser->acceptDialog();
     }
 }
