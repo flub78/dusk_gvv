@@ -20,7 +20,7 @@ class LoginTest extends GvvDuskTestCase {
             $browser->visit($this->url)
                 ->assertSee('GVV')
                 ->assertSee('Boissel')
-                ->assertSee('Peignot');;
+                ->assertSee('Peignot');
         });
     }
 

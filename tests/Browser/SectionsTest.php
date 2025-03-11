@@ -75,14 +75,34 @@ class SectionsTest extends GvvDuskTestCase {
     }
 
 
-    // /**
-    //  * Logout
-    //  * @depends testCheckThatUserCanLogin
-    //  */
-    // public function testCheckThatUserCanLogout() {
-    //     // $this->markTestSkipped('must be revisited.');
-    //     $this->browse(function (Browser $browser) {
-    //         $this->logout($browser);
-    //     });
-    // }
+    /**
+     * Logout
+     * @depends testCheckThatUserCanLoginWithSection
+     */
+    public function testTableExtraction() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            $planeur = "1";
+            $ulm = "2";
+            $avion = "3";
+            $general = "4";
+            $all = "5";
+
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), $planeur);
+            $browser->assertSee('Planeur');
+
+            $browser->visit($this->fullUrl('avion/page'));
+
+            // $tableData = $this->getElementHtml($browser, '#DataTables_Table_0');
+            // $tableData = $this->extractTableToArray($browser, '#DataTables_Table_0');
+            $tableData = $this->extractTableToAssociativeArray($browser, '#DataTables_Table_0');
+
+
+
+            dd($tableData);
+
+            $this->logout($browser);
+        });
+    }
 }

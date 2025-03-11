@@ -370,4 +370,253 @@ class GvvDuskTestCase extends DuskTestCase {
 
         if ($acceptDIalog) $browser->acceptDialog();
     }
+
+    /**
+     * Extract data from an HTML table using Laravel Dusk and convert it to an array
+     * 
+     * @param \Laravel\Dusk\Browser $browser The Dusk browser instance
+     * @param string $tableSelector The CSS selector for the table
+     * @param bool $includeHeaders Whether to include table headers in the result (default: true)
+     * @return array The table data as a PHP array
+     */
+    // function extractTableToArray($browser, $tableSelector, $includeHeaders = true) {
+    //     // Initialize the result array
+    //     $tableData = [];
+
+    //     // Check if the table exists
+    //     if (!$browser->element($tableSelector)) {
+    //         throw new \Exception("Table with selector '{$tableSelector}' not found");
+    //     }
+
+    //     // Use JavaScript to extract the table data
+    //     return $browser->script("
+    //     return (function() {
+    //         const table = document.querySelector('" . addslashes($tableSelector) . "');
+    //         if (!table) {
+    //             return [];
+    //         }
+
+    //         const result = [];
+
+    //         // Get headers if requested
+    //         if (" . ($includeHeaders ? 'true' : 'false') . ") {
+    //             const headerCells = table.querySelectorAll('thead > tr > th, tr > th');
+    //             if (headerCells.length > 0) {
+    //                 const headerRow = [];
+    //                 headerCells.forEach(cell => {
+    //                     headerRow.push(cell.innerText.trim());
+    //                 });
+    //                 if (headerRow.length > 0) {
+    //                     result.push(headerRow);
+    //                 }
+    //             }
+    //         }
+
+    //         // Get data rows
+    //         const rows = table.querySelectorAll('tbody > tr, tr');
+    //         for (let i = 0; i < rows.length; i++) {
+    //             const row = rows[i];
+    //             // Skip header rows
+    //             if (row.querySelector('th')) {
+    //                 continue;
+    //             }
+
+    //             const rowData = [];
+    //             const cells = row.querySelectorAll('td');
+    //             for (let j = 0; j < cells.length; j++) {
+    //                 rowData.push(cells[j].innerText.trim());
+    //             }
+
+    //             if (rowData.length > 0) {
+    //                 result.push(rowData);
+    //             }
+    //         }
+
+    //         return result;
+    //     })();
+    // ")[0];
+    // }
+
+    /**
+     * Extract data from an HTML table using Laravel Dusk and convert it to an array with innerHTML
+     * 
+     * @param \Laravel\Dusk\Browser $browser The Dusk browser instance
+     * @param string $tableSelector The CSS selector for the table
+     * @param bool $includeHeaders Whether to include table headers in the result (default: true)
+     * @return array The table data as a PHP array with innerHTML of each cell
+     */
+    function extractTableToArray($browser, $tableSelector, $includeHeaders = true) {
+        // Check if the table exists
+        if (!$browser->element($tableSelector)) {
+            throw new \Exception("Table with selector '{$tableSelector}' not found");
+        }
+
+        // Use JavaScript to extract the table data with innerHTML
+        return $browser->script("
+        return (function() {
+            const table = document.querySelector('" . addslashes($tableSelector) . "');
+            if (!table) {
+                return [];
+            }
+            
+            const result = [];
+            
+            // Get headers if requested
+            if (" . ($includeHeaders ? 'true' : 'false') . ") {
+                const headerCells = table.querySelectorAll('thead > tr > th, tr > th');
+                if (headerCells.length > 0) {
+                    const headerRow = [];
+                    headerCells.forEach(cell => {
+                        headerRow.push(cell.innerHTML);
+                    });
+                    if (headerRow.length > 0) {
+                        result.push(headerRow);
+                    }
+                }
+            }
+            
+            // Get data rows
+            const rows = table.querySelectorAll('tbody > tr, tr');
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                // Skip header rows
+                if (row.querySelector('th')) {
+                    continue;
+                }
+                
+                const rowData = [];
+                const cells = row.querySelectorAll('td');
+                for (let j = 0; j < cells.length; j++) {
+                    rowData.push(cells[j].innerHTML);
+                }
+                
+                if (rowData.length > 0) {
+                    result.push(rowData);
+                }
+            }
+            
+            return result;
+        })();
+    ")[0];
+    }
+
+    /**
+     * Extract data from an HTML table using Laravel Dusk and convert it to an associative array
+     * using column headers as keys
+     * 
+     * @param \Laravel\Dusk\Browser $browser The Dusk browser instance
+     * @param string $tableSelector The CSS selector for the table
+     * @param string $contentType The type of content to extract: 'innerHTML', 'outerHTML', or 'text' (default: 'innerHTML')
+     * @return array The table data as an associative array with column headers as keys
+     */
+    function extractTableToAssociativeArray($browser, $tableSelector, $contentType = 'innerHTML') {
+        // Validate content type
+        if (!in_array($contentType, ['innerHTML', 'outerHTML', 'text'])) {
+            throw new \InvalidArgumentException("Content type must be 'innerHTML', 'outerHTML', or 'text'");
+        }
+
+        // Check if the table exists
+        if (!$browser->element($tableSelector)) {
+            throw new \Exception("Table with selector '{$tableSelector}' not found");
+        }
+
+        // JavaScript property to use based on content type
+        $jsProperty = $contentType === 'text' ? 'innerText' : $contentType;
+
+        // Use JavaScript to extract the table data
+        return $browser->script("
+        return (function() {
+            const table = document.querySelector('" . addslashes($tableSelector) . "');
+            if (!table) {
+                return { headers: [], rows: [] };
+            }
+            
+            // Get headers first - we need these for the associative array keys
+            const headerCells = table.querySelectorAll('thead > tr > th, tr > th');
+            if (headerCells.length === 0) {
+                return { error: 'No header cells found in table. Cannot create associative array.' };
+            }
+            
+            // Extract header texts for keys (using trim for text to create cleaner keys)
+            const headers = [];
+            let emptyColumnCounter = 0;
+            headerCells.forEach(cell => {
+                // Use innerText for keys even if we're extracting innerHTML for values
+                // This makes the keys more usable and consistent
+
+                const headerText = cell.innerText.trim();
+                if (headerText === '') {
+                    // Use numerical index for empty headers
+                    headers.push('column_' + emptyColumnCounter);
+                    emptyColumnCounter++;
+                } else {
+                    // Reset counter when we encounter a non-empty header
+                    emptyColumnCounter = 0;
+                    headers.push(headerText);
+                }
+            });
+            
+            // Get data rows
+            const result = [];
+            const rows = table.querySelectorAll('tbody > tr, tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                // Skip header rows
+                if (row.querySelector('th')) {
+                    continue;
+                }
+                
+                const cells = row.querySelectorAll('td');
+                // Skip if number of cells doesn't match number of headers
+                if (cells.length !== headers.length) {
+                    continue;
+                }
+                
+                const rowData = {};
+                for (let j = 0; j < cells.length; j++) {
+                    // Use header text as the key for each cell
+                    rowData[headers[j]] = cells[j]['" . $jsProperty . "'];
+                }
+                
+                result.push(rowData);
+            }
+            
+            return { headers: headers, rows: result };
+        })();
+    ")[0];
+    }
+
+    /**
+     * Get the HTML content of an element using Laravel Dusk
+     *
+     * @param \Laravel\Dusk\Browser $browser The Dusk browser instance
+     * @param string $selector The CSS selector for the element
+     * @return string|null The HTML content of the element or null if not found
+     * @throws \Exception If the element is not found and $throwException is true
+     */
+    function getElementHtml($browser, $selector, $throwException = true) {
+        try {
+            // Check if element exists
+            if (!$browser->element($selector)) {
+                if ($throwException) {
+                    throw new \Exception("Element with selector '{$selector}' not found");
+                }
+                return null;
+            }
+
+            // Use JavaScript to get the outer HTML of the element
+            return $browser->script("
+            return (function() {
+                const element = document.querySelector('" . addslashes($selector) . "');
+                return element ? element.outerHTML : null;
+            })();
+        ")[0];
+        } catch (\Exception $e) {
+            if ($throwException) {
+                throw $e;
+            }
+            return null;
+        }
+    }
 }
