@@ -29,12 +29,12 @@ class PlaneurTest extends GvvDuskTestCase {
             $this->login($browser, 'testadmin', 'password');
 
             $this->canAccess($browser, "planeur/page", ['Compta', 'Planeurs']);
-            $initial_total = $this->TableTotal($browser);
+            $initial_total = $this->TableRowCount($browser);
 
             $glider_handler->CreateGliders([$glider]);
 
             $this->canAccess($browser, "planeur/page", ['Compta', 'Planeurs']);
-            $new_total = $this->TableTotal($browser);
+            $new_total = $this->TableRowCount($browser);
 
             $this->assertGreaterThanOrEqual($initial_total, $new_total);
 

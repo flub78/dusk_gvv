@@ -47,12 +47,12 @@ class SectionsTest extends GvvDuskTestCase {
             // login with planeur and see all the planes
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), $planeur);
             $browser->assertSee('Planeur');
-            $this->assertEquals($plane_total, $this->TableTotal($browser, "avion/page"));
+            $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
 
             // switch to all and still see all the planes 
             $browser->select('section', $all)
                 ->screenshot("all_selected_$all");
-            $this->assertEquals($plane_total, $this->TableTotal($browser, "avion/page"));
+            $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
 
             // Checks that all the planes are available in the plane selector
             $browser->visit($this->fullUrl('vols_avion/create'))
@@ -62,7 +62,7 @@ class SectionsTest extends GvvDuskTestCase {
             // switch to general, no planes
             $browser->select('section', $general)
                 ->screenshot("general_selected_$general");
-            $this->assertEquals(0, $this->TableTotal($browser, "avion/page"));
+            $this->assertEquals(0, $this->TableRowCount($browser, "avion/page"));
 
             // checks that there is no planes in the plane selector
             $browser->visit($this->fullUrl('vols_avion/create'))

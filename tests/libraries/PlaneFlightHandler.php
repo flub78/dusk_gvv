@@ -135,7 +135,7 @@ class PlaneFlightHandler {
 
             // var_dump($flight);
 
-            $flight_number = $total = $this->tc->TableTotal($this->browser, "vols_avion/page");
+            $flight_number = $total = $this->tc->TableRowCount($this->browser, "vols_avion/page");
 
             $this->tc->canAccess($this->browser, $flight['url']);
 
@@ -158,7 +158,7 @@ class PlaneFlightHandler {
                 "plane flight exists: " . $flight['image']
             );
 
-            $new_flight_number = $total = $this->tc->TableTotal($this->browser, "vols_avion/page");
+            $new_flight_number = $total = $this->tc->TableRowCount($this->browser, "vols_avion/page");
 
             $this->tc->assertEquals($flight_number + 1, $new_flight_number, "Flight number = " . $new_flight_number);
         }

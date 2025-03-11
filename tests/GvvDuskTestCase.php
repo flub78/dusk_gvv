@@ -205,7 +205,7 @@ class GvvDuskTestCase extends DuskTestCase {
     }
 
     /* returns the number of rows in the table */
-    public function TableTotal($browser, $route = "", $mustSee = []) {
+    public function TableRowCount($browser, $route = "", $mustSee = []) {
 
         if ($route != "") {
             $this->canAccess($browser, $route, $mustSee);
@@ -288,9 +288,9 @@ class GvvDuskTestCase extends DuskTestCase {
                 ->assertSee('à jour');
 
             // Check that the database contains expected data
-            $this->assertEquals(3, $this->TableTotal($browser, "planeur/page"));
-            $this->assertEquals(2, $this->TableTotal($browser, "avion/page"));
-            $this->assertEquals(4, $this->TableTotal($browser, "membre/page"));
+            $this->assertEquals(3, $this->TableRowCount($browser, "planeur/page"));
+            $this->assertEquals(2, $this->TableRowCount($browser, "avion/page"));
+            $this->assertEquals(4, $this->TableRowCount($browser, "membre/page"));
             $this->logout($browser);
         });
     }
