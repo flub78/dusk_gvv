@@ -96,11 +96,24 @@ class SectionsTest extends GvvDuskTestCase {
 
             // $tableData = $this->getElementHtml($browser, '#DataTables_Table_0');
             // $tableData = $this->extractTableToArray($browser, '#DataTables_Table_0');
-            $tableData = $this->extractTableToAssociativeArray($browser, '#DataTables_Table_0');
+            $table = $this->extractTableToAssociativeArray($browser, '#DataTables_Table_0');
+
+            // var_dump($table);
+
+            $edit_1 = $table['rows'][0]['column_0'];
+            $href = $this->extractHref($edit_1);
+
+            $delete_1 = $table['rows'][0]['column_1'];
+            $delete_url = $this->extractHref($delete_1);
 
 
+            // echo "edit_1: $edit_1\n";
+            // echo "href: $href\n";
+            // echo "delete_1: $delete_1\n";
+            // echo "delete_url: $delete_url\n";
 
-            dd($tableData);
+            $this->assertEquals("http://gvv.net/avion/edit/F-GUFB", $href, "it is possible to extract the edit url");
+            $this->assertEquals("http://gvv.net/avion/delete/F-GUFB", $delete_url, "it is possible to extract the delete url");
 
             $this->logout($browser);
         });

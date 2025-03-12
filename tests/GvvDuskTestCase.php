@@ -508,6 +508,37 @@ class GvvDuskTestCase extends DuskTestCase {
      * @param string $tableSelector The CSS selector for the table
      * @param string $contentType The type of content to extract: 'innerHTML', 'outerHTML', or 'text' (default: 'innerHTML')
      * @return array The table data as an associative array with column headers as keys
+     * array:2 [
+  "headers" => array:12 [
+    0 => "column_0"
+    1 => "column_1"
+    2 => "Modèle"
+    3 => "Constructeur"
+    4 => "Immatriculation"
+    5 => "Section"
+    6 => "Places"
+    7 => "Remorqueur"
+    8 => "Pirvé"
+    9 => "Actif"
+    10 => "Vols"
+    11 => "Année"
+  ]
+  "rows" => array:2 [
+    0 => array:12 [
+      "Actif" => "<img class="icon" src="http://gvv.net/themes/binary-news/images/tick.png" alt="">"
+      "Année" => "0"
+      "Constructeur" => "Robin"
+      "Immatriculation" => "F-GUFB"
+      "Modèle" => "DR400"
+      "Pirvé" => ""
+      "Places" => "4"
+      "Remorqueur" => "<img class="icon" src="http://gvv.net/themes/binary-news/images/tick.png" alt="">"
+      "Section" => "Planeur"
+      "Vols" => "<a href="http://gvv.net/vols_avion/vols_de_la_machine/F-GUFB">vols</a>"
+      "column_0" => "<a href="http://gvv.net/avion/edit/F-GUFB"><img class="icon" src="http://gvv.net/themes/binary-news/images/pencil.png" title="Changer" alt=""></a>"
+      "column_1" => "<a href="http://gvv.net/avion/delete/F-GUFB" onclick="return confirm('Etes vous sûr de vouloir supprimer F-GUFB?')"><img class="icon" src="http://gvv.net/themes/binary-news/images/delete.png" title="Supprimer" alt=""></a>"
+    ]
+      ...
      */
     function extractTableToAssociativeArray($browser, $tableSelector, $contentType = 'innerHTML') {
         // Validate content type
@@ -585,6 +616,20 @@ class GvvDuskTestCase extends DuskTestCase {
             return { headers: headers, rows: result };
         })();
     ")[0];
+    }
+
+
+    /**
+     * Extracts the href attribute value from an HTML string.
+     *
+     * @param string $html The HTML string to extract the href from.
+     * @return string|null The href value if found, or null if not found.
+     */
+    function extractHref($html) {
+        if (preg_match('/<a\s+[^>]*href=["\']([^"\']+)["\']/i', $html, $matches)) {
+            return $matches[1];
+        }
+        return null;
     }
 
     /**
