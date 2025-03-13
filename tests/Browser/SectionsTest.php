@@ -11,10 +11,23 @@ use Tests\GvvDuskTestCase;
  * - check that the user can choose a section at login
  * - CRUD fo user roles inside sections
  * - Check that a user who belongs to several sections can select a section 
+ * 
  * - Checks that the resources are displayed by section
- * -
+ * -    avions, comptes, écritures, vols.
+ * - Checks that the resources are read-only when no section is selected.
  */
 class SectionsTest extends GvvDuskTestCase {
+
+    const PLANEUR = "1";
+    const ULM = "2";
+    const AVION = "3";
+    const GENERAL = "4";
+    const ALL = "5";
+
+    public function switchSection($browser, $section) {
+        $browser->select('section', $section)
+            ->screenshot("switch_to_section_$section");
+    }
 
     /*************
      * Test cases
@@ -36,22 +49,17 @@ class SectionsTest extends GvvDuskTestCase {
 
         $this->browse(function (Browser $browser) {
 
-            $planeur = "1";
-            $ulm = "2";
-            $avion = "3";
-            $general = "4";
-            $all = "5";
-
             $plane_total = 2;
 
             // login with planeur and see all the planes
-            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), $planeur);
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), self::PLANEUR);
             $browser->assertSee('Planeur');
             $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
 
             // switch to all and still see all the planes 
-            $browser->select('section', $all)
-                ->screenshot("all_selected_$all");
+            $this->switchSection($browser, self::ALL);
+            $browser->select('section', self::ALL)
+                ->screenshot("all_selected");
             $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
 
             // Checks that all the planes are available in the plane selector
@@ -60,8 +68,8 @@ class SectionsTest extends GvvDuskTestCase {
                 ->assertSelectHasOptions('vamacid', ['F-JUFA', 'F-GUFB']);
 
             // switch to general, no planes
-            $browser->select('section', $general)
-                ->screenshot("general_selected_$general");
+            $this->switchSection($browser, self::GENERAL);
+
             $this->assertEquals(0, $this->TableRowCount($browser, "avion/page"));
 
             // checks that there is no planes in the plane selector
@@ -83,13 +91,7 @@ class SectionsTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $planeur = "1";
-            $ulm = "2";
-            $avion = "3";
-            $general = "4";
-            $all = "5";
-
-            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), $planeur);
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), self::PLANEUR);
             $browser->assertSee('Planeur');
 
             $browser->visit($this->fullUrl('avion/page'));
