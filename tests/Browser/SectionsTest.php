@@ -84,7 +84,6 @@ class SectionsTest extends GvvDuskTestCase {
 
 
     /**
-     * Logout
      * @depends testCheckThatUserCanLoginWithSection
      */
     public function testTableExtraction() {
@@ -116,6 +115,36 @@ class SectionsTest extends GvvDuskTestCase {
 
             $this->assertEquals("http://gvv.net/avion/edit/F-GUFB", $href, "it is possible to extract the edit url");
             $this->assertEquals("http://gvv.net/avion/delete/F-GUFB", $delete_url, "it is possible to extract the delete url");
+
+            $this->logout($browser);
+        });
+    }
+
+    /**
+     * Checks that the correct client accounts are created
+     * @depends testTableExtraction
+     */
+    public function testMemberAccountsCreation() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), self::ULM);
+            $browser->assertSee('ULM');
+
+            // Comptes clients de la section ULM
+            $comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $this->switchSection($browser, self::PLANEUR);
+            $comptes_planeur  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $this->switchSection($browser, self::ALL);
+            $comptes_all  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+
+            echo "comptes_ulm: $comptes_ulm\n";
+            echo "comptes_planeur: $comptes_planeur\n";
+            echo "comptes_all: $comptes_all\n";
+
+            $this->assertGreaterThanOrEqual($comptes_ulm, $comptes_all);
+            $this->assertGreaterThanOrEqual($comptes_planeur, $comptes_all);
+
 
             $this->logout($browser);
         });
