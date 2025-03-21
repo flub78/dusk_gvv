@@ -70,8 +70,15 @@ class GvvDuskTestCase extends DuskTestCase {
         }
 
         $browser->press('input[type="submit"]')
-            ->screenshot('after_login')
-            ->assertSee('Planeurs');
+            ->screenshot('after_login');
+
+        $section_images = [];
+        $section_images[1] = "Planeur";
+        $section_images[2] = "ULM";
+        $section_images[3] = "Avion";
+        $section_images[4] = "Général";
+        $section_images[5] = "Toutes";
+        $browser->assertSee($section_images[$section]);
 
         sleep(2);
     }

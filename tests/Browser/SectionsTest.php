@@ -4,6 +4,8 @@ namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
+use Tests\libraries\MemberHandler;
+
 
 /**
  * Sections
@@ -25,7 +27,8 @@ class SectionsTest extends GvvDuskTestCase {
     const ALL = "5";
 
     public function switchSection($browser, $section) {
-        $browser->select('section', $section)
+        $browser
+            ->select('section', $section)
             ->screenshot("switch_to_section_$section");
     }
 
@@ -107,14 +110,13 @@ class SectionsTest extends GvvDuskTestCase {
             $delete_1 = $table['rows'][0]['column_1'];
             $delete_url = $this->extractHref($delete_1);
 
-
             // echo "edit_1: $edit_1\n";
             // echo "href: $href\n";
             // echo "delete_1: $delete_1\n";
             // echo "delete_url: $delete_url\n";
 
-            $this->assertEquals("http://gvv.net/avion/edit/F-GUFB", $href, "it is possible to extract the edit url");
-            $this->assertEquals("http://gvv.net/avion/delete/F-GUFB", $delete_url, "it is possible to extract the delete url");
+            $this->assertEquals($this->url . "avion/edit/F-GUFB", $href, "it is possible to extract the edit url");
+            $this->assertEquals($this->url . "avion/delete/F-GUFB", $delete_url, "it is possible to extract the delete url");
 
             $this->logout($browser);
         });
@@ -135,16 +137,66 @@ class SectionsTest extends GvvDuskTestCase {
             $comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
             $this->switchSection($browser, self::PLANEUR);
             $comptes_planeur  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $this->switchSection($browser, self::GENERAL);
+            $comptes_general  = $this->TableRowCount($browser, "comptes/page/411") - 1;
             $this->switchSection($browser, self::ALL);
             $comptes_all  = $this->TableRowCount($browser, "comptes/page/411") - 1;
 
-            echo "comptes_ulm: $comptes_ulm\n";
-            echo "comptes_planeur: $comptes_planeur\n";
-            echo "comptes_all: $comptes_all\n";
+            // echo "comptes_ulm: $comptes_ulm\n";
+            // echo "comptes_planeur: $comptes_planeur\n";
+            // echo "comptes_all: $comptes_all\n";
+            // echo "comptes_general: $comptes_general\n";
 
             $this->assertGreaterThanOrEqual($comptes_ulm, $comptes_all);
             $this->assertGreaterThanOrEqual($comptes_planeur, $comptes_all);
+            $this->assertGreaterThanOrEqual($comptes_general, $comptes_all);
 
+            // On va créer un membre dans la section ULM
+            // On active la section ULM
+            $this->switchSection($browser, self::ULM);
+            // On crée le membre
+            $membre = [
+                'id' => 'bonemine',
+                'nom' => 'Le Gaulois',
+                'prenom' => 'Bonemine',
+                'email' => 'bonemine@flub78.net',
+                'adresse' => '1 rue des menhirs',
+                'code_postal' => '78000',
+                'ville' => 'Village Gaulois'
+            ];
+            $member_handler = new MemberHandler($browser, $this);
+            try {
+                $member_handler->CreateMembers([$membre]);
+            } catch (\Exception $e) {
+                $browser->acceptDialog();
+
+                // It is displayed
+                // echo "Exception raised: " . $e->getMessage() . "\n";
+            }
+
+            // On vérifie qu'on a bien deux comptes clients en plus
+            // Un dans la section ULM
+
+            $this->switchSection($browser, self::ULM);
+            $nouveau_comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            // echo "nouveau_comptes_ulm: $nouveau_comptes_ulm\n";
+            $this->assertEquals($nouveau_comptes_ulm, $comptes_ulm + 1);
+
+            // Un dans la section générale
+            $this->switchSection($browser, self::GENERAL);
+            $nouveau_comptes_general  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            // echo "nouveau_comptes_general: $nouveau_comptes_general\n";
+            $this->assertEquals($nouveau_comptes_general, $comptes_general + 1);
+
+            $this->switchSection($browser, self::ALL);
+            $nouveau_comptes_all  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            // echo "nouveau_comptes_all: $nouveau_comptes_all\n";
+            $this->assertEquals($nouveau_comptes_all, $comptes_all + 2);
+
+            // On détruit les comptes clients
+            // et le nouveau membre
+            // Et on vérifie qu'on retrouve le nombre de compte initial
+            // et on détruit le membre
 
             $this->logout($browser);
         });
