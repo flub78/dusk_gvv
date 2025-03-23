@@ -304,17 +304,24 @@ class GvvDuskTestCase extends DuskTestCase {
         });
     }
 
-    // Function to extract the href of the edit icon of a table row
-    public function getHrefFromTableRow($browser, $pattern) {
+    /**
+     * Function to extract the href of the edit icon of a table row
+     * $rank = 1    edit link
+     * $rank = 2    delete link
+     * $rank = 3    clone link
+     */
+    public function getHrefFromTableRow($browser, $pattern, $rank = "1") {
 
-        return $browser->script([
-            "return document.evaluate(
-                    \"//tr[contains(., '$pattern')]//td[1]//a\", 
+        $script = "return document.evaluate(
+                    \"//tr[contains(., '$pattern')]//td[" . $rank . "]//a\", 
                     document, 
                     null, 
                     XPathResult.FIRST_ORDERED_NODE_TYPE, 
                     null
-                ).singleNodeValue.getAttribute('href');"
+                ).singleNodeValue.getAttribute('href');";
+
+        return $browser->script([
+            $script
         ])[0];
     }
 

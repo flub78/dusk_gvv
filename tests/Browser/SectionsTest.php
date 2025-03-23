@@ -165,7 +165,7 @@ class SectionsTest extends GvvDuskTestCase {
                 $browser->acceptDialog();
 
                 // It is displayed
-                // echo "Exception raised: " . $e->getMessage() . "\n";
+                echo "Exception raised: " . $e->getMessage() . "\n";
             }
 
             // On vérifie qu'on a bien deux comptes clients en plus
@@ -218,19 +218,19 @@ class SectionsTest extends GvvDuskTestCase {
             $comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
             $id_asterix_client_ulm = $this->getIdFromTable($browser, "Asterix");
             $this->assertEquals($comptes_ulm, 2, "2 comptes client ULM dans les données de test");
-            echo "\n";
-            echo "asterix compte client ULM = " . $id_asterix_client_ulm . "\n";
-            $solde_ulm = $account_handler->AccountTotal($id_asterix_client_ulm);
-            echo "solde ulm = " . $solde_ulm . "\n";
+            // echo "\n";
+            // echo "asterix compte client ULM = " . $id_asterix_client_ulm . "\n";
+            $solde_ulm_initial = $account_handler->AccountTotal($id_asterix_client_ulm);
+            // echo "solde ulm = " . $solde_ulm_initial . "\n";
 
             // Selection section planeur
             $this->switchSection($browser, self::PLANEUR);
             $comptes_planeur  = $this->TableRowCount($browser, "comptes/page/411") - 1;
             $id_asterix_client_planeur = $this->getIdFromTable($browser, "Asterix");
-            echo "asterix compte client planeur = " . $id_asterix_client_planeur . "\n";
+            // echo "asterix compte client planeur = " . $id_asterix_client_planeur . "\n";
             $this->assertEquals($comptes_planeur, 4, "4 comptes client planeur dans les données de test");
             $solde_planeur = $account_handler->AccountTotal($id_asterix_client_planeur);
-            echo "solde planeur = " . $solde_planeur . "\n";
+            // echo "solde planeur = " . $solde_planeur . "\n";
 
             // Ouvre le compte Asterix ULM
             $this->switchSection($browser, self::ULM);
@@ -238,7 +238,34 @@ class SectionsTest extends GvvDuskTestCase {
             $this->purchase($browser, $id_asterix_client_ulm, "bobr : 2.5", $quantity = 2, $comment = "", $cost = 5.0);
 
             $new_solde_ulm = $account_handler->AccountTotal($id_asterix_client_ulm);
-            echo "new solde ulm = " . $new_solde_ulm . "\n";
+            // echo "new solde ulm = " . $new_solde_ulm . "\n";
+
+            // Modification de tarif
+            $yesterday = date('d/m/Y', strtotime('-1 day'));
+            // echo "yesterday = $yesterday\n";
+
+            $browser->visit($this->fullUrl('tarifs/page'));
+
+            $clone_href = $this->getHrefFromTableRow($browser, "bobr", 3);
+            $browser->visit($clone_href)
+                ->screenshot("clone_tarif");
+
+            // Change le tarif
+            $edit_href = $this->getHrefFromTableRow($browser, "bobr", 1);
+            $browser->visit($edit_href)
+                ->type('date', $yesterday)
+                ->type('prix', 5.0)
+                ->click('#validate');
+
+            // revalide l'achat
+            $solde_ulm = $account_handler->AccountTotal($id_asterix_client_ulm);
+            $edit_href = $this->getHrefFromTableRow($browser, "bobr", 1);
+            $browser->visit($edit_href)
+                ->click('#validate');
+
+            $new_solde_ulm = $account_handler->AccountTotal($id_asterix_client_ulm);
+            $this->assertEquals($new_solde_ulm, $solde_ulm_initial - 10.0, "solde ULM après changement de tarif");
+
             $this->logout($browser);
         });
     }
