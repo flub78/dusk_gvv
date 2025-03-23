@@ -9,6 +9,8 @@ use PHPUnit\Framework\Assert;
 use Laravel\Dusk\Browser;
 use Illuminate\Support\Facades\Log;
 use ReflectionClass;
+use Tests\libraries\AccountHandler;
+
 
 class GvvDuskTestCase extends DuskTestCase {
 
@@ -669,6 +671,45 @@ class GvvDuskTestCase extends DuskTestCase {
                 throw $e;
             }
             return null;
+        }
+    }
+
+    /**
+     * Purchase something
+     **/
+    protected function purchase($browser, $account_id, $product, $quantity = 1, $comment = "", $cost = 0) {
+
+        $account_handler = new AccountHandler($browser, $this);
+
+        $solde_initial = $account_handler->AccountTotal($account_id);
+
+        $browser->visit($this->fullUrl('compta/journal_compte/' . $account_id));
+        $browser->script('document.body.style.zoom = "0.5"');
+
+        // Achat
+        Log::debug("purchase account=$account_id, product=$product, quantity=$quantity, cost=$cost, comment=$comment");
+        $browser // ->click('#panel-achats > .accordion-button')
+            ->scrollIntoView('#validation_achat')
+            ->waitFor('#validation_achat');
+
+        $browser->click('#select2-product_selector-container')
+            ->waitFor('.select2-search__field')
+            ->type('.select2-search__field', $product)
+            ->waitFor('.select2-results__option')
+            ->click('.select2-results__option');
+        // ->assertSelected('#product_selector', $product);
+
+        $browser->type('quantite', $quantity);
+        // ->click('.form-group:nth-child(1) > .form-control')
+        if ($comment) $browser->type('.form-group:nth-child(4) > .form-control', $comment);
+
+        $browser->click('#validation_achat');
+
+        $nouveau_solde = $account_handler->AccountTotal($account_id);
+
+        if ($cost) {
+            echo "cost=$cost, solde_initial=$solde_initial, nouveau_solde=$nouveau_solde\n";
+            $this->assertEquals($nouveau_solde, $solde_initial - $cost);
         }
     }
 }

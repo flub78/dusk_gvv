@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\GvvDuskTestCase;
 use Tests\libraries\MemberHandler;
+use Tests\libraries\AccountHandler;
 
 
 /**
@@ -37,15 +38,8 @@ class SectionsTest extends GvvDuskTestCase {
      *************/
 
     /**
-     * Login
+     * testCheckThatUserCanLoginWithSection
      * @depends testCheckInstallationProcedure
-     * <select name="section" class="form-control" id="section">
-     *      <option value="3">Avion</option>
-     *      <option value="4">Général</option>
-     *      <option value="1">Planeur</option>
-     *      <option value="2">ULM</option>
-     *      <option value="5">Toutes</option>
-     * </select>
      */
     public function testCheckThatUserCanLoginWithSection() {
         // $this->markTestSkipped('must be revisited.');
@@ -198,6 +192,53 @@ class SectionsTest extends GvvDuskTestCase {
             // Et on vérifie qu'on retrouve le nombre de compte initial
             // et on détruit le membre
 
+            $this->logout($browser);
+        });
+    }
+
+    /**
+     * Checks that purchases are put in the correct account
+     * @depends testMemberAccountsCreation
+     */
+    public function testPurchasePerSection() {
+        // $this->markTestSkipped('must be revisited.');
+        $this->browse(function (Browser $browser) {
+
+            $account_handler = new AccountHandler($browser, $this);
+
+            $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), self::ULM);
+            $browser->assertSee('ULM');
+
+            // Dans les données de test, le membre Asterix a un compte ULM et un compte planeur
+            // Depuis le compte client ULM on peut aller chercher
+            // On va chercher l'id du compte client asterix ULM
+
+            // Comptes clients de la section ULM
+            // Section ULM sélectionnée
+            $comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $id_asterix_client_ulm = $this->getIdFromTable($browser, "Asterix");
+            $this->assertEquals($comptes_ulm, 2, "2 comptes client ULM dans les données de test");
+            echo "\n";
+            echo "asterix compte client ULM = " . $id_asterix_client_ulm . "\n";
+            $solde_ulm = $account_handler->AccountTotal($id_asterix_client_ulm);
+            echo "solde ulm = " . $solde_ulm . "\n";
+
+            // Selection section planeur
+            $this->switchSection($browser, self::PLANEUR);
+            $comptes_planeur  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $id_asterix_client_planeur = $this->getIdFromTable($browser, "Asterix");
+            echo "asterix compte client planeur = " . $id_asterix_client_planeur . "\n";
+            $this->assertEquals($comptes_planeur, 4, "4 comptes client planeur dans les données de test");
+            $solde_planeur = $account_handler->AccountTotal($id_asterix_client_planeur);
+            echo "solde planeur = " . $solde_planeur . "\n";
+
+            // Ouvre le compte Asterix ULM
+            $this->switchSection($browser, self::ULM);
+
+            $this->purchase($browser, $id_asterix_client_ulm, "bobr : 2.5", $quantity = 2, $comment = "", $cost = 5.0);
+
+            $new_solde_ulm = $account_handler->AccountTotal($id_asterix_client_ulm);
+            echo "new solde ulm = " . $new_solde_ulm . "\n";
             $this->logout($browser);
         });
     }

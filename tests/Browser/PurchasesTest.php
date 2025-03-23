@@ -61,35 +61,6 @@ class PurchasesTest extends BillingTest {
     }
 
     /**
-     * Purchase something
-     **/
-    protected function purchase($browser, $account_id, $product, $quantity = 1, $comment = "") {
-
-        $browser->visit($this->fullUrl('compta/journal_compte/' . $account_id));
-        $browser->script('document.body.style.zoom = "0.5"');
-
-
-        // Ajoute 2 achats
-        Log::debug("purchase $quantity $product");
-        $browser // ->click('#panel-achats > .accordion-button')
-            ->scrollIntoView('#validation_achat')
-            ->waitFor('#validation_achat');
-
-        $browser->click('#select2-product_selector-container')
-            ->waitFor('.select2-search__field')
-            ->type('.select2-search__field', $product)
-            ->waitFor('.select2-results__option')
-            ->click('.select2-results__option');
-        // ->assertSelected('#product_selector', $product);
-
-        $browser->type('quantite', $quantity);
-        // ->click('.form-group:nth-child(1) > .form-control')
-        if ($comment) $browser->type('.form-group:nth-child(4) > .form-control', $comment);
-
-        $browser->click('#validation_achat');
-    }
-
-    /**
      * Checks that a purchase is billed correctly
      * 
      * @depends testCheckThatUserCanLogin
@@ -135,13 +106,9 @@ class PurchasesTest extends BillingTest {
             Log::debug("Solde Asterix: Page 411 = $initial_asterix_balance, Solde compte = $total");
             $this->assertEquals($initial_asterix_balance, $total);
 
-            $this->purchase($browser, $asterix_compte_id, "bobr : 20.00", $quantity = 2, $comment = "2 bobs");
-            // $this->purchase($browser, $asterix_compte_id, "Treuillé : 8.00", $quantity = 1, $comment = "");
+            $this->purchase($browser, $asterix_compte_id, "bobr : 20.00", $quantity = 2, $comment = "2 bobs", $cost = 40.00);;
 
-            $asterix_new_balance = $account_handler->AccountTotal($asterix_compte_id);
             $sale_new_balance = $account_handler->AccountTotal($sale_account_id);
-
-            $this->assertEquals($asterix_new_balance, $initial_asterix_balance - 40);
             $this->assertEquals($sale_new_balance, $initial_sale_balance + 40);
 
             // Modifie la quantité
