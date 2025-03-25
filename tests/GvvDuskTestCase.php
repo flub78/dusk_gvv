@@ -12,6 +12,17 @@ use ReflectionClass;
 use Tests\libraries\AccountHandler;
 
 
+/**
+ * Base test case class for Dusk browser testing in the GVV application
+ * 
+ * Provides common utility methods for browser-based testing, including:
+ * - Environment and login/logout handling
+ * - Page access verification
+ * - Table data extraction
+ * - Logging and test lifecycle management
+ * 
+ * Extends Laravel Dusk's base test case with custom functionality specific to the GVV application
+ */
 class GvvDuskTestCase extends DuskTestCase {
 
     public $url;
@@ -43,6 +54,14 @@ class GvvDuskTestCase extends DuskTestCase {
         parent::tearDown();
     }
 
+    /**
+     * Validates that required environment variables for testing are set.
+     * 
+     * Checks that TARGET, TEST_USER, and TEST_PASSWORD environment variables
+     * are not empty, which are critical for running browser-based tests.
+     * 
+     * @throws AssertionError if any required environment variable is not set
+     */
     public function check_environement() {
         Assert::assertNotEmpty(env('TARGET'), "TARGET env var is not set");
         Assert::assertNotEmpty(env('TEST_USER'), "TEST_USER env var is not set");
@@ -86,7 +105,7 @@ class GvvDuskTestCase extends DuskTestCase {
     }
 
     /**
-     * Logout as a user.
+     * Logout.
      */
     public function logout($browser) {
 
@@ -105,17 +124,33 @@ class GvvDuskTestCase extends DuskTestCase {
             ->assertSee('Mot de passe');
     }
 
+    /**
+     * Verifies that the user is successfully logged in by checking for expected elements.
+     *
+     * @param \Laravel\Dusk\Browser $browser The browser instance used for testing
+     */
     public function IsLoggedIn($browser) {
         $browser->assertSee('Membres')
             ->assertSee('Planeurs');
     }
 
+    /**
+     * Verifies that the user is successfully logged out by checking for login page elements.
+     *
+     * @param \Laravel\Dusk\Browser $browser The browser instance used for testing
+     */
     public function IsLoggedOut($browser) {
         $browser->assertDontSee('Planeurs');
         $browser->assertSee('Utilisateur')
             ->assertSee('Mot de passe');
     }
 
+    /**
+     * Constructs a full URL by combining the base URL with a given suburl.
+     *
+     * @param string $suburl The subpath or endpoint to be appended to the base URL
+     * @return string The complete URL
+     */
     public function fullUrl($suburl) {
         return $this->url . $suburl;
         // return $this->url . 'index.php/' . $suburl;
@@ -213,8 +248,15 @@ class GvvDuskTestCase extends DuskTestCase {
         return false;
     }
 
-    /* returns the number of rows in the table */
-    public function TableRowCount($browser, $route = "", $mustSee = []) {
+    /**
+     * Retrieves the total number of rows in a table on a web page.
+     *
+     * @param Browser $browser The browser instance used for navigation
+     * @param string $route Optional route to navigate to before counting rows
+     * @param array $mustSee Optional array of strings that must be visible on the page
+     * @return int Total number of rows in the table
+     */
+    public function PageTableRowCount($browser, $route = "", $mustSee = []) {
 
         if ($route != "") {
             $this->canAccess($browser, $route, $mustSee);
@@ -297,9 +339,9 @@ class GvvDuskTestCase extends DuskTestCase {
                 ->assertSee('à jour');
 
             // Check that the database contains expected data
-            $this->assertEquals(3, $this->TableRowCount($browser, "planeur/page"));
-            $this->assertEquals(2, $this->TableRowCount($browser, "avion/page"));
-            $this->assertEquals(4, $this->TableRowCount($browser, "membre/page"));
+            $this->assertEquals(3, $this->PageTableRowCount($browser, "planeur/page"));
+            $this->assertEquals(2, $this->PageTableRowCount($browser, "avion/page"));
+            $this->assertEquals(4, $this->PageTableRowCount($browser, "membre/page"));
             $this->logout($browser);
         });
     }

@@ -202,7 +202,7 @@ class GliderFlightHandler {
 
             Log::debug("Creating glider flight : " . var_export($flight, true));
 
-            $flight_number = $this->tc->TableRowCount($this->browser, "vols_planeur/page");
+            $flight_number = $this->tc->PageTableRowCount($this->browser, "vols_planeur/page");
 
             $account_id = $account_handler->AccountIdFromImage($flight['account']);
             $total = $account_handler->AccountTotal($account_id);
@@ -247,7 +247,7 @@ class GliderFlightHandler {
                 );
             }
 
-            $new_flight_number = $this->tc->TableRowCount($this->browser, "vols_planeur/page");
+            $new_flight_number = $this->tc->PageTableRowCount($this->browser, "vols_planeur/page");
 
             $this->tc->assertEquals($flight_number + $created, $new_flight_number, "Flight number = " . $new_flight_number);
             Log::debug("glider flight creation with no error, check that there is one addition flight inthe list ");

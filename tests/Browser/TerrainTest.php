@@ -46,7 +46,7 @@ class TerrainTest extends GvvDuskTestCase {
      */
     public function createTerrain($browser, $terrains = []) {
 
-        $total = $this->TableRowCount($browser);
+        $total = $this->PageTableRowCount($browser);
         foreach ($terrains as $terrain) {
 
             $this->canAccess($browser, "terrains/create", ['Code OACI']);
@@ -63,7 +63,7 @@ class TerrainTest extends GvvDuskTestCase {
             $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
         }
 
-        $new_total = $this->TableRowCount($browser);
+        $new_total = $this->PageTableRowCount($browser);
         $this->assertEquals($total + count($terrains), $new_total, "Terrain created, total = " . $new_total);
     }
 
@@ -78,10 +78,10 @@ class TerrainTest extends GvvDuskTestCase {
 
         foreach ($terrains as $terrain) {
             $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $total = $this->TableRowCount($browser);
+            $total = $this->PageTableRowCount($browser);
 
             $this->canAccess($browser, "terrains/delete/" . $terrain['oaci'], ['Terrains']);
-            $new_total = $this->TableRowCount($browser);
+            $new_total = $this->PageTableRowCount($browser);
 
             $this->assertEquals($total - 1, $new_total, "Terrain deleted, total = " . $new_total);
         }
@@ -94,7 +94,7 @@ class TerrainTest extends GvvDuskTestCase {
 
         foreach ($terrains as $terrain) {
             $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $total = $this->TableRowCount($browser);
+            $total = $this->PageTableRowCount($browser);
 
             $this->canAccess($browser, "terrains/create", ['Planeur']);
 
@@ -109,7 +109,7 @@ class TerrainTest extends GvvDuskTestCase {
                 ->assertSee("L'élément existe déjà");
 
             $this->canAccess($browser, "terrains/page", ['Compta', 'Terrains']);
-            $new_total = $this->TableRowCount($browser);
+            $new_total = $this->PageTableRowCount($browser);
 
             $this->assertEquals($total, $new_total, "No Terrain created, total = " . $new_total);
         }
@@ -137,12 +137,12 @@ class TerrainTest extends GvvDuskTestCase {
         // $this->markTestSkipped('must be revisited.');
         $this->browse(function (Browser $browser) {
 
-            $total = $this->TableRowCount($browser, "terrains/page");
+            $total = $this->PageTableRowCount($browser, "terrains/page");
             $this->assertGreaterThan(0, $total, "Terrains Table contains some entries");
 
             $this->createTerrain($browser, $this->terrains);
 
-            $new_total = $this->TableRowCount($browser, "terrains/page", ["Terrains"]);
+            $new_total = $this->PageTableRowCount($browser, "terrains/page", ["Terrains"]);
             $this->assertEquals($new_total, $total + count($this->terrains), "Terrains Table contains more entries");
         });
     }
@@ -164,11 +164,11 @@ class TerrainTest extends GvvDuskTestCase {
     public function testFlightsCanBeDeleted() {
         $this->browse(function (Browser $browser) {
 
-            $total = $this->TableRowCount($browser, "terrains/page");
+            $total = $this->PageTableRowCount($browser, "terrains/page");
 
             $this->deleteTerrain($browser, $this->terrains);
 
-            $new_total = $this->TableRowCount($browser, "terrains/page", ["Terrains"]);
+            $new_total = $this->PageTableRowCount($browser, "terrains/page", ["Terrains"]);
             $this->assertEquals($new_total, $total - count($this->terrains), "Terrains Table contains less entries");
         });
     }

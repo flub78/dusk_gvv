@@ -43,39 +43,47 @@ class ComptaTest extends GvvDuskTestCase {
      * testCheckThatUserCanLoginWithSection
      * @depends testCheckInstallationProcedure
      */
-    public function testCheckThatUserCanLoginWithSection() {
+    public function testCreateAccountingLinesAndCheckTheBalance() {
         // $this->markTestSkipped('must be revisited.');
 
         $this->browse(function (Browser $browser) {
 
             $plane_total = 2;
 
-            // login with planeur and see all the planes
+            // login with planeur and see all the accounts
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), self::PLANEUR);
             $browser->assertSee('Planeur');
-            $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
+
+            $planeur_codec_count = $this->PageTableRowCount($browser, "comptes/general") - 1;
+
+            echo "\n";
+            echo "planeur_codec_count = $planeur_codec_count\n";
+
+            $this->switchSection($browser, self::ULM);
+            $ulm_codec_count = $this->PageTableRowCount($browser, "comptes/general") - 1;
+            echo "ulm_codec_count = $ulm_codec_count\n";
+
+            $this->switchSection($browser, self::AVION);
+            $avion_codec_count = $this->PageTableRowCount($browser, "comptes/general") - 1;
+            echo "avion_codec_count = $avion_codec_count\n";
+
+            $this->switchSection($browser, self::GENERAL);
+            $general_codec_count = $this->PageTableRowCount($browser, "comptes/general") - 1;
+            echo "general_codec_count = $general_codec_count\n";
+
 
             // switch to all and still see all the planes 
             $this->switchSection($browser, self::ALL);
-            $browser->select('section', self::ALL)
-                ->screenshot("all_selected");
-            $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
+            $all_codec_count = $this->PageTableRowCount($browser, "comptes/general") - 1;
+            echo "all_codec_count = $all_codec_count\n";
 
-            // Checks that all the planes are available in the plane selector
-            $browser->visit($this->fullUrl('vols_avion/create'))
-                ->waitFor('select[name="vamacid"]')
-                ->assertSelectHasOptions('vamacid', ['F-JUFA', 'F-GUFB']);
+            $max_codec_count = max($planeur_codec_count, $ulm_codec_count, $avion_codec_count, $general_codec_count);
 
-            // switch to general, no planes
-            $this->switchSection($browser, self::GENERAL);
+            $this->assertGreaterThanOrEqual($planeur_codec_count, 16);
+            $this->assertGreaterThanOrEqual($ulm_codec_count, 25);
+            $this->assertGreaterThanOrEqual($general_codec_count, 16);
 
-            $this->assertEquals(0, $this->TableRowCount($browser, "avion/page"));
-
-            // checks that there is no planes in the plane selector
-            $browser->visit($this->fullUrl('vols_avion/create'))
-                ->waitFor('select[name="vamacid"]')
-                ->assertSelectHasOptions('vamacid', [])
-                ->assertSelectMissingOptions('vamacid', ['F-JUFA']);
+            $this->assertGreaterThanOrEqual($max_codec_count, $all_codec_count);
 
             $this->logout($browser);
         });

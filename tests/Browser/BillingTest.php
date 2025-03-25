@@ -50,8 +50,8 @@ abstract class BillingTest extends GvvDuskTestCase {
         foreach ($account_ids as $name => $account_id) {
             $res['balance'][$name] =  $account_handler->AccountTotal($account_id);
         }
-        $res['purchases'] = $this->TableRowCount($browser, "achats/page");
-        $res['lines'] = $this->TableRowCount($browser, "compta/page");
+        $res['purchases'] = $this->PageTableRowCount($browser, "achats/page");
+        $res['lines'] = $this->PageTableRowCount($browser, "compta/page");
         return $res;
     }
 

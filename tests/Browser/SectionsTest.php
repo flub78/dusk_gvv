@@ -51,13 +51,13 @@ class SectionsTest extends GvvDuskTestCase {
             // login with planeur and see all the planes
             $this->login($browser, env('TEST_USER'), env('TEST_PASSWORD'), self::PLANEUR);
             $browser->assertSee('Planeur');
-            $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
+            $this->assertEquals($plane_total, $this->PageTableRowCount($browser, "avion/page"));
 
             // switch to all and still see all the planes 
             $this->switchSection($browser, self::ALL);
             $browser->select('section', self::ALL)
                 ->screenshot("all_selected");
-            $this->assertEquals($plane_total, $this->TableRowCount($browser, "avion/page"));
+            $this->assertEquals($plane_total, $this->PageTableRowCount($browser, "avion/page"));
 
             // Checks that all the planes are available in the plane selector
             $browser->visit($this->fullUrl('vols_avion/create'))
@@ -67,7 +67,7 @@ class SectionsTest extends GvvDuskTestCase {
             // switch to general, no planes
             $this->switchSection($browser, self::GENERAL);
 
-            $this->assertEquals(0, $this->TableRowCount($browser, "avion/page"));
+            $this->assertEquals(0, $this->PageTableRowCount($browser, "avion/page"));
 
             // checks that there is no planes in the plane selector
             $browser->visit($this->fullUrl('vols_avion/create'))
@@ -128,13 +128,13 @@ class SectionsTest extends GvvDuskTestCase {
             $browser->assertSee('ULM');
 
             // Comptes clients de la section ULM
-            $comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $comptes_ulm  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             $this->switchSection($browser, self::PLANEUR);
-            $comptes_planeur  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $comptes_planeur  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             $this->switchSection($browser, self::GENERAL);
-            $comptes_general  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $comptes_general  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             $this->switchSection($browser, self::ALL);
-            $comptes_all  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $comptes_all  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
 
             // echo "comptes_ulm: $comptes_ulm\n";
             // echo "comptes_planeur: $comptes_planeur\n";
@@ -172,18 +172,18 @@ class SectionsTest extends GvvDuskTestCase {
             // Un dans la section ULM
 
             $this->switchSection($browser, self::ULM);
-            $nouveau_comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $nouveau_comptes_ulm  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             // echo "nouveau_comptes_ulm: $nouveau_comptes_ulm\n";
             $this->assertEquals($nouveau_comptes_ulm, $comptes_ulm + 1);
 
             // Un dans la section générale
             $this->switchSection($browser, self::GENERAL);
-            $nouveau_comptes_general  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $nouveau_comptes_general  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             // echo "nouveau_comptes_general: $nouveau_comptes_general\n";
             $this->assertEquals($nouveau_comptes_general, $comptes_general + 1);
 
             $this->switchSection($browser, self::ALL);
-            $nouveau_comptes_all  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $nouveau_comptes_all  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             // echo "nouveau_comptes_all: $nouveau_comptes_all\n";
             $this->assertEquals($nouveau_comptes_all, $comptes_all + 2);
 
@@ -215,7 +215,7 @@ class SectionsTest extends GvvDuskTestCase {
 
             // Comptes clients de la section ULM
             // Section ULM sélectionnée
-            $comptes_ulm  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $comptes_ulm  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             $id_asterix_client_ulm = $this->getIdFromTable($browser, "Asterix");
             $this->assertEquals($comptes_ulm, 2, "2 comptes client ULM dans les données de test");
             // echo "\n";
@@ -225,7 +225,7 @@ class SectionsTest extends GvvDuskTestCase {
 
             // Selection section planeur
             $this->switchSection($browser, self::PLANEUR);
-            $comptes_planeur  = $this->TableRowCount($browser, "comptes/page/411") - 1;
+            $comptes_planeur  = $this->PageTableRowCount($browser, "comptes/page/411") - 1;
             $id_asterix_client_planeur = $this->getIdFromTable($browser, "Asterix");
             // echo "asterix compte client planeur = " . $id_asterix_client_planeur . "\n";
             $this->assertEquals($comptes_planeur, 4, "4 comptes client planeur dans les données de test");
