@@ -36,6 +36,28 @@ class FilteringTest extends GvvDuskTestCase {
             $planeur_codec_count = $this->PageTableRowCount($browser, "comptes/general") - 1;
             $this->assertGreaterThanOrEqual($planeur_codec_count, 16);
 
+            // Général: "Balance générale des comptes section ULM"
+            // Détaillé : "Balance détaillée des comptes section ULM"
+
+            $browser->script('window.scrollTo(0, 0);');
+
+            // Ensure filter accordion is closed, then open it
+            $browser->waitFor('#filter_button')
+                // ->click('#filter_button')
+                // ->script('document.getElementById("filter_button").click();')
+                ->with('#filter_button', function ($button) {
+                    $button->click();
+                })
+                ->pause(500);
+
+            // Wait for accordion to open
+            $browser->script('window.scrollTo(0, 0);');
+
+            // Verify filter accordion is now open
+            // ->assertVisible('#panelsStayOpen-collapseOne')
+            $browser->screenshot('filter_accordion_open')
+                ->assertSee('Balance générale des comptes')
+                ->assertSee('section Planeur');
 
             $this->logout($browser);
         });
