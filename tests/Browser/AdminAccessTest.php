@@ -188,8 +188,8 @@ class AdminAccessTest extends GvvDuskTestCase {
             $pages = [
                 ['url' => 'compta/page', 'mustSee' => ['Grand journal']],
                 ['url' => 'compta/create', 'mustSee' => ['Ecriture comptable']],
-                ['url' => 'comptes/general', 'mustSee' => ['Balance des comptes']],
-                ['url' => 'comptes/page/411', 'mustSee' => ['Balance des comptes Classe 411']],
+                ['url' => 'comptes/general', 'mustSee' => ['Balance générale des comptes']],
+                ['url' => 'comptes/page/411', 'mustSee' => ['Balance générale des comptes Classe 411']],
                 // ['url' => 'comptes/create', 'mustSee' => ['Compte']],
                 ['url' => 'comptes/resultat', 'mustSee' => ["Résultat d'exploitation de l'exercice"]],
                 ['url' => 'comptes/bilan', 'mustSee' => ["Bilan de fin d'exercice"]],

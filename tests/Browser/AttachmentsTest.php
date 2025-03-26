@@ -111,7 +111,7 @@ class AttachmentsTest extends GvvDuskTestCase {
             Log::debug("Affiche les comptes de classe 606");
             $url = $this->fullUrl("comptes/page/606");
             $browser->visit($url)
-                ->assertSee('Balance des comptes Classe 606')
+                ->assertSee('Balance générale des comptes Classe 606')
                 ->assertSee("Affichage de l'élement 1 à 3 sur 3 éléments")
                 ->assertSee('Essence plus huile')
                 ->assertSee('Frais de bureau');
@@ -139,7 +139,7 @@ class AttachmentsTest extends GvvDuskTestCase {
             // Les comptes de banque http://gvv.net/comptes/page/512
             $url = $this->fullUrl("comptes/page/512");
             $browser->visit($url)
-                ->assertSee('Balance des comptes Classe 512')
+                ->assertSee('Balance générale des comptes Classe 512')
                 ->assertSee("Affichage de l'élement 1 à 2 sur 2 éléments")
                 ->assertSee('Banque');
 

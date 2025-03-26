@@ -83,7 +83,7 @@ class PurchasesTest extends BillingTest {
 
             $browser->visit($url)
                 ->screenshot('soldes_pilotes')
-                ->assertSee('Balance des comptes Classe 411');
+                ->assertSee('Balance générale des comptes Classe 411');
 
             $asterix_compte_id = $this->getIdFromTable($browser, 'Le Gaulois Asterix');
 
